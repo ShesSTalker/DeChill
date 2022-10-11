@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void print (){
-
+void print ()
+{
     cout << "anachei" << endl;
 }
