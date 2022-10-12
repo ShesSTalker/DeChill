@@ -2,6 +2,9 @@
 #define _MENU_H_
 
 class Menu{
+    //private
+    int opcion_tomada; //creo que la vamos a necestar para procesar las opciones del usuario
+
     //Metodos
     public:
         void cargar_datos();
@@ -11,6 +14,9 @@ class Menu{
         //Pre: -
         //Pos: Imprime por pantalla el menu con las opciones
         void mostrar_menu();
+        //Pre: -
+        //Pos: Solicita al usuario que ingrese el numero de la opcion que desea ejecutar.
+        void pedir_opcion();
         //Pre: -
         //Pos: Imprime por pantalla los animales de la reserva
         void mostrar_animales();
