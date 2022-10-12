@@ -1,7 +1,7 @@
 #ifndef _MENU_H_
 #define _MENU_H_
 
-class Interfaz{
+class Menu{
     //Metodos
     public:
         void cargar_datos();
