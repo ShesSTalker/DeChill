@@ -1,7 +1,13 @@
 #include <iostream>
 #include "Menu.h"
+#include "Constantes.h"
 
 using namespace std;
+
+Menu::Menu()
+{
+    opcion_tomada = 0;
+}
 
 void Menu::bienvenida()
 {
@@ -25,6 +31,12 @@ void Menu::pedir_opcion()
     
     cout << "Ingrese la opcion que desea ejecutar: ";
     cin >> opcion_tomada;
+
+    if (opcion_tomada < 0 || opcion_tomada > GUARDAR_Y_SALIR)
+    {
+        cout << "La opcion tomada no es valida, ingrese una opcion valida: ";
+        cin >> opcion_tomada;
+    }
 
     this -> opcion_tomada = opcion_tomada;
 }

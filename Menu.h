@@ -7,18 +7,26 @@ class Menu{
 
     //Metodos
     public:
+        //Pre: -
+        //Pos: Incianliza opcion_tomada en 0
+        Menu();
+
         void cargar_datos();
         //Pre: -
         //Pos: Imprime por pantalla un saludo al usuario
+        
         void bienvenida();
         //Pre: -
         //Pos: Imprime por pantalla el menu con las opciones
+        
         void mostrar_menu();
         //Pre: -
         //Pos: Solicita al usuario que ingrese el numero de la opcion que desea ejecutar.
+        
         void pedir_opcion();
         //Pre: -
         //Pos: Imprime por pantalla los animales de la reserva
+        
         void mostrar_animales();
         //Pre: -
         // Pos: Se agrega un nuevo animal rescatado a la reserva

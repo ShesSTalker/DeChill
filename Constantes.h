@@ -1,0 +1,13 @@
+#ifndef _CONSTANTES_H_
+#define _CONSTANTES_H_
+
+enum opciones_menu_principal {
+LISTAR_ANIMALES = 1,
+RESCATAR_ANIMALES,
+BUSCAR_ANIMAL,
+CUIDAR_ANIMAL,
+ADOPTAR_ANIMAL,
+GUARDAR_Y_SALIR,
+};
+
+#endif 
