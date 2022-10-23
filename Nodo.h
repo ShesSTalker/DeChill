@@ -16,7 +16,7 @@ class Nodo
 
         void cambiar_siguiente (Nodo* puntero)
         
-        Tipo obtener_animal();
+        Tipo obtener_nodo();
 
         Tipo* obtener_siguiente(); 
 };
@@ -35,9 +35,9 @@ void Nodo<Tipo>::cambiar_siguiente(Nodo* puntero)
 }
 
 template < typename Tipo >
-Tipo Nodo<Tipo>::obtener_animal()
+Tipo Nodo<Tipo>::obtener_nodo()
 {
-
+    return Tipo;
 }
 
 #endif
