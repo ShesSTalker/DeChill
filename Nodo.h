@@ -17,7 +17,7 @@ class Nodo
 
         //PRE: -
         //POS: El puntero al siguiente nodo apunta a puntero
-        void cambiar_siguiente (Nodo* puntero)
+        void cambiar_siguiente (Nodo* puntero);
         
         //PRE: -
         //POS: Devuelve el dato que contiene el nodo
@@ -48,7 +48,7 @@ Tipo Nodo<Tipo>::obtener_dato()
 }
 
 template < typename Tipo >
-Nodo* Nodo<Tipo>::obtener_siguiente() 
+Nodo<Tipo>* Nodo<Tipo>::obtener_siguiente() 
 {
     return siguiente;
 }
