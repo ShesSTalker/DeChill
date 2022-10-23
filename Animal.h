@@ -6,34 +6,11 @@
 
 using namespace std;
 
-const int MIN = 0;
-const int MAX = 100;
-const int PASO = 10;
-
 // Tenemos que definir cómo traducimos tamaños,
 // personalidades y especies desde que los leemos del
 // archivo hasta que los usamos en las clases.
 
-// No estoy seguro como manejar las especies, discutamos esto cuando podamos
-
 // Necesitamos establecer dónde van los métodos de validacion de cada dato
-
-enum Tamanios
-{
-    DIMINUTO,
-    PEQUENIO,
-    MEDIANO,
-    GRANDE,
-    GIGANTE
-};
-
-enum Personalidades
-{
-    DORMILON,
-    JUGUETON,
-    SOCIABLE,
-    TRAVIESO
-};
 
 class Animal 
 {
