@@ -1,8 +1,8 @@
-#include "Animal.hpp"
+#include "Animal.h"
 
 using namespace std;
 
-Animal::Animal(int mi_edad, Tamanios mi_tamanio, Personalidades mi_personalidad, Especies mi_especie)
+Animal::Animal(int mi_edad, Tamanios mi_tamanio, Personalidades mi_personalidad, char mi_especie)
 {
     hambre = MIN;
     higiene = MAX;
