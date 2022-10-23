@@ -4,9 +4,10 @@
 
 using namespace std;
 
-Menu::Menu()
+Menu::Menu(Lista<Animal *> * mis_animales)
 {
     opcion_tomada = 0;
+    animales = mis_animales;
 }
 
 void Menu::bienvenida()
@@ -17,6 +18,7 @@ void Menu::bienvenida()
 void Menu::mostrar_menu()
 {
     cout <<"--------MENU--------"<< endl <<
+    "0) Mostrar Menu" << endl <<
     "1) Listar animales." << endl <<
     "2) Rescatar animal." << endl <<
     "3) Buscar animal." << endl <<
@@ -45,7 +47,10 @@ void Menu::procesar_opcion()
 {
     switch (opcion_tomada)
     {
-        case LISTAR_ANIMALES:
+        case MOSTRAR_MENU: Menu::mostrar_menu();
+        break;
+
+        case LISTAR_ANIMALES: Menu::listar_animales();
         break;
 
         case RESCATAR_ANIMALES:
@@ -63,4 +68,17 @@ void Menu::procesar_opcion()
         case GUARDAR_Y_SALIR:
         break;
     }
+}
+
+void Menu::listar_animales()
+{
+    for(int i = 0; i < animales->cuantos_tiene(); i++)
+    {
+        listar_animal(animales->consulta(i));
+    }
+}
+
+void listar_animal(Animal *mi_animal)
+{
+
 }

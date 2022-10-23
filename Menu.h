@@ -8,13 +8,14 @@
 class Menu{
     //Atributos
     private:
-        int opcion_tomada; 
+        int opcion_tomada;
+        Lista<Animal *>* animales; 
 
     //Metodos
     public:
         //PRE: -
-        //POS: Incializa opcion_tomada en 0
-        Menu();
+        //POS: inicializa opcion_tomada en 0 y animales en el puntero pasado como parámetro.
+        Menu(Lista<Animal *> * mis_animales);
         
         //PRE: -
         //POS: Imprime por pantalla un saludo al usuario
@@ -34,7 +35,7 @@ class Menu{
 
         //PRE: -
         //POS: imprime por pantalla todos los animales de la lista.
-        void listar_animales(Lista<Animal*> mis_animales); 
+        void listar_animales(); 
 };
 
 #endif
