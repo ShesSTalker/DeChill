@@ -2,6 +2,8 @@
 #define _MENU_H_
 
 #include "Constantes.h"
+#include "Lista.h"
+#include "Animal.h"
 
 class Menu{
     //Atributos
@@ -11,7 +13,7 @@ class Menu{
     //Metodos
     public:
         //PRE: -
-        //POS: Incianliza opcion_tomada en 0
+        //POS: Incializa opcion_tomada en 0
         Menu();
         
         //PRE: -
@@ -28,7 +30,11 @@ class Menu{
 
         //PRE: opcion_tomada debe ser 0 < opcion_tomada <= 6
         //POS: Procesa opcion_tomada para ejecutar las operaciones de la opcion elejida por el usuario
-        void procesar_opcion(); 
+        void procesar_opcion();
+
+        //PRE: -
+        //POS: imprime por pantalla todos los animales de la lista.
+        void listar_animales(Lista<Animal*> mis_animales); 
 };
 
 #endif
