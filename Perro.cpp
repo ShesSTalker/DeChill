@@ -2,5 +2,5 @@
 
 string Perro:: que_come()
 {
-        return "Huesos";
+    return "Huesos";
 }

@@ -2,10 +2,10 @@
 
 string Gato:: que_come()
 {
-        return "Atun";
+    return "Atun";
 }
 
 bool Gato:: requiere_ducha()
 {
-        return false;
+    return false;
 }
