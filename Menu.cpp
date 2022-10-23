@@ -74,11 +74,19 @@ void Menu::listar_animales()
 {
     for(int i = 0; i < animales->cuantos_tiene(); i++)
     {
-        listar_animal(animales->consulta(i));
+        animales->consulta(i)->obtener_nombre();
     }
 }
 
 void listar_animal(Animal *mi_animal)
 {
+    string sep = ", ";
 
+    cout << mi_animal->obtener_nombre() << sep
+         << mi_animal->obtener_edad() << " años" << sep
+         << mi_animal->obtener_tamanio_texto() << sep
+         << mi_animal->obtener_especie_texto() << sep
+         << mi_animal->obtener_personalidad_texto() << sep
+         << mi_animal->obtener_hambre() << " puntos de hambre" << sep 
+         << mi_animal->obtener_higiene() << " puntos de higiene " << endl;
 }
