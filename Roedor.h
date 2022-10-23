@@ -1,9 +1,9 @@
-#ifndef GATO_H
-#define GATO_H
+#ifndef ROEDOR_H
+#define ROEDOR_H
 
 #include "Animal.h"
 
-class Gato : public Animal
+class Roedor : public Animal
 {
     public:
         string que_come();
