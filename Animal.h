@@ -1,7 +1,8 @@
-#ifndef ANIMAL_H
-#define ANIMAL_H
+#ifndef _ANIMAL_H
+#define _ANIMAL_H
 
 #include <string>
+#include "Constantes.h"
 
 using namespace std;
 
@@ -34,32 +35,23 @@ enum Personalidades
     TRAVIESO
 };
 
-enum Especies
-{
-    PERRO = 'P', 
-    GATO = 'G',
-    CABALLO = 'C',
-    ROEDOR = 'R',
-    CONEJO = 'O',
-    ERIZO = 'E',
-    LAGARTIJA = 'L'
-};
-
 class Animal 
 {
+    //Metodos
     private:
         string nombre;
-
-        int hambre, higiene, edad;
-
+        int hambre;
+        int higiene;
+        int edad;
         Tamanios tamanio;
         Personalidades personalidad;
-        Especies especie;
+        char especie;
 
+    
     public:
         // PRE: los datos de creación han sido validados
         // POS: crea un nuevo animal con su hambre en 0, su higiene en 100 y la edad, tamaño, personalidad y especie especificados    
-        Animal(int edad, Tamanios tamanio, Personalidades personalidad, Especies especie);
+        Animal(int edad, Tamanios tamanio, Personalidades personalidad, char especie);
 
         // Getters
 
@@ -111,12 +103,12 @@ class Animal
 
         // PRE: 
         // POS: devuelve si el animal requiere ducharse o no
-        virtual bool requiere_ducha();
+        virtual bool requiere_ducha() = 0;
 
     protected:
         // PRE: 
         // POS: devuelve el nombre de la comida del animal
-        string que_come();
+        virtual string que_come() = 0;
 
 };
 

@@ -1,4 +1,4 @@
-#include "Animal.hpp"
+#include "Animal.h"
 
 class Perro : public Animal{
 public:

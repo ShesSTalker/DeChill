@@ -1,7 +1,8 @@
-#include "Animal.hpp"
+#include "Animal.h"
 
-class Gato : public Animal{
-public:
-string que_come();
-virtual bool requiere_ducha();
+class Gato : public Animal
+{
+    public:
+    string que_come();
+    bool requiere_ducha();
 };

@@ -40,3 +40,27 @@ void Menu::pedir_opcion()
 
     this -> opcion_tomada = opcion_tomada;
 }
+
+void Menu::procesar_opcion()
+{
+    switch (opcion_tomada)
+    {
+        case LISTAR_ANIMALES:
+        break;
+
+        case RESCATAR_ANIMALES:
+        break;
+
+        case BUSCAR_ANIMAL:
+        break;
+
+        case CUIDAR_ANIMAL:
+        break;
+
+        case ADOPTAR_ANIMAL:
+        break;
+
+        case GUARDAR_Y_SALIR:
+        break;
+    }
+}

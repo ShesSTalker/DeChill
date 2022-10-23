@@ -1,8 +1,11 @@
 #include "Gato.h"
 
-string Gato:: que_come(){
+string Gato:: que_come()
+{
         return "Atun";
-};
-bool Gato:: requiere_ducha(){
+}
+
+bool Gato:: requiere_ducha()
+{
         return false;
-};
+}
