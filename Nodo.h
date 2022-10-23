@@ -16,15 +16,28 @@ class Nodo
 
         void cambiar_siguiente (Nodo* puntero)
         
-        Tipo obtener_animal();
+        Tipo obtener_nodo();
 
         Tipo* obtener_siguiente(); 
 };
 
-template <typename Tipo>
-Tipo Nodo<Tipo>::obtener_animal()
+template < typename Tipo >
+Nodo<Tipo>::Nodo(Tipo animal)
 {
+    this -> animal = animal;
+    this -> siguiente = 0;
+}
 
+template < typename Tipo >
+void Nodo<Tipo>::cambiar_siguiente(Nodo* puntero)
+{
+    siguiente = puntero;
+}
+
+template < typename Tipo >
+Tipo Nodo<Tipo>::obtener_nodo()
+{
+    return Tipo;
 }
 
 #endif
