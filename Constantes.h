@@ -14,6 +14,8 @@ enum Tamanios
     GIGANTE
 };
 
+const int MAX_TAMANIOS = 4;
+
 enum Personalidades
 {
     DORMILON,
@@ -36,11 +38,13 @@ enum Especies
 enum opciones_menu_principal {
     MOSTRAR_MENU,
     LISTAR_ANIMALES,
-    RESCATAR_ANIMALES,
+    RESCATAR_ANIMAL,
     BUSCAR_ANIMAL,
     CUIDAR_ANIMAL,
     ADOPTAR_ANIMAL,
     GUARDAR_Y_SALIR,
 };
+
+const int MAX_OPCIONES_MENU_PRINCIPAL = 6;
 
 #endif 

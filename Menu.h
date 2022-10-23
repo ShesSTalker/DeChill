@@ -36,6 +36,10 @@ class Menu{
         //PRE: -
         //POS: imprime por pantalla todos los animales de la lista.
         void listar_animales(); 
+
+        //PRE: -
+        //POS: si el animal ingresado no estaba en la Reserva, se agrega.
+        void rescatar_animal();
 };
 
 #endif
