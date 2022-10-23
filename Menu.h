@@ -2,11 +2,13 @@
 #define _MENU_H_
 
 #include "Constantes.h"
+#include "Opciones.h"
 
 class Menu{
     //Atributos
     private:
         int opcion_tomada; 
+        Opcion* opcion;
 
     //Metodos
     public:

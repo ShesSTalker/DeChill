@@ -46,6 +46,7 @@ void Menu::procesar_opcion()
     switch (opcion_tomada)
     {
         case LISTAR_ANIMALES:
+        opcion -> listar_animales();
         break;
 
         case RESCATAR_ANIMALES:
