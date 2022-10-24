@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cctype>
+
 #include "Menu.h"
 #include "Constantes.h"
 
@@ -98,6 +100,10 @@ void Menu::rescatar_animal()
     Tamanios tamanio = obtener_tamanio();
 
     Especies especie = obtener_especie();
+
+    Personalidades personalidad = obtener_personalidad();
+
+    // Como creo la clase adecuada y la agrego a la lista?
 }
 
 string obtener_nombre(Lista<Animal*>* mis_animales)
@@ -162,9 +168,50 @@ Especies obtener_especie()
     int especie;
 
     cout << "Ingrese la especie de su animal: " << endl <<
-    "0) Diminuto (puede vivir en menos de 2m^2)" << endl <<
-    "1) Pequeño (puede vivir en menos de 10m^2)" << endl <<
-    "2) Mediano (puede vivir en un lugar de 10m^2 o más)" << endl <<
-    "3) Grande (puede vivir en un lugar de 20m^2 o más)" << endl <<
-    "4) Gigante (puede vivir en un lugar de 50m^2 o más)" << endl;
+    "0) Perro" << endl <<
+    "1) Gato" << endl <<
+    "2) Caballo" << endl <<
+    "3) Roedor" << endl <<
+    "4) Conejo" << endl <<
+    "5) Erizo" << endl <<
+    "6) Lagartija" << endl;
+    cin >> especie;
+
+    validar_especie(especie);
+
+    return (Especies) especie;
+}
+
+void validar_especie(int especie)
+{
+    while (especie < 0 || especie > MAX_ESPECIES)
+    {
+        cout << "La especie ingresada no es válida, ingrese una especie válida: ";
+        cin >> especie;
+    }
+}
+
+Personalidades obtener_personalidad()
+{
+    int personalidad;
+
+    cout << "Ingrese la personalidad de su animal: " << endl <<
+    "0) Dormilón" << endl <<
+    "1) Juguetón" << endl <<
+    "2) Sociable" << endl <<
+    "3) Travieso" << endl;
+    cin >> personalidad;
+
+    validar_personalidad(personalidad);
+
+    return (Personalidades) personalidad;
+}
+
+void validar_personalidad(int personalidad)
+{
+    while(personalidad < 0 || personalidad > MAX_PERSONALIDADES)
+    {
+        cout << "La personalidad ingresada no es válida, ingrese una personalidad válida: ";
+        cin >> personalidad;
+    }
 }

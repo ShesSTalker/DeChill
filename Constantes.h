@@ -24,16 +24,20 @@ enum Personalidades
     TRAVIESO
 };
 
+const int MAX_PERSONALIDADES = 3;
+
 enum Especies
 {
-    PERRO = 'P',
-    GATO = 'G',
-    CABALLO = 'C',
-    ROEDOR = 'R',
-    CONEJO = 'O',
-    ERIZO = 'E',
-    LAGARTIJA = 'L'
+    PERRO,
+    GATO,
+    CABALLO,
+    ROEDOR,
+    CONEJO,
+    ERIZO,
+    LAGARTIJA
 };
+
+const int MAX_ESPECIES = 6;
 
 enum opciones_menu_principal {
     MOSTRAR_MENU,
