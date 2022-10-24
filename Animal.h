@@ -23,7 +23,6 @@ class Animal
         Tamanios tamanio;
         Personalidades personalidad;
         char especie;
-
     
     public:
         // PRE: los datos de creación han sido validados
@@ -80,7 +79,7 @@ class Animal
 
         // PRE: 
         // POS: devuelve si el animal requiere ducharse o no
-        virtual bool requiere_ducha() = 0;
+        virtual bool requiere_ducha();
 
     protected:
         // PRE: 

@@ -14,6 +14,8 @@ enum Tamanios
     GIGANTE
 };
 
+const int MAX_TAMANIOS = 4;
+
 enum Personalidades
 {
     DORMILON,
@@ -22,24 +24,31 @@ enum Personalidades
     TRAVIESO
 };
 
+const int MAX_PERSONALIDADES = 3;
+
 enum Especies
 {
-    PERRO = 'P',
-    GATO = 'G',
-    CABALLO = 'C',
-    ROEDOR = 'R',
-    CONEJO = 'O',
-    ERIZO = 'E',
-    LAGARTIJA = 'L'
+    PERRO,
+    GATO,
+    CABALLO,
+    ROEDOR,
+    CONEJO,
+    ERIZO,
+    LAGARTIJA
 };
 
+const int MAX_ESPECIES = 6;
+
 enum opciones_menu_principal {
-LISTAR_ANIMALES = 1,
-RESCATAR_ANIMALES,
-BUSCAR_ANIMAL,
-CUIDAR_ANIMAL,
-ADOPTAR_ANIMAL,
-GUARDAR_Y_SALIR,
+    MOSTRAR_MENU,
+    LISTAR_ANIMALES,
+    RESCATAR_ANIMAL,
+    BUSCAR_ANIMAL,
+    CUIDAR_ANIMAL,
+    ADOPTAR_ANIMAL,
+    GUARDAR_Y_SALIR,
 };
+
+const int MAX_OPCIONES_MENU_PRINCIPAL = 6;
 
 #endif 

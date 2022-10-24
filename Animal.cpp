@@ -76,7 +76,20 @@ string Animal::obtener_especie_texto()
 
 char Animal::obtener_especie_char()
 {
-    return (char) especie;
+    char especie_char;
+
+    switch(especie)
+    {
+        case PERRO: especie_char = 'P'; break;
+        case GATO: especie_char = 'G'; break;
+        case CABALLO: especie_char = 'C'; break;
+        case ROEDOR: especie_char = 'R'; break;
+        case CONEJO: especie_char = 'O'; break;
+        case ERIZO: especie_char = 'R'; break;
+        case LAGARTIJA: especie_char = 'L';
+    }
+
+    return especie_char;
 }
 
 string Animal::obtener_personalidad_texto()
