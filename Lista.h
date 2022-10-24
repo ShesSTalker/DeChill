@@ -5,9 +5,24 @@ template <typename Tipo>
 
 class Lista
 {
+    private:
+        int cantidad;
+        Tipo* primero;
+
+    public:
+        Lista();
         
+        bool esta_vacia();
+
+        int cuantos_tiene();
+
+        Tipo consulta(int posicion);
 };
 
-
+template <typename Tipo>
+Tipo consulta(int posicion)
+{
+    return nullptr;
+};
 
 #endif
