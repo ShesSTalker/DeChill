@@ -56,7 +56,7 @@ class Lista
     private:
         //PRE: -
         //POS: Devuelve un puntero al nodo que esta en posicion
-        Nodo* obtener_nodo(int posicion);
+        Nodo<Tipo>* obtener_nodo(int posicion);
 };
 
 template < typename Tipo >
@@ -116,7 +116,7 @@ void Lista<Tipo>::baja(int posicion)
 template < typename Tipo >
 bool Lista<Tipo>::vacia()
 {
-    return cantidad == 0;
+    return (cantidad == 0);
 }
 
 template < typename Tipo >
