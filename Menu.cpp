@@ -77,7 +77,7 @@ void Menu::procesar_opcion()
 
 void Menu::listar_animales()
 {
-    for(int i = 0; i < animales->cuantos_tiene(); i++)
+    for(int i = 0; i < animales->obtener_cantidad(); i++)
     {  // Poco eficiente
         listar_animal(animales->consulta(i));
     }
