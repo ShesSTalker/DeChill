@@ -74,7 +74,7 @@ void Menu::procesar_opcion()
 
 void Menu::listar_animales()
 {
-    for(int i = 0; i < animales->cuantos_tiene(); i++)
+    for(int i = 0; i < animales->obtener_cantidad(); i++)
     {  // Poco eficiente
         listar_animal(animales->consulta(i));
     }
@@ -122,7 +122,7 @@ void validar_nombre(string nombre, Lista<Animal*>* mis_animales)
 {
     bool validado = true;
 
-    for(int i = 0; i < mis_animales->cuantos_tiene(); i++)
+    for(int i = 0; i < mis_animales->obtener_cantidad(); i++)
     { // Poco eficiente
         if(nombre == mis_animales->consulta(i)->obtener_nombre())
         {
@@ -154,7 +154,7 @@ Tamanios obtener_tamanio()
     return (Tamanios) tamanio;
 }
 
-void validar_tamanio(int tamanio)
+void validar_tamanio(int &tamanio)
 {
     while (tamanio < 0 || tamanio > MAX_TAMANIOS)
     {
@@ -182,7 +182,7 @@ Especies obtener_especie()
     return (Especies) especie;
 }
 
-void validar_especie(int especie)
+void validar_especie(int &especie)
 {
     while (especie < 0 || especie > MAX_ESPECIES)
     {
@@ -207,7 +207,7 @@ Personalidades obtener_personalidad()
     return (Personalidades) personalidad;
 }
 
-void validar_personalidad(int personalidad)
+void validar_personalidad(int &personalidad)
 {
     while(personalidad < 0 || personalidad > MAX_PERSONALIDADES)
     {
