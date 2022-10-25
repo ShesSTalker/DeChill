@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Menu::Menu(Lista<Animal *> * mis_animales)
+Menu::Menu(Lista<Animal*>* mis_animales)
 {
     opcion_tomada = 0;
     animales = mis_animales;
@@ -49,13 +49,16 @@ void Menu::procesar_opcion()
 {
     switch (opcion_tomada)
     {
-        case MOSTRAR_MENU: Menu::mostrar_menu();
+        case MOSTRAR_MENU: 
+        mostrar_menu();
         break;
 
-        case LISTAR_ANIMALES: Menu::listar_animales();
+        case LISTAR_ANIMALES: 
+        listar_animales();
         break;
 
-        case RESCATAR_ANIMAL: Menu::rescatar_animal();
+        case RESCATAR_ANIMAL: 
+        rescatar_animal();
         break;
 
         case BUSCAR_ANIMAL:
@@ -80,7 +83,7 @@ void Menu::listar_animales()
     }
 }
 
-void listar_animal(Animal *mi_animal)
+void listar_animal(Animal* mi_animal)
 {
     string sep = ", ";
 
