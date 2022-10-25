@@ -9,13 +9,13 @@ class Menu{
     //Atributos
     private:
         int opcion_tomada;
-        Lista<Animal *>* animales; 
+        Lista<Animal*>* animales; 
 
     //Metodos
     public:
         //PRE: -
         //POS: inicializa opcion_tomada en 0 y animales en el puntero pasado como parámetro.
-        Menu(Lista<Animal *> * mis_animales);
+        Menu(Lista<Animal*>* animales);
         
         //PRE: -
         //POS: Imprime por pantalla un saludo al usuario
@@ -34,8 +34,12 @@ class Menu{
         void procesar_opcion();
 
         //PRE: -
-        //POS: imprime por pantalla todos los animales de la lista.
+        //POS: Imprime por pantalla todos los animales de la lista.
         void listar_animales(); 
+
+        //PRE: -
+        //POS: Muestra por pantalla la informacion del animal
+        void mostrar_animal(Animal* mi_animal);
 
         //PRE: -
         //POS: si el animal ingresado no estaba en la Reserva, se agrega.
