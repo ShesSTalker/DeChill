@@ -3,7 +3,7 @@
 
 #include "Nodo.h"
 
-template <typename Tipo>
+template < typename Tipo >
 class Lista
 {
     //Atributos
@@ -32,7 +32,7 @@ class Lista
 
         //PRE: -
         //POS: Devuelve verdadero si la lista esta vacia y falso en caso contrario
-        bool vacia()
+        bool vacia();
 
         //PRE: - 
         //POS: Devuelve la cantidad de elementos que hay en la lista 
@@ -59,7 +59,7 @@ class Lista
         Nodo* obtener_nodo(int posicion);
 };
 
-template <typename Tipo>
+template < typename Tipo >
 Lista<Tipo>::Lista()
 {
     primero = 0;
@@ -67,7 +67,7 @@ Lista<Tipo>::Lista()
     cursor = 0; 
 }
 
-template <typename Tipo>
+template < typename Tipo >
 void Lista<Tipo>::alta(Tipo dato, int posicion)
 {
     Nodo<Tipo>* nuevo = new Nodo<Tipo>(dato);
@@ -87,11 +87,83 @@ void Lista<Tipo>::alta(Tipo dato, int posicion)
     cantidad++;
 }
 
-template <typename Tipo>
+template < typename Tipo >
 Tipo Lista<Tipo>::consulta(int posicion)
 {
     Nodo<Tipo>* nodo = obtener_nodo(posicion);
     return (nodo -> obtener_dato());
+}
+
+template < typename Tipo >
+void Lista<Tipo>::baja(int posicion)
+{
+    Nodo<Tipo>* borrar = primero;
+    
+    if(posicion == 1)
+    {
+        primero = borrar -> obtener_siguiente();
+    }
+    else
+    {
+        Nodo<Tipo>* anterior = obtener_nodo(posicion - 1);
+        borrar  = anterior -> obtener_siguiente();
+        anterior -> cambiar_siguiente(borrar -> obtener_siguiente());
+    }
+    delete borrar;
+    cantidad --;
+}
+
+template < typename Tipo >
+bool Lista<Tipo>::vacia()
+{
+    return cantidad == 0;
+}
+
+template < typename Tipo >
+int Lista<Tipo>::obtener_cantidad()
+{
+    return cantidad;
+}
+
+template < typename Tipo >
+bool Lista<Tipo>::hay_siguiente()
+{
+    return (cursor != 0);
+}
+
+template < typename Tipo >
+Tipo Lista<Tipo>::siguiente()
+{
+    Tipo dato = cursor -> obtener_dato();
+    cursor = cursor -> obtener_siguiente();
+    return dato;
+}
+
+template < typename Tipo >
+void Lista<Tipo>::iniciar()
+{
+    cursor = primero;
+}
+
+template < typename Tipo >
+Lista<Tipo>::~Lista()
+{
+    while (!vacia())
+    {
+        baja(1);
+    }
+}
+
+template < typename Tipo >
+Nodo<Tipo>* Lista<Tipo>::obtener_nodo(int posicion)
+{
+    Nodo<Tipo>* auxiliar = primero;
+
+    for (int i = 1; i < posicion; i++)
+    {
+        auxiliar = auxiliar -> obtener_siguiente();
+    } 
+    return auxiliar;
 }
 
 #endif
