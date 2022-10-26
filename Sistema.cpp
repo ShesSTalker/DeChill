@@ -55,6 +55,7 @@ void Sistema::cargar_animales(){
         }else{
                 cout<<"No se pudo abrir el archivo"<<endl;
         };
+        archivo.close();
 };
 
 void Sistema::guardar(){
@@ -71,4 +72,5 @@ void Sistema::guardar(){
         }else{
                 cout<<"No se pudo abrir el archivo"<<endl;
         };
+        archivo.close();
 };
