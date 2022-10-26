@@ -42,11 +42,11 @@ class Menu{
 
         //PRE: -
         //POS: Le pide al usario el nombre del animal rescatado, si el nombre ya existe se le da la opcion al usuario de cargar otro nombre o volver al menu;
-        void ingresar_nombre();
+        void ingresar_nombre(Lista<Animal*>* animales);
 
         //PRE: - 
         //POS: Devuelve verdadero si el nombre existe en la lista y falso si no existe       
-        bool buscar_nombre(string nombre);
+        bool buscar_nombre(string nombre, Lista<Animal*>* animales);
 
         //PRE: El nombre del animal no debe estar en la lista
         //POS: Carga el animal a la lista

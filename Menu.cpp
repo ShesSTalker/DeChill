@@ -86,12 +86,12 @@ void Menu::mostrar_animal(Animal* animal)
     "Edad: " << animal -> obtener_edad() << endl <<
     "Tamanio: " << animal -> obtener_tamanio() << endl <<
     "Especie: " << animal -> obtener_especie() << endl <<
-    "Personalidad: " << animal -> obtener_personalidad() << endl <<
+    "Personalidad: " << animal -> obtener_personalidad_texto() << endl <<
     "Hambre: " << animal -> obtener_hambre() << endl <<
     "Higiene: " << animal -> obtener_higiene() << endl << endl;
 }
 
-void Menu::ingresar_nombre()
+void Menu::ingresar_nombre(Lista<Animal*>* animales)
 {
     string nombre;
     char eleccion;
@@ -99,7 +99,7 @@ void Menu::ingresar_nombre()
     cout << "Ingrese el nombre del animal rescatado: ";
     cin >> nombre;
 
-    if (buscar_nombre(nombre))
+    if (buscar_nombre(nombre, animales))
     {
         cout << "El nombre del animal rescato ya existe." << endl;
         cout << " (M) volver al menu / (N) ingresar otro nombre:";
@@ -113,7 +113,7 @@ void Menu::ingresar_nombre()
     }
 }
 
-bool Menu::buscar_nombre(string nombre)
+bool Menu::buscar_nombre(string nombre, Lista<Animal*>* animales)
 {
     bool encontrado = false;
     int i = 1;
@@ -128,11 +128,11 @@ void Menu::rescatar_animal()
 {
     //string nombre = obtener_nombre(animales);
 
-    Tamanios tamanio = obtener_tamanio();
+    char tamanio = obtener_tamanio();
 
     char especie = obtener_especie();
 
-    Personalidades personalidad = obtener_personalidad();
+    char personalidad = obtener_personalidad();
 
     // Como creo la clase adecuada y la agrego a la lista?
 }
@@ -168,24 +168,24 @@ void validar_nombre(string nombre, Lista<Animal*>* mis_animales)
         validar_nombre(nombre, mis_animales);
 }
 
-Tamanios obtener_tamanio()
+char obtener_tamanio()
 {
-    int tamanio;
+    char tamanio;
 
     cout << "Ingrese un tamaño para su nuevo animal: " << endl <<
-    "0) Diminuto (puede vivir en menos de 2m^2)" << endl <<
-    "1) Pequeño (puede vivir en menos de 10m^2)" << endl <<
-    "2) Mediano (puede vivir en un lugar de 10m^2 o más)" << endl <<
-    "3) Grande (puede vivir en un lugar de 20m^2 o más)" << endl <<
-    "4) Gigante (puede vivir en un lugar de 50m^2 o más)" << endl;
+    "- Diminuto (puede vivir en menos de 2m^2)[d]" << endl <<
+    "- Pequeño (puede vivir en menos de 10m^2)[p]" << endl <<
+    "- Mediano (puede vivir en un lugar de 10m^2 o más)[m]" << endl <<
+    "- Grande (puede vivir en un lugar de 20m^2 o más)[g]" << endl <<
+    "- Gigante (puede vivir en un lugar de 50m^2 o más)[t]" << endl;
     cin >> tamanio;
 
     validar_tamanio(tamanio);
 
-    return (Tamanios) tamanio;
+    return  tamanio;
 }
 
-void validar_tamanio(int &tamanio)
+void validar_tamanio(char &tamanio)
 {
     while (tamanio < 0 || tamanio > MAX_TAMANIOS)
     {
@@ -215,33 +215,33 @@ char obtener_especie()
 
 void validar_especie(char &especie)
 {
-    while (especie != PERRO || especie != GATO  || especie != CABALLO || especie != ROEDOR || 
-    especie != CONEJO ||especie != ERIZO || especie !=LAGARTIJA )
+    while (especie != PERRO && especie != GATO  && especie != CABALLO && especie != ROEDOR && 
+    especie != CONEJO && especie != ERIZO && especie !=LAGARTIJA )
     {
         cout << "La especie ingresada no es válida, ingrese una especie válida: ";
         cin >> especie;
     }
 }
 
-Personalidades obtener_personalidad()
+char obtener_personalidad()
 {
-    int personalidad;
+    char personalidad;
 
     cout << "Ingrese la personalidad de su animal: " << endl <<
-    "0) Dormilón" << endl <<
-    "1) Juguetón" << endl <<
-    "2) Sociable" << endl <<
-    "3) Travieso" << endl;
+    "-Dormilón[d]" << endl <<
+    "-Juguetón[j]" << endl <<
+    "-Sociable[s]" << endl <<
+    "-Travieso[t]" << endl;
     cin >> personalidad;
 
     validar_personalidad(personalidad);
 
-    return (Personalidades) personalidad;
+    return personalidad;
 }
 
-void validar_personalidad(int &personalidad)
+void validar_personalidad(char &personalidad)
 {
-    while(personalidad < 0 || personalidad > MAX_PERSONALIDADES)
+    while(personalidad != TRAVIESO && personalidad != JUGUETON && personalidad !=DORMILON && personalidad !=SOCIABLE)
     {
         cout << "La personalidad ingresada no es válida, ingrese una personalidad válida: ";
         cin >> personalidad;
