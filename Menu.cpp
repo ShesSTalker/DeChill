@@ -6,10 +6,10 @@
 
 using namespace std;
 
-Menu::Menu(Lista<Animal *> * mis_animales)
+Menu::Menu(Lista<Animal*>* animales)
 {
     opcion_tomada = 0;
-    animales = mis_animales;
+    this -> animales = animales;
 }
 
 void Menu::bienvenida()
@@ -49,13 +49,12 @@ void Menu::procesar_opcion()
 {
     switch (opcion_tomada)
     {
-        case MOSTRAR_MENU: Menu::mostrar_menu();
+        case LISTAR_ANIMALES: 
+        listar_animales();
         break;
 
-        case LISTAR_ANIMALES: Menu::listar_animales();
-        break;
-
-        case RESCATAR_ANIMAL: Menu::rescatar_animal();
+        case RESCATAR_ANIMAL: 
+        rescatar_animal();
         break;
 
         case BUSCAR_ANIMAL:
@@ -74,28 +73,29 @@ void Menu::procesar_opcion()
 
 void Menu::listar_animales()
 {
-    for(int i = 0; i < animales->obtener_cantidad(); i++)
-    {  // Poco eficiente
-        listar_animal(animales->consulta(i));
+
+    for(int i = 1; i < animales->obtener_cantidad(); i++)
+    { 
+        mostrar_animal(animales->consulta(i));
     }
 }
 
-void listar_animal(Animal *mi_animal)
+void Menu::mostrar_animal(Animal* animal)
 {
     string sep = ", ";
 
-    cout << mi_animal->obtener_nombre() << sep
-         << mi_animal->obtener_edad() << " años" << sep
-         << mi_animal->obtener_tamanio_texto() << sep
-         << mi_animal->obtener_especie_texto() << sep
-         << mi_animal->obtener_personalidad_texto() << sep
-         << mi_animal->obtener_hambre() << " puntos de hambre" << sep 
-         << mi_animal->obtener_higiene() << " puntos de higiene" << endl;
+    cout << animal->obtener_nombre() << sep
+         << animal->obtener_edad() << " años" << sep
+         << animal->obtener_tamanio_texto() << sep
+         << animal->obtener_especie_texto() << sep
+         << animal->obtener_personalidad_texto() << sep
+         << animal->obtener_hambre() << " puntos de hambre" << sep 
+         << animal->obtener_higiene() << " puntos de higiene" << endl;
 }
 
 void Menu::rescatar_animal()
 {
-    string nombre = obtener_nombre(animales);
+    //string nombre = obtener_nombre(animales);
 
     Tamanios tamanio = obtener_tamanio();
 
@@ -106,7 +106,7 @@ void Menu::rescatar_animal()
     // Como creo la clase adecuada y la agrego a la lista?
 }
 
-string obtener_nombre(Lista<Animal*>* mis_animales)
+/*string obtener_nombre(Lista<Animal*>* mis_animales)
 {
     string nombre;
 
@@ -116,7 +116,7 @@ string obtener_nombre(Lista<Animal*>* mis_animales)
     validar_nombre(nombre, mis_animales);
 
     return nombre;
-}
+}*/
 
 void validar_nombre(string nombre, Lista<Animal*>* mis_animales)
 {
