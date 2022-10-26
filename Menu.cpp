@@ -98,7 +98,7 @@ void Menu::rescatar_animal()
 
     Tamanios tamanio = obtener_tamanio();
 
-    Especies especie = obtener_especie();
+    char especie = obtener_especie();
 
     Personalidades personalidad = obtener_personalidad();
 
@@ -162,28 +162,29 @@ void validar_tamanio(int &tamanio)
     }
 }
 
-Especies obtener_especie()
+char obtener_especie()
 {
-    int especie;
+    char especie;
 
-    cout << "Ingrese la especie de su animal: " << endl <<
-    "0) Perro" << endl <<
-    "1) Gato" << endl <<
-    "2) Caballo" << endl <<
-    "3) Roedor" << endl <<
-    "4) Conejo" << endl <<
-    "5) Erizo" << endl <<
-    "6) Lagartija" << endl;
+    cout << "Ingrese la letra correspondiente a la especie de su animal: " << endl <<
+    "Perro[P]" << endl <<
+    "Gato[G]" << endl <<
+    "Caballo[C]" << endl <<
+    "Roedor[R]" << endl <<
+    "Conejo[O]" << endl <<
+    "Erizo[E]" << endl <<
+    "Lagartija[L]" << endl;
     cin >> especie;
 
     validar_especie(especie);
 
-    return (Especies) especie;
+    return especie;
 }
 
-void validar_especie(int &especie)
+void validar_especie(char &especie)
 {
-    while (especie < 0 || especie > MAX_ESPECIES)
+    while (especie != PERRO || especie != GATO  || especie != CABALLO || especie != ROEDOR || 
+    especie != CONEJO ||especie != ERIZO || especie !=LAGARTIJA )
     {
         cout << "La especie ingresada no es válida, ingrese una especie válida: ";
         cin >> especie;

@@ -27,16 +27,16 @@ enum Personalidades
 
 const int MAX_PERSONALIDADES = 3;
 
-enum Especies
-{
+
+    const char 
     PERRO='P',
     GATO='G',
     CABALLO='C',
     ROEDOR='R',
     CONEJO='O',
     ERIZO='E',
-    LAGARTIJA='L'
-};
+    LAGARTIJA='L';
+
 
 const int MAX_ESPECIES = 6;
 

@@ -27,7 +27,7 @@ class Animal
     public:
         // PRE: los datos de creación han sido validados
         // POS: crea un nuevo animal con su hambre en 0, su higiene en 100 y la edad, tamaño, personalidad y especie especificados    
-        Animal(int edad, Tamanios tamanio, Personalidades personalidad);
+        Animal(string nombre,int edad, Tamanios tamanio, Personalidades personalidad);
 
         // Getters
 

@@ -4,9 +4,13 @@
 class Sistema{
 private:
 Lista<Animal*>* animales; 
+Menu menu;
 
 public:
+//PRE: -
+//POS: Inicializa la lista de animales
 Sistema();
+void iniciar_sistema();
 void cargar_animales();
 ~Sistema();
 

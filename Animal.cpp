@@ -2,15 +2,14 @@
 
 using namespace std;
 
-Animal::Animal(int mi_edad, Tamanios mi_tamanio, Personalidades mi_personalidad)
+Animal::Animal(string nombre ,int edad, Tamanios tamanio, Personalidades personalidad)
 {
     hambre = MIN;
     higiene = MAX;
-
-    edad = mi_edad;
-    tamanio = mi_tamanio;
-    personalidad = mi_personalidad;
-    tamanio = mi_tamanio;
+    this->nombre=nombre;
+    this->edad = edad;
+    this->tamanio = tamanio;
+    this->personalidad = personalidad;
 }
 
 bool Animal::requiere_ducha()
