@@ -6,10 +6,9 @@
 
 using namespace std;
 
-Menu::Menu(Lista<Animal*>* animales)
+Menu::Menu()
 {
     opcion_tomada = 0;
-    this -> animales = animales;
 }
 
 void Menu::bienvenida()
@@ -45,12 +44,12 @@ void Menu::pedir_opcion()
     this -> opcion_tomada = opcion_tomada;
 }
 
-void Menu::procesar_opcion()
+void Menu::procesar_opcion(Lista<Animal*>* animales)
 {
     switch (opcion_tomada)
     {
         case LISTAR_ANIMALES: 
-        listar_animales();
+        listar_animales( animales);
         break;
 
         case RESCATAR_ANIMAL: 
@@ -71,9 +70,10 @@ void Menu::procesar_opcion()
     }
 }
 
-void Menu::listar_animales()
+void Menu::listar_animales(Lista<Animal*>* animales)
 {
-    for(int i = 1; i <= animales -> obtener_cantidad(); i++)
+
+    for(int i = 1; i < animales->obtener_cantidad(); i++)
     { 
         mostrar_animal(animales -> consulta(i));
     }
@@ -86,12 +86,12 @@ void Menu::mostrar_animal(Animal* animal)
     "Edad: " << animal -> obtener_edad() << endl <<
     "Tamanio: " << animal -> obtener_tamanio() << endl <<
     "Especie: " << animal -> obtener_especie() << endl <<
-    "Personalidad: " << animal -> obtener_personalidad() << endl <<
+    "Personalidad: " << animal -> obtener_personalidad_texto() << endl <<
     "Hambre: " << animal -> obtener_hambre() << endl <<
     "Higiene: " << animal -> obtener_higiene() << endl << endl;
 }
 
-void Menu::ingresar_nombre()
+void Menu::ingresar_nombre(Lista<Animal*>* animales)
 {
     string nombre;
     char eleccion;
@@ -99,7 +99,7 @@ void Menu::ingresar_nombre()
     cout << "Ingrese el nombre del animal rescatado: ";
     cin >> nombre;
 
-    if (buscar_nombre(nombre))
+    if (buscar_nombre(nombre, animales))
     {
         cout << "El nombre del animal rescatado ya existe." << endl;
         cout << " (M) volver al menu / (N) ingresar otro nombre: ";
@@ -113,7 +113,7 @@ void Menu::ingresar_nombre()
     }
 }
 
-bool Menu::buscar_nombre(string nombre)
+bool Menu::buscar_nombre(string nombre, Lista<Animal*>* animales)
 {
     bool encontrado = false;
     int i = 1;
@@ -134,13 +134,13 @@ bool Menu::buscar_nombre(string nombre)
 
 /*void Menu::rescatar_animal()
 {
-    string nombre = obtener_nombre(animales);
+    //string nombre = obtener_nombre(animales);
 
-    Tamanios tamanio = obtener_tamanio();
+    char tamanio = obtener_tamanio();
 
-    Especies especie = obtener_especie();
+    char especie = obtener_especie();
 
-    Personalidades personalidad = obtener_personalidad();
+    char personalidad = obtener_personalidad();
 
     // Como creo la clase adecuada y la agrego a la lista?
 }
@@ -176,24 +176,24 @@ void validar_nombre(string nombre, Lista<Animal*>* mis_animales)
         validar_nombre(nombre, mis_animales);
 }
 
-Tamanios obtener_tamanio()
+char obtener_tamanio()
 {
-    int tamanio;
+    char tamanio;
 
     cout << "Ingrese un tamaño para su nuevo animal: " << endl <<
-    "0) Diminuto (puede vivir en menos de 2m^2)" << endl <<
-    "1) Pequeño (puede vivir en menos de 10m^2)" << endl <<
-    "2) Mediano (puede vivir en un lugar de 10m^2 o más)" << endl <<
-    "3) Grande (puede vivir en un lugar de 20m^2 o más)" << endl <<
-    "4) Gigante (puede vivir en un lugar de 50m^2 o más)" << endl;
+    "- Diminuto (puede vivir en menos de 2m^2)[d]" << endl <<
+    "- Pequeño (puede vivir en menos de 10m^2)[p]" << endl <<
+    "- Mediano (puede vivir en un lugar de 10m^2 o más)[m]" << endl <<
+    "- Grande (puede vivir en un lugar de 20m^2 o más)[g]" << endl <<
+    "- Gigante (puede vivir en un lugar de 50m^2 o más)[t]" << endl;
     cin >> tamanio;
 
     validar_tamanio(tamanio);
 
-    return (Tamanios) tamanio;
+    return  tamanio;
 }
 
-void validar_tamanio(int tamanio)
+void validar_tamanio(char &tamanio)
 {
     while (tamanio < 0 || tamanio > MAX_TAMANIOS)
     {
@@ -202,53 +202,54 @@ void validar_tamanio(int tamanio)
     }
 }
 
-Especies obtener_especie()
+char obtener_especie()
 {
-    int especie;
+    char especie;
 
-    cout << "Ingrese la especie de su animal: " << endl <<
-    "0) Perro" << endl <<
-    "1) Gato" << endl <<
-    "2) Caballo" << endl <<
-    "3) Roedor" << endl <<
-    "4) Conejo" << endl <<
-    "5) Erizo" << endl <<
-    "6) Lagartija" << endl;
+    cout << "Ingrese la letra correspondiente a la especie de su animal: " << endl <<
+    "Perro[P]" << endl <<
+    "Gato[G]" << endl <<
+    "Caballo[C]" << endl <<
+    "Roedor[R]" << endl <<
+    "Conejo[O]" << endl <<
+    "Erizo[E]" << endl <<
+    "Lagartija[L]" << endl;
     cin >> especie;
 
     validar_especie(especie);
 
-    return (Especies) especie;
+    return especie;
 }
 
-void validar_especie(int especie)
+void validar_especie(char &especie)
 {
-    while (especie < 0 || especie > MAX_ESPECIES)
+    while (especie != PERRO && especie != GATO  && especie != CABALLO && especie != ROEDOR && 
+    especie != CONEJO && especie != ERIZO && especie !=LAGARTIJA )
     {
         cout << "La especie ingresada no es válida, ingrese una especie válida: ";
         cin >> especie;
     }
 }
 
-Personalidades obtener_personalidad()
+char obtener_personalidad()
 {
-    int personalidad;
+    char personalidad;
 
     cout << "Ingrese la personalidad de su animal: " << endl <<
-    "0) Dormilón" << endl <<
-    "1) Juguetón" << endl <<
-    "2) Sociable" << endl <<
-    "3) Travieso" << endl;
+    "-Dormilón[d]" << endl <<
+    "-Juguetón[j]" << endl <<
+    "-Sociable[s]" << endl <<
+    "-Travieso[t]" << endl;
     cin >> personalidad;
 
     validar_personalidad(personalidad);
 
-    return (Personalidades) personalidad;
+    return personalidad;
 }
 
-void validar_personalidad(int personalidad)
+void validar_personalidad(char &personalidad)
 {
-    while(personalidad < 0 || personalidad > MAX_PERSONALIDADES)
+    while(personalidad != TRAVIESO && personalidad != JUGUETON && personalidad !=DORMILON && personalidad !=SOCIABLE)
     {
         cout << "La personalidad ingresada no es válida, ingrese una personalidad válida: ";
         cin >> personalidad;

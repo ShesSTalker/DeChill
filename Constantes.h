@@ -1,41 +1,39 @@
 #ifndef _CONSTANTES_H_
 #define _CONSTANTES_H_
 
+const string PATH_ANIMALES("animales.csv");
 const int MIN = 0;
 const int MAX = 100;
 const int PASO = 10;
 
-enum Tamanios
-{
-    DIMINUTO,
-    PEQUENIO,
-    MEDIANO,
-    GRANDE,
-    GIGANTE
-};
+
+const char
+DIMINUTO='d',
+PEQUENIO='p',
+MEDIANO='m',
+GRANDE='g',
+GIGANTE='t';
 
 const int MAX_TAMANIOS = 4;
 
-enum Personalidades
-{
-    DORMILON,
-    JUGUETON,
-    SOCIABLE,
-    TRAVIESO
-};
+const char
+DORMILON='d',
+JUGUETON='j',
+SOCIABLE='s',
+TRAVIESO='t';
 
 const int MAX_PERSONALIDADES = 3;
 
-enum Especies
-{
-    PERRO,
-    GATO,
-    CABALLO,
-    ROEDOR,
-    CONEJO,
-    ERIZO,
-    LAGARTIJA
-};
+
+    const char 
+    PERRO='P',
+    GATO='G',
+    CABALLO='C',
+    ROEDOR='R',
+    CONEJO='O',
+    ERIZO='E',
+    LAGARTIJA='L';
+
 
 const int MAX_ESPECIES = 6;
 

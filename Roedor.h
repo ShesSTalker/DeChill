@@ -6,8 +6,9 @@
 class Roedor : public Animal
 {
     public:
-        string que_come();
-        bool requiere_ducha();
+    Roedor(string nombre ,int edad, char tamanio, char personalidad);
+    string que_come();
+    bool requiere_ducha();
 };
 
 #endif

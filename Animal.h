@@ -20,15 +20,15 @@ class Animal
         int hambre;
         int higiene;
         int edad;
-        Tamanios tamanio;
-        Personalidades personalidad;
+        char tamanio;
+        char personalidad;
         char especie;
     
     //Metodos
     public:
         // PRE: los datos de creación han sido validados
         // POS: crea un nuevo animal con su hambre en 0, su higiene en 100 y la edad, tamaño, personalidad y especie especificados    
-        Animal(int edad, Tamanios tamanio, Personalidades personalidad, char especie);
+        Animal(string nombre,int edad, char tamanio, char personalidad);
 
         // Getters
 
@@ -64,7 +64,7 @@ class Animal
 
         // PRE: 
         // POS: devuelve la personalidad del animal en formato de texto (forma completa)
-        string obtener_personalidad();
+        string obtener_personalidad_texto();
 
         // Setters
 
