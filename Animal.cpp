@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Animal::Animal(int mi_edad, Tamanios mi_tamanio, Personalidades mi_personalidad, char mi_especie)
+Animal::Animal(int mi_edad, Tamanios mi_tamanio, Personalidades mi_personalidad)
 {
     hambre = MIN;
     higiene = MAX;

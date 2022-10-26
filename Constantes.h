@@ -8,34 +8,34 @@ const int PASO = 10;
 
 enum Tamanios
 {
-    DIMINUTO,
-    PEQUENIO,
-    MEDIANO,
-    GRANDE,
-    GIGANTE
+    DIMINUTO='D',
+    PEQUENIO='P',
+    MEDIANO='M',
+    GRANDE='G',
+    GIGANTE='T'
 };
 
 const int MAX_TAMANIOS = 4;
 
 enum Personalidades
 {
-    DORMILON,
-    JUGUETON,
-    SOCIABLE,
-    TRAVIESO
+    DORMILON='D',
+    JUGUETON='J',
+    SOCIABLE='S',
+    TRAVIESO='T'
 };
 
 const int MAX_PERSONALIDADES = 3;
 
 enum Especies
 {
-    PERRO,
-    GATO,
-    CABALLO,
-    ROEDOR,
-    CONEJO,
-    ERIZO,
-    LAGARTIJA
+    PERRO='P',
+    GATO='G',
+    CABALLO='C',
+    ROEDOR='R',
+    CONEJO='O',
+    ERIZO='E',
+    LAGARTIJA='L'
 };
 
 const int MAX_ESPECIES = 6;
