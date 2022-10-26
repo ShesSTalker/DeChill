@@ -14,7 +14,7 @@ using namespace std;
 
 class Animal 
 {
-    //Metodos
+    //Atributos
     private:
         string nombre;
         int hambre;
@@ -24,6 +24,7 @@ class Animal
         char personalidad;
         char especie;
     
+    //Metodos
     public:
         // PRE: los datos de creación han sido validados
         // POS: crea un nuevo animal con su hambre en 0, su higiene en 100 y la edad, tamaño, personalidad y especie especificados    
@@ -53,15 +54,17 @@ class Animal
 
         // PRE: 
         // POS: devuelve la especie del animal en formato de texto (forma completa)
-        string obtener_especie_texto();
+        string obtener_especie();
 
         // PRE: 
         // POS: devuelve la especie del animal en formato de caracter
         char obtener_especie_char();
 
+        string obtener_tamanio();
+
         // PRE: 
         // POS: devuelve la personalidad del animal en formato de texto (forma completa)
-        string obtener_personalidad_texto();
+        string obtener_personalidad();
 
         // Setters
 
