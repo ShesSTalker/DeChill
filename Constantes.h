@@ -1,6 +1,7 @@
 #ifndef _CONSTANTES_H_
 #define _CONSTANTES_H_
 
+const string PATH_ANIMALES("animales.csv");
 const int MIN = 0;
 const int MAX = 100;
 const int PASO = 10;
