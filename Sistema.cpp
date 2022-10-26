@@ -33,6 +33,7 @@ void Sistema::cargar_animales(){
                         getline(archivo,personalidad);
 
                         char(especie);
+                        
                         switch(especie)
                         {
                                 case PERRO: 
