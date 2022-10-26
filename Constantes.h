@@ -6,24 +6,20 @@ const int MIN = 0;
 const int MAX = 100;
 const int PASO = 10;
 
-enum Tamanios
-{
-    DIMINUTO='D',
-    PEQUENIO='P',
-    MEDIANO='M',
-    GRANDE='G',
-    GIGANTE='T'
-};
+const char
+DIMINUTO='d',
+PEQUENIO='p',
+MEDIANO='m',
+GRANDE='g',
+GIGANTE='t';
 
 const int MAX_TAMANIOS = 4;
 
-enum Personalidades
-{
-    DORMILON='D',
-    JUGUETON='J',
-    SOCIABLE='S',
-    TRAVIESO='T'
-};
+const char
+DORMILON='d',
+JUGUETON='j',
+SOCIABLE='s',
+TRAVIESO='t';
 
 const int MAX_PERSONALIDADES = 3;
 

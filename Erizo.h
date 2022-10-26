@@ -6,7 +6,8 @@
 class Erizo : public Animal
 {
     public:
-        string que_come();
+    Erizo(string nombre ,int edad, char tamanio, char personalidad);
+    string que_come();
 };
 
 #endif

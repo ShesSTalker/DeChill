@@ -20,14 +20,14 @@ class Animal
         int hambre;
         int higiene;
         int edad;
-        Tamanios tamanio;
-        Personalidades personalidad;
+        char tamanio;
+        char personalidad;
         char especie;
     
     public:
         // PRE: los datos de creación han sido validados
         // POS: crea un nuevo animal con su hambre en 0, su higiene en 100 y la edad, tamaño, personalidad y especie especificados    
-        Animal(string nombre,int edad, Tamanios tamanio, Personalidades personalidad);
+        Animal(string nombre,int edad, char tamanio, char personalidad);
 
         // Getters
 

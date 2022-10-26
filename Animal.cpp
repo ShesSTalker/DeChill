@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Animal::Animal(string nombre ,int edad, Tamanios tamanio, Personalidades personalidad)
+Animal::Animal(string nombre ,int edad, char tamanio, char personalidad)
 {
     hambre = MIN;
     higiene = MAX;
