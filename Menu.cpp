@@ -6,10 +6,9 @@
 
 using namespace std;
 
-Menu::Menu(Lista<Animal*>* animales)
+Menu::Menu()
 {
     opcion_tomada = 0;
-    this -> animales = animales;
 }
 
 void Menu::bienvenida()
@@ -45,12 +44,12 @@ void Menu::pedir_opcion()
     this -> opcion_tomada = opcion_tomada;
 }
 
-void Menu::procesar_opcion()
+void Menu::procesar_opcion(Lista<Animal*>* animales)
 {
     switch (opcion_tomada)
     {
         case LISTAR_ANIMALES: 
-        listar_animales();
+        listar_animales( animales);
         break;
 
         case RESCATAR_ANIMAL: 
@@ -71,7 +70,7 @@ void Menu::procesar_opcion()
     }
 }
 
-void Menu::listar_animales()
+void Menu::listar_animales(Lista<Animal*>* animales)
 {
 
     for(int i = 1; i < animales->obtener_cantidad(); i++)
