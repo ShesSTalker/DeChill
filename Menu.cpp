@@ -101,7 +101,7 @@ void Menu::ingresar_nombre()
 
     if (buscar_nombre(nombre))
     {
-        cout << "El nombre del animal rescato ya existe." << endl;
+        cout << "El nombre del animal rescatado ya existe." << endl;
         cout << " (M) volver al menu / (N) ingresar otro nombre: ";
         cin >> eleccion;
         
