@@ -81,15 +81,47 @@ void Menu::listar_animales(Lista<Animal*>* animales)
 
 void Menu::mostrar_animal(Animal* animal)
 {
-    string sep = ", ";
+    cout << "---------------------------------------------------" << endl << endl;
+    cout << "Nombre: " << animal -> obtener_nombre() << endl <<
+    "Edad: " << animal -> obtener_edad() << endl <<
+    "Tamanio: " << animal -> obtener_tamanio() << endl <<
+    "Especie: " << animal -> obtener_especie() << endl <<
+    "Personalidad: " << animal -> obtener_personalidad() << endl <<
+    "Hambre: " << animal -> obtener_hambre() << endl <<
+    "Higiene: " << animal -> obtener_higiene() << endl << endl;
+}
 
-    cout << animal->obtener_nombre() << sep
-         << animal->obtener_edad() << " años" << sep
-         << animal->obtener_tamanio_texto() << sep
-         << animal->obtener_especie_texto() << sep
-         << animal->obtener_personalidad_texto() << sep
-         << animal->obtener_hambre() << " puntos de hambre" << sep 
-         << animal->obtener_higiene() << " puntos de higiene" << endl;
+void Menu::ingresar_nombre()
+{
+    string nombre;
+    char eleccion;
+
+    cout << "Ingrese el nombre del animal rescatado: ";
+    cin >> nombre;
+
+    if (buscar_nombre(nombre))
+    {
+        cout << "El nombre del animal rescato ya existe." << endl;
+        cout << " (M) volver al menu / (N) ingresar otro nombre:";
+        cin >> eleccion;
+        
+        while (eleccion != 'M' && eleccion != 'N')
+        {
+            cout << "Opcion invalida. (M) volver al menu / (N) ingresar otro nombre: ";
+            cin >> eleccion;
+        }
+    }
+}
+
+bool Menu::buscar_nombre(string nombre)
+{
+    bool encontrado = false;
+    int i = 1;
+
+    while (i < animales -> obtener_cantidad() && !encontrado)
+    {
+        
+    }
 }
 
 void Menu::rescatar_animal()
