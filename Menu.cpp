@@ -73,9 +73,9 @@ void Menu::procesar_opcion()
 
 void Menu::listar_animales()
 {
-    for(int i = 1; i < animales->obtener_cantidad(); i++)
+    for(int i = 1; i <= animales -> obtener_cantidad(); i++)
     { 
-        mostrar_animal(animales->consulta(i));
+        mostrar_animal(animales -> consulta(i));
     }
 }
 
@@ -102,7 +102,7 @@ void Menu::ingresar_nombre()
     if (buscar_nombre(nombre))
     {
         cout << "El nombre del animal rescato ya existe." << endl;
-        cout << " (M) volver al menu / (N) ingresar otro nombre:";
+        cout << " (M) volver al menu / (N) ingresar otro nombre: ";
         cin >> eleccion;
         
         while (eleccion != 'M' && eleccion != 'N')
@@ -117,14 +117,22 @@ bool Menu::buscar_nombre(string nombre)
 {
     bool encontrado = false;
     int i = 1;
+    Animal* animal; 
 
-    while (i < animales -> obtener_cantidad() && !encontrado)
+    while (i <= animales -> obtener_cantidad() && !encontrado)
     {
+        animal = animales -> consulta(i);
         
+        if (nombre == animal -> obtener_nombre())
+        {
+            encontrado = true;
+        }
+        i++;
     }
+    return encontrado;
 }
 
-void Menu::rescatar_animal()
+/*void Menu::rescatar_animal()
 {
     string nombre = obtener_nombre(animales);
 
@@ -137,7 +145,7 @@ void Menu::rescatar_animal()
     // Como creo la clase adecuada y la agrego a la lista?
 }
 
-/*string obtener_nombre(Lista<Animal*>* mis_animales)
+string obtener_nombre(Lista<Animal*>* mis_animales)
 {
     string nombre;
 
