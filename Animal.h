@@ -58,13 +58,13 @@ class Animal
 
         // PRE: 
         // POS: devuelve la especie del animal en formato de caracter
-        char obtener_especie_char();
+        char obtener_especie_texto();
 
         string obtener_tamanio();
 
         // PRE: 
         // POS: devuelve la personalidad del animal en formato de texto (forma completa)
-        string obtener_personalidad();
+        string obtener_personalidad_texto();
 
         // Setters
 

@@ -17,6 +17,9 @@ void iniciar_sistema();
 //POS: carga animales en la lista de animales
 void cargar_animales();
 //PRE: -
+//POS: guarda todos los cambios realizados al  archivo csv de animales
+void guardar();
+//PRE: -
 //POS: 
 ~Sistema();
 

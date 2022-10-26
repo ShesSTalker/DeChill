@@ -56,3 +56,19 @@ void Sistema::cargar_animales(){
                 cout<<"No se pudo abrir el archivo"<<endl;
         };
 };
+
+void Sistema::guardar(){
+        Animal * animal;
+        ofstream archivo (PATH_ANIMALES);
+        if (archivo.is_open()){
+                for (int i = 1; i <= animales->obtener_cantidad(); i++) // de 1 a cantidad porque la lista empieza desde el elemento 1 no 0
+                {
+                        animal=animales->consulta(i);
+                        archivo<<animal->obtener_nombre()<<","<<animal->obtener_edad()<<","<<animal->obtener_tamanio_texto()<<
+                        ","<<animal->obtener_especie()<<","<<animal->obtener_personalidad_texto()<<endl;
+                };
+                
+        }else{
+                cout<<"No se pudo abrir el archivo"<<endl;
+        };
+};
