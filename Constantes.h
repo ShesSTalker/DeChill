@@ -25,14 +25,14 @@ TRAVIESO='t';
 const int MAX_PERSONALIDADES = 3;
 
 
-    const char 
-    PERRO='P',
-    GATO='G',
-    CABALLO='C',
-    ROEDOR='R',
-    CONEJO='O',
-    ERIZO='E',
-    LAGARTIJA='L';
+const char 
+PERRO='P',
+GATO='G',
+CABALLO='C',
+ROEDOR='R',
+CONEJO='O',
+ERIZO='E',
+LAGARTIJA='L';
 
 
 const int MAX_ESPECIES = 6;
