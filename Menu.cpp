@@ -44,6 +44,11 @@ void Menu::pedir_opcion()
     this -> opcion_tomada = opcion_tomada;
 }
 
+int Menu::obtener_opcion_tomada()
+{
+    return opcion_tomada;
+}
+
 void Menu::procesar_opcion(Lista<Animal*>* animales)
 {
     switch (opcion_tomada)
