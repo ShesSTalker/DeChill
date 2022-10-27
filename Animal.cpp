@@ -2,21 +2,6 @@
 
 using namespace std;
 
-Animal::Animal(string nombre ,int edad, char tamanio, char personalidad)
-{
-    hambre = MIN;
-    higiene = MAX;
-    this->nombre=nombre;
-    this->edad = edad;
-    this->tamanio = tamanio;
-    this->personalidad = personalidad;
-}
-
-bool Animal::requiere_ducha()
-{
-    return true;
-}
-
 // Getters
 
 int Animal::obtener_hambre()
@@ -45,10 +30,14 @@ string Animal::obtener_tamanio_texto()
 
     switch(tamanio)
     {
-        case DIMINUTO: tamanio_texto = "diminuto"; break;
-        case PEQUENIO: tamanio_texto = "pequeño"; break;
-        case MEDIANO: tamanio_texto = "mediano"; break;
-        case GRANDE: tamanio_texto = "grande"; break;
+        case DIMINUTO: tamanio_texto = "diminuto";
+        break;
+        case PEQUENIO: tamanio_texto = "pequeño"; 
+        break;
+        case MEDIANO: tamanio_texto = "mediano"; 
+        break;
+        case GRANDE: tamanio_texto = "grande"; 
+        break;
         case GIGANTE: tamanio_texto = "gigante";
     }
 
@@ -130,10 +119,10 @@ void Animal::pasar_tiempo()
 
 void Animal::alimentar()
 {
-    hambre = MIN;
+    hambre = HAMBRE_INICIAL;
 }
 
 void Animal::duchar()
 {
-    higiene = MAX;
+    higiene = HIGIENE_INICIAL;
 }
