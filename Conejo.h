@@ -8,7 +8,7 @@ class Conejo : public Animal
     //Atributos
     private:
     char especie=CONEJO;
-    string comida="Lechuga";
+    string comida;
 
     //Metodos
     public:
