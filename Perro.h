@@ -5,8 +5,10 @@
 
 class Perro : public Animal
 {
+    private:
+    char especie=PERRO;
     public:
-    Perro(string nombre, int edad, char tamanio, char personalidad, char especie);
+    Perro(string nombre, int edad, char tamanio, char personalidad);
 
     //PRE: -
     //POS: Devuelve verdadero si requiere una ducha y falso si no requiere

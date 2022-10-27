@@ -1,6 +1,6 @@
 #include "Gato.h"
 
-Gato::Gato(string nombre, int edad, char tamanio, char personalidad, char especie) : Animal(nombre, edad, tamanio, personalidad, especie) {}
+Gato::Gato(string nombre, int edad, char tamanio, char personalidad) : Animal(nombre, edad, tamanio, personalidad) {}
 
 bool Gato:: requiere_ducha()
 {

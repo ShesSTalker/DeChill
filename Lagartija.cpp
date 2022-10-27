@@ -1,6 +1,6 @@
 #include "Lagartija.h"
 
-Lagartija::Lagartija(string nombre, int edad, char tamanio, char personalidad, char especie) : Animal(nombre, edad, tamanio, personalidad, especie) {} 
+Lagartija::Lagartija(string nombre, int edad, char tamanio, char personalidad) : Animal(nombre, edad, tamanio, personalidad) {} 
 
 bool Lagartija:: requiere_ducha()
 {

@@ -1,6 +1,6 @@
 #include "Roedor.h"
 
-Roedor::Roedor(string nombre, int edad, char tamanio, char personalidad, char especie) : Animal(nombre, edad, tamanio, personalidad, especie) {}
+Roedor::Roedor(string nombre, int edad, char tamanio, char personalidad) : Animal(nombre, edad, tamanio, personalidad) {}
 
 bool Roedor:: requiere_ducha()
 {

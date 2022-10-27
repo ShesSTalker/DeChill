@@ -1,6 +1,6 @@
 #include "Conejo.h"
 
-Conejo::Conejo(string nombre, int edad, char tamanio, char personalidad, char especie) : Animal(nombre, edad, tamanio, personalidad, especie){}
+Conejo::Conejo(string nombre, int edad, char tamanio, char personalidad) : Animal(nombre, edad, tamanio, personalidad){}
 
 bool Conejo::requiere_ducha()
 {

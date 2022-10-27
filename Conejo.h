@@ -6,9 +6,10 @@
 class Conejo : public Animal
 {
     private:
-    
+    char especie=CONEJO;
+
     public:
-    Conejo(string nombre, int edad, char tamanio, char personalidad, char especie);
+    Conejo(string nombre, int edad, char tamanio, char personalidad);
 
     //PRE:
     //POS: Devuelve verdadero si requiere una ducha y falso si no requiere

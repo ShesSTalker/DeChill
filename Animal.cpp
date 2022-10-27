@@ -2,13 +2,12 @@
 
 using namespace std;
 
-Animal::Animal(string nombre, int edad, char tamanio, char personalidad, char especie)
+Animal::Animal(string nombre, int edad, char tamanio, char personalidad)
 {
     this -> nombre = nombre;
     this -> edad = edad; 
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
-    this -> especie = especie;
     this -> hambre = HAMBRE_INICIAL;
     this -> higiene = HIGIENE_INICIAL; 
 }

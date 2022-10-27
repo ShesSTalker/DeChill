@@ -37,25 +37,25 @@ void Sistema::cargar_animales()
                         switch(especie)
                         {
                                 case PERRO: 
-                                        animal= new Perro(nombre ,stoi(edad) , tamanio[0] , personalidad[0], especie); 
+                                        animal= new Perro(nombre ,stoi(edad) , tamanio[0] , personalidad[0]); 
                                         break;
                                 case GATO: 
-                                        animal= new Gato(nombre ,stoi(edad) , tamanio[0] , personalidad[0], especie);
+                                        animal= new Gato(nombre ,stoi(edad) , tamanio[0] , personalidad[0]);
                                         break;
                                 case CABALLO:
-                                        animal= new Caballo(nombre ,stoi(edad) , tamanio[0] , personalidad[0], especie);
+                                        animal= new Caballo(nombre ,stoi(edad) , tamanio[0] , personalidad[0]);
                                         break;
                                 case ROEDOR: 
-                                        animal= new Roedor(nombre ,stoi(edad) , tamanio[0] , personalidad[0], especie);
+                                        animal= new Roedor(nombre ,stoi(edad) , tamanio[0] , personalidad[0]);
                                         break;
                                 case CONEJO: 
-                                        animal= new Conejo(nombre ,stoi(edad) , tamanio[0] , personalidad[0], especie);
+                                        animal= new Conejo(nombre ,stoi(edad) , tamanio[0] , personalidad[0]);
                                         break;
                                 case ERIZO: 
-                                        animal= new Erizo(nombre ,stoi(edad) , tamanio[0] , personalidad[0], especie);
+                                        animal= new Erizo(nombre ,stoi(edad) , tamanio[0] , personalidad[0]);
                                         break;
                                 case LAGARTIJA:
-                                        animal= new Lagartija(nombre ,stoi(edad) , tamanio[0] , personalidad[0], especie);
+                                        animal= new Lagartija(nombre ,stoi(edad) , tamanio[0] , personalidad[0]);
                                         break;
                         }
                         animales->alta(animal, animales->obtener_cantidad());

@@ -1,6 +1,6 @@
 #include "Perro.h"
 
-Perro::Perro(string nombre, int edad, char tamanio, char personalidad, char especie) : Animal(nombre, edad, tamanio, personalidad, especie) {}
+Perro::Perro(string nombre, int edad, char tamanio, char personalidad) : Animal(nombre, edad, tamanio, personalidad) {}
 
 bool Perro::requiere_ducha()
 {

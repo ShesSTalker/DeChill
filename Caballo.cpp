@@ -1,6 +1,6 @@
 #include "Caballo.h"
 
-Caballo::Caballo(string nombre, int edad, char tamanio, char personalidad, char especie) : Animal(nombre, edad, tamanio, personalidad, especie){}
+Caballo::Caballo(string nombre, int edad, char tamanio, char personalidad) : Animal(nombre, edad, tamanio, personalidad){}
 
 bool Caballo::requiere_ducha()
 {

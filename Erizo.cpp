@@ -1,6 +1,6 @@
 #include "Erizo.h"
 
-Erizo::Erizo(string nombre, int edad, char tamanio, char personalidad, char especie) : Animal(nombre, edad, tamanio, personalidad, especie) {}
+Erizo::Erizo(string nombre, int edad, char tamanio, char personalidad) : Animal(nombre, edad, tamanio, personalidad) {}
 
 bool Erizo::requiere_ducha()
 {
