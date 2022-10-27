@@ -5,16 +5,21 @@
 
 class Roedor : public Animal
 {
+    //Atributos
+    private:
+        char especie;
+
+    //Metodos
     public:
-    Roedor(string nombre, int edad, char tamanio, char personalidad, char especie);
+        Roedor(string nombre, int edad, char tamanio, char personalidad);
 
-    //PRE: -
-    //POS: Devuelve verdadero si requiere una ducha y falso si no requiere
-    bool requiere_ducha();
+        //PRE: -
+        //POS: Devuelve verdadero si requiere una ducha y falso si no requiere
+        bool requiere_ducha();
 
-    //PRE: -
-    //POS: Devuelve la comida que come
-    string que_come();
+        //PRE: -
+        //POS: Devuelve la comida que come
+        string que_come();
 };
 
 #endif
