@@ -7,7 +7,7 @@ class Conejo : public Animal
 {
     //Atributos
     private:
-    char especie=CONEJO;
+    char especie;
     string comida;
 
     //Metodos

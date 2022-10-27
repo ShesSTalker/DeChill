@@ -7,8 +7,8 @@ class Roedor : public Animal
 {
     //Atributos
     private:
-    char especie=ROEDOR;
-    string comida ="Queso";
+    char especie;
+    string comida;
     //Metodos
     public:
     Roedor(string nombre, int edad, char tamanio, char personalidad);
