@@ -9,6 +9,7 @@ Lagartija::Lagartija(string nombre, int edad, char tamanio, char personalidad)
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
     this -> especie = LAGARTIJA;
+    this -> comida = COMIDA_LAGARTIJA;
 }
 
 bool Lagartija:: requiere_ducha()

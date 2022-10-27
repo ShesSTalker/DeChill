@@ -9,6 +9,7 @@ Gato::Gato(string nombre, int edad, char tamanio, char personalidad)
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
     this -> especie = GATO;
+    this -> comida = COMIDA_GATO;
 }
 
 bool Gato:: requiere_ducha()

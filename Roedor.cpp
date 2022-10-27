@@ -9,6 +9,7 @@ Roedor::Roedor(string nombre, int edad, char tamanio, char personalidad)
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
     this -> especie = ROEDOR;
+    this -> comida = COMIDA_ROEDOR;
 }
 
 bool Roedor:: requiere_ducha()

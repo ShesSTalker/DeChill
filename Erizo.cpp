@@ -9,6 +9,7 @@ Erizo::Erizo(string nombre, int edad, char tamanio, char personalidad)
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
     this -> especie = ERIZO;
+    this -> comida = COMIDA_CONEJO;
 }
 
 bool Erizo::requiere_ducha()
