@@ -6,10 +6,9 @@ Perro::Perro(string nombre, int edad, char tamanio, char personalidad)
     this -> hambre = HAMBRE_INICIAL;
     this -> higiene = HIGIENE_INICIAL;
     this -> edad = edad;
+    this -> especie = PERRO;
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
-    this -> especie = PERRO;
-    this -> comida = COMIDA_PERRO;
 }
 
 bool Perro::requiere_ducha()
@@ -19,5 +18,5 @@ bool Perro::requiere_ducha()
 
 string Perro:: que_come()
 {
-    return comida;
+    return COMIDA_PERRO;
 }

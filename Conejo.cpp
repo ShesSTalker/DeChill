@@ -6,10 +6,9 @@ Conejo::Conejo(string nombre, int edad, char tamanio, char personalidad)
     this -> hambre = HAMBRE_INICIAL;
     this -> higiene = HIGIENE_INICIAL;
     this -> edad = edad;
+    this -> especie = CONEJO;
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
-    this -> especie = CONEJO;
-    this -> comida = COMIDA_CONEJO;
 }
 
 
@@ -20,5 +19,5 @@ bool Conejo::requiere_ducha()
 
 string Conejo::que_come()
 {
-    return comida;
+    return COMIDA_CONEJO;
 }

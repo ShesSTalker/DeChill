@@ -6,10 +6,9 @@ Caballo::Caballo(string nombre, int edad, char tamanio, char personalidad)
     this -> hambre = HAMBRE_INICIAL;
     this -> higiene = HIGIENE_INICIAL;
     this -> edad = edad;
+    this -> especie = CABALLO;
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
-    this -> especie = CABALLO;
-    this -> comida = COMIDA_CABALLO;
 }
 
 bool Caballo::requiere_ducha()
@@ -19,5 +18,5 @@ bool Caballo::requiere_ducha()
 
 string Caballo:: que_come()
 {
-        return comida;
+        return COMIDA_CABALLO;
 }

@@ -6,10 +6,9 @@ Lagartija::Lagartija(string nombre, int edad, char tamanio, char personalidad)
     this -> hambre = HAMBRE_INICIAL;
     this -> higiene = HIGIENE_INICIAL;
     this -> edad = edad;
+    this -> especie = LAGARTIJA;
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
-    this -> especie = LAGARTIJA;
-    this -> comida = COMIDA_LAGARTIJA;
 }
 
 bool Lagartija:: requiere_ducha()
@@ -19,5 +18,5 @@ bool Lagartija:: requiere_ducha()
 
 string Lagartija:: que_come()
 {
-    return comida;
+    return COMIDA_LAGARTIJA;
 }

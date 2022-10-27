@@ -5,14 +5,9 @@
 
 class Conejo : public Animal
 {
-    //Atributos
-    private:
-    char especie;
-    string comida;
-
     //Metodos
     public:
-    Conejo(string nombre, int edad, char tamanio, char personalidad);
+        Conejo(string nombre, int edad, char tamanio, char personalidad);
 
         //PRE:
         //POS: Devuelve verdadero si requiere una ducha y falso si no requiere

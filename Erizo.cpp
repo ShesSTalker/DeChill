@@ -6,10 +6,9 @@ Erizo::Erizo(string nombre, int edad, char tamanio, char personalidad)
     this -> hambre = HAMBRE_INICIAL;
     this -> higiene = HIGIENE_INICIAL;
     this -> edad = edad;
+    this -> especie = ERIZO;
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
-    this -> especie = ERIZO;
-    this -> comida = COMIDA_CONEJO;
 }
 
 bool Erizo::requiere_ducha()
@@ -19,5 +18,5 @@ bool Erizo::requiere_ducha()
 
 string Erizo:: que_come()
 {
-    return comida;
+    return COMIDA_ERIZO;
 }

@@ -6,10 +6,9 @@ Roedor::Roedor(string nombre, int edad, char tamanio, char personalidad)
     this -> hambre = HAMBRE_INICIAL;
     this -> higiene = HIGIENE_INICIAL;
     this -> edad = edad;
+    this -> especie = ROEDOR;
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
-    this -> especie = ROEDOR;
-    this -> comida = COMIDA_ROEDOR;
 }
 
 bool Roedor:: requiere_ducha()
@@ -19,5 +18,5 @@ bool Roedor:: requiere_ducha()
 
 string Roedor:: que_come()
 {
-    return comida;
+    return COMIDA_ROEDOR;
 }

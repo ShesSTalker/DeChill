@@ -6,10 +6,9 @@ Gato::Gato(string nombre, int edad, char tamanio, char personalidad)
     this -> hambre = HAMBRE_INICIAL;
     this -> higiene = HIGIENE_INICIAL;
     this -> edad = edad;
+    this -> especie = GATO;
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
-    this -> especie = GATO;
-    this -> comida = COMIDA_GATO;
 }
 
 bool Gato:: requiere_ducha()
@@ -19,6 +18,6 @@ bool Gato:: requiere_ducha()
 
 string Gato:: que_come()
 {
-    return comida;
+    return COMIDA_GATO;
 }
 
