@@ -85,7 +85,7 @@ void Menu::mostrar_animal(Animal* animal)
     cout << "Nombre: " << animal -> obtener_nombre() << endl <<
     "Edad: " << animal -> obtener_edad() << endl <<
     "Tamanio: " << animal -> obtener_tamanio() << endl <<
-    "Especie: " << animal -> obtener_especie() << endl <<
+    "Especie: " << animal -> obtener_especie_texto() << endl <<
     "Personalidad: " << animal -> obtener_personalidad_texto() << endl <<
     "Hambre: " << animal -> obtener_hambre() << endl <<
     "Higiene: " << animal -> obtener_higiene() << endl << endl;

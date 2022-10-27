@@ -5,6 +5,8 @@
 
 class Conejo : public Animal
 {
+    private:
+    
     public:
     Conejo(string nombre ,int edad, char tamanio, char personalidad);
     string que_come();

@@ -66,7 +66,7 @@ void Sistema::guardar(){
                 {
                         animal=animales->consulta(i);
                         archivo<<animal->obtener_nombre()<<","<<animal->obtener_edad()<<","<<animal->obtener_tamanio_texto()<<
-                        ","<<animal->obtener_especie()<<","<<animal->obtener_personalidad_texto()<<endl;
+                        ","<<animal->obtener_especie_texto()<<","<<animal->obtener_personalidad_texto()<<endl;
                 };
                 
         }else{

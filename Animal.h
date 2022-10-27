@@ -15,7 +15,7 @@ using namespace std;
 class Animal 
 {
     //Atributos
-    private:
+    protected:
         string nombre;
         int hambre;
         int higiene;
