@@ -6,6 +6,7 @@
 class Lagartija : public Animal
 {
     public:
+    Lagartija(string nombre, int edad, char tamanio, char personalidad, char especie);
 
     //PRE: -
     //POS: Devuelve verdadero si requiere una ducha y falso si no requiere
