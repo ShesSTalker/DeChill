@@ -17,13 +17,15 @@ void Sistema::iniciar_sistema(){
 
 };
 
-void Sistema::cargar_animales(){
+void Sistema::cargar_animales()
+{
         fstream archivo (PATH_ANIMALES);
-        if (archivo.is_open()){
-
+        if (archivo.is_open())
+        {
                 string nombre, edad, tamanio , especie, personalidad;
                 
-                while(getline(archivo,nombre, ',')){
+                while(getline(archivo,nombre, ','))
+                {
                         Animal * animal;
                         getline(archivo,edad,',');
                         getline(archivo,tamanio,',');
@@ -58,7 +60,9 @@ void Sistema::cargar_animales(){
                         }
                         animales->alta(animal, animales->obtener_cantidad());
                 }
-        }else{
+        }
+        else
+        {
                 cout<<"No se pudo abrir el archivo"<<endl;
-        };
+        }
 };

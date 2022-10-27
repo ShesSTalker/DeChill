@@ -14,7 +14,7 @@ class Sistema
     public:
     //PRE: -
     //POS: Inicializa la lista de animales
-    Sistema();
+    Sistema(){};
 
     //PRE: -
     //POS: Inicializa el sistema 
