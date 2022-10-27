@@ -15,21 +15,18 @@ using namespace std;
 class Animal 
 {
     //Atributos
-    private:
+    protected:
         string nombre;
         int hambre;
         int higiene;
         int edad;
         char tamanio;
         char personalidad;
-        char especie;
     
     //Metodos 
     public:
         //Constructor por defecto  
         Animal(){};
-
-        Animal(string nombre, int edad, char tamanio, char personalidad, char especie);
 
         // Getters
 
