@@ -2,8 +2,8 @@
 #define _CONSTANTES_H_
 
 const string PATH_ANIMALES("animales.csv");
-const int MIN = 0;
-const int MAX = 100;
+const int HAMBRE_INICIAL = 0;
+const int HIGIENE_INICIAL = 100;
 const int PASO = 10;
 
 

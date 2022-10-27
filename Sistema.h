@@ -1,5 +1,6 @@
 #ifndef _SISTEMA_H_
 #define _SISTEMA_H_
+
 #include "Menu.h"
 class Sistema{
 private:
@@ -22,8 +23,5 @@ void guardar();
 //PRE: -
 //POS: 
 ~Sistema();
-
 };
-
-
 #endif //_SISTEMA_H_

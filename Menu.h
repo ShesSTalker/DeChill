@@ -28,6 +28,10 @@ class Menu{
         //POS: Solicita al usuario que ingrese el numero de la opcion que desea ejecutar.
         void pedir_opcion();
 
+        //PRE: -
+        //POS: Devuelve la opcion tomada por el usuario
+        int obtener_opcion_tomada();
+
         //PRE: opcion_tomada debe ser 0 < opcion_tomada <= 6
         //POS: Procesa opcion_tomada para ejecutar las operaciones de la opcion elejida por el usuario
         void procesar_opcion(Lista<Animal*>* animales);
