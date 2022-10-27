@@ -8,6 +8,7 @@ int main()
     Menu* menu;
     int opcion;
 
+    menu -> bienvenida();
     menu -> mostrar_menu();
     menu -> pedir_opcion();
     opcion = menu -> obtener_opcion_tomada();
