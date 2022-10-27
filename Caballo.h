@@ -7,8 +7,8 @@ class Caballo : public Animal
 {
     //Atributos:
     private:
-    char especie=CABALLO;
-    string comida="Manzanas";
+    char especie;
+    string comida;
 
 
     //Metodos
