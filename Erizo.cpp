@@ -18,5 +18,5 @@ bool Erizo::requiere_ducha()
 
 string Erizo:: que_come()
 {
-    return "Insectos";
+    return comida;
 }

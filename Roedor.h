@@ -7,11 +7,11 @@ class Roedor : public Animal
 {
     //Atributos
     private:
-        char especie;
-
+    char especie=ROEDOR;
+    string comida ="Queso";
     //Metodos
     public:
-        Roedor(string nombre, int edad, char tamanio, char personalidad);
+    Roedor(string nombre, int edad, char tamanio, char personalidad);
 
         //PRE: -
         //POS: Devuelve verdadero si requiere una ducha y falso si no requiere

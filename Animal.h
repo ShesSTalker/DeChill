@@ -29,6 +29,9 @@ class Animal
         //Constructor por defecto  
         Animal(){};
 
+
+        Animal(string nombre, int edad, char tamanio, char personalidad);
+
         // Getters
 
         // PRE: 

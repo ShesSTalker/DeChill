@@ -18,5 +18,5 @@ bool Perro::requiere_ducha()
 
 string Perro:: que_come()
 {
-    return "Huesos";
+    return comida;
 }

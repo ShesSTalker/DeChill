@@ -18,5 +18,5 @@ bool Roedor:: requiere_ducha()
 
 string Roedor:: que_come()
 {
-    return "Queso";
+    return comida;
 }

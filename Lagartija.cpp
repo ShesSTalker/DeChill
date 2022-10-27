@@ -18,5 +18,5 @@ bool Lagartija:: requiere_ducha()
 
 string Lagartija:: que_come()
 {
-    return "Insectos";
+    return comida;
 }

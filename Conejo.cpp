@@ -11,6 +11,7 @@ Conejo::Conejo(string nombre, int edad, char tamanio, char personalidad)
     this -> especie = CONEJO;
 }
 
+
 bool Conejo::requiere_ducha()
 {
     return true;
@@ -18,5 +19,5 @@ bool Conejo::requiere_ducha()
 
 string Conejo::que_come()
 {
-    return "Lechuga";
+    return comida;
 }

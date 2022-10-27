@@ -18,5 +18,5 @@ bool Caballo::requiere_ducha()
 
 string Caballo:: que_come()
 {
-        return "Manzanas";
+        return comida;
 }
