@@ -24,11 +24,12 @@ class Animal
         char personalidad;
         char especie;
     
-    //Metodos
+    //Metodos 
     public:
-        // PRE: los datos de creación han sido validados
-        // POS: crea un nuevo animal con su hambre en 0, su higiene en 100 y la edad, tamaño, personalidad y especie especificados    
-        Animal(string nombre,int edad, char tamanio, char personalidad);
+        //Constructor por defecto  
+        Animal(){};
+
+        Animal(string nombre, int edad, char tamanio, char personalidad, char especie);
 
         // Getters
 
@@ -82,13 +83,11 @@ class Animal
 
         // PRE: 
         // POS: devuelve si el animal requiere ducharse o no
-        virtual bool requiere_ducha();
-
-    protected:
+        virtual bool requiere_ducha() = 0;
+        
         // PRE: 
         // POS: devuelve el nombre de la comida del animal
         virtual string que_come() = 0;
-
 };
 
 #endif

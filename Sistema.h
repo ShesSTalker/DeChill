@@ -8,7 +8,7 @@ class Sistema
     //Atributos
     private:
     Lista<Animal*>* animales; 
-    Menu menu;
+    Menu* menu;
 
     //Metodos
     public:
