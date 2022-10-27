@@ -7,6 +7,7 @@ class Perro : public Animal
 {
     private:
     char especie=PERRO;
+    string comida="Huesos";
     public:
     Perro(string nombre, int edad, char tamanio, char personalidad);
 

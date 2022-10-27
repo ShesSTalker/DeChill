@@ -7,6 +7,7 @@ class Lagartija : public Animal
 {
     private:
     char especie=LAGARTIJA;
+    string comida="Insectos";
     public:
 
     Lagartija(string nombre, int edad, char tamanio, char personalidad);

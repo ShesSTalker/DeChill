@@ -7,6 +7,7 @@ class Erizo : public Animal
 {
     private:
     char especie=ERIZO;
+    string comida="Insectos";
     public:
     Erizo(string nombre, int edad, char tamanio, char personalidad);
 

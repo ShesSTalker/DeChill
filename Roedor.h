@@ -7,6 +7,7 @@ class Roedor : public Animal
 {
     private:
     char especie=ROEDOR;
+    string comida ="Queso";
     public:
     Roedor(string nombre, int edad, char tamanio, char personalidad);
 

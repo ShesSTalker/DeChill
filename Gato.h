@@ -7,6 +7,7 @@ class Gato : public Animal
 {
     private:
     char especie=GATO;
+    string comida="Atun";
     public:
     Gato(string nombre, int edad, char tamanio, char personalidad);
 

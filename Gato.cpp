@@ -9,6 +9,6 @@ bool Gato:: requiere_ducha()
 
 string Gato:: que_come()
 {
-    return "Atun";
+    return comida;
 }
 

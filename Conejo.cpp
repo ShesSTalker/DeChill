@@ -9,5 +9,5 @@ bool Conejo::requiere_ducha()
 
 string Conejo::que_come()
 {
-    return "Lechuga";
+    return comida;
 }
