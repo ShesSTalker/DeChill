@@ -37,6 +37,17 @@ LAGARTIJA='L';
 
 const int MAX_ESPECIES = 6;
 
+
+const string
+COMIDA_PERRO = "Huesos";
+COMIDA_GATO = "Atun";
+COMIDA_CABALLO = "Manzanas";
+COMIDA_ROEDOR = "Queso";
+COMIDA_CONEJO = "Lechuga";
+COMIDA_ERIZO = "Insectos";
+COMIDA_LAGARTIJA = "Insectos";
+
+
 enum opciones_menu_principal {
     MOSTRAR_MENU,
     LISTAR_ANIMALES,
