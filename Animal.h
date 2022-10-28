@@ -63,14 +63,12 @@ class Animal
         // POS: devuelve la personalidad del animal en formato de texto (forma completa)
         string obtener_personalidad_texto();
 
-        // PRE: 
-        // POS: aumenta el hambre del animal y reduce (o no) su higiene, basándose en las características del animal particular
-        void pasar_tiempo();
-
-        //PRE:
-        // POS: aumenta 
+        //PRE: -
+        // POS: Aumenta el hambre del animal (varia dependiendo de la personalidad)
         void aumentar_hambre();
 
+        //PRE: El animal debe requerir ducha
+        //POS: Dearma el higiene del animal (varia dependiendo de la personalidad)
         void dearmar_higiene();
 
         // PRE: 

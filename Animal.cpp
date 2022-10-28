@@ -97,9 +97,9 @@ string Animal::obtener_personalidad_texto()
 
 void Animal::aumentar_hambre()
 {
-    int 
+    int tipo_personalidad = int(personalidad);
 
-    switch(int(personalidad))
+    switch(tipo_personalidad)
     {
         case DORMILON:
             hambre += SUMA_HAMBRE / 2;
@@ -112,6 +112,27 @@ void Animal::aumentar_hambre()
             break;
         case TRAVIESO:
             hambre += SUMA_HAMBRE;
+            break;
+    }
+}
+
+void Animal::dearmar_higiene()
+{
+     int tipo_personalidad = int(personalidad);
+
+    switch(tipo_personalidad)
+    {
+        case DORMILON:
+            higiene -= HIGIENE_INICIAL;
+            break;
+        case JUGUETON:
+            higiene -= HIGIENE_INICIAL;
+            break;
+        case SOCIABLE:
+            higiene -= HIGIENE_INICIAL / 2;
+            break;
+        case TRAVIESO:
+            higiene -= HIGIENE_INICIAL * 2;
             break;
     }
 }
