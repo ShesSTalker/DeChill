@@ -29,7 +29,7 @@ class Sistema
 
         //PRE: opcion_tomada debe ser 0 < opcion_tomada <= 6
         //POS: Procesa opcion_tomada para ejecutar las operaciones de la opcion elejida por el usuario
-        void procesar_opcion(Lista<Animal*>* animales);
+        void procesar_opcion(int opcion_tomada);
 
         // PRE: -
         // POS: aumenta el hambre del animal y reduce (o no) su higiene, basándose en las características del animal particular

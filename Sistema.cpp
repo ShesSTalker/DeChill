@@ -75,9 +75,9 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
         animales->alta(animal, animales->obtener_cantidad());
 }
 
-void Sistema::procesar_opcion(Lista<Animal*>* animales)
+void Sistema::procesar_opcion(int opcion_tomada)
 {
-    switch (menu->obtener_opcion_tomada())
+    switch (opcion_tomada)
     {
         case LISTAR_ANIMALES: 
         pasar_tiempo();
