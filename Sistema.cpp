@@ -96,9 +96,9 @@ void Sistema::procesar_opcion(int opcion_tomada)
         cout << endl << "BUSCAR ANIMAL DE LA RESERVA:" << endl << endl;
         pasar_tiempo();
         pedir_nombre(nombre);
-        if (buscar_nombre(nombre))
+        if (buscar_nombre(nombre) != NULL)
         {
-            mostrar_animal();
+            mostrar_animal(animales -> consulta(buscar_nombre(nombre)));
         }
         else
         {
@@ -158,10 +158,10 @@ void Sistema::pedir_nombre(string &nombre)
     getline (cin >> ws, nombre);
 }
 
-bool Sistema::buscar_nombre(string nombre)
+int Sistema::buscar_nombre(string nombre)
 {
     bool encontrado = false;
-    int i = 1;
+    int posicion = NULL, i = 1;
     Animal* animal; 
 
     while (i <= animales -> obtener_cantidad() && !encontrado)
@@ -171,10 +171,11 @@ bool Sistema::buscar_nombre(string nombre)
         if (nombre == animal -> obtener_nombre())
         {
             encontrado = true;
+            posicion = i;
         }
         i++;
     }
-    return encontrado;
+    return posicion;
 }
 
 void Sistema::guardar(){
