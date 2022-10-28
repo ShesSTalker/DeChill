@@ -81,15 +81,23 @@ char Animal::obtener_especie_char()
 string Animal::obtener_personalidad_texto()
 {
     string personalidad_texto;
+    int tipo_personalidad = int(personalidad);
 
-    switch(personalidad)
+    switch(tipo_personalidad)
     {
-        case DORMILON: personalidad_texto = "dormilón"; break;
-        case JUGUETON: personalidad_texto = "juguetón"; break;
-        case SOCIABLE: personalidad_texto = "sociable"; break;
-        case TRAVIESO: personalidad_texto = "travieso";
+        case DORMILON: 
+            personalidad_texto = "dormilón"; 
+            break;
+        case JUGUETON: 
+            personalidad_texto = "juguetón"; 
+            break;
+        case SOCIABLE: 
+            personalidad_texto = "sociable"; 
+            break;
+        case TRAVIESO: 
+            personalidad_texto = "travieso";
+            break;
     }
-
     return personalidad_texto;
 }
 
