@@ -67,6 +67,12 @@ class Animal
         // POS: aumenta el hambre del animal y reduce (o no) su higiene, basándose en las características del animal particular
         void pasar_tiempo();
 
+        //PRE:
+        // POS: aumenta 
+        void aumentar_hambre();
+
+        void dearmar_higiene();
+
         // PRE: 
         // POS: reduce el hambre del animal a 0
         void alimentar();

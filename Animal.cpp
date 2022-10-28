@@ -95,12 +95,24 @@ string Animal::obtener_personalidad_texto()
 
 // Setters
 
-void Animal::pasar_tiempo()
+void Animal::aumentar_hambre()
 {
+    int 
 
     switch(int(personalidad))
     {
-        case 
+        case DORMILON:
+            hambre += SUMA_HAMBRE / 2;
+            break;
+        case JUGUETON:
+            hambre += SUMA_HAMBRE * 2;
+            break;
+        case SOCIABLE:
+            hambre += SUMA_HAMBRE;
+            break;
+        case TRAVIESO:
+            hambre += SUMA_HAMBRE;
+            break;
     }
 }
 

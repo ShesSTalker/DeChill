@@ -2,9 +2,12 @@
 #define _CONSTANTES_H_
 
 const string PATH_ANIMALES("animales.csv");
+
 const int HAMBRE_INICIAL = 0;
 const int HIGIENE_INICIAL = 100;
-const int PASO = 10;
+const int SUMA_HAMBRE = 10;
+const int RESTA_HIGIENE = 10;
+
 
 //Constantes tamanio
 const char
