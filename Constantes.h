@@ -8,7 +8,7 @@ const int HIGIENE_INICIAL = 100;
 const int SUMA_HAMBRE = 10;
 const int RESTA_HIGIENE = 10;
 
-const int NULL = -1;
+const int NULO = -1;
 
 //Constantes tamanio
 const char
