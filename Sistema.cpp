@@ -93,11 +93,16 @@ void Sistema::procesar_opcion(int opcion_tomada)
         break;
 
         case BUSCAR_ANIMAL:
+        cout << endl << "BUSCAR ANIMAL DE LA RESERVA:" << endl << endl;
         pasar_tiempo();
         pedir_nombre(nombre);
         if (buscar_nombre(nombre))
         {
             mostrar_animal();
+        }
+        else
+        {
+            cout << endl << "ERROR, no se pudo encontrar el nombre ingresado" << endl << endl;
         }
         break;
 
