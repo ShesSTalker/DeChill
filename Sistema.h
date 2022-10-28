@@ -31,6 +31,10 @@ class Sistema
         //POS: Procesa opcion_tomada para ejecutar las operaciones de la opcion elejida por el usuario
         void procesar_opcion(Lista<Animal*>* animales);
 
+        // PRE: -
+        // POS: aumenta el hambre del animal y reduce (o no) su higiene, basándose en las características del animal particular
+        void pasar_tiempo();
+
         //PRE: -
         //POS: Imprime por pantalla todos los animales de la lista.
         void listar_animales(Lista<Animal*>* animales); 

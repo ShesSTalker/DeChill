@@ -80,24 +80,45 @@ void Sistema::procesar_opcion(Lista<Animal*>* animales)
     switch (menu->obtener_opcion_tomada())
     {
         case LISTAR_ANIMALES: 
-        listar_animales( animales);
+        pasar_tiempo();
+        listar_animales(animales);
         break;
 
         case RESCATAR_ANIMAL: 
+        pasar_tiempo();
         rescatar_animal();
         break;
 
         case BUSCAR_ANIMAL:
+        pasar_tiempo();
         break;
 
         case CUIDAR_ANIMAL:
+        pasar_tiempo();
         break;
 
         case ADOPTAR_ANIMAL:
+        pasar_tiempo();
         break;
 
         case GUARDAR_Y_SALIR:
+        pasar_tiempo();
         break;
+    }
+}
+
+void Sistema::pasar_tiempo()
+{
+    Animal* animal;
+
+    for(int i = 1; i < animales->obtener_cantidad(); i++)
+    {
+        animal = animales -> consulta(i);
+        if (animal -> requiere_ducha())
+        {
+            animal -> dearmar_higiene();
+        }
+        animal -> aumentar_hambre();
     }
 }
 
