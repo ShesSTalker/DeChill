@@ -80,6 +80,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
     switch (opcion_tomada)
     {
         case LISTAR_ANIMALES: 
+        cout << endl << "ISTA DE ANIMALES EN LA RESERVA:" << endl << endl;
         pasar_tiempo();
         listar_animales(animales);
         break;
@@ -98,10 +99,6 @@ void Sistema::procesar_opcion(int opcion_tomada)
         break;
 
         case ADOPTAR_ANIMAL:
-        pasar_tiempo();
-        break;
-
-        case GUARDAR_Y_SALIR:
         pasar_tiempo();
         break;
     }
