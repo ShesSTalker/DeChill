@@ -7,6 +7,8 @@ class Caballo : public Animal
 {
     //Metodos
     public:
+        //PRE: -
+        //POS: Inicializa los atributos
         Caballo(string nombre, int edad, char tamanio, char personalidad);
 
         //PRE: - 

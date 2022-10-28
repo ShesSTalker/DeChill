@@ -29,11 +29,6 @@ class Animal
         //Constructor por defecto  
         Animal(){};
 
-
-        Animal(string nombre, int edad, char tamanio, char personalidad);
-
-        // Getters
-
         // PRE: 
         // POS: devuelve el valor de hambre actual del animal
         int obtener_hambre();
@@ -67,8 +62,6 @@ class Animal
         // PRE: 
         // POS: devuelve la personalidad del animal en formato de texto (forma completa)
         string obtener_personalidad_texto();
-
-        // Setters
 
         // PRE: 
         // POS: aumenta el hambre del animal y reduce (o no) su higiene, basándose en las características del animal particular

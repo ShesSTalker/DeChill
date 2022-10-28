@@ -2,18 +2,6 @@
 
 using namespace std;
 
-Animal::Animal(string nombre, int edad, char tamanio, char personalidad)
-{
-    this -> nombre = nombre;
-    this -> edad = edad; 
-    this -> tamanio = tamanio;
-    this -> personalidad = personalidad;
-    this -> hambre = HAMBRE_INICIAL;
-    this -> higiene = HIGIENE_INICIAL; 
-}
-
-// Getters
-
 int Animal::obtener_hambre()
 {
     return hambre;
@@ -109,22 +97,11 @@ string Animal::obtener_personalidad_texto()
 
 void Animal::pasar_tiempo()
 {
-    float multiplicador_higiene = (float) requiere_ducha();
-    float multiplicador_hambre = 1;
 
-    switch(personalidad)
+    switch(int(personalidad))
     {
-        case DORMILON: multiplicador_hambre *= 0.5f; break;
-        case JUGUETON: multiplicador_hambre *= 2; break;
-        case SOCIABLE: multiplicador_higiene *= 0.5f; break;
-        case TRAVIESO: multiplicador_higiene *= 2;
-    };
-
-    float nueva_hambre = hambre + PASO * multiplicador_hambre;
-    float nueva_higiene = higiene - PASO * multiplicador_higiene;
-
-    hambre = (nueva_hambre > 100 ? 100 : nueva_hambre);
-    higiene = (nueva_higiene < 0 ? 0 : nueva_higiene);
+        case 
+    }
 }
 
 void Animal::alimentar()

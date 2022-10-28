@@ -6,38 +6,39 @@ const int HAMBRE_INICIAL = 0;
 const int HIGIENE_INICIAL = 100;
 const int PASO = 10;
 
-
+//Constantes tamanio
 const char
-DIMINUTO='d',
-PEQUENIO='p',
-MEDIANO='m',
-GRANDE='g',
-GIGANTE='t';
+DIMINUTO = 'd',
+PEQUENIO = 'p',
+MEDIANO = 'm',
+GRANDE = 'g',
+GIGANTE = 't';
 
 const int MAX_TAMANIOS = 4;
 
-const char
-DORMILON='d',
-JUGUETON='j',
-SOCIABLE='s',
-TRAVIESO='t';
+//Constantes personalidad
+const int
+DORMILON = 'd',
+JUGUETON = 'j',
+SOCIABLE = 's',
+TRAVIESO = 't';
 
 const int MAX_PERSONALIDADES = 3;
 
-
+//Constantes especie
 const char 
-PERRO='P',
-GATO='G',
-CABALLO='C',
-ROEDOR='R',
-CONEJO='O',
-ERIZO='E',
-LAGARTIJA='L';
+PERRO = 'P',
+GATO = 'G',
+CABALLO = 'C',
+ROEDOR = 'R',
+CONEJO = 'O',
+ERIZO = 'E',
+LAGARTIJA = 'L';
 
 
 const int MAX_ESPECIES = 6;
 
-
+//Constantes comida
 const string
 COMIDA_PERRO = "Huesos",
 COMIDA_GATO = "Atun",
