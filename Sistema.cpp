@@ -77,10 +77,12 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
 
 void Sistema::procesar_opcion(int opcion_tomada)
 {
+    string nombre;
+
     switch (opcion_tomada)
     {
         case LISTAR_ANIMALES: 
-        cout << endl << "ISTA DE ANIMALES EN LA RESERVA:" << endl << endl;
+        cout << endl << "LISTA DE ANIMALES EN LA RESERVA:" << endl << endl;
         pasar_tiempo();
         listar_animales(animales);
         break;
@@ -92,6 +94,11 @@ void Sistema::procesar_opcion(int opcion_tomada)
 
         case BUSCAR_ANIMAL:
         pasar_tiempo();
+        pedir_nombre(nombre);
+        if (buscar_nombre(nombre))
+        {
+            mostrar_animal();
+        }
         break;
 
         case CUIDAR_ANIMAL:
@@ -140,29 +147,13 @@ void Sistema::mostrar_animal(Animal* animal)
     "Higiene: " << animal -> obtener_higiene() << endl << endl;
 }
 
-void Sistema::ingresar_nombre(Lista<Animal*>* animales)
+void Sistema::pedir_nombre(string &nombre)
 {
-    string nombre;
-    char eleccion;
-
     cout << "Ingrese el nombre del animal rescatado: ";
-    cin >> nombre;
-
-    if (buscar_nombre(nombre, animales))
-    {
-        cout << "El nombre del animal rescatado ya existe." << endl;
-        cout << " (M) volver al menu / (N) ingresar otro nombre: ";
-        cin >> eleccion;
-        
-        while (eleccion != 'M' && eleccion != 'N')
-        {
-            cout << "Opcion invalida. (M) volver al menu / (N) ingresar otro nombre: ";
-            cin >> eleccion;
-        }
-    }
+    getline (cin >> ws, nombre);
 }
 
-bool Sistema::buscar_nombre(string nombre, Lista<Animal*>* animales)
+bool Sistema::buscar_nombre(string nombre)
 {
     bool encontrado = false;
     int i = 1;
@@ -180,6 +171,7 @@ bool Sistema::buscar_nombre(string nombre, Lista<Animal*>* animales)
     }
     return encontrado;
 }
+
 void Sistema::guardar(){
         Animal * animal;
         ofstream archivo (PATH_ANIMALES);

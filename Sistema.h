@@ -44,16 +44,18 @@ class Sistema
         void mostrar_animal(Animal* mi_animal);
 
         //PRE: -
-        //POS: Le pide al usario el nombre del animal rescatado, si el nombre ya existe se le da la opcion al usuario de cargar otro nombre o volver al menu;
-            void ingresar_nombre(Lista<Animal*>* animales);
+        //POS: Le pide al usario el nombre del animal rescatado y lo devuelve
+        void pedir_nombre(string &nombre);
 
         //PRE: - 
         //POS: Devuelve verdadero si el nombre existe en la lista y falso si no existe       
-        bool buscar_nombre(string nombre, Lista<Animal*>* animales);
+        bool buscar_nombre(string nombre);
 
         //PRE: El nombre del animal no debe estar en la lista
         //POS: Carga el animal a la lista
         void rescatar_animal();
+
+
 
         //PRE: -
         //POS: Guarda todos los cambios realizados al  archivo csv de animales
