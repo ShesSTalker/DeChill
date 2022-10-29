@@ -61,6 +61,10 @@ class Sistema
 
         void procesar_opcion_submenu(int opcion_submenu);
 
+        void  opciones_individuales(int &opcion_individual);
+
+        void eleccion_individual();
+
         void alimentar_todos();
 
         void duchar_todos();

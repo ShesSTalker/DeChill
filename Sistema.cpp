@@ -207,7 +207,7 @@ void Sistema::ingresar_opcion_submenu(int &opcion_submenu)
     cout << "Ingrese el numero de la opcion que desa ejecutar: " << endl;
     cin >> opcion_submenu;
 
-    while (opcion_submenu < 0 &&  opcion_submenu <= REGRESAR_INICIO)
+    while (opcion_submenu <= 0 &&  opcion_submenu > REGRESAR_INICIO)
     {
         cout << "opcion invalida, ingrese el numero de la opcion que desa ejecutar: " << endl;
         cin >> opcion_submenu;
@@ -230,6 +230,33 @@ void Sistema::procesar_opcion_submenu(int opcion_submenu)
         duchar_todos();
         cout << "se ha duchado a todos los animales con exito." << endl << endl;
         break;
+    }
+}
+
+void Sistema::opciones_individuales(int &opcion_individual)
+{
+    cout << "1) Duchar." << endl <<
+    "2) Alimentar." << endl << 
+    "3) Saltear animal" << endl << endl <<
+    "Ingrese la opcion a ejecutar: ";
+
+    while (opcion_individual <= 0 && opcion_individual > 3)
+    {
+        
+    }
+
+}
+
+void Sistema::eleccion_individual()
+{
+    Animal * animal;
+    int opcion_individual;
+
+    while(animales ->hay_siguiente())
+    {
+        animal = animales -> siguiente ();
+        mostrar_animal(animal);
+        opciones_individuales(opcion_individual);
     }
 }
 

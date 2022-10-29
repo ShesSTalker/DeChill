@@ -69,6 +69,12 @@ enum opciones_submenu {
     REGRESAR_INICIO,
 };
 
+enum opciones_individuales {
+    DUCHAR = 1,
+    ALIMENTAR,
+    SALTEAR_ANIMAL,
+};
+
 const int MAX_OPCIONES_MENU_PRINCIPAL = 6;
 
 #endif 
