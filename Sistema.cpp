@@ -164,15 +164,9 @@ int Sistema::buscar_nombre(string nombre)
     int posicion = NULO, i = 1;
     Animal* animal; 
 
-    while (i <= animales -> obtener_cantidad() && !encontrado)
+    while (animales -> siguiente() && !encontrado)
     {
         animal = animales -> siguiente();
-        
-        if (!animales -> hay_siguiente())
-        {
-            animales -> iniciar();
-            animal = animales -> siguiente();
-        }
 
         if (nombre == animal -> obtener_nombre())
         {
@@ -181,6 +175,7 @@ int Sistema::buscar_nombre(string nombre)
         }
         i++;
     }
+    animales -> iniciar();
     return posicion;
 }
 
