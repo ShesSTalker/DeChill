@@ -219,6 +219,7 @@ void Sistema::procesar_opcion_submenu(int opcion_submenu)
     switch(opcion_submenu)
     {
         case ELEGIR_INDIVIDUALMENTE:
+        eleccion_individual();
         break;
 
         case ALIMENTAR_A_TODOS:
@@ -266,6 +267,7 @@ void Sistema::procesar_opcion_indivual(int opcion_individual, Animal * animal)
 
         case ALIMENTAR:
         animal -> alimentar();
+        cout << animal -> obtener_nombre() << " ha sido alimentado";
         break;
     }
 }
@@ -280,8 +282,13 @@ void Sistema::eleccion_individual()
         animal = animales -> siguiente ();
         mostrar_animal(animal);
         opciones_individuales(opcion_individual);
-        procesar_opcion_indivual(opcion_individual, animal);
+        
+        if (opcion_individual != SALTEAR_ANIMAL)
+        {
+            procesar_opcion_indivual(opcion_individual, animal);
+        }
     }
+    animales -> iniciar();
 }
 
 void Sistema::alimentar_todos()
