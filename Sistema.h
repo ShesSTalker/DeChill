@@ -55,7 +55,9 @@ class Sistema
         //POS: Carga el animal a la lista
         void rescatar_animal();
 
+        void mostrar_submenu();
 
+        void pedir_espacio(int &espacio);
 
         //PRE: -
         //POS: Guarda todos los cambios realizados al  archivo csv de animales

@@ -78,6 +78,7 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
 void Sistema::procesar_opcion(int opcion_tomada)
 {
     string nombre;
+    int espacio;
 
     switch (opcion_tomada)
     {
@@ -88,6 +89,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
         break;
 
         case RESCATAR_ANIMAL: 
+        cout << endl << "RESCATAR ANIMAL:" << endl << endl;
         pasar_tiempo();
         rescatar_animal();
         break;
@@ -107,11 +109,15 @@ void Sistema::procesar_opcion(int opcion_tomada)
         break;
 
         case CUIDAR_ANIMAL:
+        cout << endl << "CUIDAR ANIMALES:" << endl << endl;
         pasar_tiempo();
+        mostrar_submenu();
         break;
 
         case ADOPTAR_ANIMAL:
+        cout << endl << "ADOPTAR ANIMAL:" << endl << endl;
         pasar_tiempo();
+        pedir_espacio(espacio);
         break;
     }
 }
@@ -181,6 +187,26 @@ int Sistema::buscar_nombre(string nombre)
     animales -> iniciar();
     
     return posicion;
+}
+
+void Sistema::mostrar_submenu()
+{
+    cout << "1) Elegir individualmente." << endl <<
+    "2) Alimentar a todos" << 
+    "3) Baniar a todos." <<
+    "4) Regresar al inicio" << endl << endl;
+}
+
+void Sistema::pedir_espacio(int &espacio)
+{
+    cout << "Ingrese el espacio disponible para el animal (mayor a 0): ";
+    cin >> espacio;
+
+    while (espacio < 0)
+    {
+        cout << "Espacio invalido, ingrese el espacio disponible para el animal: ";
+        cin >> espacio;
+    }
 }
 
 void Sistema::guardar(){
