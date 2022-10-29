@@ -120,24 +120,27 @@ void Sistema::pasar_tiempo()
 {
     Animal* animal;
 
-    for(int i = 1; i < animales->obtener_cantidad(); i++)
+    while (animales -> hay_siguiente())
     {
-        animal = animales -> consulta(i);
+        animal = animales -> siguiente();
+        
         if (animal -> requiere_ducha())
         {
             animal -> dearmar_higiene();
         }
         animal -> aumentar_hambre();
     }
+    animales -> iniciar();
 }
 
 void Sistema::listar_animales(Lista<Animal*>* animales)
 {
 
-    for(int i = 1; i < animales->obtener_cantidad(); i++)
+    while (animales -> hay_siguiente())
     { 
-        mostrar_animal(animales -> consulta(i));
+        mostrar_animal(animales -> siguiente());
     }
+    animales -> iniciar();
 }
 
 void Sistema::mostrar_animal(Animal* animal)
@@ -176,6 +179,7 @@ int Sistema::buscar_nombre(string nombre)
         i++;
     }
     animales -> iniciar();
+    
     return posicion;
 }
 
