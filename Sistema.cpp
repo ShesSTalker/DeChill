@@ -194,7 +194,7 @@ void Sistema::mostrar_submenu()
 {
     cout << "1) Elegir individualmente." << endl <<
     "2) Alimentar a todos." << 
-    "3) Baniar a todos." <<
+    "3) Duchar a todos." <<
     "4) Regresar al inicio." << endl << endl;
 }
 
@@ -218,6 +218,8 @@ void Sistema::procesar_opcion_submenu(int opcion_submenu)
         break;
 
         case ALIMENTAR_A_TODOS:
+        alimentar_todos();
+        cout << "se ha alimentado a todos los animales con exito." << endl << endl;
         break;
 
         case BANIAR_A_TODOS:
@@ -235,6 +237,20 @@ void Sistema::alimentar_todos()
         animal -> alimentar();
     }
     animales -> iniciar();
+}
+
+void Sistema::duchar_todos()
+{
+    Animal * animal;
+
+    while (animales -> hay_siguiente())
+    {
+        animal = animales -> siguiente();
+        if (animal -> requiere_ducha())
+        {
+            animal -> 
+        }
+    }
 }
 
 void Sistema::pedir_espacio(int &espacio)

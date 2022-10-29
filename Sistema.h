@@ -63,6 +63,8 @@ class Sistema
 
         void alimentar_todos();
 
+        void duchar_todos();
+
         void pedir_espacio(int &espacio);
 
         //PRE: -
