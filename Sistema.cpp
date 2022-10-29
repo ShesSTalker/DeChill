@@ -246,11 +246,17 @@ void Sistema::duchar_todos()
     while (animales -> hay_siguiente())
     {
         animal = animales -> siguiente();
+        
         if (animal -> requiere_ducha())
         {
-            animal -> 
+            animal -> duchar();
+        }
+        else
+        {
+            cout << animal -> obtener_nombre() << " no necesita ducharse porque es un/a " << animal -> obtener_especie_texto() << endl;
         }
     }
+    animales -> iniciar();
 }
 
 void Sistema::pedir_espacio(int &espacio)
