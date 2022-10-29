@@ -78,7 +78,7 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
 void Sistema::procesar_opcion(int opcion_tomada)
 {
     string nombre;
-    int espacio;
+    int opcion_submenu, espacio;
 
     switch (opcion_tomada)
     {
@@ -112,6 +112,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
         cout << endl << "CUIDAR ANIMALES:" << endl << endl;
         pasar_tiempo();
         mostrar_submenu();
+        ingresar_opcion_submenu(opcion_submenu); 
         break;
 
         case ADOPTAR_ANIMAL:
@@ -195,6 +196,14 @@ void Sistema::mostrar_submenu()
     "2) Alimentar a todos" << 
     "3) Baniar a todos." <<
     "4) Regresar al inicio" << endl << endl;
+}
+
+void Sistema::ingresar_opcion_submenu(int &opcion_submenu)
+{
+    cout << "Ingrese el numero de la opcion que desa ejecutar: " << endl;
+    cin >> opcion_submenu;
+
+    while (opcion_submenu )
 }
 
 void Sistema::pedir_espacio(int &espacio)

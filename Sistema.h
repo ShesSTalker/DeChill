@@ -57,6 +57,10 @@ class Sistema
 
         void mostrar_submenu();
 
+        void ingresar_opcion_submenu(int &opcion_submenu);
+
+        void procesar_opcion_submenu(int opcion_submenu);
+
         void pedir_espacio(int &espacio);
 
         //PRE: -
