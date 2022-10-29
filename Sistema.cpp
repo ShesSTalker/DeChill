@@ -84,9 +84,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
         case LISTAR_ANIMALES: 
         cout << endl << "LISTA DE ANIMALES EN LA RESERVA:" << endl << endl;
         pasar_tiempo();
-        animales -> iniciar();
         listar_animales(animales);
-        animales -> iniciar();
         break;
 
         case RESCATAR_ANIMAL: 
@@ -97,7 +95,6 @@ void Sistema::procesar_opcion(int opcion_tomada)
         case BUSCAR_ANIMAL:
         cout << endl << "BUSCAR ANIMAL DE LA RESERVA:" << endl << endl;
         pasar_tiempo();
-        animales -> iniciar();
         pedir_nombre(nombre);
         if (buscar_nombre(nombre) != NULO)
         {
@@ -107,7 +104,6 @@ void Sistema::procesar_opcion(int opcion_tomada)
         {
             cout << endl << "ERROR, no se pudo encontrar el nombre ingresado" << endl << endl;
         }
-        animales -> iniciar();
         break;
 
         case CUIDAR_ANIMAL:
@@ -170,8 +166,14 @@ int Sistema::buscar_nombre(string nombre)
 
     while (i <= animales -> obtener_cantidad() && !encontrado)
     {
-        animal = animales -> consulta(i);
+        animal = animales -> siguiente();
         
+        if (!animales -> hay_siguiente())
+        {
+            animales -> iniciar();
+            animal = animales -> siguiente();
+        }
+
         if (nombre == animal -> obtener_nombre())
         {
             encontrado = true;
