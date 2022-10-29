@@ -239,12 +239,35 @@ void Sistema::opciones_individuales(int &opcion_individual)
     "2) Alimentar." << endl << 
     "3) Saltear animal" << endl << endl <<
     "Ingrese la opcion a ejecutar: ";
+    cin >> opcion_individual;
 
-    while (opcion_individual <= 0 && opcion_individual > 3)
+    while (opcion_individual <= 0 && opcion_individual > SALTEAR_ANIMAL)
     {
-        
+        cout << "Opcion invalida, ingrese la opcion a ejecutar: ";
+        cin >> opcion_individual;
     }
 
+}
+
+void Sistema::procesar_opcion_indivual(int opcion_individual, Animal * animal)
+{
+    switch (opcion_individual)
+    {
+        case DUCHAR:
+        if (animal -> requiere_ducha())
+        {
+            animal -> duchar();
+        }
+        else 
+        {
+           cout << animal -> obtener_nombre() << " no necesita ducharse porque es un/a " << animal -> obtener_especie_texto() << endl; 
+        }
+        break;
+
+        case ALIMENTAR:
+        animal -> alimentar();
+        break;
+    }
 }
 
 void Sistema::eleccion_individual()
@@ -257,6 +280,7 @@ void Sistema::eleccion_individual()
         animal = animales -> siguiente ();
         mostrar_animal(animal);
         opciones_individuales(opcion_individual);
+        procesar_opcion_indivual(opcion_individual, animal);
     }
 }
 

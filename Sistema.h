@@ -63,6 +63,8 @@ class Sistema
 
         void  opciones_individuales(int &opcion_individual);
 
+        void procesar_opcion_indivual (int opcion_individual, Animal* animal);
+
         void eleccion_individual();
 
         void alimentar_todos();
