@@ -65,7 +65,7 @@ enum opciones_menu_principal {
 enum opciones_submenu {
     ELEGIR_INDIVIDUALMENTE = 1,
     ALIMENTAR_A_TODOS,
-    BANIAR_A_TODOS,
+    DUCHAR_A_TODOS,
     REGRESAR_INICIO,
 };
 

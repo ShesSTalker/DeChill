@@ -222,7 +222,7 @@ void Sistema::procesar_opcion_submenu(int opcion_submenu)
         cout << "se ha alimentado a todos los animales con exito." << endl << endl;
         break;
 
-        case BANIAR_A_TODOS:
+        case DUCHAR_A_TODOS:
         break;
     }
 }
