@@ -210,6 +210,33 @@ void Sistema::ingresar_opcion_submenu(int &opcion_submenu)
     }
 }
 
+void Sistema::procesar_opcion_submenu(int opcion_submenu)
+{
+    switch(opcion_submenu)
+    {
+        case ELEGIR_INDIVIDUALMENTE:
+        break;
+
+        case ALIMENTAR_A_TODOS:
+        break;
+
+        case BANIAR_A_TODOS:
+        break;
+    }
+}
+
+void Sistema::alimentar_todos()
+{
+    Animal * animal;
+    
+    while (animales -> hay_siguiente())
+    {
+        animal = animales -> siguiente();
+        animal -> alimentar();
+    }
+    animales -> iniciar();
+}
+
 void Sistema::pedir_espacio(int &espacio)
 {
     cout << "Ingrese el espacio disponible para el animal (mayor a 0): ";

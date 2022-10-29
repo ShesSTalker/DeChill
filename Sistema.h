@@ -61,6 +61,8 @@ class Sistema
 
         void procesar_opcion_submenu(int opcion_submenu);
 
+        void alimentar_todos();
+
         void pedir_espacio(int &espacio);
 
         //PRE: -
