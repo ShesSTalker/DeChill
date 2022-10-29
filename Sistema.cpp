@@ -78,7 +78,7 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
 void Sistema::procesar_opcion(int opcion_tomada)
 {
     string nombre;
-    int opcion_submenu, espacio;
+    int posicion, opcion_submenu, espacio;
 
     switch (opcion_tomada)
     {
@@ -98,9 +98,10 @@ void Sistema::procesar_opcion(int opcion_tomada)
         cout << endl << "BUSCAR ANIMAL DE LA RESERVA:" << endl << endl;
         pasar_tiempo();
         pedir_nombre(nombre);
-        if (buscar_nombre(nombre) != NULO)
+        posicion = buscar_nombre(nombre);
+        if (posicion != NULO)
         {
-            mostrar_animal(animales -> consulta(buscar_nombre(nombre)));
+            mostrar_animal(animales -> consulta(posicion));
         }
         else
         {
