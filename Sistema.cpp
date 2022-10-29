@@ -193,9 +193,9 @@ int Sistema::buscar_nombre(string nombre)
 void Sistema::mostrar_submenu()
 {
     cout << "1) Elegir individualmente." << endl <<
-    "2) Alimentar a todos" << 
+    "2) Alimentar a todos." << 
     "3) Baniar a todos." <<
-    "4) Regresar al inicio" << endl << endl;
+    "4) Regresar al inicio." << endl << endl;
 }
 
 void Sistema::ingresar_opcion_submenu(int &opcion_submenu)
@@ -203,7 +203,11 @@ void Sistema::ingresar_opcion_submenu(int &opcion_submenu)
     cout << "Ingrese el numero de la opcion que desa ejecutar: " << endl;
     cin >> opcion_submenu;
 
-    while (opcion_submenu )
+    while (opcion_submenu < 0 &&  opcion_submenu <= REGRESAR_INICIO)
+    {
+        cout << "opcion invalida, ingrese el numero de la opcion que desa ejecutar: " << endl;
+        cin >> opcion_submenu;
+    }
 }
 
 void Sistema::pedir_espacio(int &espacio)
