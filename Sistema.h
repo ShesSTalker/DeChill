@@ -51,6 +51,8 @@ class Sistema
         //POS: Devuelve la posicion del animal en la lista si el nombre existe en la lista y -1 si no existe       
         int buscar_nombre(string nombre);
 
+        void verificar_nombre(int posicion);
+
         //PRE: El nombre del animal no debe estar en la lista
         //POS: Carga el animal a la lista
         void rescatar_animal();

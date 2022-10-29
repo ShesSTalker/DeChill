@@ -91,7 +91,9 @@ void Sistema::procesar_opcion(int opcion_tomada)
         case RESCATAR_ANIMAL: 
         cout << endl << "RESCATAR ANIMAL:" << endl << endl;
         pasar_tiempo();
-        rescatar_animal();
+        pedir_nombre(nombre);
+        posicion = buscar_nombre(nombre);
+        verificar_nombre(posicion);
         break;
 
         case BUSCAR_ANIMAL:
@@ -193,6 +195,27 @@ int Sistema::buscar_nombre(string nombre)
     animales -> iniciar();
     
     return posicion;
+}
+
+void Sistema:: verificar_nombre(int posicion)
+{
+    int desicion;
+
+    if (posicion != NULO)
+        {
+            cout << " El nombre ingresado ya existe en la reserva" << endl <<
+            "Ingrese (1) si desea ingresar otro nombre, si desea volver al menu principal ingrese cualquier otro numero: ";
+            cin >> desicion;
+            if (desicion == 1)
+            {
+                procesar_opcion(RESCATAR_ANIMAL);
+            }
+        }
+    else
+    {
+        rescatar_animal();
+    }
+    
 }
 
 void Sistema::mostrar_submenu()
