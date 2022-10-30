@@ -62,31 +62,31 @@ class Sistema
         void mostrar_submenu();
 
         //PRE: -
-        //POS: Le pide al usuario que ingrese la opcion del submenu que desea ejecutar
+        //POS: Le pide al usuario que ingrese la opcion del submenu que desea ejecutar y hace la validacion
         void ingresar_opcion_submenu(int &opcion_submenu);
 
         //PRE: 1 <= opcion_submenu <= 4
         //POS: Realiza la opcion del submenu tomada por el usuario
         void procesar_opcion_submenu(int opcion_submenu);
 
-        //PRE:
-        //POS:
+        //PRE: -
+        //POS: Imprime por pantalla las opciones individuales de cada animal de la reserva y le pide la opcion que desea ejecutar
         void  opciones_individuales(int &opcion_individual);
 
-        //PRE:
-        //POS:
+        //PRE: La opcion individual tomada por el usuario, no debe ser la tercera de las opciones individuales 
+        //POS:  Realiza la opcion individual tomada por el usuario 
         void procesar_opcion_indivual (int opcion_individual, Animal* animal);
 
-        //PRE:
-        //POS:
+        //PRE: -
+        //POS: Recorre toda la lista para que el usuario pueda elegir que hacer (opciones individuales) con cada animal de la reserva
         void eleccion_individual();
 
-        //PRE:
-        //POS:
+        //PRE: -
+        //POS: Deja en 0 el hambre de todos los animales de la reserva
         void alimentar_todos();
 
-        //PRE:
-        //POS:
+        //PRE: -
+        //POS: Vuelve a poner en 100 la higiene de todos los animales que requieran ducha, en caso contrario imprimira que el animal no requiere ducha
         void duchar_todos();
 
         //PRE:
