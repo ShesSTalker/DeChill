@@ -57,22 +57,40 @@ class Sistema
         //POS: Carga el animal a la lista
         void rescatar_animal(string nombre);
 
+        //PRE:
+        //POS:
         void mostrar_submenu();
 
+        //PRE:
+        //POS:
         void ingresar_opcion_submenu(int &opcion_submenu);
 
+        //PRE:
+        //POS:
         void procesar_opcion_submenu(int opcion_submenu);
 
+        //PRE:
+        //POS:
         void  opciones_individuales(int &opcion_individual);
 
+        //PRE:
+        //POS:
         void procesar_opcion_indivual (int opcion_individual, Animal* animal);
 
+        //PRE:
+        //POS:
         void eleccion_individual();
 
+        //PRE:
+        //POS:
         void alimentar_todos();
 
+        //PRE:
+        //POS:
         void duchar_todos();
 
+        //PRE:
+        //POS:
         void pedir_espacio(int &espacio);
 
         //PRE: -
