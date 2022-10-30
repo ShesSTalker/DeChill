@@ -417,25 +417,41 @@ void Sistema::pedir_espacio(int &espacio)
     }
 }
 
-void Sistema::validar_animales_espacio(Animal * animal, int espacio)
+void Sistema::validar_animales_espacio(Animal* animal, int espacio)
 {
+    char tamanio = animal -> obtener_tamanio_caracter();
+
     if (espacio < DELIMITADOR_DIMINUTO)
     {
-        if (animal -> obtener_tamanio_caracter() == DIMINUTO)
+        if (tamanio == DIMINUTO)
         {
 
         }
     }
     else if (espacio < DELIMITADOR_PEQUENIO_MEDIANO)
     {
-        if (animal -> obtener_tamanio_caracter() == DIMINUTO || animal -> obtener_tamanio_caracter() == PEQUENIO)
+        if (tamanio == DIMINUTO || tamanio == PEQUENIO)
         {
 
         }
     }
     else if (espacio >= DELIMITADOR_PEQUENIO_MEDIANO)
     {
-        if (animal -> obtener_tamanio_caracter() == MEDIANO)
+        if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO)
+        {
+
+        }
+    }
+    else if (espacio >= DELIMITADOR_GRANDE)
+    {
+        if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO || tamanio == GRANDE)
+        {
+
+        }
+    }
+    else if (espacio >= DELIMITADOR_GIGANTE)
+    {
+        if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO || tamanio == GRANDE || tamanio == GIGANTE)
         {
             
         }
