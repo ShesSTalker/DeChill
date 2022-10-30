@@ -220,7 +220,52 @@ void Sistema:: verificar_nombre(int posicion, string nombre)
 
 void Sistema::rescatar_animal(string nombre)
 {
+    int edad;
+    char especie, tamanio, personalidad;
 
+    cout << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
+    endl << "- E (Erizo)" << endl << "- L (Lagartija)" << endl << "Ingrese el primer caracter la especie del animal: ";
+    cin >> especie;
+
+    while (especie != PERRO && especie != GATO && especie != CABALLO && especie != ROEDOR && especie != CONEJO && especie != ERIZO && especie != LAGARTIJA)
+    {
+        cout << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
+        endl << "- E (Erizo)" << endl << "- L (Lagartija)" << endl << "Especie invalida, Ingrese el primer caracter la especie del animal: ";
+        cin >> especie;
+    }
+
+    cout << "Ingrese la edad del animal: ";
+    cin >> edad;
+
+    while (edad <= 0)
+    {
+        cout << "Edad invalida, ingrese la edad del animal: ";
+        cin >> edad;
+    }
+
+    cout << "- diminuto" << endl << "- pequeño" << endl << "- mediano" << endl << "- grande" << endl << "- gigante" << endl <<
+    "Ingrese el tamanio del animal: ";
+    cin >> tamanio;
+
+    while (tamanio != DIMINUTO && tamanio != PEQUENIO && tamanio != MEDIANO && tamanio != GRANDE && tamanio != GIGANTE)
+    {
+        cout << "- diminuto" << endl << "- pequeño" << endl << "- mediano" << endl << "- grande" << endl << "- gigante" <<
+        "Tamanio invalido, ingrese el tamanio del animal: ";
+        cin >> tamanio;
+    }
+
+    cout << "- dormilon" << endl << "- jugueton" << endl << "- sociable" << endl << "- travieso" << endl << 
+    "Ingrese la personalidad del animal: ";
+    cin >> personalidad;
+
+    while (personalidad != DORMILON && personalidad != JUGUETON && personalidad != SOCIABLE && tamanio != TRAVIESO)
+    {
+        cout << "- dormilon" << endl << "- jugueton" << endl << "- sociable" << endl << "- travieso" << endl << 
+        "Personalidad invalida, ingrese la personalidad del animal: ";
+        cin >> personalidad;
+    }
+
+    cargar_animal();
 }
 
 void Sistema::mostrar_submenu()
