@@ -18,6 +18,13 @@ MEDIANO = 'm',
 GRANDE = 'g',
 GIGANTE = 't';
 
+//Constantes delimitadores tamanio
+const int
+DELIMITADO_DIMINUTO = 2,
+DELIMITADOR_PEQUENIO_MEDIANO = 10,
+DELIMITADOR_GRANDE = 20,
+DELIMITADOR_GIGANTE = 50;
+
 const int MAX_TAMANIOS = 4;
 
 //Constantes personalidad

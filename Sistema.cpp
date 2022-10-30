@@ -419,7 +419,10 @@ void Sistema::pedir_espacio(int &espacio)
 
 void Sistema::validar_animales_espacio(Animal * animal, int espacio)
 {
-    
+    if (espacio < 2)
+    {
+        
+    }
 } 
 
 void Sistema::listar_animales_espacio(int espacio)
