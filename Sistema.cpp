@@ -114,6 +114,9 @@ void Sistema::procesar_opcion(int opcion_tomada)
         case CUIDAR_ANIMAL:
         cout << endl << "CUIDAR ANIMALES:" << endl << endl;
         pasar_tiempo();
+        mostrar_submenu();
+        ingresar_opcion_submenu(opcion_submenu); 
+        procesar_opcion_submenu(opcion_submenu);
         while (opcion_submenu != REGRESAR_INICIO)
         {
             mostrar_submenu();

@@ -57,16 +57,16 @@ class Sistema
         //POS: Carga el animal a la lista
         void rescatar_animal(string nombre);
 
-        //PRE:
-        //POS:
+        //PRE: -
+        //POS: Imprime por pantalla las opciones del submenu 
         void mostrar_submenu();
 
-        //PRE:
-        //POS:
+        //PRE: -
+        //POS: Le pide al usuario que ingrese la opcion del submenu que desea ejecutar
         void ingresar_opcion_submenu(int &opcion_submenu);
 
-        //PRE:
-        //POS:
+        //PRE: 1 <= opcion_submenu <= 4
+        //POS: Realiza la opcion del submenu tomada por el usuario
         void procesar_opcion_submenu(int opcion_submenu);
 
         //PRE:
