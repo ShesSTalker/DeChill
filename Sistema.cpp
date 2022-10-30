@@ -85,7 +85,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
         case LISTAR_ANIMALES: 
         cout << endl << "LISTA DE ANIMALES EN LA RESERVA:" << endl << endl;
         pasar_tiempo();
-        listar_animales(animales);
+        listar_animales();
         break;
 
         case RESCATAR_ANIMAL: 
@@ -151,7 +151,7 @@ void Sistema::pasar_tiempo()
     animales -> iniciar();
 }
 
-void Sistema::listar_animales(Lista<Animal*>* animales)
+void Sistema::listar_animales()
 {
 
     while (animales -> hay_siguiente())
@@ -312,12 +312,16 @@ void Sistema::procesar_opcion_submenu(int opcion_submenu)
     }
 }
 
-void Sistema::opciones_individuales(int &opcion_individual)
+void mostrar_opciones_individuales()
 {
     cout << "1) Duchar." << endl <<
     "2) Alimentar." << endl << 
-    "3) Saltear animal" << endl << endl <<
-    "Ingrese la opcion a ejecutar: ";
+    "3) Saltear animal" << endl << endl;
+}
+
+void Sistema::pedir_opciones_individuales(int &opcion_individual)
+{
+    cout << "Ingrese la opcion a ejecutar: ";
     cin >> opcion_individual;
 
     while (opcion_individual <= 0 && opcion_individual > SALTEAR_ANIMAL)

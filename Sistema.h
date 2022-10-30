@@ -11,9 +11,7 @@ class Sistema
 
     //Metodos
     public:
-        //PRE: -
-        //POS: Inicializa la lista de animales
-        Sistema();
+        Sistema(){};
 
         //PRE: -
         //POS: Inicializa el sistema 
@@ -27,7 +25,7 @@ class Sistema
         //POS: carga el animal en la lista de animales
         void cargar_animal(char especie, string nombre, int edad, char tamanio, char personalidad);
 
-        //PRE: opcion_tomada debe ser 0 < opcion_tomada <= 6
+        //PRE: opcion_tomada debe ser 0 < opcion_tomada <= 5
         //POS: Procesa opcion_tomada para ejecutar las operaciones de la opcion elejida por el usuario
         void procesar_opcion(int opcion_tomada);
 
@@ -37,24 +35,26 @@ class Sistema
 
         //PRE: -
         //POS: Imprime por pantalla todos los animales de la lista.
-        void listar_animales(Lista<Animal*>* animales); 
+        void listar_animales(); 
 
         //PRE: -
         //POS: Muestra por pantalla la informacion del animal
         void mostrar_animal(Animal* mi_animal);
 
         //PRE: -
-        //POS: Le pide al usario el nombre del animal rescatado y lo devuelve
+        //POS: Le pide al usario que ingrese el nombre del animal rescatado
         void pedir_nombre(string &nombre);
 
         //PRE: - 
         //POS: Devuelve la posicion del animal en la lista si el nombre existe en la lista y -1 si no existe       
         int buscar_nombre(string nombre);
 
+        //PRE: -
+        //POS: Si el nombre ya existe en la lista le da la opcion al usuario de volver a ingresar otro nombre o volver al menu inicial, si no existe, rescata al animal. 
         void verificar_nombre(int posicion, string nombre);
 
         //PRE: El nombre del animal no debe estar en la lista
-        //POS: Carga el animal a la lista
+        //POS: Pide el resto de datos del animal para rescatarlo y aniadirlo a a la lista de animales
         void rescatar_animal(string nombre);
 
         //PRE: -
@@ -65,13 +65,17 @@ class Sistema
         //POS: Le pide al usuario que ingrese la opcion del submenu que desea ejecutar y hace la validacion
         void ingresar_opcion_submenu(int &opcion_submenu);
 
-        //PRE: 1 <= opcion_submenu <= 4
+        //PRE: 1 <= opcion_submenu <= 3
         //POS: Realiza la opcion del submenu tomada por el usuario
         void procesar_opcion_submenu(int opcion_submenu);
 
+        //PRE: - 
+        //POS: Imprime por pantalla las opciones individuales de cada animal de la reserva
+        void mostrar_opciones_individuales();
+
         //PRE: -
-        //POS: Imprime por pantalla las opciones individuales de cada animal de la reserva y le pide la opcion que desea ejecutar
-        void  opciones_individuales(int &opcion_individual);
+        //POS: le pide al usuario la opcion individual que desea ejecutar y la valida
+        void  pedir_opciones_individuales(int &opcion_individual);
 
         //PRE: La opcion individual tomada por el usuario, no debe ser la tercera de las opciones individuales 
         //POS:  Realiza la opcion individual tomada por el usuario 
@@ -89,12 +93,12 @@ class Sistema
         //POS: Vuelve a poner en 100 la higiene de todos los animales que requieran ducha, en caso contrario imprimira que el animal no requiere ducha
         void duchar_todos();
 
-        //PRE:
-        //POS:
+        //PRE: -
+        //POS: Le pide al usuario el espacio disponible para el animal y hace la validacion
         void pedir_espacio(int &espacio);
 
         //PRE: -
-        //POS: Guarda todos los cambios realizados al  archivo csv de animales
+        //POS: Guarda todos los cambios realizados al archivo csv de animales
         void guardar();
 
         //PRE: -
