@@ -93,7 +93,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
         pasar_tiempo();
         pedir_nombre(nombre);
         posicion = buscar_nombre(nombre);
-        verificar_nombre(posicion);
+        verificar_nombre(posicion, nombre);
         break;
 
         case BUSCAR_ANIMAL:
@@ -197,7 +197,7 @@ int Sistema::buscar_nombre(string nombre)
     return posicion;
 }
 
-void Sistema:: verificar_nombre(int posicion)
+void Sistema:: verificar_nombre(int posicion, string nombre)
 {
     int desicion;
 
@@ -213,9 +213,14 @@ void Sistema:: verificar_nombre(int posicion)
         }
     else
     {
-        rescatar_animal();
+        rescatar_animal(nombre);
     }
     
+}
+
+void Sistema::rescatar_animal(string nombre)
+{
+
 }
 
 void Sistema::mostrar_submenu()
