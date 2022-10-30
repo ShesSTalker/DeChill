@@ -166,7 +166,7 @@ void Sistema::mostrar_animal(Animal* animal)
     cout << "---------------------------------------------------" << endl << endl;
     cout << "Nombre: " << animal -> obtener_nombre() << endl <<
     "Edad: " << animal -> obtener_edad() << endl <<
-    "Tamanio: " << animal -> obtener_tamanio() << endl <<
+    "Tamanio: " << animal -> obtener_tamanio_texto() << endl <<
     "Especie: " << animal -> obtener_especie_texto() << endl <<
     "Personalidad: " << animal -> obtener_personalidad_texto() << endl <<
     "Hambre: " << animal -> obtener_hambre() << endl <<
@@ -419,10 +419,28 @@ void Sistema::pedir_espacio(int &espacio)
 
 void Sistema::validar_animales_espacio(Animal * animal, int espacio)
 {
-    if (espacio < DELIMITADO_DIMINUTO)
+    if (espacio < DELIMITADOR_DIMINUTO)
     {
-        if (animal -> obtener_tamanio() == DIMINUTO)
+        if (animal -> obtener_tamanio_caracter() == DIMINUTO)
+        {
+
+        }
     }
+    else if (espacio < DELIMITADOR_PEQUENIO_MEDIANO)
+    {
+        if (animal -> obtener_tamanio_caracter() == DIMINUTO || animal -> obtener_tamanio_caracter() == PEQUENIO)
+        {
+
+        }
+    }
+    else if (espacio >= DELIMITADOR_PEQUENIO_MEDIANO)
+    {
+        if (animal -> obtener_tamanio_caracter() == MEDIANO)
+        {
+            
+        }
+    }
+
 } 
 
 void Sistema::listar_animales_espacio(int espacio)
