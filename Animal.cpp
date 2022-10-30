@@ -28,15 +28,21 @@ string Animal::obtener_tamanio_texto()
 
     switch(tamanio)
     {
-        case DIMINUTO: tamanio_texto = "diminuto";
-        break;
-        case PEQUENIO: tamanio_texto = "pequeño"; 
-        break;
-        case MEDIANO: tamanio_texto = "mediano"; 
-        break;
-        case GRANDE: tamanio_texto = "grande"; 
-        break;
-        case GIGANTE: tamanio_texto = "gigante";
+        case DIMINUTO: 
+            tamanio_texto = "diminuto";
+            break;
+        case PEQUENIO: 
+            tamanio_texto = "pequeño"; 
+            break;
+        case MEDIANO:
+            tamanio_texto = "mediano"; 
+            break;
+        case GRANDE: 
+            tamanio_texto = "grande"; 
+            break;
+        case GIGANTE: 
+            tamanio_texto = "gigante";
+            break;
     }
 
     return tamanio_texto;
@@ -48,13 +54,27 @@ string Animal::obtener_especie_texto()
 
     switch(especie)
     {
-        case PERRO: especie_texto = "perro"; break;
-        case GATO: especie_texto = "gato"; break;
-        case CABALLO: especie_texto = "caballo"; break;
-        case ROEDOR: especie_texto = "roedor"; break;
-        case CONEJO: especie_texto = "conejo"; break;
-        case ERIZO: especie_texto = "erizo"; break;
-        case LAGARTIJA: especie_texto = "lagartija";
+        case PERRO: 
+            especie_texto = "perro"; 
+            break;
+        case GATO: 
+            especie_texto = "gato"; 
+            break;
+        case CABALLO: 
+            especie_texto = "caballo";
+            break;
+        case ROEDOR: 
+            especie_texto = "roedor"; 
+            break;
+        case CONEJO: 
+            especie_texto = "conejo"; 
+            break;
+        case ERIZO: 
+            especie_texto = "erizo"; 
+            break;
+        case LAGARTIJA: 
+            especie_texto = "lagartija";
+            break;
     }
 
     return especie_texto;

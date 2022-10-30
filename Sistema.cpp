@@ -419,9 +419,9 @@ void Sistema::pedir_espacio(int &espacio)
 
 void Sistema::validar_animales_espacio(Animal * animal, int espacio)
 {
-    if (espacio < 2)
+    if (espacio < DELIMITADO_DIMINUTO)
     {
-        
+        if (animal -> obtener_tamanio() == DIMINUTO)
     }
 } 
 
