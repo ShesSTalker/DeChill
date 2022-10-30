@@ -126,6 +126,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
         cout << endl << "ADOPTAR ANIMAL:" << endl << endl;
         pasar_tiempo();
         pedir_espacio(espacio);
+        
         break;
     }
 }
