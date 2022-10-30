@@ -72,7 +72,7 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
                     animal = new Lagartija(nombre, edad, tamanio, personalidad);
                     break;
         }
-        animales->alta(animal, animales->obtener_cantidad());
+        animales -> alta(animal, animales -> obtener_cantidad());
 }
 
 void Sistema::procesar_opcion(int opcion_tomada)
@@ -421,15 +421,15 @@ void Sistema::guardar(){
         Animal * animal;
         ofstream archivo (PATH_ANIMALES);
         if (archivo.is_open()){
-                for (int i = 1; i <= animales->obtener_cantidad(); i++) // de 1 a cantidad porque la lista empieza desde el elemento 1 no 0
+                for (int i = 1; i <= animales -> obtener_cantidad(); i++)
                 {
-                        animal=animales->consulta(i);
-                        archivo<<animal->obtener_nombre()<<","<<animal->obtener_edad()<<","<<animal->obtener_tamanio_texto()<<
-                        ","<<animal->obtener_especie_texto()<<","<<animal->obtener_personalidad_texto()<<endl;
+                        animal = animales -> consulta(i);
+                        archivo << animal -> obtener_nombre() << "," << animal -> obtener_edad()<< "," << animal -> obtener_tamanio_texto() <<
+                        "," << animal -> obtener_especie_texto() << "," << animal -> obtener_personalidad_texto() << endl;
                 };
                 
         }else{
-                cout<<"No se pudo abrir el archivo"<<endl;
+                cout << "No se pudo abrir el archivo" << endl;
         }
         archivo.close();
 }
