@@ -129,7 +129,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
         cout << endl << "ADOPTAR ANIMAL:" << endl << endl;
         pasar_tiempo();
         pedir_espacio(espacio);
-        
+        listar_animales_espacio(espacio);
         break;
     }
 }
@@ -414,6 +414,22 @@ void Sistema::pedir_espacio(int &espacio)
     {
         cout << "Espacio invalido, ingrese el espacio disponible para el animal: ";
         cin >> espacio;
+    }
+}
+
+void Sistema::validar_animales_espacio(Animal * animal, int espacio)
+{
+    
+} 
+
+void Sistema::listar_animales_espacio(int espacio)
+{
+    Animal* animal;
+
+    while (animales -> hay_siguiente())
+    {
+        animal = animales -> siguiente();
+        
     }
 }
 

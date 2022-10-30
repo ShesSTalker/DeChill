@@ -97,6 +97,10 @@ class Sistema
         //POS: Le pide al usuario el espacio disponible para el animal y hace la validacion
         void pedir_espacio(int &espacio);
 
+        void validar_animales_espacio(Animal * animal, int espacio); 
+
+        void listar_animales_espacio(int espacio);
+
         //PRE: -
         //POS: Guarda todos los cambios realizados al archivo csv de animales
         void guardar();
