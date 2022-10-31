@@ -129,7 +129,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
         cout << endl << "ADOPTAR ANIMAL:" << endl << endl;
         pasar_tiempo();
         pedir_espacio(espacio);
-        listar_animales_espacio(espacio);
+        listar_animales_espacio(espacio, posicion);
         break;
     }
 }
@@ -417,7 +417,16 @@ void Sistema::pedir_espacio(int &espacio)
     }
 }
 
-void Sistema::validar_animales_espacio(Animal* animal, int espacio)
+void Sistema::mostrar_animal_espacio(Animal* animal, int posicion)
+{
+
+    cout << posicion << ") " << "Nombre: " << animal -> obtener_nombre() << endl <<
+    "Edad: " << animal -> obtener_edad() << endl <<
+    "Especie: " << animal -> obtener_especie_texto() << endl <<
+    "Personalidad: " << animal -> obtener_personalidad_texto() << endl;
+}
+
+void Sistema::validar_animales_espacio(Animal* animal, int espacio, int posicion)
 {
     char tamanio = animal -> obtener_tamanio_caracter();
 
@@ -425,48 +434,49 @@ void Sistema::validar_animales_espacio(Animal* animal, int espacio)
     {
         if (tamanio == DIMINUTO)
         {
-
+            mostrar_animal_espacio(animal, posicion);
         }
     }
     else if (espacio < DELIMITADOR_PEQUENIO_MEDIANO && espacio >= DELIMITADOR_DIMINUTO)
     {
         if (tamanio == DIMINUTO || tamanio == PEQUENIO)
         {
-
+            mostrar_animal_espacio(animal, posicion);
         }
     }
     else if (espacio >= DELIMITADOR_PEQUENIO_MEDIANO && espacio < DELIMITADOR_GRANDE) 
     {
         if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO)
         {
-
+            mostrar_animal_espacio(animal, posicion);
         }
     }
     else if (espacio >= DELIMITADOR_GRANDE && espacio < DELIMITADOR_GIGANTE)
     {
         if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO || tamanio == GRANDE)
         {
-
+            mostrar_animal_espacio(animal, posicion);
         }
     }
     else if (espacio >= DELIMITADOR_GIGANTE)
     {
         if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO || tamanio == GRANDE || tamanio == GIGANTE)
         {
-            
+            mostrar_animal_espacio(animal, posicion);
         }
     }
 
 } 
 
-void Sistema::listar_animales_espacio(int espacio)
+void Sistema::listar_animales_espacio(int espacio, int posicion)
 {
+    posicion = 1;
     Animal* animal;
 
     while (animales -> hay_siguiente())
     {
         animal = animales -> siguiente();
-        
+        validar_animales_espacio(animal, espacio, posicion);
     }
 }
 
