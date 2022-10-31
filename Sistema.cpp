@@ -19,60 +19,60 @@ void Sistema::iniciar_sistema(){
 
 void Sistema::leer_datos()
 {
-        fstream archivo (PATH_ANIMALES);
-        if (archivo.is_open())
-        {
-                string nombre, edad, tamanio , especie, personalidad;
+    fstream archivo (PATH_ANIMALES);
+    if (archivo.is_open())
+    {
+        string nombre, edad, tamanio , especie, personalidad;
                 
-                while(getline(archivo,nombre, ','))
-                {
-                        Animal * animal;
-                        getline(archivo,edad,',');
-                        getline(archivo,tamanio,',');
-                        getline(archivo,especie,',');
-                        getline(archivo,personalidad);
-
-                        char(especie);
-
-                        cargar_animal(especie, nombre, stoi(edad), tamanio[0], personalidad[0]);
-                }
-        }
-        else
+        while(getline(archivo,nombre, ','))
         {
-                cout<<"No se pudo abrir el archivo"<<endl;
+             Animal * animal;
+            getline(archivo,edad,',');
+            getline(archivo,tamanio,',');
+            getline(archivo,especie,',');
+            getline(archivo,personalidad);
+
+            char(especie);
+
+            cargar_animal(especie, nombre, stoi(edad), tamanio[0], personalidad[0]);
         }
-        archivo.close();
+    }
+    else
+    {
+        cout<<"No se pudo abrir el archivo"<<endl;
+    }
+    archivo.close();
 }
 
 void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio, char personalidad)
 {
-        Animal * animal;
+    Animal * animal;
 
-        switch(especie)
-        {
-                case PERRO: 
-                    animal = new Perro(nombre, edad, tamanio, personalidad); 
-                    break;
-                case GATO: 
-                    animal = new Gato(nombre, edad, tamanio, personalidad);
-                    break;
-                case CABALLO:
-                    animal = new Caballo(nombre, edad, tamanio, personalidad);
-                    break;
-                case ROEDOR: 
-                    animal = new Roedor(nombre, edad, tamanio, personalidad);
-                    break;
-                case CONEJO: 
-                    animal = new Conejo(nombre, edad, tamanio, personalidad);
-                    break;
-                case ERIZO: 
-                    animal = new Erizo(nombre, edad, tamanio, personalidad);
-                    break;
-                case LAGARTIJA:
-                    animal = new Lagartija(nombre, edad, tamanio, personalidad);
-                    break;
+    switch(especie)
+    {
+        case PERRO: 
+            animal = new Perro(nombre, edad, tamanio, personalidad); 
+            break;
+        case GATO: 
+            animal = new Gato(nombre, edad, tamanio, personalidad);
+            break;
+        case CABALLO:
+            animal = new Caballo(nombre, edad, tamanio, personalidad);
+            break;
+        case ROEDOR: 
+            animal = new Roedor(nombre, edad, tamanio, personalidad);
+            break;
+        case CONEJO: 
+            animal = new Conejo(nombre, edad, tamanio, personalidad);
+            break;
+        case ERIZO: 
+            animal = new Erizo(nombre, edad, tamanio, personalidad);
+            break;
+        case LAGARTIJA:
+            animal = new Lagartija(nombre, edad, tamanio, personalidad);
+            break;
         }
-        animales -> alta(animal, animales -> obtener_cantidad());
+    animales -> alta(animal, animales -> obtener_cantidad());
 }
 
 void Sistema::procesar_opcion(int opcion_tomada)
