@@ -140,8 +140,6 @@ string Animal::obtener_personalidad_texto()
     return personalidad_texto;
 }
 
-// Setters
-
 void Animal::aumentar_hambre()
 {
     int tipo_personalidad = int(personalidad);
