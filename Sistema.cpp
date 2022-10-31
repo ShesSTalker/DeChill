@@ -19,28 +19,28 @@ void Sistema::iniciar_sistema(){
 
 void Sistema::leer_datos()
 {
-        fstream archivo (PATH_ANIMALES);
-        if (archivo.is_open())
-        {
-                string nombre, edad, tamanio , especie, personalidad;
+    fstream archivo (PATH_ANIMALES);
+    if (archivo.is_open())
+    {
+        string nombre, edad, tamanio , especie, personalidad;
                 
-                while(getline(archivo,nombre, ','))
-                {
-                        Animal * animal;
-                        getline(archivo,edad,',');
-                        getline(archivo,tamanio,',');
-                        getline(archivo,especie,',');
-                        getline(archivo,personalidad);
-
-                        char(especie);
-
-                        cargar_animal(especie, nombre, stoi(edad), tamanio[0], personalidad[0]);
-                }
-        }
-        else
+        while(getline(archivo,nombre, ','))
         {
-                cout<<"No se pudo abrir el archivo"<<endl;
+            Animal* animal;
+            getline(archivo,edad,',');
+            getline(archivo,tamanio,',');
+            getline(archivo,especie,',');
+            getline(archivo,personalidad);
+
+            char(especie);
+
+            cargar_animal(especie, nombre, stoi(edad), tamanio[0], personalidad[0]);
         }
+    }
+    else
+    {
+        cout << "No se pudo abrir el archivo" << endl;
+    }
         archivo.close();
 }
 

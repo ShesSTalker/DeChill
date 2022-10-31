@@ -71,7 +71,7 @@ template < typename Tipo >
 void Lista<Tipo>::alta(Tipo dato, int posicion)
 {
     Nodo<Tipo>* nuevo = new Nodo<Tipo>(dato);
-    Nodo<Tipo>* siguiente =nuevo;
+    Nodo<Tipo>* siguiente = nuevo;
 
     if (posicion == 1)
     {
