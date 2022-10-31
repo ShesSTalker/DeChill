@@ -326,7 +326,7 @@ void mostrar_opciones_individuales()
 {
     cout << "1) Duchar." << endl <<
     "2) Alimentar." << endl << 
-    "3) Saltear animal" << endl << endl;
+    "3) Saltear animal." << endl << endl;
 }
 
 void Sistema::pedir_opciones_individuales(int &opcion_individual)
