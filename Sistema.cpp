@@ -373,7 +373,7 @@ void Sistema::eleccion_individual()
     {
         animal = animales -> siguiente ();
         mostrar_animal(animal);
-        opciones_individuales(opcion_individual);
+        pedir_opciones_individuales(opcion_individual);
         
         if (opcion_individual != SALTEAR_ANIMAL)
         {
