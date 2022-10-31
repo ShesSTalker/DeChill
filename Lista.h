@@ -71,7 +71,7 @@ template < typename Tipo >
 void Lista<Tipo>::alta(Tipo dato, int posicion)
 {
     Nodo<Tipo>* nuevo = new Nodo<Tipo>(dato);
-    Nodo<Tipo>* siguiente =nuevo;
+    Nodo<Tipo>* siguiente = primero;
 
     if (posicion == 1)
     {
@@ -80,7 +80,7 @@ void Lista<Tipo>::alta(Tipo dato, int posicion)
     else
     {
         Nodo<Tipo>* anterior = obtener_nodo(posicion - 1);
-        siguiente = anterior -> anterior -> obtener_siguiente();
+        siguiente = anterior -> obtener_siguiente();
         anterior -> cambiar_siguiente(nuevo);
     }
     nuevo -> cambiar_siguiente(siguiente);
