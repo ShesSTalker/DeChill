@@ -428,21 +428,21 @@ void Sistema::validar_animales_espacio(Animal* animal, int espacio)
 
         }
     }
-    else if (espacio < DELIMITADOR_PEQUENIO_MEDIANO)
+    else if (espacio < DELIMITADOR_PEQUENIO_MEDIANO && espacio >= DELIMITADOR_DIMINUTO)
     {
         if (tamanio == DIMINUTO || tamanio == PEQUENIO)
         {
 
         }
     }
-    else if (espacio >= DELIMITADOR_PEQUENIO_MEDIANO)
+    else if (espacio >= DELIMITADOR_PEQUENIO_MEDIANO && espacio < DELIMITADOR_GRANDE) 
     {
         if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO)
         {
 
         }
     }
-    else if (espacio >= DELIMITADOR_GRANDE)
+    else if (espacio >= DELIMITADOR_GRANDE && espacio < DELIMITADOR_GIGANTE)
     {
         if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO || tamanio == GRANDE)
         {
