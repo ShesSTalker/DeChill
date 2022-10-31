@@ -33,7 +33,7 @@ string Animal::obtener_tamanio_texto()
             break;
         case PEQUENIO: 
             tamanio_texto = "pequeño"; 
-            break;
+            break;     
         case MEDIANO:
             tamanio_texto = "mediano"; 
             break;
