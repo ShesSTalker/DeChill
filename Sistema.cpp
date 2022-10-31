@@ -322,7 +322,7 @@ void Sistema::procesar_opcion_submenu(int opcion_submenu)
     }
 }
 
-void mostrar_opciones_individuales()
+void Sistema::mostrar_opciones_individuales()
 {
     cout << "1) Duchar." << endl <<
     "2) Alimentar." << endl << 
@@ -373,6 +373,7 @@ void Sistema::eleccion_individual()
     {
         animal = animales -> siguiente ();
         mostrar_animal(animal);
+        mostrar_opciones_individuales();
         pedir_opciones_individuales(opcion_individual);
         
         if (opcion_individual != SALTEAR_ANIMAL)
