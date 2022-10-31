@@ -26,7 +26,7 @@ void Sistema::leer_datos()
                 
         while(getline(archivo,nombre, ','))
         {
-             Animal * animal;
+            Animal * animal;
             getline(archivo,edad,',');
             getline(archivo,tamanio,',');
             getline(archivo,especie,',');
