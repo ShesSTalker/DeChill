@@ -78,7 +78,7 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
 void Sistema::procesar_opcion(int opcion_tomada)
 {
     string nombre;
-    int posicion, opcion_submenu, espacio;
+    int posicion, opcion_submenu, espacio, posicion_adopcion;
 
     switch (opcion_tomada)
     {
@@ -130,6 +130,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
         pasar_tiempo();
         pedir_espacio(espacio);
         listar_animales_espacio(espacio, posicion);
+        posicion_adopcion = pedir_opcion_adopcion(); 
         break;
     }
 }
@@ -468,6 +469,15 @@ void Sistema::validar_animales_espacio(Animal* animal, int espacio, int posicion
 
 } 
 
+int Sistema::pedir_opcion_adopcion()
+{
+    int posicion_adopcion;
+
+    cout << endl << "Ingrese el numero del animal que desea ingresar, si desea cancelar la adopcion ingrese 0: ";
+
+    return posicion_adopcion;
+}
+
 void Sistema::listar_animales_espacio(int espacio, int posicion)
 {
     posicion = 1;
@@ -478,6 +488,8 @@ void Sistema::listar_animales_espacio(int espacio, int posicion)
         animal = animales -> siguiente();
         validar_animales_espacio(animal, espacio, posicion);
     }
+
+    animales -> iniciar();
 }
 
 void Sistema::guardar(){

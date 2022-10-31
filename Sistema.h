@@ -101,6 +101,8 @@ class Sistema
 
         void validar_animales_espacio(Animal* animal, int espacio, int posicion); 
 
+        int pedir_opcion_adopcion();
+
         void listar_animales_espacio(int espacio, int posicion);
 
         //PRE: -
