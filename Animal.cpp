@@ -167,18 +167,14 @@ void Animal::dearmar_higiene()
 
     switch(tipo_personalidad)
     {
-        case DORMILON:
-            higiene -= HIGIENE_INICIAL;
-            break;
-        case JUGUETON:
-            higiene -= HIGIENE_INICIAL;
-            break;
         case SOCIABLE:
-            higiene -= HIGIENE_INICIAL / 2;
+            higiene -= RESTA_HIGIENE / 2;
             break;
         case TRAVIESO:
-            higiene -= HIGIENE_INICIAL * 2;
+            higiene -= RESTA_HIGIENE * 2;
             break;
+        default:
+            higiene -= RESTA_HIGIENE;
     }
 }
 
