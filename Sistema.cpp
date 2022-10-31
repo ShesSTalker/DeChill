@@ -307,18 +307,18 @@ void Sistema::procesar_opcion_submenu(int opcion_submenu)
     switch(opcion_submenu)
     {
         case ELEGIR_INDIVIDUALMENTE:
-        eleccion_individual();
-        break;
+            eleccion_individual();
+            break;
 
         case ALIMENTAR_A_TODOS:
-        alimentar_todos();
-        cout << "se ha alimentado a todos los animales con exito." << endl << endl;
-        break;
+            alimentar_todos();
+            cout << "se ha alimentado a todos los animales con exito." << endl << endl;
+            break;
 
         case DUCHAR_A_TODOS:
-        duchar_todos();
-        cout << "se ha duchado a todos los animales con exito." << endl << endl;
-        break;
+            duchar_todos();
+            cout << "se ha duchado a todos los animales con exito." << endl << endl;
+            break;
     }
 }
 
@@ -347,20 +347,20 @@ void Sistema::procesar_opcion_indivual(int opcion_individual, Animal * animal)
     switch (opcion_individual)
     {
         case DUCHAR:
-        if (animal -> requiere_ducha())
-        {
-            animal -> duchar();
-        }
-        else 
-        {
-           cout << animal -> obtener_nombre() << " no necesita ducharse porque es un/a " << animal -> obtener_especie_texto() << endl; 
-        }
-        break;
+            if (animal -> requiere_ducha())
+            {
+                animal -> duchar();
+            }
+            else 
+            {
+                cout << animal -> obtener_nombre() << " no necesita ducharse porque es un/a " << animal -> obtener_especie_texto() << endl; 
+            }
+            break;
 
         case ALIMENTAR:
-        animal -> alimentar();
-        cout << animal -> obtener_nombre() << " ha sido alimentado";
-        break;
+            animal -> alimentar();
+            cout << animal -> obtener_nombre() << " ha sido alimentado";
+            break;
     }
 }
 
@@ -429,7 +429,6 @@ void Sistema::pedir_espacio(int &espacio)
 
 void Sistema::mostrar_animal_espacio(Animal* animal, int posicion)
 {
-
     cout << posicion << ") " << "Nombre: " << animal -> obtener_nombre() << endl <<
     "Edad: " << animal -> obtener_edad() << endl <<
     "Especie: " << animal -> obtener_especie_texto() << endl <<
@@ -507,19 +506,22 @@ void Sistema::listar_animales_espacio(int espacio, int posicion)
     animales -> iniciar();
 }
 
-void Sistema::guardar(){
-        Animal * animal;
-        ofstream archivo (PATH_ANIMALES);
-        if (archivo.is_open()){
-                for (int i = 1; i <= animales -> obtener_cantidad(); i++)
-                {
-                        animal = animales -> consulta(i);
-                        archivo << animal -> obtener_nombre() << "," << animal -> obtener_edad()<< "," << animal -> obtener_tamanio_texto() <<
-                        "," << animal -> obtener_especie_texto() << "," << animal -> obtener_personalidad_texto() << endl;
-                };
-                
-        }else{
-                cout << "No se pudo abrir el archivo" << endl;
-        }
-        archivo.close();
+void Sistema::guardar()
+{
+    Animal * animal;
+    ofstream archivo (PATH_ANIMALES);
+    if (archivo.is_open())
+    {
+        for (int i = 1; i <= animales -> obtener_cantidad(); i++)
+        {
+            animal = animales -> consulta(i);
+            archivo << animal -> obtener_nombre() << "," << animal -> obtener_edad()<< "," << animal -> obtener_tamanio_texto() <<
+            "," << animal -> obtener_especie_texto() << "," << animal -> obtener_personalidad_texto() << endl;
+        }        
+    }
+    else
+    {
+        cout << "No se pudo abrir el archivo" << endl;
+    }
+    archivo.close();
 }
