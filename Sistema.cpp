@@ -322,7 +322,7 @@ void Sistema::procesar_opcion_submenu(int opcion_submenu)
     }
 }
 
-void mostrar_opciones_individuales()
+void Sistema::mostrar_opciones_individuales()
 {
     cout << "1) Duchar." << endl <<
     "2) Alimentar." << endl << 
