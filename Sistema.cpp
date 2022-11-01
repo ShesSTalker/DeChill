@@ -523,5 +523,5 @@ void Sistema::guardar()
 
 Sistema::~Sistema()
 {
-    animales = nullptr;    
+    delete animales;    
 }

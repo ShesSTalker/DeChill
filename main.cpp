@@ -26,6 +26,7 @@ int main()
     sistema->guardar();
     
     delete menu;
+    delete sistema;
 
     return 0;
 }
