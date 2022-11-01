@@ -19,7 +19,6 @@ void Menu::bienvenida()
 void Menu::mostrar_menu()
 {
     cout <<"--------MENU--------"<< endl <<
-    "0) Mostrar Menu" << endl <<
     "1) Listar animales." << endl <<
     "2) Rescatar animal." << endl <<
     "3) Buscar animal." << endl <<
@@ -35,7 +34,7 @@ void Menu::pedir_opcion()
     cout << "Ingrese la opcion que desea ejecutar: ";
     cin >> opcion_tomada;
 
-    while (opcion_tomada < 0 || opcion_tomada > MAX_OPCIONES_MENU_PRINCIPAL)
+    while (opcion_tomada < 1 || opcion_tomada > MAX_OPCIONES_MENU_PRINCIPAL)
     {
         cout << "La opcion tomada no es valida, ingrese una opcion valida: ";
         cin >> opcion_tomada;

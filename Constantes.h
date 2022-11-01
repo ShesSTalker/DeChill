@@ -1,7 +1,10 @@
 #ifndef _CONSTANTES_H_
 #define _CONSTANTES_H_
+#include <string>
+#include <iostream>
 
-const string PATH_ANIMALES("animales.csv");
+using namespace std;
+const string PATH_ANIMALES = "animales.csv";
 
 const int HAMBRE_INICIAL = 0;
 const int HIGIENE_INICIAL = 100;

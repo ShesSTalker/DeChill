@@ -72,7 +72,6 @@ void Lista<Tipo>::alta(Tipo dato, int posicion)
 {
     Nodo<Tipo>* nuevo = new Nodo<Tipo>(dato);
     Nodo<Tipo>* siguiente = primero;
-    
     if (posicion == 1)
     {
         primero = nuevo;

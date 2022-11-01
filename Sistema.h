@@ -9,13 +9,12 @@ class Sistema
     private:
         Lista<Animal*>* animales; 
 
+
     //Metodos
     public:
-        Sistema(){};
-
-        //PRE: -
-        //POS: Inicializa el sistema 
-        void iniciar_sistema();
+        Sistema(){
+            animales = new Lista<Animal*>;
+        };
 
         //PRE: - 
         //POS: Lee los datos del arcivo csv de animales

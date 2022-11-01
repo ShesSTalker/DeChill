@@ -1,7 +1,6 @@
 #ifndef _ANIMAL_H
 #define _ANIMAL_H
 
-#include <string>
 #include "Constantes.h"
 
 using namespace std;
@@ -60,10 +59,6 @@ class Animal
         //PRE: -
         //POS: devuelve el tamanio del animal en formato de caracter
         char obtener_tamanio_caracter();
-
-        //PRE: -
-        //POS: devuelve el tamanio del animal en formato de de texto (froma completa)
-        string obtener_tamanio_texto();
 
         // PRE: 
         // POS: devuelve la personalidad del animal en formato de texto (forma completa)

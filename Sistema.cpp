@@ -13,28 +13,20 @@
 
 using namespace std;
 
-void Sistema::iniciar_sistema(){
-
-}
-
 void Sistema::leer_datos()
 {
     fstream archivo (PATH_ANIMALES);
     if (archivo.is_open())
     {
         string nombre, edad, tamanio , especie, personalidad;
-                
         while(getline(archivo,nombre, ','))
         {
-            Animal * animal;
             getline(archivo,edad,',');
             getline(archivo,tamanio,',');
             getline(archivo,especie,',');
             getline(archivo,personalidad);
 
-            char(especie);
-
-            cargar_animal(especie, nombre, stoi(edad), tamanio[0], personalidad[0]);
+            cargar_animal(especie[0], nombre, stoi(edad), tamanio[0], personalidad[0]);
         }
     }
     else
@@ -72,7 +64,7 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
             animal = new Lagartija(nombre, edad, tamanio, personalidad);
             break;
         }
-    animales -> alta(animal, animales -> obtener_cantidad());
+    animales->alta(animal, animales -> obtener_cantidad()+1);
 }
 
 void Sistema::procesar_opcion(int opcion_tomada)
@@ -85,7 +77,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
         case LISTAR_ANIMALES: 
         cout << endl << "LISTA DE ANIMALES EN LA RESERVA:" << endl << endl;
         pasar_tiempo();
-        listar_animales();
+        this->listar_animales();
         break;
 
         case RESCATAR_ANIMAL: 
@@ -126,6 +118,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
         break;
 
         case ADOPTAR_ANIMAL:
+        posicion= 1;
         cout << endl << "ADOPTAR ANIMAL:" << endl << endl;
         pasar_tiempo();
         pedir_espacio(espacio);
@@ -495,7 +488,6 @@ int Sistema::pedir_opcion_adopcion()
 
 void Sistema::listar_animales_espacio(int espacio, int posicion)
 {
-    posicion = 1;
     Animal* animal;
 
     while (animales -> hay_siguiente())
