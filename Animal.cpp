@@ -159,7 +159,8 @@ void Animal::aumentar_hambre()
             hambre += SUMA_HAMBRE;
             break;
     }
-    if( hambre > HAMBRE_MAX ){
+    if( hambre > HAMBRE_MAX )
+    {
         hambre=HAMBRE_MAX;
     }
 }
@@ -179,7 +180,8 @@ void Animal::dearmar_higiene()
         default:
             higiene -= RESTA_HIGIENE;
     }
-    if (higiene < HIGIENE_MIN){
+    if (higiene < HIGIENE_MIN)
+    {
         higiene= HIGIENE_MIN;
     }
 }

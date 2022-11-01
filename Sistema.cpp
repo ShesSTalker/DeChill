@@ -521,6 +521,7 @@ void Sistema::guardar()
     archivo.close();
 }
 
-Sistema::~Sistema(){
-    
+Sistema::~Sistema()
+{
+    animales = nullptr;    
 }

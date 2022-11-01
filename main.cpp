@@ -8,13 +8,14 @@ int main()
 {
 
     Menu* menu= new Menu();
-    int opcion;
     Sistema* sistema= new Sistema();
+    int opcion;
 
     sistema->leer_datos();
     menu -> bienvenida();
     
-    do{
+    do
+    {
         menu -> mostrar_menu();
         menu -> pedir_opcion();
         opcion = menu -> obtener_opcion_tomada();
@@ -23,7 +24,8 @@ int main()
     while (opcion != GUARDAR_Y_SALIR);
 
     sistema->guardar();
-
     
+    delete menu;
+
     return 0;
 }
