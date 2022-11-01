@@ -1,11 +1,14 @@
 #ifndef _CONSTANTES_H_
 #define _CONSTANTES_H_
-#include <string>
 #include <iostream>
+#include <string>
 
 using namespace std;
+
+//Constantes leer datos
 const string PATH_ANIMALES = "animales.csv";
 
+//Constantes pasar tiempo
 const int HAMBRE_INICIAL = 0;
 const int HIGIENE_INICIAL = 100;
 const int SUMA_HAMBRE = 10;
@@ -30,16 +33,12 @@ DELIMITADOR_PEQUENIO_MEDIANO = 10,
 DELIMITADOR_GRANDE = 20,
 DELIMITADOR_GIGANTE = 50;
 
-const int MAX_TAMANIOS = 4;
-
 //Constantes personalidad
 const int
 DORMILON = 'd',
 JUGUETON = 'j',
 SOCIABLE = 's',
 TRAVIESO = 't';
-
-const int MAX_PERSONALIDADES = 3;
 
 //Constantes especie
 const char 
@@ -50,9 +49,6 @@ ROEDOR = 'R',
 CONEJO = 'O',
 ERIZO = 'E',
 LAGARTIJA = 'L';
-
-
-const int MAX_ESPECIES = 6;
 
 //Constantes comida
 const string
@@ -86,7 +82,5 @@ enum opciones_individuales {
     ALIMENTAR,
     SALTEAR_ANIMAL,
 };
-
-const int MAX_OPCIONES_MENU_PRINCIPAL = 6;
 
 #endif 

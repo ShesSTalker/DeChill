@@ -12,6 +12,7 @@ class Lista
         int cantidad;
         Nodo<Tipo>* cursor;
 
+    //Metodos
     public:
         //Constructor
         //PRE: -
