@@ -419,12 +419,12 @@ void Sistema::duchar_todos()
 void Sistema::pedir_espacio(string espacio)
 {
     cout << "Ingrese el espacio disponible para el animal en m² (mayor a 0): ";
-    getline(cin >> ws, espacio);
+    getline(cin , espacio);
 
     while (stoi(espacio) < 0)
     {
         cout << "Espacio invalido, ingrese el espacio en  m² disponible para el animal (mayor a 0): ";
-        getline(cin >> ws, espacio);
+        getline(cin , espacio);
     }
 }
 
