@@ -31,15 +31,19 @@ string Animal::obtener_tamanio_texto()
         case DIMINUTO: 
             tamanio_texto = "diminuto";
             break;
+        
         case PEQUENIO: 
             tamanio_texto = "pequeño"; 
             break;     
+        
         case MEDIANO:
             tamanio_texto = "mediano"; 
             break;
+        
         case GRANDE: 
             tamanio_texto = "grande"; 
             break;
+        
         case GIGANTE: 
             tamanio_texto = "gigante";
             break;
@@ -57,21 +61,27 @@ string Animal::obtener_especie_texto()
         case PERRO: 
             especie_texto = "perro"; 
             break;
+        
         case GATO: 
             especie_texto = "gato"; 
             break;
+        
         case CABALLO: 
             especie_texto = "caballo";
             break;
+        
         case ROEDOR: 
             especie_texto = "roedor"; 
             break;
+        
         case CONEJO: 
             especie_texto = "conejo"; 
             break;
+        
         case ERIZO: 
             especie_texto = "erizo"; 
             break;
+        
         case LAGARTIJA: 
             especie_texto = "lagartija";
             break;
@@ -89,21 +99,27 @@ char Animal::obtener_especie_caracter()
         case PERRO: 
             especie_char = 'P'; 
             break;
+        
         case GATO: 
             especie_char = 'G';
             break;
+        
         case CABALLO:
             especie_char = 'C'; 
             break;
+        
         case ROEDOR: 
             especie_char = 'R'; 
             break;
+        
         case CONEJO: 
             especie_char = 'O'; 
             break;
+        
         case ERIZO: 
             especie_char = 'R'; 
             break;
+        
         case LAGARTIJA: 
             especie_char = 'L';
             break;
@@ -127,12 +143,15 @@ string Animal::obtener_personalidad_texto()
         case DORMILON: 
             personalidad_texto = "dormilón"; 
             break;
+        
         case JUGUETON: 
             personalidad_texto = "juguetón"; 
             break;
+        
         case SOCIABLE: 
             personalidad_texto = "sociable"; 
             break;
+        
         case TRAVIESO: 
             personalidad_texto = "travieso";
             break;
@@ -149,12 +168,15 @@ void Animal::aumentar_hambre()
         case DORMILON:
             hambre += SUMA_HAMBRE / 2;
             break;
+        
         case JUGUETON:
             hambre += SUMA_HAMBRE * 2;
             break;
+        
         case SOCIABLE:
             hambre += SUMA_HAMBRE;
             break;
+        
         case TRAVIESO:
             hambre += SUMA_HAMBRE;
             break;
@@ -174,9 +196,11 @@ void Animal::dearmar_higiene()
         case SOCIABLE:
             higiene -= RESTA_HIGIENE / 2;
             break;
+        
         case TRAVIESO:
             higiene -= RESTA_HIGIENE * 2;
             break;
+        
         default:
             higiene -= RESTA_HIGIENE;
     }

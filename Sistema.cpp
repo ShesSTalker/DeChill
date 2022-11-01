@@ -43,7 +43,7 @@ void Sistema::leer_datos()
 
 void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio, char personalidad)
 {
-    Animal * animal;
+    Animal* animal;
 
     switch(especie)
     {
@@ -366,7 +366,7 @@ void Sistema::procesar_opcion_indivual(int opcion_individual, Animal * animal)
 
 void Sistema::eleccion_individual()
 {
-    Animal * animal;
+    Animal* animal;
     int opcion_individual;
 
     while(animales ->hay_siguiente())
@@ -386,7 +386,7 @@ void Sistema::eleccion_individual()
 
 void Sistema::alimentar_todos()
 {
-    Animal * animal;
+    Animal* animal;
     
     while (animales -> hay_siguiente())
     {
