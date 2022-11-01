@@ -263,7 +263,7 @@ void Sistema::rescatar_animal(string nombre)
 
     while (tamanio != DIMINUTO && tamanio != PEQUENIO && tamanio != MEDIANO && tamanio != GRANDE && tamanio != GIGANTE)
     {
-       cout << "- d (diminuto)" << endl << "- p (pequeño)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)"  <<endl<<
+       cout << "- d (diminuto)" << endl << "- p (pequenio)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)"  <<endl<<
         "Tamanio invalido, ingrese el caracter del tamanio del animal: ";
         cin >> tamanio;
     }
@@ -359,7 +359,7 @@ void Sistema::procesar_opcion_indivual(int opcion_individual, Animal * animal)
 
         case ALIMENTAR:
             animal -> alimentar();
-            cout << animal -> obtener_nombre() << " ha sido alimentado";
+            cout << animal -> obtener_nombre() << " ha sido alimentado" << endl;
             break;
     }
 }
