@@ -292,12 +292,12 @@ void Sistema::mostrar_submenu()
 
 void Sistema::ingresar_opcion_submenu(int &opcion_submenu)
 {
-    cout << "Ingrese el numero de la opcion que desa ejecutar: " << endl;
+    cout << "Ingrese el numero de la opcion que desa ejecutar: ";
     cin >> opcion_submenu;
 
     while (opcion_submenu <= 0 &&  opcion_submenu > REGRESAR_INICIO)
     {
-        cout << "opcion invalida, ingrese el numero de la opcion que desa ejecutar: " << endl;
+        cout << "opcion invalida, ingrese el numero de la opcion que desa ejecutar: ";
         cin >> opcion_submenu;
     }
 }
@@ -419,12 +419,12 @@ void Sistema::duchar_todos()
 void Sistema::pedir_espacio(string espacio)
 {
     cout << "Ingrese el espacio disponible para el animal en m² (mayor a 0): ";
-    getline(cin>>ws,espacio);
+    getline(cin >> ws, espacio);
 
     while (stoi(espacio) < 0)
     {
         cout << "Espacio invalido, ingrese el espacio en  m² disponible para el animal (mayor a 0): ";
-        getline(cin>>ws,espacio);
+        getline(cin >> ws, espacio);
     }
 }
 
@@ -488,7 +488,7 @@ int Sistema::pedir_opcion_adopcion()
 
     while (posicion_adopcion < 0 && posicion_adopcion > animales -> obtener_cantidad())
     {
-        cout << endl << "Opcion invalida ,ingrese el numero del animal que desea ingresar, si desea cancelar la adopcion ingrese 0: ";
+        cout << endl << "Opcion invalida, ingrese el numero del animal que desea ingresar, si desea cancelar la adopcion ingrese 0: ";
     }
 
     return posicion_adopcion;
