@@ -77,7 +77,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
         case LISTAR_ANIMALES: 
         cout << endl << "LISTA DE ANIMALES EN LA RESERVA:" << endl << endl;
         pasar_tiempo();
-        this->listar_animales();
+        listar_animales();
         break;
 
         case RESCATAR_ANIMAL: 
@@ -199,6 +199,7 @@ int Sistema::buscar_nombre(string nombre)
         }
         i++;
     }
+    cout<<"hsda"<<endl;
     animales -> iniciar();
     
     return posicion;
@@ -278,8 +279,8 @@ void Sistema::rescatar_animal(string nombre)
 void Sistema::mostrar_submenu()
 {
     cout << "1) Elegir individualmente." << endl <<
-    "2) Alimentar a todos." << 
-    "3) Duchar a todos." <<
+    "2) Alimentar a todos." <<endl << 
+    "3) Duchar a todos." <<endl <<
     "4) Regresar al inicio." << endl << endl;
 }
 
@@ -411,12 +412,12 @@ void Sistema::duchar_todos()
 
 void Sistema::pedir_espacio(int &espacio)
 {
-    cout << "Ingrese el espacio disponible para el animal (mayor a 0): ";
+    cout << "Ingrese el espacio disponible para el animal en m² (mayor a 0): ";
     cin >> espacio;
 
     while (espacio < 0)
     {
-        cout << "Espacio invalido, ingrese el espacio disponible para el animal: ";
+        cout << "Espacio invalido, ingrese el espacio en  m² disponible para el animal (mayor a 0): ";
         cin >> espacio;
     }
 }
@@ -494,6 +495,7 @@ void Sistema::listar_animales_espacio(int espacio, int posicion)
     {
         animal = animales -> siguiente();
         validar_animales_espacio(animal, espacio, posicion);
+        posicion++;
     }
 
     animales -> iniciar();
@@ -517,4 +519,8 @@ void Sistema::guardar()
         cout << "No se pudo abrir el archivo" << endl;
     }
     archivo.close();
+}
+
+Sistema::~Sistema(){
+    
 }

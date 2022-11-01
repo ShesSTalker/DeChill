@@ -10,6 +10,8 @@ const int HAMBRE_INICIAL = 0;
 const int HIGIENE_INICIAL = 100;
 const int SUMA_HAMBRE = 10;
 const int RESTA_HIGIENE = 10;
+const int HAMBRE_MAX = 100;
+const int HIGIENE_MIN = 0;
 
 const int NULO = -1;
 
