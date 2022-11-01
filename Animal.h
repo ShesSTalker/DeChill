@@ -5,12 +5,6 @@
 
 using namespace std;
 
-// Tenemos que definir cómo traducimos tamaños,
-// personalidades y especies desde que los leemos del
-// archivo hasta que los usamos en las clases.
-
-// Necesitamos establecer dónde van los métodos de validacion de cada dato
-
 class Animal 
 {
     //Atributos

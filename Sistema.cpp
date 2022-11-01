@@ -13,6 +13,11 @@
 
 using namespace std;
 
+Sistema::Sistema()
+{
+    animales = new Lista<Animal*>;
+}
+
 void Sistema::leer_datos()
 {
     fstream archivo (PATH_ANIMALES);
@@ -76,65 +81,65 @@ void Sistema::procesar_opcion(int opcion_tomada)
     switch (opcion_tomada)
     {
         case LISTAR_ANIMALES: 
-        cout << endl << "LISTA DE ANIMALES EN LA RESERVA:" << endl << endl;
-        pasar_tiempo();
-        listar_animales();
-        break;
+            cout << endl << "LISTA DE ANIMALES EN LA RESERVA:" << endl << endl;
+            pasar_tiempo();
+            listar_animales();
+            break;
 
         case RESCATAR_ANIMAL: 
-        cout << endl << "RESCATAR ANIMAL:" << endl << endl;
-        pasar_tiempo();
-        pedir_nombre(nombre);
-        posicion = buscar_nombre(nombre);
-        verificar_nombre(posicion, nombre);
-        break;
+            cout << endl << "RESCATAR ANIMAL:" << endl << endl;
+            pasar_tiempo();
+            pedir_nombre(nombre);
+            posicion = buscar_nombre(nombre);
+            verificar_nombre(posicion, nombre);
+            break;
 
         case BUSCAR_ANIMAL:
-        cout << endl << "BUSCAR ANIMAL DE LA RESERVA:" << endl << endl;
-        pasar_tiempo();
-        pedir_nombre(nombre);
-        posicion = buscar_nombre(nombre);
-        if (posicion != NULO)
-        {
-            mostrar_animal(animales -> consulta(posicion));
-        }
-        else
-        {
-            cout << endl << "ERROR, no se pudo encontrar el nombre ingresado" << endl << endl;
-        }
-        break;
+            cout << endl << "BUSCAR ANIMAL DE LA RESERVA:" << endl << endl;
+            pasar_tiempo();
+            pedir_nombre(nombre);
+            posicion = buscar_nombre(nombre);
+            if (posicion != NULO)
+            {
+                mostrar_animal(animales -> consulta(posicion));
+            }
+            else
+            {
+                cout << endl << "ERROR, no se pudo encontrar el nombre ingresado" << endl << endl;
+            }
+            break;
 
         case CUIDAR_ANIMAL:
-        cout << endl << "CUIDAR ANIMALES:" << endl << endl;
-        pasar_tiempo();
-        mostrar_submenu();
-        ingresar_opcion_submenu(opcion_submenu); 
-        procesar_opcion_submenu(opcion_submenu);
-        while (opcion_submenu != REGRESAR_INICIO)
-        {
+            cout << endl << "CUIDAR ANIMALES:" << endl << endl;
+            pasar_tiempo();
             mostrar_submenu();
             ingresar_opcion_submenu(opcion_submenu); 
             procesar_opcion_submenu(opcion_submenu);
-        }
-        break;
+            while (opcion_submenu != REGRESAR_INICIO)
+            {
+                mostrar_submenu();
+                ingresar_opcion_submenu(opcion_submenu); 
+                procesar_opcion_submenu(opcion_submenu);
+            }
+            break;
 
         case ADOPTAR_ANIMAL:
-        posicion= 1;
-        cout << endl << "ADOPTAR ANIMAL:" << endl << endl;
-        pasar_tiempo();
-        pedir_espacio(espacio);
-        listar_animales_espacio(espacio, posicion);
-        posicion_adopcion = pedir_opcion_adopcion(); 
-        if (posicion_adopcion == 0)
-        {
-            cout << "Se ha cancelado la adopcion." << endl << endl;
-        } 
-        else
-        {
-            animales -> baja(posicion_adopcion);
-            cout << "Felicidades por su adopcion." << endl << endl;
-        }
-        break;
+            posicion= 1;
+            cout << endl << "ADOPTAR ANIMAL:" << endl << endl;
+            pasar_tiempo();
+            pedir_espacio(espacio);
+            listar_animales_espacio(espacio, posicion);
+            posicion_adopcion = pedir_opcion_adopcion(); 
+            if (posicion_adopcion == 0)
+            {
+                cout << "Se ha cancelado la adopcion." << endl << endl;
+            } 
+            else
+            {
+                animales -> baja(posicion_adopcion);
+                cout << "Felicidades por su adopcion." << endl << endl;
+            }
+            break;
     }
 }
 

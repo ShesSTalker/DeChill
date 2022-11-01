@@ -9,12 +9,11 @@ class Sistema
     private:
         Lista<Animal*>* animales; 
 
-
     //Metodos
     public:
-        Sistema(){
-            animales = new Lista<Animal*>;
-        };
+        //PRE: -
+        //POS:
+        Sistema();
 
         //PRE: - 
         //POS: Lee los datos del arcivo csv de animales
