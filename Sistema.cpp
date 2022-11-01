@@ -416,6 +416,7 @@ void Sistema::pedir_espacio(int &espacio)
     cin >> espacio;
 
     while (espacio < 0)
+    
     {
         cout << "Espacio invalido, ingrese el espacio en  m² disponible para el animal (mayor a 0): ";
         cin >> espacio;
