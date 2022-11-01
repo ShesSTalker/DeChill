@@ -19,13 +19,22 @@ class Sistema
         //POS: Lee los datos del arcivo csv de animales
         void leer_datos();
 
-        //PRE: -
-        //POS: carga el animal en la lista de animales
-        void cargar_animal(char especie, string nombre, int edad, char tamanio, char personalidad);
-
         //PRE: opcion_tomada debe ser 0 < opcion_tomada <= 5
         //POS: Procesa opcion_tomada para ejecutar las operaciones de la opcion elejida por el usuario
         void procesar_opcion(int opcion_tomada);
+
+        //PRE: -
+        //POS: Guarda todos los cambios realizados al archivo csv de animales
+        void guardar();
+
+        //PRE: -
+        //POS: 
+        ~Sistema();
+
+    private:
+        //PRE: -
+        //POS: carga el animal en la lista de animales
+        void cargar_animal(char especie, string nombre, int edad, char tamanio, char personalidad);
 
         // PRE: -
         // POS: aumenta el hambre del animal y reduce (o no) su higiene, basándose en las características del animal particular
@@ -110,13 +119,5 @@ class Sistema
         //PRE: -
         //POS: Muestra por pantalla todos los animales que cumplen con el espacio con el que dispone el usuario
         void listar_animales_espacio(string espacio, int posicion);
-
-        //PRE: -
-        //POS: Guarda todos los cambios realizados al archivo csv de animales
-        void guardar();
-
-        //PRE: -
-        //POS: 
-        ~Sistema();
 };
 #endif //_SISTEMA_H_
