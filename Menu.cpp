@@ -29,18 +29,18 @@ void Menu::mostrar_menu()
 
 void Menu::pedir_opcion()
 {
-    int opcion_tomada;
+    string opcion_tomada;
     
     cout << "Ingrese la opcion que desea ejecutar: ";
     cin >> opcion_tomada;
 
-    while (opcion_tomada < 1 || opcion_tomada > MAX_OPCIONES_MENU_PRINCIPAL)
+    while (stoi(opcion_tomada) < 1 || stoi(opcion_tomada) > MAX_OPCIONES_MENU_PRINCIPAL)
     {
         cout << "La opcion tomada no es valida, ingrese una opcion valida: ";
         cin >> opcion_tomada;
     }
 
-    this -> opcion_tomada = opcion_tomada;
+    this -> opcion_tomada = stoi(opcion_tomada);
 }
 
 int Menu::obtener_opcion_tomada()

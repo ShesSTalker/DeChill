@@ -69,8 +69,9 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
 
 void Sistema::procesar_opcion(int opcion_tomada)
 {
-    string nombre;
-    int posicion, opcion_submenu, espacio, posicion_adopcion;
+    string nombre, espacio;
+    int posicion, opcion_submenu, posicion_adopcion;
+
 
     switch (opcion_tomada)
     {
@@ -187,8 +188,8 @@ int Sistema::buscar_nombre(string nombre)
     bool encontrado = false;
     int posicion = NULO, i = 1;
     Animal* animal; 
-
-    while (animales -> siguiente() && !encontrado)
+    
+    while (animales -> hay_siguiente() && !encontrado)
     {
         animal = animales -> siguiente();
 
@@ -199,7 +200,7 @@ int Sistema::buscar_nombre(string nombre)
         }
         i++;
     }
-    cout<<"hsda"<<endl;
+    
     animales -> iniciar();
     
     return posicion;
@@ -251,13 +252,13 @@ void Sistema::rescatar_animal(string nombre)
         cin >> edad;
     }
 
-    cout << "- d (diminuto)" << endl << "- p (pequeño)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- g (gigante)" << 
+    cout << "- d (diminuto)" << endl << "- p (pequeño)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)" << 
     endl << "Ingrese el caracter del tamanio del animal: ";
     cin >> tamanio;
 
     while (tamanio != DIMINUTO && tamanio != PEQUENIO && tamanio != MEDIANO && tamanio != GRANDE && tamanio != GIGANTE)
     {
-        cout << "- diminuto" << endl << "- pequeño" << endl << "- mediano" << endl << "- grande" << endl << "- gigante" <<
+       cout << "- d (diminuto)" << endl << "- p (pequeño)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)"  <<endl<<
         "Tamanio invalido, ingrese el caracter del tamanio del animal: ";
         cin >> tamanio;
     }
@@ -266,9 +267,9 @@ void Sistema::rescatar_animal(string nombre)
     "Ingrese el caracter de la personalidad del animal: ";
     cin >> personalidad;
 
-    while (personalidad != DORMILON && personalidad != JUGUETON && personalidad != SOCIABLE && tamanio != TRAVIESO)
+    while (personalidad != DORMILON && personalidad != JUGUETON && personalidad != SOCIABLE && personalidad != TRAVIESO)
     {
-        cout << "- dormilon" << endl << "- jugueton" << endl << "- sociable" << endl << "- travieso" << endl << 
+        cout << "- d (dormilon)" << endl << "- j (jugueton)" << endl << "- s (sociable)" << endl << "- t (travieso)" << endl << 
         "Personalidad invalida, ingrese el caracter de la personalidad del animal: ";
         cin >> personalidad;
     }
@@ -410,16 +411,15 @@ void Sistema::duchar_todos()
     animales -> iniciar();
 }
 
-void Sistema::pedir_espacio(int &espacio)
+void Sistema::pedir_espacio(string espacio)
 {
     cout << "Ingrese el espacio disponible para el animal en m² (mayor a 0): ";
-    cin >> espacio;
+    getline(cin>>ws,espacio);
 
-    while (espacio < 0)
-    
+    while (stoi(espacio) < 0)
     {
         cout << "Espacio invalido, ingrese el espacio en  m² disponible para el animal (mayor a 0): ";
-        cin >> espacio;
+        getline(cin>>ws,espacio);
     }
 }
 
@@ -431,39 +431,40 @@ void Sistema::mostrar_animal_espacio(Animal* animal, int posicion)
     "Personalidad: " << animal -> obtener_personalidad_texto() << endl;
 }
 
-void Sistema::validar_animales_espacio(Animal* animal, int espacio, int posicion)
+void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posicion)
 {
     char tamanio = animal -> obtener_tamanio_caracter();
 
-    if (espacio < DELIMITADOR_DIMINUTO)
+    cout<<endl;
+    if (stoi(espacio) < DELIMITADOR_DIMINUTO)
     {
         if (tamanio == DIMINUTO)
         {
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (espacio < DELIMITADOR_PEQUENIO_MEDIANO && espacio >= DELIMITADOR_DIMINUTO)
+    else if (stoi(espacio) < DELIMITADOR_PEQUENIO_MEDIANO && stoi(espacio) >= DELIMITADOR_DIMINUTO)
     {
         if (tamanio == DIMINUTO || tamanio == PEQUENIO)
         {
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (espacio >= DELIMITADOR_PEQUENIO_MEDIANO && espacio < DELIMITADOR_GRANDE) 
+    else if (stoi(espacio) >= DELIMITADOR_PEQUENIO_MEDIANO && stoi(espacio) < DELIMITADOR_GRANDE) 
     {
         if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO)
         {
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (espacio >= DELIMITADOR_GRANDE && espacio < DELIMITADOR_GIGANTE)
+    else if (stoi(espacio) >= DELIMITADOR_GRANDE && stoi(espacio) < DELIMITADOR_GIGANTE)
     {
         if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO || tamanio == GRANDE)
         {
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (espacio >= DELIMITADOR_GIGANTE)
+    else if (stoi(espacio) >= DELIMITADOR_GIGANTE)
     {
         if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO || tamanio == GRANDE || tamanio == GIGANTE)
         {
@@ -488,7 +489,7 @@ int Sistema::pedir_opcion_adopcion()
     return posicion_adopcion;
 }
 
-void Sistema::listar_animales_espacio(int espacio, int posicion)
+void Sistema::listar_animales_espacio(string espacio, int posicion)
 {
     Animal* animal;
 
@@ -512,7 +513,7 @@ void Sistema::guardar()
         {
             animal = animales -> consulta(i);
             archivo << animal -> obtener_nombre() << "," << animal -> obtener_edad()<< "," << animal -> obtener_tamanio_texto() <<
-            "," << animal -> obtener_especie_texto() << "," << animal -> obtener_personalidad_texto() << endl;
+            "," << animal -> obtener_especie_caracter() << "," << animal -> obtener_personalidad_texto() << endl;
         }        
     }
     else
