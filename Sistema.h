@@ -94,7 +94,7 @@ class Sistema
 
         //PRE: -
         //POS: Le pide al usuario el espacio disponible para el animal y hace la validacion
-        void pedir_espacio(int &espacio);
+        void pedir_espacio(string espacio);
 
         //PRE: -
         //POS: Imprime por pantalla los datos del animal de la reserva que cumple con el espacio dispobnible por el usuario
@@ -102,7 +102,7 @@ class Sistema
 
         //PRE: -
         //POS: Valida los animales para mostrar los que cumplen con el espacio disponible por el usuario
-        void validar_animales_espacio(Animal* animal, int espacio, int posicion); 
+        void validar_animales_espacio(Animal* animal, string espacio, int posicion); 
 
         //PRE: -
         //POS: Pide el numero del animal que el usuario desea adoptar o 0 en caso de que desee cancelar la adopcion y lo devuelve
@@ -110,7 +110,7 @@ class Sistema
 
         //PRE: -
         //POS: Muestra por pantalla todos los animales que cumplen con el espacio con el que dispone el usuario
-        void listar_animales_espacio(int espacio, int posicion);
+        void listar_animales_espacio(string espacio, int posicion);
 
         //PRE: -
         //POS: Guarda todos los cambios realizados al archivo csv de animales
