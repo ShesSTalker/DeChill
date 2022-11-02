@@ -74,8 +74,8 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
 
 void Sistema::procesar_opcion(int opcion_tomada)
 {
-    string nombre, espacio, opcion_submenu;
-    int posicion, posicion_adopcion;
+    string nombre, espacio, opcion_submenu, posicion_adopcion;
+    int posicion;
 
 
     switch (opcion_tomada)
@@ -130,13 +130,13 @@ void Sistema::procesar_opcion(int opcion_tomada)
             pedir_espacio(espacio);
             listar_animales_espacio(espacio, posicion);
             posicion_adopcion = pedir_opcion_adopcion(); 
-            if (posicion_adopcion == 0)
+            if (stoi(posicion_adopcion) == 0)
             {
                 cout << "Se ha cancelado la adopcion." << endl << endl;
             } 
             else
             {
-                animales -> baja(posicion_adopcion);
+                animales -> baja(stoi(posicion_adopcion));
                 cout << "Felicidades por su adopcion." << endl << endl;
             }
             break;
@@ -496,16 +496,17 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
 
 } 
 
-int Sistema::pedir_opcion_adopcion()
+string Sistema::pedir_opcion_adopcion()
 {
-    int posicion_adopcion;
+    string posicion_adopcion;
 
     cout << endl << "Ingrese el numero del animal que desea ingresar, si desea cancelar la adopcion ingrese 0: ";
-    cin >> posicion_adopcion;
+    getline(cin >> ws, posicion_adopcion);
 
-    while (posicion_adopcion < 0 && posicion_adopcion > animales -> obtener_cantidad())
+    while (!cadena_numeros_valida(posicion_adopcion) || stoi(posicion_adopcion) > animales -> obtener_cantidad())
     {
         cout << endl << "Opcion invalida, ingrese el numero del animal que desea ingresar, si desea cancelar la adopcion ingrese 0: ";
+        getline(cin >> ws, posicion_adopcion);
     }
 
     return posicion_adopcion;

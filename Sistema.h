@@ -118,7 +118,7 @@ class Sistema
 
         //PRE: -
         //POS: Pide el numero del animal que el usuario desea adoptar o 0 en caso de que desee cancelar la adopcion y lo devuelve
-        int pedir_opcion_adopcion();
+        string pedir_opcion_adopcion();
 
         //PRE: -
         //POS: Muestra por pantalla todos los animales que cumplen con el espacio con el que dispone el usuario
