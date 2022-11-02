@@ -237,44 +237,44 @@ void Sistema::rescatar_animal(string nombre)
     string edad;
     char especie, tamanio, personalidad;
 
-    cout << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
+    cout << endl << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
     endl << "- E (Erizo)" << endl << "- L (Lagartija)" << endl << "Ingrese el caracter la especie del animal: ";
     cin >> especie;
 
     while (especie != PERRO && especie != GATO && especie != CABALLO && especie != ROEDOR && especie != CONEJO && especie != ERIZO && especie != LAGARTIJA)
     {
-        cout << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
+        cout << endl << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
         endl << "- E (Erizo)" << endl << "- L (Lagartija)" << endl << "Especie invalida, Ingrese el caracter la especie del animal: ";
         cin >> especie;
     }
 
-    cout << "Ingrese la edad del animal: ";
+    cout << endl << "Ingrese la edad del animal: ";
     getline(cin >> ws, edad);
 
     while (!cadena_numeros_valida(edad) || stoi(edad) > 100)
     {
-        cout << "Edad invalida, ingrese la edad del animal: ";
+        cout << endl << "Edad invalida, ingrese la edad del animal: ";
         getline(cin >> ws, edad);
     }
 
-    cout << "- d (diminuto)" << endl << "- p (pequeño)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)" << 
+    cout << endl << "- d (diminuto)" << endl << "- p (pequeño)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)" << 
     endl << "Ingrese el caracter del tamanio del animal: ";
     cin >> tamanio;
 
     while (tamanio != DIMINUTO && tamanio != PEQUENIO && tamanio != MEDIANO && tamanio != GRANDE && tamanio != GIGANTE)
     {
-       cout << "- d (diminuto)" << endl << "- p (pequenio)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)"  <<endl<<
+       cout << endl << "- d (diminuto)" << endl << "- p (pequenio)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)"  <<endl<<
         "Tamanio invalido, ingrese el caracter del tamanio del animal: ";
         cin >> tamanio;
     }
 
-    cout << "- d (dormilon)" << endl << "- j (jugueton)" << endl << "- s (sociable)" << endl << "- t (travieso)" << endl << 
+    cout << endl << "- d (dormilon)" << endl << "- j (jugueton)" << endl << "- s (sociable)" << endl << "- t (travieso)" << endl << 
     "Ingrese el caracter de la personalidad del animal: ";
     cin >> personalidad;
 
     while (personalidad != DORMILON && personalidad != JUGUETON && personalidad != SOCIABLE && personalidad != TRAVIESO)
     {
-        cout << "- d (dormilon)" << endl << "- j (jugueton)" << endl << "- s (sociable)" << endl << "- t (travieso)" << endl << 
+        cout << endl << "- d (dormilon)" << endl << "- j (jugueton)" << endl << "- s (sociable)" << endl << "- t (travieso)" << endl << 
         "Personalidad invalida, ingrese el caracter de la personalidad del animal: ";
         cin >> personalidad;
     }
@@ -419,12 +419,12 @@ void Sistema::duchar_todos()
 void Sistema::pedir_espacio(string espacio)
 {
     cout << "Ingrese el espacio disponible para el animal en m² (mayor a 0): ";
-    getline(cin>>ws , espacio);
+    getline(cin >> ws, espacio);
 
-    while (stoi(espacio) < 0 || !cadena_numeros_valida(espacio))
+    while (!cadena_numeros_valida(espacio) || stoi(espacio) == 0)
     {
         cout << "Espacio invalido, ingrese el espacio en  m² disponible para el animal (mayor a 0): ";
-        getline(cin>>ws , espacio);
+        getline(cin >> ws, espacio);
     }
 }
 
@@ -436,7 +436,7 @@ bool Sistema::cadena_numeros_valida(string numeros)
 
     while (i < tamanio && valido)
     {
-        if (int(numeros[i]) < 48 || int(numeros[i]) > 57)
+        if (!isdigit(numeros[i]))
         {
             valido = false;
         }
