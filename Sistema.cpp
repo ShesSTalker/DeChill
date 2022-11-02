@@ -251,7 +251,7 @@ void Sistema::rescatar_animal(string nombre)
     cout << "Ingrese la edad del animal: ";
     cin >> edad;
 
-    while (stoi(edad) <= 0 && cadena_numeros_valida(edad))
+    while (stoi(edad) <= 0 || !cadena_numeros_valida(edad))
     {
         cout << "Edad invalida, ingrese la edad del animal: ";
         cin >> edad;
@@ -435,6 +435,7 @@ bool Sistema::cadena_numeros_valida(string numeros){
         if (!isdigit(numeros[i])){
             valido=false;
         }
+        i++;
     }
     return valido;
 }
