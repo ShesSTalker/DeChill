@@ -70,11 +70,11 @@ class Sistema
 
         //PRE: -
         //POS: Le pide al usuario que ingrese la opcion del submenu que desea ejecutar y hace la validacion
-        void ingresar_opcion_submenu(int &opcion_submenu);
+        void ingresar_opcion_submenu(string &opcion_submenu);
 
         //PRE: 1 <= opcion_submenu <= 3
         //POS: Realiza la opcion del submenu tomada por el usuario
-        void procesar_opcion_submenu(int opcion_submenu);
+        void procesar_opcion_submenu(string opcion_submenu);
 
         //PRE: - 
         //POS: Imprime por pantalla las opciones individuales de cada animal de la reserva
@@ -102,7 +102,7 @@ class Sistema
 
         //PRE: -
         //POS: Le pide al usuario el espacio disponible para el animal y hace la validacion
-        void pedir_espacio(string espacio);
+        void pedir_espacio(string &espacio);
 
         //PRE: -
         //POS: valida que el string recibido conste completamente de numeros, devolviendo true en caso afirmativo y false en caso contrario

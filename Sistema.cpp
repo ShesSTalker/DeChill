@@ -74,8 +74,8 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
 
 void Sistema::procesar_opcion(int opcion_tomada)
 {
-    string nombre, espacio;
-    int posicion, opcion_submenu, posicion_adopcion;
+    string nombre, espacio, opcion_submenu;
+    int posicion, posicion_adopcion;
 
 
     switch (opcion_tomada)
@@ -115,7 +115,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
             mostrar_submenu();
             ingresar_opcion_submenu(opcion_submenu); 
             procesar_opcion_submenu(opcion_submenu);
-            while (opcion_submenu != REGRESAR_INICIO)
+            while (stoi(opcion_submenu) != REGRESAR_INICIO)
             {
                 mostrar_submenu();
                 ingresar_opcion_submenu(opcion_submenu); 
@@ -290,21 +290,21 @@ void Sistema::mostrar_submenu()
     "4) Regresar al inicio." << endl << endl;
 }
 
-void Sistema::ingresar_opcion_submenu(int &opcion_submenu)
+void Sistema::ingresar_opcion_submenu(string &opcion_submenu)
 {
     cout << "Ingrese el numero de la opcion que desa ejecutar: ";
-    cin >> opcion_submenu;
+    getline(cin >> ws, opcion_submenu);
 
-    while (opcion_submenu <= 0 &&  opcion_submenu > REGRESAR_INICIO)
+    while (!cadena_numeros_valida(opcion_submenu) || stoi(opcion_submenu) == 0 || stoi(opcion_submenu) > REGRESAR_INICIO)
     {
-        cout << "opcion invalida, ingrese el numero de la opcion que desa ejecutar: ";
-        cin >> opcion_submenu;
+        cout << "Opcion invalida, ingrese el numero de la opcion que desa ejecutar: ";
+        getline(cin >> ws, opcion_submenu);
     }
 }
 
-void Sistema::procesar_opcion_submenu(int opcion_submenu)
+void Sistema::procesar_opcion_submenu(string opcion_submenu)
 {
-    switch(opcion_submenu)
+    switch(stoi(opcion_submenu))
     {
         case ELEGIR_INDIVIDUALMENTE:
             eleccion_individual();
@@ -329,15 +329,15 @@ void Sistema::mostrar_opciones_individuales()
     "3) Saltear animal." << endl << endl;
 }
 
-void Sistema::pedir_opciones_individuales(int &opcion_individual)
+void Sistema::pedir_opciones_individuales(string &opcion_individual)
 {
     cout << "Ingrese la opcion a ejecutar: ";
-    cin >> opcion_individual;
+    getline(cin >> ws, opcion_individual);
 
-    while (opcion_individual <= 0 && opcion_individual > SALTEAR_ANIMAL)
+    while (stoi(opcion_individual) == 0 || stoi(opcion_individual) > SALTEAR_ANIMAL)
     {
         cout << "Opcion invalida, ingrese la opcion a ejecutar: ";
-        cin >> opcion_individual;
+        getline(cin >> ws, opcion_individual);
     }
 
 }
@@ -416,7 +416,7 @@ void Sistema::duchar_todos()
     animales -> iniciar();
 }
 
-void Sistema::pedir_espacio(string espacio)
+void Sistema::pedir_espacio(string &espacio)
 {
     cout << "Ingrese el espacio disponible para el animal en m² (mayor a 0): ";
     getline(cin >> ws, espacio);
