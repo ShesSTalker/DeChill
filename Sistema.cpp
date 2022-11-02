@@ -234,7 +234,7 @@ void Sistema:: verificar_nombre(int posicion, string nombre)
 
 void Sistema::rescatar_animal(string nombre)
 {
-    int edad;
+    string edad;
     char especie, tamanio, personalidad;
 
     cout << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
@@ -251,7 +251,7 @@ void Sistema::rescatar_animal(string nombre)
     cout << "Ingrese la edad del animal: ";
     cin >> edad;
 
-    while (edad <= 0)
+    while (stoi(edad) <= 0 && cadena_numeros_valida(edad))
     {
         cout << "Edad invalida, ingrese la edad del animal: ";
         cin >> edad;
@@ -279,7 +279,7 @@ void Sistema::rescatar_animal(string nombre)
         cin >> personalidad;
     }
 
-    cargar_animal(especie, nombre, edad, tamanio, personalidad);
+    cargar_animal(especie, nombre, stoi(edad), tamanio, personalidad);
 }
 
 void Sistema::mostrar_submenu()
@@ -419,15 +419,25 @@ void Sistema::duchar_todos()
 void Sistema::pedir_espacio(string espacio)
 {
     cout << "Ingrese el espacio disponible para el animal en m² (mayor a 0): ";
-    getline(cin , espacio);
+    getline(cin>>ws , espacio);
 
-    while (stoi(espacio) < 0)
+    while (stoi(espacio) < 0 || !cadena_numeros_valida(espacio))
     {
         cout << "Espacio invalido, ingrese el espacio en  m² disponible para el animal (mayor a 0): ";
-        getline(cin , espacio);
+        getline(cin>>ws , espacio);
     }
 }
+bool Sistema::cadena_numeros_valida(string numeros){
+    bool valido= true;
+    int i = 0, tamanio = int(numeros.length()) ;
 
+    while (i < tamanio && valido){
+        if (!isdigit(numeros[i])){
+            valido=false;
+        }
+    }
+    return valido;
+}
 void Sistema::mostrar_animal_espacio(Animal* animal, int posicion)
 {
     cout << posicion << ") " << "Nombre: " << animal -> obtener_nombre() << endl <<

@@ -105,6 +105,10 @@ class Sistema
         void pedir_espacio(string espacio);
 
         //PRE: -
+        //POS: valida que el string recibido conste completamente de numeros, devolviendo true en caso afirmativo y false en caso contrario
+        bool cadena_numeros_valida(string numeros);
+
+        //PRE: -
         //POS: Imprime por pantalla los datos del animal de la reserva que cumple con el espacio dispobnible por el usuario
         void mostrar_animal_espacio(Animal* animal, int posicion);
 

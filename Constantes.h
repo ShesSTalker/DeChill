@@ -62,13 +62,15 @@ COMIDA_LAGARTIJA = "Insectos";
 
 
 enum opciones_menu_principal {
-    LISTAR_ANIMALES = 1,
+    LISTAR_ANIMALES = 1 ,
     RESCATAR_ANIMAL,
     BUSCAR_ANIMAL,
     CUIDAR_ANIMAL,
     ADOPTAR_ANIMAL,
     GUARDAR_Y_SALIR,
 };
+
+const int MAX_OPCIONES_MENU_PRINCIPAL= 6;
 
 enum opciones_submenu {
     ELEGIR_INDIVIDUALMENTE = 1,
