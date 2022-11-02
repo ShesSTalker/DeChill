@@ -249,12 +249,12 @@ void Sistema::rescatar_animal(string nombre)
     }
 
     cout << "Ingrese la edad del animal: ";
-    cin >> edad;
+    getline(cin >> ws, edad);
 
-    while (stoi(edad) <= 0 || !cadena_numeros_valida(edad))
+    while (!cadena_numeros_valida(edad) || stoi(edad) > 100)
     {
         cout << "Edad invalida, ingrese la edad del animal: ";
-        cin >> edad;
+        getline(cin >> ws, edad);
     }
 
     cout << "- d (diminuto)" << endl << "- p (pequeño)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)" << 
@@ -427,18 +427,24 @@ void Sistema::pedir_espacio(string espacio)
         getline(cin>>ws , espacio);
     }
 }
-bool Sistema::cadena_numeros_valida(string numeros){
-    bool valido= true;
-    int i = 0, tamanio = int(numeros.length()) ;
 
-    while (i < tamanio && valido){
-        if (!isdigit(numeros[i])){
-            valido=false;
+bool Sistema::cadena_numeros_valida(string numeros)
+{
+    int i = 0;
+    long int tamanio = numeros.size();
+    bool valido = true; 
+
+    while (i < tamanio && valido)
+    {
+        if (int(numeros[i]) < 48 || int(numeros[i]) > 57)
+        {
+            valido = false;
         }
         i++;
-    }
+    } 
     return valido;
 }
+
 void Sistema::mostrar_animal_espacio(Animal* animal, int posicion)
 {
     cout << posicion << ") " << "Nombre: " << animal -> obtener_nombre() << endl <<
