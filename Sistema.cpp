@@ -334,7 +334,7 @@ void Sistema::pedir_opciones_individuales(string &opcion_individual)
     cout << "Ingrese la opcion a ejecutar: ";
     getline(cin >> ws, opcion_individual);
 
-    while (stoi(opcion_individual) == 0 || stoi(opcion_individual) > SALTEAR_ANIMAL)
+    while (!cadena_numeros_valida(opcion_individual) || stoi(opcion_individual) == 0 || stoi(opcion_individual) > SALTEAR_ANIMAL)
     {
         cout << "Opcion invalida, ingrese la opcion a ejecutar: ";
         getline(cin >> ws, opcion_individual);
@@ -342,7 +342,7 @@ void Sistema::pedir_opciones_individuales(string &opcion_individual)
 
 }
 
-void Sistema::procesar_opcion_individual(int opcion_individual, Animal * animal)
+void Sistema::procesar_opcion_individual(int opcion_individual, Animal* animal)
 {
     switch (opcion_individual)
     {
@@ -367,7 +367,7 @@ void Sistema::procesar_opcion_individual(int opcion_individual, Animal * animal)
 void Sistema::eleccion_individual()
 {
     Animal* animal;
-    int opcion_individual;
+    string opcion_individual;
 
     while(animales ->hay_siguiente())
     {
@@ -376,9 +376,9 @@ void Sistema::eleccion_individual()
         mostrar_opciones_individuales();
         pedir_opciones_individuales(opcion_individual);
         
-        if (opcion_individual != SALTEAR_ANIMAL)
+        if (stoi(opcion_individual) != SALTEAR_ANIMAL)
         {
-            procesar_opcion_individual(opcion_individual, animal);
+            procesar_opcion_individual(stoi(opcion_individual), animal);
         }
     }
     animales -> iniciar();
