@@ -56,7 +56,7 @@ bool Menu::cadena_numeros_valida(string numeros)
 
     while (i < tamanio && valido)
     {
-        if (int(numeros[i]) < 48 || int(numeros[i]) > 57)
+        if (!isdigit(numeros[i]))
         {
             valido = false;
         }

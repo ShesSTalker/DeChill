@@ -124,7 +124,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
             break;
 
         case ADOPTAR_ANIMAL:
-            posicion= 1;
+            posicion = 1;
             cout << endl << "ADOPTAR ANIMAL:" << endl << endl;
             pasar_tiempo();
             pedir_espacio(espacio);
