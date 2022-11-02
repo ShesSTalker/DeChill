@@ -86,7 +86,7 @@ class Sistema
 
         //PRE: La opcion individual tomada por el usuario, no debe ser la tercera de las opciones individuales 
         //POS:  Realiza la opcion individual tomada por el usuario 
-        void procesar_opcion_indivual (int opcion_individual, Animal* animal);
+        void procesar_opcion_individual (int opcion_individual, Animal* animal);
 
         //PRE: -
         //POS: Recorre toda la lista para que el usuario pueda elegir que hacer (opciones individuales) con cada animal de la reserva

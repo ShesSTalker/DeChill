@@ -342,7 +342,7 @@ void Sistema::pedir_opciones_individuales(int &opcion_individual)
 
 }
 
-void Sistema::procesar_opcion_indivual(int opcion_individual, Animal * animal)
+void Sistema::procesar_opcion_individual(int opcion_individual, Animal * animal)
 {
     switch (opcion_individual)
     {
@@ -378,7 +378,7 @@ void Sistema::eleccion_individual()
         
         if (opcion_individual != SALTEAR_ANIMAL)
         {
-            procesar_opcion_indivual(opcion_individual, animal);
+            procesar_opcion_individual(opcion_individual, animal);
         }
     }
     animales -> iniciar();
