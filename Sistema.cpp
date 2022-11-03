@@ -16,7 +16,7 @@ using namespace std;
 Sistema::Sistema()
 {
     animales = new Lista<Animal*>;
-    punteros_a_animales = nullptr;
+    punteros_animales = nullptr;
     cantidad_de_punteros = 0;
 }
 
@@ -38,7 +38,7 @@ void Sistema::leer_datos()
     }
     else
     {
-        cout<<"No se pudo abrir el archivo."<<endl;
+        cout << "No se pudo abrir el archivo." << endl;
     }
     archivo.close();
 }
@@ -76,11 +76,31 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
 
     Animal **aux = new Animal*[cantidad_de_punteros + 1];
     for(int i = 0; i < cantidad_de_punteros; i++)
-        aux[i] = punteros_a_animales[i];
+        aux[i] = punteros_animales[i];
     aux[cantidad_de_punteros] = animal;
 
-    delete[] punteros_a_animales;
-    punteros_a_animales = aux;
+    delete[] punteros_animales;
+    punteros_animales = aux;
+    cantidad_de_punteros++;
+}
+
+void::Sistema::redimencionar_punteros_animales(Animal* animal)
+{
+    Animal** nuevo_vector_punteros_animales = new Animal*[cantidad_de_punteros + 1];
+    
+    for(int i = 0; i < cantidad_de_punteros; i++)
+    {
+        nuevo_vector_punteros_animales[i] = punteros_animales[i];
+    }
+    
+    nuevo_vector_punteros_animales[cantidad_de_punteros] = animal;
+
+    if (cantidad_de_punteros != 0) 
+    {
+        delete[] punteros_animales;
+    }
+    
+    punteros_animales = nuevo_vector_punteros_animales;
     cantidad_de_punteros++;
 }
 
@@ -481,6 +501,7 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
     char tamanio = animal -> obtener_tamanio_caracter();
 
     cout << endl;
+    
     if (stoi(espacio) < DELIMITADOR_DIMINUTO)
     {
         if (tamanio == DIMINUTO)
@@ -569,7 +590,9 @@ void Sistema::guardar()
 Sistema::~Sistema()
 {
     for(int i = 0; i < cantidad_de_punteros; i++)
-        delete punteros_a_animales[i];
-    delete[] punteros_a_animales;
+    {
+        delete punteros_animales[i];
+    }
+    delete[] punteros_animales;
     delete animales;
 }
