@@ -6,7 +6,8 @@
 class Sistema
 {
     private:
-        Lista<Animal*>* animales; 
+        Lista<Animal*>* animales;
+        Animal **punteros; 
 
     public:
         Sistema();
