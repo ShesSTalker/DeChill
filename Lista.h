@@ -6,57 +6,53 @@
 template < class Tipo >
 class Lista
 {
-    //Atributos
     private:
         Nodo<Tipo>* primero;
         int cantidad;
         Nodo<Tipo>* cursor;
 
-    //Metodos
     public:
-        //Constructor
         //PRE: -
-        //PRE:  Inicializa primero = 0  (Puntero a NULL), cantidad = 0 y cursor = 0 (Puntero a NULL) 
+        //PRE: inicializa primero y cursor en 0 (punteros a NULL) y cantidad en 0. 
         Lista();
 
         //PRE: - 
-        //POS: Agrega dato en la posicion "posicion" 
+        //POS: agrega el dato ingresado en la posicion ingresada. 
         void alta(Tipo dato, int posicion);
 
         //PRE: - 
-        //POS: Devuelve el dato que se encuentre en la posicion "posicion"
+        //POS: devuelve el dato que se encuentra en la posicion del parámetro.
         Tipo consulta(int posicion);
 
-        //PRE: La lista no debe estar vacia
-        //POS: Da de baja el dato que se encurntra en la posicion "posicion"
+        //PRE: la lista no debe estar vacia
+        //POS: da de baja el dato que se encuentra en la posicion del parámetro.
         void baja(int posicion);
 
         //PRE: -
-        //POS: Devuelve verdadero si la lista esta vacia y falso en caso contrario
+        //POS: devuelve verdadero si la lista esta vacia y falso en caso contrario.
         bool vacia();
 
         //PRE: - 
-        //POS: Devuelve la cantidad de elementos que hay en la lista 
+        //POS: devuelve la cantidad de elementos que hay en la lista.
         int obtener_cantidad();
 
         //PRE: - 
-        //POS: Devuelve verdadero si hay un elemento en la siguiente posicion y falso en caso contrario
+        //POS: devuelve verdadero si hay un elemento en la siguiente posición y falso en caso contrario.
         bool hay_siguiente();
 
         //PRE: - 
-        //POS: Devuelve el dato y mueve el cursor al siguiente 
+        //POS: devuelve el dato y mueve el cursor al siguiente nodo.
         Tipo siguiente();
 
-        //PRE: No debe haber un elemento en la siguiente posicion 
-        //POS: Pone el cursor al principio 
+        //PRE: no debe haber un elemento en la posición siguiente al cursor. 
+        //POS: apunta el cursor al principio de la lista.
         void iniciar();
 
-        //Destructor
         ~Lista();
 
     private:
         //PRE: -
-        //POS: Devuelve un puntero al nodo que esta en posicion
+        //POS: devuelve un puntero al nodo que esta en la posición del parámetro.
         Nodo<Tipo>* obtener_nodo(int posicion);
 };
 
@@ -73,6 +69,7 @@ void Lista<Tipo>::alta(Tipo dato, int posicion)
 {
     Nodo<Tipo>* nuevo = new Nodo<Tipo>(dato);
     Nodo<Tipo>* siguiente = primero;
+
     if (posicion == 1)
     {
         primero = nuevo;
@@ -83,6 +80,7 @@ void Lista<Tipo>::alta(Tipo dato, int posicion)
         siguiente = anterior -> obtener_siguiente();
         anterior -> cambiar_siguiente(nuevo);
     }
+
     nuevo -> cambiar_siguiente(siguiente);
     cantidad++;
 }
@@ -109,6 +107,7 @@ void Lista<Tipo>::baja(int posicion)
         borrar  = anterior -> obtener_siguiente();
         anterior -> cambiar_siguiente(borrar -> obtener_siguiente());
     }
+
     delete borrar;
     cantidad --;
 }
