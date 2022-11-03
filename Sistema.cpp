@@ -16,7 +16,8 @@ using namespace std;
 Sistema::Sistema()
 {
     animales = new Lista<Animal*>;
-    punteros = nullptr;
+    punteros_a_animales = nullptr;
+    cantidad_de_punteros = 0;
 }
 
 void Sistema::leer_datos()
@@ -73,13 +74,14 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
 
     animales->alta(animal, animales -> obtener_cantidad()+1);
 
-    Animal **aux = new Animal*[animales -> obtener_cantidad()];
-    for(int i = 0; i < animales -> obtener_cantidad() - 1; i++)
-        aux[i] = punteros[i];
-    aux[animales -> obtener_cantidad() - 1] = animal;
+    Animal **aux = new Animal*[cantidad_de_punteros + 1];
+    for(int i = 0; i < cantidad_de_punteros; i++)
+        aux[i] = punteros_a_animales[i];
+    aux[cantidad_de_punteros] = animal;
 
-    delete[] punteros;
-    punteros = aux;
+    delete[] punteros_a_animales;
+    punteros_a_animales = aux;
+    cantidad_de_punteros++;
 }
 
 void Sistema::procesar_opcion(int opcion_tomada)
@@ -478,7 +480,7 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
 {
     char tamanio = animal -> obtener_tamanio_caracter();
 
-    cout<<endl;
+    cout << endl;
     if (stoi(espacio) < DELIMITADOR_DIMINUTO)
     {
         if (tamanio == DIMINUTO)
@@ -486,33 +488,30 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (stoi(espacio) < DELIMITADOR_PEQUENIO_MEDIANO && stoi(espacio) >= DELIMITADOR_DIMINUTO)
+    else if (stoi(espacio) < DELIMITADOR_PEQUENIO_MEDIANO)
     {
         if (tamanio == DIMINUTO || tamanio == PEQUENIO)
         {
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (stoi(espacio) >= DELIMITADOR_PEQUENIO_MEDIANO && stoi(espacio) < DELIMITADOR_GRANDE) 
+    else if (stoi(espacio) < DELIMITADOR_GRANDE) 
     {
-        if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO)
+        if (tamanio != GIGANTE && tamanio != GRANDE)
         {
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (stoi(espacio) >= DELIMITADOR_GRANDE && stoi(espacio) < DELIMITADOR_GIGANTE)
+    else if (stoi(espacio) < DELIMITADOR_GIGANTE)
     {
-        if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO || tamanio == GRANDE)
+        if (tamanio != GIGANTE)
         {
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (stoi(espacio) >= DELIMITADOR_GIGANTE)
+    else
     {
-        if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO || tamanio == GRANDE || tamanio == GIGANTE)
-        {
-            mostrar_animal_espacio(animal, posicion);
-        }
+        mostrar_animal_espacio(animal, posicion);
     }
 
 } 
@@ -569,8 +568,8 @@ void Sistema::guardar()
 
 Sistema::~Sistema()
 {
-    for(int i = 0; i < animales -> obtener_cantidad(); i++)
-        delete punteros[i];
-    delete[] punteros;
+    for(int i = 0; i < cantidad_de_punteros; i++)
+        delete punteros_a_animales[i];
+    delete[] punteros_a_animales;
     delete animales;
 }
