@@ -18,13 +18,14 @@ void Menu::bienvenida()
 
 void Menu::mostrar_menu()
 {
-    cout <<"--------MENU--------"<< endl <<
+    cout << endl << endl <<
+    "--------MENU--------"<< endl <<
     "[1] Listar animales." << endl <<
     "[2] Rescatar animal." << endl <<
     "[3] Buscar animal." << endl <<
     "[4] Ciudar animales." << endl <<
     "[5] Adoptar animal." << endl <<
-    "[6] Guardar y salir." << endl << endl; 
+    "[6] Guardar y salir." << endl << endl;
 }
 
 void Menu::pedir_opcion()
