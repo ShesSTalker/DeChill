@@ -17,6 +17,7 @@ Sistema::Sistema()
 {
     animales = new Lista<Animal*>;
     punteros = nullptr;
+    cantidad_de_punteros = 0;
 }
 
 void Sistema::leer_datos()
@@ -73,13 +74,14 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
 
     animales->alta(animal, animales -> obtener_cantidad()+1);
 
-    Animal **aux = new Animal*[animales -> obtener_cantidad()];
-    for(int i = 0; i < animales -> obtener_cantidad() - 1; i++)
+    Animal **aux = new Animal*[cantidad_de_punteros + 1];
+    for(int i = 0; i < cantidad_de_punteros; i++)
         aux[i] = punteros[i];
-    aux[animales -> obtener_cantidad() - 1] = animal;
+    aux[cantidad_de_punteros] = animal;
 
     delete[] punteros;
     punteros = aux;
+    cantidad_de_punteros++;
 }
 
 void Sistema::procesar_opcion(int opcion_tomada)
@@ -561,7 +563,7 @@ void Sistema::guardar()
 
 Sistema::~Sistema()
 {
-    for(int i = 0; i < animales -> obtener_cantidad(); i++)
+    for(int i = 0; i < cantidad_de_punteros; i++)
         delete punteros[i];
     delete[] punteros;
     delete animales;
