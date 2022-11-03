@@ -6,12 +6,11 @@ using namespace std;
 
 int main()
 {
-
-    Menu* menu= new Menu();
-    Sistema* sistema= new Sistema();
+    Menu* menu = new Menu();
+    Sistema* sistema = new Sistema();
     int opcion;
 
-    sistema->leer_datos();
+    sistema -> leer_datos();
     menu -> bienvenida();
     
     do
@@ -19,11 +18,11 @@ int main()
         menu -> mostrar_menu();
         menu -> pedir_opcion();
         opcion = menu -> obtener_opcion_tomada();
-        sistema->procesar_opcion(opcion);
+        sistema -> procesar_opcion(opcion);
     }
     while (opcion != GUARDAR_Y_SALIR);
 
-    sistema->guardar();
+    sistema -> guardar();
     
     delete menu;
     delete sistema;
