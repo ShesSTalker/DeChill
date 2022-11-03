@@ -79,6 +79,9 @@ class Animal
         // PRE: -
         // POS: devuelve el nombre de la comida del animal.
         virtual string que_come() = 0;
+
+        // Destructor virtual
+        virtual ~Animal();
 };
 
 #endif
