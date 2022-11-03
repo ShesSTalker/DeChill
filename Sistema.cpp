@@ -16,7 +16,7 @@ using namespace std;
 Sistema::Sistema()
 {
     animales = new Lista<Animal*>;
-    punteros = nullptr;
+    punteros_a_animales = nullptr;
     cantidad_de_punteros = 0;
 }
 
@@ -472,7 +472,7 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
 {
     char tamanio = animal -> obtener_tamanio_caracter();
 
-    cout<<endl;
+    cout << endl;
     if (stoi(espacio) < DELIMITADOR_DIMINUTO)
     {
         if (tamanio == DIMINUTO)
@@ -480,33 +480,30 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (stoi(espacio) < DELIMITADOR_PEQUENIO_MEDIANO && stoi(espacio) >= DELIMITADOR_DIMINUTO)
+    else if (stoi(espacio) < DELIMITADOR_PEQUENIO_MEDIANO)
     {
         if (tamanio == DIMINUTO || tamanio == PEQUENIO)
         {
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (stoi(espacio) >= DELIMITADOR_PEQUENIO_MEDIANO && stoi(espacio) < DELIMITADOR_GRANDE) 
+    else if (stoi(espacio) < DELIMITADOR_GRANDE) 
     {
-        if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO)
+        if (tamanio != GIGANTE && tamanio != GRANDE)
         {
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (stoi(espacio) >= DELIMITADOR_GRANDE && stoi(espacio) < DELIMITADOR_GIGANTE)
+    else if (stoi(espacio) < DELIMITADOR_GIGANTE)
     {
-        if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO || tamanio == GRANDE)
+        if (tamanio != GIGANTE)
         {
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (stoi(espacio) >= DELIMITADOR_GIGANTE)
+    else
     {
-        if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO || tamanio == GRANDE || tamanio == GIGANTE)
-        {
-            mostrar_animal_espacio(animal, posicion);
-        }
+        mostrar_animal_espacio(animal, posicion);
     }
 
 } 
