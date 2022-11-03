@@ -36,7 +36,7 @@ void Sistema::leer_datos()
     }
     else
     {
-        cout<<"No se pudo abrir el archivo"<<endl;
+        cout<<"No se pudo abrir el archivo."<<endl;
     }
     archivo.close();
 }
@@ -104,7 +104,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
             }
             else
             {
-                cout << endl << "ERROR, no se pudo encontrar el nombre ingresado" << endl << endl;
+                cout << endl << "ERROR, no se pudo encontrar el nombre ingresado." << endl << endl;
             }
             break;
 
@@ -136,7 +136,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
             else
             {
                 animales -> baja(stoi(posicion_adopcion));
-                cout << "Felicidades por su adopcion." << endl << endl;
+                cout << "Felicidades por su adopcion!" << endl << endl;
             }
             break;
     }
@@ -216,18 +216,23 @@ int Sistema::buscar_nombre(string nombre)
 
 void Sistema:: verificar_nombre(int posicion, string nombre)
 {
-    int desicion;
+    string decision;
 
     if (posicion != NULO)
+    {
+        cout << "El nombre ingresado ya existe en la reserva." << endl <<
+        "Ingrese [1] si desea ingresar otro nombre, si desea volver al menu principal ingrese cualquier otro numero: ";      
+        
+        getline(cin >> ws, decision);
+
+        while (!cadena_numeros_valida(decision) || stoi(decision) != 1)
         {
-            cout << " El nombre ingresado ya existe en la reserva" << endl <<
-            "Ingrese (1) si desea ingresar otro nombre, si desea volver al menu principal ingrese cualquier otro numero: ";
-            cin >> desicion;
-            if (desicion == 1)
-            {
-                procesar_opcion(RESCATAR_ANIMAL);
-            }
+            cout << endl << "decision invalida, ingrese nuevamente la decision: ";
+            getline(cin >> ws, decision);
         }
+        
+        procesar_opcion(RESCATAR_ANIMAL);
+    }
     else
     {
         rescatar_animal(nombre);
