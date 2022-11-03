@@ -225,13 +225,16 @@ void Sistema:: verificar_nombre(int posicion, string nombre)
         
         getline(cin >> ws, decision);
 
-        while (!cadena_numeros_valida(decision) || stoi(decision) != 1)
+        while (!cadena_numeros_valida(decision))
         {
             cout << endl << "decision invalida, ingrese nuevamente la decision: ";
             getline(cin >> ws, decision);
         }
         
-        procesar_opcion(RESCATAR_ANIMAL);
+        if (stoi(decision) == 1)
+        {
+            procesar_opcion(RESCATAR_ANIMAL);
+        }
     }
     else
     {
