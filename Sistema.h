@@ -119,4 +119,5 @@ class Sistema
         //POS: muestra por pantalla todos los animales que cumplen con el espacio con el que dispone el usuario.
         void listar_animales_espacio(string espacio, int posicion);
 };
+
 #endif
