@@ -77,7 +77,6 @@ void Sistema::procesar_opcion(int opcion_tomada)
     string nombre, espacio, opcion_submenu, posicion_adopcion;
     int posicion;
 
-
     switch (opcion_tomada)
     {
         case LISTAR_ANIMALES: 
@@ -162,12 +161,16 @@ void Sistema::pasar_tiempo()
 
 void Sistema::listar_animales()
 {
-
     while (animales -> hay_siguiente())
     { 
         mostrar_animal(animales -> siguiente());
     }
     animales -> iniciar();
+
+    if (animales -> vacia())
+    {
+        cout << "La reserva de animales esta vacia." << endl << endl;
+    }
 }
 
 void Sistema::mostrar_animal(Animal* animal)
