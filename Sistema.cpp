@@ -76,11 +76,11 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
 
     Animal **aux = new Animal*[cantidad_de_punteros + 1];
     for(int i = 0; i < cantidad_de_punteros; i++)
-        aux[i] = punteros[i];
+        aux[i] = punteros_a_animales[i];
     aux[cantidad_de_punteros] = animal;
 
-    delete[] punteros;
-    punteros = aux;
+    delete[] punteros_a_animales;
+    punteros_a_animales = aux;
     cantidad_de_punteros++;
 }
 
@@ -564,7 +564,7 @@ void Sistema::guardar()
 Sistema::~Sistema()
 {
     for(int i = 0; i < cantidad_de_punteros; i++)
-        delete punteros[i];
-    delete[] punteros;
+        delete punteros_a_animales[i];
+    delete[] punteros_a_animales;
     delete animales;
 }

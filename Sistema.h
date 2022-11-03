@@ -7,7 +7,7 @@ class Sistema
 {
     private:
         Lista<Animal*>* animales;
-        Animal **punteros;
+        Animal **punteros_a_animales;
         int cantidad_de_punteros; 
 
     public:
