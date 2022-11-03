@@ -16,6 +16,7 @@ using namespace std;
 Sistema::Sistema()
 {
     animales = new Lista<Animal*>;
+    punteros = nullptr;
 }
 
 void Sistema::leer_datos()
@@ -48,7 +49,7 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
     switch(especie)
     {
         case PERRO: 
-            animal = new Perro(nombre, edad, tamanio, personalidad); 
+            animal = new Perro(nombre, edad, tamanio, personalidad);
             break;
         case GATO: 
             animal = new Gato(nombre, edad, tamanio, personalidad);
@@ -69,7 +70,16 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
             animal = new Lagartija(nombre, edad, tamanio, personalidad);
             break;
         }
+
     animales->alta(animal, animales -> obtener_cantidad()+1);
+
+    Animal **aux = new Animal*[animales -> obtener_cantidad()];
+    for(int i = 0; i < animales -> obtener_cantidad() - 1; i++)
+        aux[i] = punteros[i];
+    aux[animales -> obtener_cantidad() - 1] = animal;
+
+    delete[] punteros;
+    punteros = aux;
 }
 
 void Sistema::procesar_opcion(int opcion_tomada)
@@ -559,5 +569,8 @@ void Sistema::guardar()
 
 Sistema::~Sistema()
 {
-    delete animales;    
+    for(int i = 0; i < animales -> obtener_cantidad(); i++)
+        delete punteros[i];
+    delete[] punteros;
+    delete animales;
 }

@@ -17,6 +17,8 @@ class Erizo : public Animal
         // PRE: -
         // POS: devuelve el nombre de la comida del animal.
         string que_come();
+
+        virtual ~Erizo();
 };
 
 #endif
