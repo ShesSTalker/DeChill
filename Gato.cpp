@@ -21,3 +21,4 @@ string Gato:: que_come()
     return COMIDA_GATO;
 }
 
+Gato::~Gato(){};

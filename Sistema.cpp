@@ -16,6 +16,8 @@ using namespace std;
 Sistema::Sistema()
 {
     animales = new Lista<Animal*>;
+    punteros_animales = nullptr;
+    cantidad_de_punteros = 0;
 }
 
 void Sistema::leer_datos()
@@ -36,7 +38,7 @@ void Sistema::leer_datos()
     }
     else
     {
-        cout<<"No se pudo abrir el archivo."<<endl;
+        cout << "No se pudo abrir el archivo." << endl;
     }
     archivo.close();
 }
@@ -48,7 +50,7 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
     switch(especie)
     {
         case PERRO: 
-            animal = new Perro(nombre, edad, tamanio, personalidad); 
+            animal = new Perro(nombre, edad, tamanio, personalidad);
             break;
         case GATO: 
             animal = new Gato(nombre, edad, tamanio, personalidad);
@@ -69,7 +71,30 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
             animal = new Lagartija(nombre, edad, tamanio, personalidad);
             break;
         }
-    animales->alta(animal, animales -> obtener_cantidad()+1);
+
+    animales -> alta(animal, animales -> obtener_cantidad()+1);
+
+    redimencionar_punteros_animales(animal);
+}
+
+void::Sistema::redimencionar_punteros_animales(Animal* animal)
+{
+    Animal** nuevo_vector_punteros_animales = new Animal*[cantidad_de_punteros + 1];
+    
+    for(int i = 0; i < cantidad_de_punteros; i++)
+    {
+        nuevo_vector_punteros_animales[i] = punteros_animales[i];
+    }
+    
+    nuevo_vector_punteros_animales[cantidad_de_punteros] = animal;
+
+    if (cantidad_de_punteros != 0) 
+    {
+        delete[] punteros_animales;
+    }
+    
+    punteros_animales = nuevo_vector_punteros_animales;
+    cantidad_de_punteros++;
 }
 
 void Sistema::procesar_opcion(int opcion_tomada)
@@ -468,7 +493,8 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
 {
     char tamanio = animal -> obtener_tamanio_caracter();
 
-    cout<<endl;
+    cout << endl;
+    
     if (stoi(espacio) < DELIMITADOR_DIMINUTO)
     {
         if (tamanio == DIMINUTO)
@@ -476,33 +502,30 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (stoi(espacio) < DELIMITADOR_PEQUENIO_MEDIANO && stoi(espacio) >= DELIMITADOR_DIMINUTO)
+    else if (stoi(espacio) < DELIMITADOR_PEQUENIO_MEDIANO)
     {
         if (tamanio == DIMINUTO || tamanio == PEQUENIO)
         {
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (stoi(espacio) >= DELIMITADOR_PEQUENIO_MEDIANO && stoi(espacio) < DELIMITADOR_GRANDE) 
+    else if (stoi(espacio) < DELIMITADOR_GRANDE) 
     {
-        if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO)
+        if (tamanio != GIGANTE && tamanio != GRANDE)
         {
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (stoi(espacio) >= DELIMITADOR_GRANDE && stoi(espacio) < DELIMITADOR_GIGANTE)
+    else if (stoi(espacio) < DELIMITADOR_GIGANTE)
     {
-        if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO || tamanio == GRANDE)
+        if (tamanio != GIGANTE)
         {
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (stoi(espacio) >= DELIMITADOR_GIGANTE)
+    else
     {
-        if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO || tamanio == GRANDE || tamanio == GIGANTE)
-        {
-            mostrar_animal_espacio(animal, posicion);
-        }
+        mostrar_animal_espacio(animal, posicion);
     }
 
 } 
@@ -526,6 +549,7 @@ string Sistema::pedir_opcion_adopcion()
 void Sistema::listar_animales_espacio(string espacio, int posicion)
 {
     Animal* animal;
+
 
     while (animales -> hay_siguiente())
     {
@@ -559,5 +583,10 @@ void Sistema::guardar()
 
 Sistema::~Sistema()
 {
-    delete animales;    
+    for(int i = 0; i < cantidad_de_punteros; i++)
+    {
+        delete punteros_animales[i];
+    }
+    delete[] punteros_animales;
+    delete animales;
 }

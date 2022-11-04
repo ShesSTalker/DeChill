@@ -5,9 +5,13 @@
 
 class Sistema
 {
+    //Atributos
     private:
-        Lista<Animal*>* animales; 
+        Lista<Animal*>* animales;
+        Animal** punteros_animales;
+        int cantidad_de_punteros; 
 
+    //Metodos
     public:
         Sistema();
 
@@ -22,13 +26,18 @@ class Sistema
         //PRE: -
         //POS: guarda todos los cambios realizados al archivo CSV de la reserva.
         void guardar();
-
+        
+        //Destructor
         ~Sistema();
 
     private:
         //PRE: -
         //POS: carga los parámetros como un animal nuevo en la reserva.
         void cargar_animal(char especie, string nombre, int edad, char tamanio, char personalidad);
+
+        //PRE: -
+        //POS:
+        void redimencionar_punteros_animales(Animal* animal);
 
         // PRE: -
         // POS: aumenta el hambre del animal y reduce (o no) su higiene, basándose en las características del animal particular.
@@ -118,4 +127,5 @@ class Sistema
         //POS: muestra por pantalla todos los animales que cumplen con el espacio con el que dispone el usuario.
         void listar_animales_espacio(string espacio, int posicion);
 };
+
 #endif
