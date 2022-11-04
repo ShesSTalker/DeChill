@@ -5,11 +5,13 @@
 
 class Sistema
 {
+    //Atributos
     private:
         Lista<Animal*>* animales;
         Animal** punteros_animales;
         int cantidad_de_punteros; 
 
+    //Metodos
     public:
         Sistema();
 

@@ -556,6 +556,7 @@ string Sistema::pedir_opcion_adopcion()
 void Sistema::listar_animales_espacio(string espacio, int posicion)
 {
     Animal* animal;
+    
 
     while (animales -> hay_siguiente())
     {
