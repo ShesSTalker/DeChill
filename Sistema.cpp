@@ -72,16 +72,9 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
             break;
         }
 
-    animales->alta(animal, animales -> obtener_cantidad()+1);
+    animales -> alta(animal, animales -> obtener_cantidad()+1);
 
-    Animal **aux = new Animal*[cantidad_de_punteros + 1];
-    for(int i = 0; i < cantidad_de_punteros; i++)
-        aux[i] = punteros_animales[i];
-    aux[cantidad_de_punteros] = animal;
-
-    delete[] punteros_animales;
-    punteros_animales = aux;
-    cantidad_de_punteros++;
+    redimencionar_punteros_animales(animal);
 }
 
 void::Sistema::redimencionar_punteros_animales(Animal* animal)
@@ -556,7 +549,7 @@ string Sistema::pedir_opcion_adopcion()
 void Sistema::listar_animales_espacio(string espacio, int posicion)
 {
     Animal* animal;
-    
+
 
     while (animales -> hay_siguiente())
     {
