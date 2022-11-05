@@ -2,18 +2,22 @@
 #define SISTEMA_H
 
 #include "Menu.h"
+#include "Vector.h"
 
 class Sistema
 {
     //Atributos
     private:
         Lista<Animal*>* animales;
-        Animal** punteros_animales;
-        int cantidad_de_punteros; 
+        Vector<Animal*>* punteros_animales;
 
     //Metodos
     public:
         Sistema();
+
+        //PRE: - 
+        //POS: agrega el puntero a animal pasado como parámetro a la lista de los punteros a los animales de la reserva.
+        void agregar_puntero_animal(Animal *nuevo_animal);
 
         //PRE: - 
         //POS: lee los datos del archivo CSV de la reserva.
@@ -34,10 +38,6 @@ class Sistema
         //PRE: -
         //POS: carga los parámetros como un animal nuevo en la reserva.
         void cargar_animal(char especie, string nombre, int edad, char tamanio, char personalidad);
-
-        //PRE: -
-        //POS:
-        void redimencionar_punteros_animales(Animal* animal);
 
         // PRE: -
         // POS: aumenta el hambre del animal y reduce (o no) su higiene, basándose en las características del animal particular.

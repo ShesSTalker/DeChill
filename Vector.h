@@ -23,7 +23,7 @@ class Vector
         Vector(int cantidad);
 
         //PRE: 0 <= posicion < longitud
-        //POS: carga elemento en la posicion "posicion"
+        //POS: carga elemento en la posicion "posicion". Si se inserta la posición "longitud", se redimensiona el Vector.
         void cargar(Tipo elemento, int posicion);
 
         //PRE: 0 <= posicion < longitud
@@ -115,11 +115,12 @@ void Vector<Tipo>::redimensionar_vector()
 template < class Tipo >
 Vector<Tipo>::~Vector()
 {
-    if (longitud > 0)
+    for(int i = 0; i < longitud; i++)
     {
-        delete[] elemento;
-        elemento = nullptr;
+        delete elemento[i];
     }
+
+    delete[] elemento;
 }
 
 #endif

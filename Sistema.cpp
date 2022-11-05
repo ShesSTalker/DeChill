@@ -16,8 +16,7 @@ using namespace std;
 Sistema::Sistema()
 {
     animales = new Lista<Animal*>;
-    punteros_animales = nullptr;
-    cantidad_de_punteros = 0;
+    punteros_animales = new Vector<Animal*>;
 }
 
 void Sistema::leer_datos()
@@ -72,29 +71,9 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
             break;
         }
 
-    animales -> alta(animal, animales -> obtener_cantidad()+1);
+    animales -> alta(animal, animales -> obtener_cantidad() + 1);
 
-    redimencionar_punteros_animales(animal);
-}
-
-void::Sistema::redimencionar_punteros_animales(Animal* animal)
-{
-    Animal** nuevo_vector_punteros_animales = new Animal*[cantidad_de_punteros + 1];
-    
-    for(int i = 0; i < cantidad_de_punteros; i++)
-    {
-        nuevo_vector_punteros_animales[i] = punteros_animales[i];
-    }
-    
-    nuevo_vector_punteros_animales[cantidad_de_punteros] = animal;
-
-    if (cantidad_de_punteros != 0) 
-    {
-        delete[] punteros_animales;
-    }
-    
-    punteros_animales = nuevo_vector_punteros_animales;
-    cantidad_de_punteros++;
+    punteros_animales -> cargar(animal, punteros_animales -> obtener_longitud());
 }
 
 void Sistema::procesar_opcion(int opcion_tomada)
@@ -583,10 +562,6 @@ void Sistema::guardar()
 
 Sistema::~Sistema()
 {
-    for(int i = 0; i < cantidad_de_punteros; i++)
-    {
-        delete punteros_animales[i];
-    }
-    delete[] punteros_animales;
     delete animales;
+    delete punteros_animales;
 }
