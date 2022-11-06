@@ -79,8 +79,12 @@ void Vector<Tipo>::cargar(Tipo elemento, int posicion)
 
 template < class Tipo >
 Tipo Vector<Tipo>::obtener_elemento(int posicion)
-{
-    return elemento[posicion];
+{   
+    Tipo elemento = 0;
+    if (posicion < longitud){
+        elemento=elemento[posicion];
+    }
+    return elemento;
 }
 
 template < class Tipo >
