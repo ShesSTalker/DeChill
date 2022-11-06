@@ -14,7 +14,7 @@ class Sistema
     //Metodos
     public:
         //PRE: -
-        //POS: incializa los atributos 
+        //POS: crea un objeto Sistema e incializa los atributos 
         Sistema();
 
         //PRE: - 
