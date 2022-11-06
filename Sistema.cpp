@@ -79,7 +79,7 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
 void Sistema::procesar_opcion(int opcion_tomada)
 {
     string nombre, espacio, opcion_submenu, posicion_adopcion;
-    int posicion, animales_validados = 0;
+    int posicion, animales_validados;
     bool volver_a_intentar = false;
 
     pasar_tiempo();
@@ -344,10 +344,10 @@ void Sistema::rescatar_animal(string nombre)
 
 void Sistema::mostrar_submenu()
 {
-    cout << "1) Elegir individualmente." << endl <<
-    "2) Alimentar a todos." <<endl << 
-    "3) Duchar a todos." <<endl <<
-    "4) Regresar al inicio." << endl << endl;
+    cout << "[1] Elegir individualmente." << endl <<
+    "[2] Alimentar a todos." <<endl << 
+    "[3] Duchar a todos." <<endl <<
+    "[4] Regresar al inicio." << endl << endl;
 }
 
 void Sistema::ingresar_opcion_submenu(string &opcion_submenu)
@@ -384,9 +384,9 @@ void Sistema::procesar_opcion_submenu(string opcion_submenu)
 
 void Sistema::mostrar_opciones_individuales()
 {
-    cout << "1) Duchar." << endl <<
-    "2) Alimentar." << endl << 
-    "3) Saltear animal." << endl << endl;
+    cout << "[1] Duchar." << endl <<
+    "[2] Alimentar." << endl << 
+    "[3] Saltear animal." << endl << endl;
 }
 
 void Sistema::pedir_opciones_individuales(string &opcion_individual)
@@ -513,11 +513,10 @@ void Sistema::mostrar_animal_espacio(Animal* animal, int posicion)
     "Personalidad: " << animal -> obtener_personalidad_texto() << endl;
 }
 
-void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posicion, bool* animales_validos, int animales_validados)
+void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posicion, bool* animales_validos, int contador_validos)
 {
     char tamanio = animal -> obtener_tamanio_caracter();
-
-    cout << endl;
+    int contador_validos = 0;
 
     int espacio_int = stoi(espacio);
     
@@ -527,7 +526,7 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
         {
             mostrar_animal_espacio(animal, posicion);
             animales_validos[posicion - 1] = true;
-            animales_validados++;
+            contador_validos++;
         }
         else
             animales_validos[posicion - 1] = false;
@@ -541,7 +540,7 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
         {
             mostrar_animal_espacio(animal, posicion);
             animales_validos[posicion - 1] = true;
-            animales_validados++;
+            contador_validos++;
         }
         else
             animales_validos[posicion - 1] = false;
@@ -555,7 +554,7 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
         {
             mostrar_animal_espacio(animal, posicion);
             animales_validos[posicion - 1] = true;
-            animales_validados++;
+            contador_validos++;
         }
         else
             animales_validos[posicion - 1] = false;
@@ -569,7 +568,7 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
         {
             mostrar_animal_espacio(animal, posicion);
             animales_validos[posicion - 1] = true;
-            animales_validados++;
+            contador_validos++;
         }
         else
             animales_validos[posicion - 1] = false;
@@ -580,7 +579,7 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
     {
         mostrar_animal_espacio(animal, posicion);
         animales_validos[posicion - 1] = true;
-        animales_validados++;
+        contador_validos++;
     }
 } 
 
@@ -615,17 +614,19 @@ string Sistema::pedir_opcion_adopcion(bool* animales_validos)
     return posicion_adopcion;
 }
 
-void Sistema::listar_animales_espacio(string espacio, int posicion , bool* animales_validos, int animales_validados)
+void Sistema::listar_animales_espacio(string espacio, int posicion , bool* animales_validos, int &animales_validados)
 {
     Animal* animal;
+    int contador_validos;
 
     while (animales -> hay_siguiente())
     {
 
         animal = animales -> siguiente();
-        validar_animales_espacio(animal, espacio, posicion , animales_validos, animales_validados);
+        validar_animales_espacio(animal, espacio, posicion , animales_validos, contador_validos);
         posicion++;
     }
+    animales_validados = contador_validos;
 
     animales -> iniciar();
 }
