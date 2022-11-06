@@ -35,8 +35,6 @@ class Sistema
         
         //PRE: -
         //POS: libera la memoria asociada con este objeto.
-        //PRE:- 
-        //POS: libera la memoria requerida por el objeto 
         ~Sistema();
 
     private:
