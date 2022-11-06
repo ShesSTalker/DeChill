@@ -33,7 +33,8 @@ class Sistema
         //POS: guarda todos los cambios realizados al archivo CSV de la reserva.
         void guardar();
         
-        //Destructor
+        //PRE: -
+        //POS: libera la memoria asociada con este objeto.
         ~Sistema();
 
     private:
@@ -61,9 +62,9 @@ class Sistema
         //POS: devuelve la posicion del animal en la lista si el nombre existe en la lista y -1 si no existe.      
         int buscar_nombre(string nombre);
 
-        //PRE: -
-        //POS: si el nombre ya existe en la lista, le da la opcion al usuario de volver a ingresar otro nombre o volver al menú principal. Si no existe, rescata al animal. 
-        void verificar_nombre(int posicion, string nombre);
+        //PRE: el nombre ingresado para un animal nuevo ya estaba en la reserva.
+        //POS: si el usuario ingresa que quiere intentar con un nombre diferente para un animal nuevo en la reserva, devuelve true. Caso contrario devuelve false.  
+        bool verificar_intentar_de_nuevo(int posicion, string nombre);
 
         //PRE: el nombre del animal no debe estar en la lista.
         //POS: pide el resto de datos del animal para rescatarlo y agregarlo a a la lista de animales.

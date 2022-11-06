@@ -84,7 +84,13 @@ void Sistema::procesar_opcion(int opcion_tomada)
     pasar_tiempo();
     switch (opcion_tomada)
     {
-        case LISTAR_ANIMALES: 
+        case LISTAR_ANIMALES:
+            if(animales -> vacia())
+            {
+                cout << endl << "La reserva actualmente no tiene animales :(" << endl;
+                break;
+            }
+
             cout << endl << "LISTA DE ANIMALES EN LA RESERVA:" << endl << endl;
             
             listar_animales();
@@ -93,12 +99,35 @@ void Sistema::procesar_opcion(int opcion_tomada)
         case RESCATAR_ANIMAL: 
             cout << endl << "RESCATAR ANIMAL:" << endl << endl;
 
+            bool volver_a_intentar;
+
             pedir_nombre(nombre);
             posicion = buscar_nombre(nombre);
-            verificar_nombre(posicion, nombre);
+
+            if(posicion != NO_ENCONTRO)
+                volver_a_intentar = verificar_intentar_de_nuevo(posicion, nombre);
+
+            while(volver_a_intentar == true)
+            {
+                pedir_nombre(nombre);
+                posicion = buscar_nombre(nombre);
+
+                if(posicion != NO_ENCONTRO)
+                    volver_a_intentar = verificar_intentar_de_nuevo(posicion, nombre);
+            }
+
+            if(posicion == NO_ENCONTRO)
+                rescatar_animal(nombre);
+
             break;
 
         case BUSCAR_ANIMAL:
+            if(animales -> vacia())
+            {
+                cout << endl << "La reserva actualmente no tiene animales :(" << endl;
+                break;
+            }
+
             cout << endl << "BUSCAR ANIMAL DE LA RESERVA:" << endl << endl;
 
             pedir_nombre(nombre);
@@ -114,6 +143,12 @@ void Sistema::procesar_opcion(int opcion_tomada)
             break;
 
         case CUIDAR_ANIMAL:
+            if(animales -> vacia())
+            {
+                cout << endl << "La reserva actualmente no tiene animales :(" << endl;
+                break;
+            }
+
             cout << endl << "CUIDAR ANIMALES:" << endl << endl;
 
             mostrar_submenu();
@@ -128,6 +163,12 @@ void Sistema::procesar_opcion(int opcion_tomada)
             break;
 
         case ADOPTAR_ANIMAL:
+            if(animales -> vacia())
+            {
+                cout << endl << "La reserva actualmente no tiene animales :(" << endl;
+                break;
+            }
+
             cout << endl << "ADOPTAR ANIMAL:" << endl << endl;
 
             bool animales_validos[animales -> obtener_cantidad()];
@@ -173,11 +214,6 @@ void Sistema::listar_animales()
         mostrar_animal(animales -> siguiente());
     }
     animales -> iniciar();
-
-    if (animales -> vacia())
-    {
-        cout << "La reserva de animales esta vacia." << endl << endl;
-    }
 }
 
 void Sistema::mostrar_animal(Animal* animal)
@@ -194,7 +230,7 @@ void Sistema::mostrar_animal(Animal* animal)
 
 void Sistema::pedir_nombre(string &nombre)
 {
-    cout << "Ingrese el nombre del animal rescatado: ";
+    cout << "Ingrese el nombre del animal: ";
     getline (cin >> ws, nombre);
 }
 
@@ -221,33 +257,25 @@ int Sistema::buscar_nombre(string nombre)
     return posicion;
 }
 
-void Sistema:: verificar_nombre(int posicion, string nombre)
+bool Sistema::verificar_intentar_de_nuevo(int posicion, string nombre)
 {
     string decision;
 
-    if (posicion != NO_ENCONTRO)
-    {
-        cout << "El nombre ingresado ya existe en la reserva." << endl <<
-        "Ingrese [1] si desea ingresar otro nombre, si desea volver al menu principal ingrese cualquier otro numero: ";      
+    cout << "El nombre ingresado ya existe en la reserva." << endl <<
+    "Ingrese [1] si desea ingresar otro nombre, si desea volver al menu principal ingrese cualquier otro numero: ";      
         
-        getline(cin >> ws, decision);
+    getline(cin >> ws, decision);
 
-        while (!cadena_numeros_valida(decision))
-        {
-            cout << endl << "decision invalida, ingrese nuevamente la decision: ";
-            getline(cin >> ws, decision);
-        }
-        
-        if (stoi(decision) == 1)
-        {
-            procesar_opcion(RESCATAR_ANIMAL);
-        }
-    }
-    else
+    while (!cadena_numeros_valida(decision))
     {
-        rescatar_animal(nombre);
+        cout << endl << "Decision invalida, ingrese un numero para su decision: ";
+        getline(cin >> ws, decision);
     }
     
+    if (stoi(decision) == 1)
+        return true;
+
+    return false;
 }
 
 void Sistema::rescatar_animal(string nombre)
@@ -540,7 +568,7 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
 bool Sistema::posicion_espacio_validado(int posicion, bool* animales_validos)
 {
     // Si posición está en -1, el usuario quiere cancelar la adopción.
-    if(posicion = -1) return true;
+    if(posicion == -1) return true;
 
     bool valido = false;
 
