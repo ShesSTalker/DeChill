@@ -172,24 +172,20 @@ void Animal::aumentar_hambre()
         case JUGUETON:
             hambre += SUMA_HAMBRE * 2;
             break;
-        
-        case SOCIABLE:
+
+        default:
             hambre += SUMA_HAMBRE;
-            break;
-        
-        case TRAVIESO:
-            hambre += SUMA_HAMBRE;
-            break;
     }
-    if( hambre > HAMBRE_MAX )
+
+    if(hambre > HAMBRE_MAX)
     {
-        hambre=HAMBRE_MAX;
+        hambre = HAMBRE_MAX;
     }
 }
 
 void Animal::dearmar_higiene()
 {
-     int tipo_personalidad = int(personalidad);
+    int tipo_personalidad = int(personalidad);
 
     switch(tipo_personalidad)
     {
@@ -204,9 +200,10 @@ void Animal::dearmar_higiene()
         default:
             higiene -= RESTA_HIGIENE;
     }
+    
     if (higiene < HIGIENE_MIN)
     {
-        higiene= HIGIENE_MIN;
+        higiene = HIGIENE_MIN;
     }
 }
 
@@ -219,3 +216,5 @@ void Animal::duchar()
 {
     higiene = HIGIENE_INICIAL;
 }
+
+Animal::~Animal(){};

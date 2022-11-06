@@ -5,19 +5,20 @@
 
 class Caballo : public Animal
 {
-    //Metodos
     public:
-        //PRE: -
-        //POS: Inicializa los atributos
+        // PRE: -
+        // POS: inicializa los atributos.
         Caballo(string nombre, int edad, char tamanio, char personalidad);
 
-        //PRE: - 
-        //POS: Devuelve verdadero si requiere una ducha y falso si no requiere
+        // PRE: - 
+        // POS: devuelve verdadero si requiere una ducha y falso si no requiere.
         bool requiere_ducha();
 
-        //PRE: -
-        //POS: Devuelve la comida que come 
+        // PRE: -
+        // POS: devuelve el nombre de la comida del animal.
         string que_come();
+
+        virtual ~Caballo();
 };
 
 #endif

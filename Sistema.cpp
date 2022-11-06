@@ -16,6 +16,7 @@ using namespace std;
 Sistema::Sistema()
 {
     animales = new Lista<Animal*>;
+    punteros_animales = new Vector<Animal*>;
 }
 
 void Sistema::leer_datos()
@@ -36,7 +37,7 @@ void Sistema::leer_datos()
     }
     else
     {
-        cout<<"No se pudo abrir el archivo"<<endl;
+        cout << "No se pudo abrir el archivo." << endl;
     }
     archivo.close();
 }
@@ -48,7 +49,7 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
     switch(especie)
     {
         case PERRO: 
-            animal = new Perro(nombre, edad, tamanio, personalidad); 
+            animal = new Perro(nombre, edad, tamanio, personalidad);
             break;
         case GATO: 
             animal = new Gato(nombre, edad, tamanio, personalidad);
@@ -69,14 +70,16 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
             animal = new Lagartija(nombre, edad, tamanio, personalidad);
             break;
         }
-    animales->alta(animal, animales -> obtener_cantidad()+1);
+
+    animales -> alta(animal, animales -> obtener_cantidad() + 1);
+
+    punteros_animales -> cargar(animal, punteros_animales -> obtener_longitud());
 }
 
 void Sistema::procesar_opcion(int opcion_tomada)
 {
-    string nombre, espacio;
-    int posicion, opcion_submenu, posicion_adopcion;
-
+    string nombre, espacio, opcion_submenu, posicion_adopcion;
+    int posicion;
 
     switch (opcion_tomada)
     {
@@ -105,7 +108,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
             }
             else
             {
-                cout << endl << "ERROR, no se pudo encontrar el nombre ingresado" << endl << endl;
+                cout << endl << "ERROR, no se pudo encontrar el nombre ingresado." << endl << endl;
             }
             break;
 
@@ -115,7 +118,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
             mostrar_submenu();
             ingresar_opcion_submenu(opcion_submenu); 
             procesar_opcion_submenu(opcion_submenu);
-            while (opcion_submenu != REGRESAR_INICIO)
+            while (stoi(opcion_submenu) != REGRESAR_INICIO)
             {
                 mostrar_submenu();
                 ingresar_opcion_submenu(opcion_submenu); 
@@ -124,20 +127,20 @@ void Sistema::procesar_opcion(int opcion_tomada)
             break;
 
         case ADOPTAR_ANIMAL:
-            posicion= 1;
+            posicion = 1;
             cout << endl << "ADOPTAR ANIMAL:" << endl << endl;
             pasar_tiempo();
             pedir_espacio(espacio);
             listar_animales_espacio(espacio, posicion);
             posicion_adopcion = pedir_opcion_adopcion(); 
-            if (posicion_adopcion == 0)
+            if (stoi(posicion_adopcion) == 0)
             {
                 cout << "Se ha cancelado la adopcion." << endl << endl;
             } 
             else
             {
-                animales -> baja(posicion_adopcion);
-                cout << "Felicidades por su adopcion." << endl << endl;
+                animales -> baja(stoi(posicion_adopcion));
+                cout << "Felicidades por su adopcion!" << endl << endl;
             }
             break;
     }
@@ -162,12 +165,16 @@ void Sistema::pasar_tiempo()
 
 void Sistema::listar_animales()
 {
-
     while (animales -> hay_siguiente())
     { 
         mostrar_animal(animales -> siguiente());
     }
     animales -> iniciar();
+
+    if (animales -> vacia())
+    {
+        cout << "La reserva de animales esta vacia." << endl << endl;
+    }
 }
 
 void Sistema::mostrar_animal(Animal* animal)
@@ -213,18 +220,26 @@ int Sistema::buscar_nombre(string nombre)
 
 void Sistema:: verificar_nombre(int posicion, string nombre)
 {
-    int desicion;
+    string decision;
 
     if (posicion != NULO)
+    {
+        cout << "El nombre ingresado ya existe en la reserva." << endl <<
+        "Ingrese [1] si desea ingresar otro nombre, si desea volver al menu principal ingrese cualquier otro numero: ";      
+        
+        getline(cin >> ws, decision);
+
+        while (!cadena_numeros_valida(decision))
         {
-            cout << " El nombre ingresado ya existe en la reserva" << endl <<
-            "Ingrese (1) si desea ingresar otro nombre, si desea volver al menu principal ingrese cualquier otro numero: ";
-            cin >> desicion;
-            if (desicion == 1)
-            {
-                procesar_opcion(RESCATAR_ANIMAL);
-            }
+            cout << endl << "decision invalida, ingrese nuevamente la decision: ";
+            getline(cin >> ws, decision);
         }
+        
+        if (stoi(decision) == 1)
+        {
+            procesar_opcion(RESCATAR_ANIMAL);
+        }
+    }
     else
     {
         rescatar_animal(nombre);
@@ -237,44 +252,44 @@ void Sistema::rescatar_animal(string nombre)
     string edad;
     char especie, tamanio, personalidad;
 
-    cout << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
+    cout << endl << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
     endl << "- E (Erizo)" << endl << "- L (Lagartija)" << endl << "Ingrese el caracter la especie del animal: ";
     cin >> especie;
 
     while (especie != PERRO && especie != GATO && especie != CABALLO && especie != ROEDOR && especie != CONEJO && especie != ERIZO && especie != LAGARTIJA)
     {
-        cout << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
+        cout << endl << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
         endl << "- E (Erizo)" << endl << "- L (Lagartija)" << endl << "Especie invalida, Ingrese el caracter la especie del animal: ";
         cin >> especie;
     }
 
-    cout << "Ingrese la edad del animal: ";
-    cin >> edad;
+    cout << endl << "Ingrese la edad del animal: ";
+    getline(cin >> ws, edad);
 
-    while (stoi(edad) <= 0 || !cadena_numeros_valida(edad))
+    while (!cadena_numeros_valida(edad) || stoi(edad) > 100)
     {
-        cout << "Edad invalida, ingrese la edad del animal: ";
-        cin >> edad;
+        cout << endl << "Edad invalida, ingrese la edad del animal: ";
+        getline(cin >> ws, edad);
     }
 
-    cout << "- d (diminuto)" << endl << "- p (pequeño)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)" << 
+    cout << endl << "- d (diminuto)" << endl << "- p (pequeño)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)" << 
     endl << "Ingrese el caracter del tamanio del animal: ";
     cin >> tamanio;
 
     while (tamanio != DIMINUTO && tamanio != PEQUENIO && tamanio != MEDIANO && tamanio != GRANDE && tamanio != GIGANTE)
     {
-       cout << "- d (diminuto)" << endl << "- p (pequenio)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)"  <<endl<<
+       cout << endl << "- d (diminuto)" << endl << "- p (pequenio)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)"  <<endl<<
         "Tamanio invalido, ingrese el caracter del tamanio del animal: ";
         cin >> tamanio;
     }
 
-    cout << "- d (dormilon)" << endl << "- j (jugueton)" << endl << "- s (sociable)" << endl << "- t (travieso)" << endl << 
+    cout << endl << "- d (dormilon)" << endl << "- j (jugueton)" << endl << "- s (sociable)" << endl << "- t (travieso)" << endl << 
     "Ingrese el caracter de la personalidad del animal: ";
     cin >> personalidad;
 
     while (personalidad != DORMILON && personalidad != JUGUETON && personalidad != SOCIABLE && personalidad != TRAVIESO)
     {
-        cout << "- d (dormilon)" << endl << "- j (jugueton)" << endl << "- s (sociable)" << endl << "- t (travieso)" << endl << 
+        cout << endl << "- d (dormilon)" << endl << "- j (jugueton)" << endl << "- s (sociable)" << endl << "- t (travieso)" << endl << 
         "Personalidad invalida, ingrese el caracter de la personalidad del animal: ";
         cin >> personalidad;
     }
@@ -290,21 +305,21 @@ void Sistema::mostrar_submenu()
     "4) Regresar al inicio." << endl << endl;
 }
 
-void Sistema::ingresar_opcion_submenu(int &opcion_submenu)
+void Sistema::ingresar_opcion_submenu(string &opcion_submenu)
 {
     cout << "Ingrese el numero de la opcion que desa ejecutar: ";
-    cin >> opcion_submenu;
+    getline(cin >> ws, opcion_submenu);
 
-    while (opcion_submenu <= 0 &&  opcion_submenu > REGRESAR_INICIO)
+    while (!cadena_numeros_valida(opcion_submenu) || stoi(opcion_submenu) == 0 || stoi(opcion_submenu) > REGRESAR_INICIO)
     {
-        cout << "opcion invalida, ingrese el numero de la opcion que desa ejecutar: ";
-        cin >> opcion_submenu;
+        cout << "Opcion invalida, ingrese el numero de la opcion que desa ejecutar: ";
+        getline(cin >> ws, opcion_submenu);
     }
 }
 
-void Sistema::procesar_opcion_submenu(int opcion_submenu)
+void Sistema::procesar_opcion_submenu(string opcion_submenu)
 {
-    switch(opcion_submenu)
+    switch(stoi(opcion_submenu))
     {
         case ELEGIR_INDIVIDUALMENTE:
             eleccion_individual();
@@ -329,20 +344,20 @@ void Sistema::mostrar_opciones_individuales()
     "3) Saltear animal." << endl << endl;
 }
 
-void Sistema::pedir_opciones_individuales(int &opcion_individual)
+void Sistema::pedir_opciones_individuales(string &opcion_individual)
 {
     cout << "Ingrese la opcion a ejecutar: ";
-    cin >> opcion_individual;
+    getline(cin >> ws, opcion_individual);
 
-    while (opcion_individual <= 0 && opcion_individual > SALTEAR_ANIMAL)
+    while (!cadena_numeros_valida(opcion_individual) || stoi(opcion_individual) == 0 || stoi(opcion_individual) > SALTEAR_ANIMAL)
     {
         cout << "Opcion invalida, ingrese la opcion a ejecutar: ";
-        cin >> opcion_individual;
+        getline(cin >> ws, opcion_individual);
     }
 
 }
 
-void Sistema::procesar_opcion_indivual(int opcion_individual, Animal * animal)
+void Sistema::procesar_opcion_individual(int opcion_individual, Animal* animal)
 {
     switch (opcion_individual)
     {
@@ -367,7 +382,7 @@ void Sistema::procesar_opcion_indivual(int opcion_individual, Animal * animal)
 void Sistema::eleccion_individual()
 {
     Animal* animal;
-    int opcion_individual;
+    string opcion_individual;
 
     while(animales ->hay_siguiente())
     {
@@ -376,9 +391,9 @@ void Sistema::eleccion_individual()
         mostrar_opciones_individuales();
         pedir_opciones_individuales(opcion_individual);
         
-        if (opcion_individual != SALTEAR_ANIMAL)
+        if (stoi(opcion_individual) != SALTEAR_ANIMAL)
         {
-            procesar_opcion_indivual(opcion_individual, animal);
+            procesar_opcion_individual(stoi(opcion_individual), animal);
         }
     }
     animales -> iniciar();
@@ -416,29 +431,35 @@ void Sistema::duchar_todos()
     animales -> iniciar();
 }
 
-void Sistema::pedir_espacio(string espacio)
+void Sistema::pedir_espacio(string &espacio)
 {
     cout << "Ingrese el espacio disponible para el animal en m² (mayor a 0): ";
-    getline(cin>>ws , espacio);
+    getline(cin >> ws, espacio);
 
-    while (stoi(espacio) < 0 || !cadena_numeros_valida(espacio))
+    while (!cadena_numeros_valida(espacio) || stoi(espacio) == 0)
     {
         cout << "Espacio invalido, ingrese el espacio en  m² disponible para el animal (mayor a 0): ";
-        getline(cin>>ws , espacio);
+        getline(cin >> ws, espacio);
     }
 }
-bool Sistema::cadena_numeros_valida(string numeros){
-    bool valido= true;
-    int i = 0, tamanio = int(numeros.length()) ;
 
-    while (i < tamanio && valido){
-        if (!isdigit(numeros[i])){
-            valido=false;
+bool Sistema::cadena_numeros_valida(string numeros)
+{
+    int i = 0;
+    long int tamanio = numeros.size();
+    bool valido = true; 
+
+    while (i < tamanio && valido)
+    {
+        if (!isdigit(numeros[i]))
+        {
+            valido = false;
         }
         i++;
-    }
+    } 
     return valido;
 }
+
 void Sistema::mostrar_animal_espacio(Animal* animal, int posicion)
 {
     cout << posicion << ") " << "Nombre: " << animal -> obtener_nombre() << endl <<
@@ -451,7 +472,8 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
 {
     char tamanio = animal -> obtener_tamanio_caracter();
 
-    cout<<endl;
+    cout << endl;
+    
     if (stoi(espacio) < DELIMITADOR_DIMINUTO)
     {
         if (tamanio == DIMINUTO)
@@ -459,47 +481,45 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (stoi(espacio) < DELIMITADOR_PEQUENIO_MEDIANO && stoi(espacio) >= DELIMITADOR_DIMINUTO)
+    else if (stoi(espacio) < DELIMITADOR_PEQUENIO_MEDIANO)
     {
         if (tamanio == DIMINUTO || tamanio == PEQUENIO)
         {
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (stoi(espacio) >= DELIMITADOR_PEQUENIO_MEDIANO && stoi(espacio) < DELIMITADOR_GRANDE) 
+    else if (stoi(espacio) < DELIMITADOR_GRANDE) 
     {
-        if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO)
+        if (tamanio != GIGANTE && tamanio != GRANDE)
         {
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (stoi(espacio) >= DELIMITADOR_GRANDE && stoi(espacio) < DELIMITADOR_GIGANTE)
+    else if (stoi(espacio) < DELIMITADOR_GIGANTE)
     {
-        if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO || tamanio == GRANDE)
+        if (tamanio != GIGANTE)
         {
             mostrar_animal_espacio(animal, posicion);
         }
     }
-    else if (stoi(espacio) >= DELIMITADOR_GIGANTE)
+    else
     {
-        if (tamanio == DIMINUTO || tamanio == PEQUENIO || tamanio == MEDIANO || tamanio == GRANDE || tamanio == GIGANTE)
-        {
-            mostrar_animal_espacio(animal, posicion);
-        }
+        mostrar_animal_espacio(animal, posicion);
     }
 
 } 
 
-int Sistema::pedir_opcion_adopcion()
+string Sistema::pedir_opcion_adopcion()
 {
-    int posicion_adopcion;
+    string posicion_adopcion;
 
     cout << endl << "Ingrese el numero del animal que desea ingresar, si desea cancelar la adopcion ingrese 0: ";
-    cin >> posicion_adopcion;
+    getline(cin >> ws, posicion_adopcion);
 
-    while (posicion_adopcion < 0 && posicion_adopcion > animales -> obtener_cantidad())
+    while (!cadena_numeros_valida(posicion_adopcion) || stoi(posicion_adopcion) > animales -> obtener_cantidad())
     {
         cout << endl << "Opcion invalida, ingrese el numero del animal que desea ingresar, si desea cancelar la adopcion ingrese 0: ";
+        getline(cin >> ws, posicion_adopcion);
     }
 
     return posicion_adopcion;
@@ -508,6 +528,7 @@ int Sistema::pedir_opcion_adopcion()
 void Sistema::listar_animales_espacio(string espacio, int posicion)
 {
     Animal* animal;
+
 
     while (animales -> hay_siguiente())
     {
@@ -541,5 +562,6 @@ void Sistema::guardar()
 
 Sistema::~Sistema()
 {
-    delete animales;    
+    delete animales;
+    delete punteros_animales;
 }

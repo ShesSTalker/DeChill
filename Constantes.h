@@ -1,24 +1,25 @@
-#ifndef _CONSTANTES_H_
-#define _CONSTANTES_H_
+#ifndef CONSTANTES_H
+#define CONSTANTES_H
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-//Constantes leer datos
+// Constantes leer datos
 const string PATH_ANIMALES = "animales.csv";
 
-//Constantes pasar tiempo
-const int HAMBRE_INICIAL = 0;
-const int HIGIENE_INICIAL = 100;
-const int SUMA_HAMBRE = 10;
-const int RESTA_HIGIENE = 10;
-const int HAMBRE_MAX = 100;
-const int HIGIENE_MIN = 0;
+// Constantes pasar tiempo
+const int
+HAMBRE_INICIAL = 0,
+HIGIENE_INICIAL = 100,
+SUMA_HAMBRE = 10,
+RESTA_HIGIENE = 10,
+HAMBRE_MAX = 100,
+HIGIENE_MIN = 0;
 
 const int NULO = -1;
 
-//Constantes tamanio
+// Constantes tamanio
 const char
 DIMINUTO = 'd',
 PEQUENIO = 'p',
@@ -26,21 +27,21 @@ MEDIANO = 'm',
 GRANDE = 'g',
 GIGANTE = 't';
 
-//Constantes delimitadores tamanio
+// Constantes delimitadores tamanio
 const int
 DELIMITADOR_DIMINUTO = 2,
 DELIMITADOR_PEQUENIO_MEDIANO = 10,
 DELIMITADOR_GRANDE = 20,
 DELIMITADOR_GIGANTE = 50;
 
-//Constantes personalidad
+// Constantes personalidad
 const int
 DORMILON = 'd',
 JUGUETON = 'j',
 SOCIABLE = 's',
 TRAVIESO = 't';
 
-//Constantes especie
+// Constantes especie
 const char 
 PERRO = 'P',
 GATO = 'G',
@@ -50,7 +51,7 @@ CONEJO = 'O',
 ERIZO = 'E',
 LAGARTIJA = 'L';
 
-//Constantes comida
+// Constantes comida
 const string
 COMIDA_PERRO = "Huesos",
 COMIDA_GATO = "Atun",
@@ -60,7 +61,7 @@ COMIDA_CONEJO = "Lechuga",
 COMIDA_ERIZO = "Insectos",
 COMIDA_LAGARTIJA = "Insectos";
 
-
+// Constantes menues
 enum opciones_menu_principal {
     LISTAR_ANIMALES = 1 ,
     RESCATAR_ANIMAL,
