@@ -33,7 +33,8 @@ class Sistema
         //POS: guarda todos los cambios realizados al archivo CSV de la reserva.
         void guardar();
         
-        //Destructor
+        //PRE:- 
+        //POS: libera la memoria requerida por el objeto 
         ~Sistema();
 
     private:
