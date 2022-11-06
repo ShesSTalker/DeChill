@@ -92,40 +92,40 @@ string Animal::obtener_especie_texto()
 
 char Animal::obtener_especie_caracter()
 {
-    char especie_char;
+    char especie_caracter;
 
     switch(especie)
     {
         case PERRO: 
-            especie_char = 'P'; 
+            especie_caracter = 'P'; 
             break;
         
         case GATO: 
-            especie_char = 'G';
+            especie_caracter = 'G';
             break;
         
         case CABALLO:
-            especie_char = 'C'; 
+            especie_caracter = 'C'; 
             break;
         
         case ROEDOR: 
-            especie_char = 'R'; 
+            especie_caracter = 'R'; 
             break;
         
         case CONEJO: 
-            especie_char = 'O'; 
+            especie_caracter = 'O'; 
             break;
         
         case ERIZO: 
-            especie_char = 'R'; 
+            especie_caracter = 'R'; 
             break;
         
         case LAGARTIJA: 
-            especie_char = 'L';
+            especie_caracter = 'L';
             break;
     }
 
-    return especie_char;
+    return especie_caracter;
 }
 
 char Animal::obtener_tamanio_caracter()
