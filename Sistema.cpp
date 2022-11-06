@@ -600,7 +600,6 @@ void Sistema::listar_animales_espacio(string espacio, int posicion , bool* anima
 {
     Animal* animal;
 
-
     while (animales -> hay_siguiente())
     {
 

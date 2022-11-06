@@ -14,7 +14,7 @@ class Sistema
     //Metodos
     public:
         //PRE: -
-        //POS: incializa los atributos 
+        //POS: crea un objeto Sistema e incializa los atributos 
         Sistema();
 
         //PRE: - 
@@ -35,6 +35,8 @@ class Sistema
         
         //PRE: -
         //POS: libera la memoria asociada con este objeto.
+        //PRE:- 
+        //POS: libera la memoria requerida por el objeto 
         ~Sistema();
 
     private:
