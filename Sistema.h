@@ -13,6 +13,8 @@ class Sistema
 
     //Metodos
     public:
+        //PRE: -
+        //POS: incializa los atributos 
         Sistema();
 
         //PRE: - 
@@ -117,19 +119,19 @@ class Sistema
 
         //PRE: -
         //POS: valida los animales para mostrar los que cumplen con el espacio disponible definido por el usuario.
-        void validar_animales_espacio(Animal* animal, string espacio, int posicion, bool * animales_validos); 
+        void validar_animales_espacio(Animal* animal, string espacio, int posicion, bool* animales_validos); 
         
         //PRE: -
         //POS: valida los animales que cumplen con el espacio disponible definido por el usuario
-        bool posicion_espacio_validado(int posicion, bool * animales_validos);
+        bool posicion_espacio_validado(int posicion, bool* animales_validos);
 
         //PRE: -
         //POS: pide el número del animal que el usuario desea adoptar o 0 en caso de que desee cancelar la adopción y lo devuelve.
-        string pedir_opcion_adopcion(bool * animales_validos);
+        string pedir_opcion_adopcion(bool* animales_validos);
 
         //PRE: -
         //POS: muestra por pantalla todos los animales que cumplen con el espacio con el que dispone el usuario.
-        void listar_animales_espacio(string espacio, int posicion, bool * animales_validos);
+        void listar_animales_espacio(string espacio, int posicion, bool* animales_validos);
 };
 
 #endif

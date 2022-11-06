@@ -17,7 +17,8 @@ RESTA_HIGIENE = 10,
 HAMBRE_MAX = 100,
 HIGIENE_MIN = 0;
 
-const int NULO = -1;
+//Constantes buscar nombre
+const int NO_ENCONTRO = -1;
 
 // Constantes tamanio (char)
 const char
@@ -76,7 +77,7 @@ CONEJO_TEXTO = "conejo",
 ERIZO_TEXTO = "erizo",
 LAGARTIJA_TEXTO = "lagartija";
 
-// Constantes comida
+// Constantes comida (string)
 const string
 COMIDA_PERRO = "Huesos",
 COMIDA_GATO = "Atun",

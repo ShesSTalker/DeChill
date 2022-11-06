@@ -102,7 +102,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
             pasar_tiempo();
             pedir_nombre(nombre);
             posicion = buscar_nombre(nombre);
-            if (posicion != NULO)
+            if (posicion != NO_ENCONTRO)
             {
                 mostrar_animal(animales -> consulta(posicion));
             }
@@ -199,7 +199,7 @@ void Sistema::pedir_nombre(string &nombre)
 int Sistema::buscar_nombre(string nombre)
 {
     bool encontrado = false;
-    int posicion = NULO, i = 1;
+    int posicion = NO_ENCONTRO, i = 1;
     Animal* animal; 
     
     while (animales -> hay_siguiente() && !encontrado)
@@ -223,7 +223,7 @@ void Sistema:: verificar_nombre(int posicion, string nombre)
 {
     string decision;
 
-    if (posicion != NULO)
+    if (posicion != NO_ENCONTRO)
     {
         cout << "El nombre ingresado ya existe en la reserva." << endl <<
         "Ingrese [1] si desea ingresar otro nombre, si desea volver al menu principal ingrese cualquier otro numero: ";      
@@ -550,14 +550,12 @@ string Sistema::pedir_opcion_adopcion(bool* animales_validos)
     cout << endl << "Ingrese el numero del animal que desea ingresar, si desea cancelar la adopcion ingrese 0: ";
     getline(cin >> ws, posicion_adopcion);
 
-    while (!cadena_numeros_valida(posicion_adopcion) || stoi(posicion_adopcion) > animales -> obtener_cantidad())
+    while (!cadena_numeros_valida(posicion_adopcion) || stoi(posicion_adopcion) > animales -> obtener_cantidad() || !posicion_espacio_validado(stoi(posicion_adopcion) -1, animales_validos))
     {
         cout << endl << "Opcion invalida, ingrese el numero del animal que desea ingresar, si desea cancelar la adopcion ingrese 0: ";
         getline(cin >> ws, posicion_adopcion);
     }
-    if (!posicion_espacio_validado(stoi(posicion_adopcion) -1, animales_validos)){
-        posicion_adopcion = pedir_opcion_adopcion(animales_validos);
-    }
+
     return posicion_adopcion;
 }
 
