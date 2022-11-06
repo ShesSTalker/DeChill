@@ -7,7 +7,7 @@ class Gato : public Animal
 {
     public:
         // PRE: -
-        // POS: inicializa los atributos.
+        // POS: crea un objeto Gato e inicializa los atributos.
         Gato(string nombre, int edad, char tamanio, char personalidad);
 
         // PRE: - 
