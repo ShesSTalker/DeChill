@@ -19,7 +19,7 @@ HIGIENE_MIN = 0;
 
 const int NULO = -1;
 
-// Constantes tamanio
+// Constantes tamanio (char)
 const char
 DIMINUTO = 'd',
 PEQUENIO = 'p',
@@ -27,21 +27,36 @@ MEDIANO = 'm',
 GRANDE = 'g',
 GIGANTE = 't';
 
-// Constantes delimitadores tamanio
+// Constantes tamanio (string)
+const string
+DIMINUTO_TEXTO = "diminuto",
+PEQUENIO_TEXTO = "pequenio",
+MEDIANO_TEXTO = "mediano",
+GRANDE_TEXTO = "grande",
+GIGANTE_TEXTO = "gigante";
+
+// Constantes delimitadores tamanio 
 const int
 DELIMITADOR_DIMINUTO = 2,
 DELIMITADOR_PEQUENIO_MEDIANO = 10,
 DELIMITADOR_GRANDE = 20,
 DELIMITADOR_GIGANTE = 50;
 
-// Constantes personalidad
+// Constantes personalidad (int)
 const int
 DORMILON = 'd',
 JUGUETON = 'j',
 SOCIABLE = 's',
 TRAVIESO = 't';
 
-// Constantes especie
+// Constantes personalidad (string)
+const string
+DORMILON_TEXTO = "dormilon",
+JUGUETON_TEXTO = "jugueton",
+SOCIABLE_TEXTO = "sociable",
+TRAVIESO_TEXTO = "travieso";
+
+// Constantes especie (char)
 const char 
 PERRO = 'P',
 GATO = 'G',
@@ -50,6 +65,16 @@ ROEDOR = 'R',
 CONEJO = 'O',
 ERIZO = 'E',
 LAGARTIJA = 'L';
+
+// Constantes especie (string)
+const string
+PERRO_TEXTO = "perro",
+GATO_TEXTO = "gato",
+CABALLO_TEXTO = "caballo",
+ROEDOR_TEXTO = "roedor",
+CONEJO_TEXTO = "conejo",
+ERIZO_TEXTO = "erizo",
+LAGARTIJA_TEXTO = "lagartija";
 
 // Constantes comida
 const string
@@ -63,7 +88,7 @@ COMIDA_LAGARTIJA = "Insectos";
 
 // Constantes menues
 enum opciones_menu_principal {
-    LISTAR_ANIMALES = 1 ,
+    LISTAR_ANIMALES = 1,
     RESCATAR_ANIMAL,
     BUSCAR_ANIMAL,
     CUIDAR_ANIMAL,

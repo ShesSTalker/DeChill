@@ -29,23 +29,23 @@ string Animal::obtener_tamanio_texto()
     switch(tamanio)
     {
         case DIMINUTO: 
-            tamanio_texto = "diminuto";
+            tamanio_texto = DIMINUTO_TEXTO;
             break;
         
         case PEQUENIO: 
-            tamanio_texto = "pequenio"; 
+            tamanio_texto = PEQUENIO_TEXTO; 
             break;     
         
         case MEDIANO:
-            tamanio_texto = "mediano"; 
+            tamanio_texto = MEDIANO_TEXTO; 
             break;
         
         case GRANDE: 
-            tamanio_texto = "grande"; 
+            tamanio_texto = GRANDE_TEXTO; 
             break;
         
         case GIGANTE: 
-            tamanio_texto = "gigante";
+            tamanio_texto = GIGANTE_TEXTO;
             break;
     }
 
@@ -59,31 +59,31 @@ string Animal::obtener_especie_texto()
     switch(especie)
     {
         case PERRO: 
-            especie_texto = "perro"; 
+            especie_texto = PERRO_TEXTO; 
             break;
         
         case GATO: 
-            especie_texto = "gato"; 
+            especie_texto = GATO_TEXTO; 
             break;
         
         case CABALLO: 
-            especie_texto = "caballo";
+            especie_texto = CABALLO_TEXTO;
             break;
         
         case ROEDOR: 
-            especie_texto = "roedor"; 
+            especie_texto = ROEDOR_TEXTO; 
             break;
         
         case CONEJO: 
-            especie_texto = "conejo"; 
+            especie_texto = CONEJO_TEXTO; 
             break;
         
         case ERIZO: 
-            especie_texto = "erizo"; 
+            especie_texto = ERIZO_TEXTO; 
             break;
         
         case LAGARTIJA: 
-            especie_texto = "lagartija";
+            especie_texto = LAGARTIJA_TEXTO;
             break;
     }
 
@@ -97,31 +97,31 @@ char Animal::obtener_especie_caracter()
     switch(especie)
     {
         case PERRO: 
-            especie_caracter = 'P'; 
+            especie_caracter = PERRO; 
             break;
         
         case GATO: 
-            especie_caracter = 'G';
+            especie_caracter = GATO;
             break;
         
         case CABALLO:
-            especie_caracter = 'C'; 
+            especie_caracter = CABALLO; 
             break;
         
         case ROEDOR: 
-            especie_caracter = 'R'; 
+            especie_caracter = ROEDOR; 
             break;
         
         case CONEJO: 
-            especie_caracter = 'O'; 
+            especie_caracter = CONEJO; 
             break;
         
         case ERIZO: 
-            especie_caracter = 'R'; 
+            especie_caracter = ERIZO; 
             break;
         
         case LAGARTIJA: 
-            especie_caracter = 'L';
+            especie_caracter = LAGARTIJA;
             break;
     }
 
@@ -141,19 +141,19 @@ string Animal::obtener_personalidad_texto()
     switch(tipo_personalidad)
     {
         case DORMILON: 
-            personalidad_texto = "dormilón"; 
+            personalidad_texto = DORMILON_TEXTO; 
             break;
         
         case JUGUETON: 
-            personalidad_texto = "juguetón"; 
+            personalidad_texto = JUGUETON_TEXTO; 
             break;
         
         case SOCIABLE: 
-            personalidad_texto = "sociable"; 
+            personalidad_texto = SOCIABLE_TEXTO; 
             break;
         
         case TRAVIESO: 
-            personalidad_texto = "travieso";
+            personalidad_texto = TRAVIESO_TEXTO;
             break;
     }
     return personalidad_texto;
