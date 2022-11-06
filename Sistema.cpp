@@ -80,6 +80,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
 {
     string nombre, espacio, opcion_submenu, posicion_adopcion;
     int posicion;
+    bool volver_a_intentar = false;
 
     pasar_tiempo();
     switch (opcion_tomada)
@@ -99,8 +100,6 @@ void Sistema::procesar_opcion(int opcion_tomada)
         case RESCATAR_ANIMAL: 
             cout << endl << "RESCATAR ANIMAL:" << endl << endl;
 
-            bool volver_a_intentar;
-
             pedir_nombre(nombre);
             posicion = buscar_nombre(nombre);
 
@@ -114,6 +113,8 @@ void Sistema::procesar_opcion(int opcion_tomada)
 
                 if(posicion != NO_ENCONTRO)
                     volver_a_intentar = verificar_intentar_de_nuevo(posicion, nombre);
+                else
+                    volver_a_intentar = false;
             }
 
             if(posicion == NO_ENCONTRO)
