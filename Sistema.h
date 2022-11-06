@@ -120,7 +120,7 @@ class Sistema
 
         //PRE: -
         //POS: valida los animales para mostrar los que cumplen con el espacio disponible definido por el usuario.
-        void validar_animales_espacio(Animal* animal, string espacio, int posicion, bool* animales_validos); 
+        void validar_animales_espacio(Animal* animal, string espacio, int posicion, bool* animales_validos, int animales_validados); 
         
         //PRE: -
         //POS: valida los animales que cumplen con el espacio disponible definido por el usuario
@@ -132,7 +132,7 @@ class Sistema
 
         //PRE: -
         //POS: muestra por pantalla todos los animales que cumplen con el espacio con el que dispone el usuario.
-        void listar_animales_espacio(string espacio, int posicion, bool* animales_validos);
+        void listar_animales_espacio(string espacio, int posicion, bool* animales_validos, int animales_validados);
 };
 
 #endif

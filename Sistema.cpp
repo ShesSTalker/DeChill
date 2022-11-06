@@ -79,7 +79,7 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
 void Sistema::procesar_opcion(int opcion_tomada)
 {
     string nombre, espacio, opcion_submenu, posicion_adopcion;
-    int posicion;
+    int posicion, animales_validados = 0;
     bool volver_a_intentar = false;
 
     pasar_tiempo();
@@ -112,14 +112,19 @@ void Sistema::procesar_opcion(int opcion_tomada)
                 posicion = buscar_nombre(nombre);
 
                 if(posicion != NO_ENCONTRO)
+                {
                     volver_a_intentar = verificar_intentar_de_nuevo(posicion, nombre);
+                }
                 else
+                {
                     volver_a_intentar = false;
+                }
             }
 
             if(posicion == NO_ENCONTRO)
+            {
                 rescatar_animal(nombre);
-
+            }
             break;
 
         case BUSCAR_ANIMAL:
@@ -176,16 +181,24 @@ void Sistema::procesar_opcion(int opcion_tomada)
             posicion = 1;
             
             pedir_espacio(espacio);
-            listar_animales_espacio(espacio, posicion, animales_validos);
-            posicion_adopcion = pedir_opcion_adopcion(animales_validos); 
-            if (stoi(posicion_adopcion) == 0)
+            listar_animales_espacio(espacio, posicion, animales_validos, animales_validados);
+            
+            if (animales_validados == 0)
             {
-                cout << "Se ha cancelado la adopcion." << endl << endl;
-            } 
+                cout << "La reserva no dispone de animales que puedan cumplir con el espacio solicitado." << endl << endl;
+            }
             else
             {
-                animales -> baja(stoi(posicion_adopcion));
-                cout << "Felicidades por su adopcion!" << endl << endl;
+                posicion_adopcion = pedir_opcion_adopcion(animales_validos); 
+                if (stoi(posicion_adopcion) == 0)
+                {
+                    cout << "Se ha cancelado la adopcion." << endl << endl;
+                } 
+                else
+                {
+                    animales -> baja(stoi(posicion_adopcion));
+                    cout << "Felicidades por su adopcion!" << endl << endl;
+                }
             }
             break;
     }
@@ -500,7 +513,7 @@ void Sistema::mostrar_animal_espacio(Animal* animal, int posicion)
     "Personalidad: " << animal -> obtener_personalidad_texto() << endl;
 }
 
-void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posicion, bool* animales_validos)
+void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posicion, bool* animales_validos, int animales_validados)
 {
     char tamanio = animal -> obtener_tamanio_caracter();
 
@@ -514,6 +527,7 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
         {
             mostrar_animal_espacio(animal, posicion);
             animales_validos[posicion - 1] = true;
+            animales_validados++;
         }
         else
             animales_validos[posicion - 1] = false;
@@ -527,6 +541,7 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
         {
             mostrar_animal_espacio(animal, posicion);
             animales_validos[posicion - 1] = true;
+            animales_validados++;
         }
         else
             animales_validos[posicion - 1] = false;
@@ -540,6 +555,7 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
         {
             mostrar_animal_espacio(animal, posicion);
             animales_validos[posicion - 1] = true;
+            animales_validados++;
         }
         else
             animales_validos[posicion - 1] = false;
@@ -553,6 +569,7 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
         {
             mostrar_animal_espacio(animal, posicion);
             animales_validos[posicion - 1] = true;
+            animales_validados++;
         }
         else
             animales_validos[posicion - 1] = false;
@@ -563,6 +580,7 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
     {
         mostrar_animal_espacio(animal, posicion);
         animales_validos[posicion - 1] = true;
+        animales_validados++;
     }
 } 
 
@@ -597,7 +615,7 @@ string Sistema::pedir_opcion_adopcion(bool* animales_validos)
     return posicion_adopcion;
 }
 
-void Sistema::listar_animales_espacio(string espacio, int posicion , bool* animales_validos)
+void Sistema::listar_animales_espacio(string espacio, int posicion , bool* animales_validos, int animales_validados)
 {
     Animal* animal;
 
@@ -605,7 +623,7 @@ void Sistema::listar_animales_espacio(string espacio, int posicion , bool* anima
     {
 
         animal = animales -> siguiente();
-        validar_animales_espacio(animal, espacio, posicion , animales_validos);
+        validar_animales_espacio(animal, espacio, posicion , animales_validos, animales_validados);
         posicion++;
     }
 
