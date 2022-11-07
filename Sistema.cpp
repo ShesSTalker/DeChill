@@ -585,8 +585,10 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
 
 bool Sistema::posicion_espacio_validado(int posicion, bool* animales_validos)
 {
-    // Si posición está en -1, el usuario quiere cancelar la adopción.
-    if(posicion == -1) return true;
+    if(posicion == -1) 
+    {
+        return true;
+    }
 
     bool valido = false;
 
@@ -602,12 +604,12 @@ string Sistema::pedir_opcion_adopcion(bool* animales_validos)
 {
     string posicion_adopcion;
 
-    cout << endl << "Ingrese el numero del animal que desea ingresar, si desea cancelar la adopcion ingrese 0: ";
+    cout << endl << "Ingrese el numero del animal que desea ingresar, si desea cancelar la adopcion ingrese [0]: ";
     getline(cin >> ws, posicion_adopcion);
 
     while (!cadena_numeros_valida(posicion_adopcion) || stoi(posicion_adopcion) > animales -> obtener_cantidad() || !posicion_espacio_validado(stoi(posicion_adopcion) -1, animales_validos))
     {
-        cout << endl << "Opcion invalida, ingrese el numero del animal que desea ingresar, si desea cancelar la adopcion ingrese 0: ";
+        cout << endl << "Opcion invalida, ingrese el numero del animal que desea ingresar, si desea cancelar la adopcion ingrese [0]: ";
         getline(cin >> ws, posicion_adopcion);
     }
 

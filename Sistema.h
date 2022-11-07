@@ -18,10 +18,6 @@ class Sistema
         Sistema();
 
         //PRE: - 
-        //POS: agrega el puntero a animal pasado como parámetro a la lista de los punteros a los animales de la reserva.
-        void agregar_puntero_animal(Animal *nuevo_animal);
-
-        //PRE: - 
         //POS: lee los datos del archivo CSV de la reserva.
         void leer_datos();
 
@@ -123,7 +119,7 @@ class Sistema
         void validar_animales_espacio(Animal* animal, string espacio, int posicion, bool* animales_validos, int contador_validos); 
         
         //PRE: -
-        //POS: valida los animales que cumplen con el espacio disponible definido por el usuario
+        //POS: valida los animales que cumplen con el espacio disponible definido por el usuario. Si posición está en -1, el usuario quiere cancelar la adopción.
         bool posicion_espacio_validado(int posicion, bool* animales_validos);
 
         //PRE: -
