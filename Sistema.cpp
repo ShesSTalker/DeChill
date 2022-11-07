@@ -293,18 +293,20 @@ bool Sistema::verificar_intentar_de_nuevo(int posicion, string nombre)
 
 void Sistema::rescatar_animal(string nombre)
 {
-    string edad;
+    string edad, especie_string, tamanio_string, personalidad_string;
     char especie, tamanio, personalidad;
 
     cout << endl << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
     endl << "- E (Erizo)" << endl << "- L (Lagartija)" << endl << "Ingrese el caracter la especie del animal: ";
-    cin >> especie;
+    cin >> especie_string;
+    especie = especie_string[0];
 
     while (especie != PERRO && especie != GATO && especie != CABALLO && especie != ROEDOR && especie != CONEJO && especie != ERIZO && especie != LAGARTIJA)
     {
         cout << endl << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
         endl << "- E (Erizo)" << endl << "- L (Lagartija)" << endl << "Especie invalida, Ingrese el caracter la especie del animal: ";
-        cin >> especie;
+        cin >> especie_string;
+        especie = especie_string[0];
     }
 
     cout << endl << "Ingrese la edad del animal: ";
@@ -318,24 +320,28 @@ void Sistema::rescatar_animal(string nombre)
 
     cout << endl << "- d (diminuto)" << endl << "- p (pequeño)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)" << 
     endl << "Ingrese el caracter del tamanio del animal: ";
-    cin >> tamanio;
+    cin >> tamanio_string;
+    tamanio = tamanio_string[0];
 
     while (tamanio != DIMINUTO && tamanio != PEQUENIO && tamanio != MEDIANO && tamanio != GRANDE && tamanio != GIGANTE)
     {
-       cout << endl << "- d (diminuto)" << endl << "- p (pequenio)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)"  <<endl<<
+        cout << endl << "- d (diminuto)" << endl << "- p (pequenio)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)"  <<endl<<
         "Tamanio invalido, ingrese el caracter del tamanio del animal: ";
         cin >> tamanio;
+        tamanio = tamanio_string[0];
     }
 
     cout << endl << "- d (dormilon)" << endl << "- j (jugueton)" << endl << "- s (sociable)" << endl << "- t (travieso)" << endl << 
     "Ingrese el caracter de la personalidad del animal: ";
-    cin >> personalidad;
+    cin >> personalidad_string;
+    personalidad = personalidad_string[0];
 
     while (personalidad != DORMILON && personalidad != JUGUETON && personalidad != SOCIABLE && personalidad != TRAVIESO)
     {
         cout << endl << "- d (dormilon)" << endl << "- j (jugueton)" << endl << "- s (sociable)" << endl << "- t (travieso)" << endl << 
         "Personalidad invalida, ingrese el caracter de la personalidad del animal: ";
-        cin >> personalidad;
+        cin >> personalidad_string;
+        personalidad = personalidad_string[0];
     }
 
     cargar_animal(especie, nombre, stoi(edad), tamanio, personalidad);
@@ -512,10 +518,10 @@ void Sistema::mostrar_animal_espacio(Animal* animal, int posicion)
     "Personalidad: " << animal -> obtener_personalidad_texto() << endl;
 }
 
-void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posicion, bool* animales_validos, int contador_validos)
+void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posicion, bool* animales_validos, int &contador_validos)
 {
     char tamanio = animal -> obtener_tamanio_caracter();
-    int contador_validos = 0;
+    contador_validos = 0;
 
     int espacio_int = stoi(espacio);
     
