@@ -275,13 +275,13 @@ bool Sistema::verificar_intentar_de_nuevo(int posicion, string nombre)
     string decision;
 
     cout << "El nombre ingresado ya existe en la reserva." << endl <<
-    "Ingrese [1] si desea ingresar otro nombre, si desea volver al menu principal ingrese cualquier otro numero: ";      
+    "Ingrese [1] si desea ingresar otro nombre, si desea volver al menu principal ingrese cualquier otro numero positivo: ";      
         
     getline(cin >> ws, decision);
 
     while (!cadena_numeros_valida(decision))
     {
-        cout << endl << "Decision invalida, ingrese un numero para su decision: ";
+        cout << endl << "Decision invalida, ingrese un numero positivo para su decision: ";
         getline(cin >> ws, decision);
     }
     
