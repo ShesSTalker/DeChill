@@ -20,5 +20,3 @@ string Erizo:: que_come()
 {
     return COMIDA_ERIZO;
 }
-
-Erizo::~Erizo(){};

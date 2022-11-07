@@ -17,8 +17,6 @@ class Roedor : public Animal
         // PRE: -
         // POS: devuelve el nombre de la comida del animal.
         string que_come();
-
-        virtual ~Roedor();
 };
 
 #endif

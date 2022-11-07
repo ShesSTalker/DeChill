@@ -513,10 +513,10 @@ void Sistema::mostrar_animal_espacio(Animal* animal, int posicion)
     "Personalidad: " << animal -> obtener_personalidad_texto() << endl;
 }
 
-void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posicion, bool* animales_validos, int contador_validos)
+void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posicion, bool* animales_validos, int &contador_validos)
 {
     char tamanio = animal -> obtener_tamanio_caracter();
-    int contador_validos = 0;
+    contador_validos = 0;
 
     int espacio_int = stoi(espacio);
     

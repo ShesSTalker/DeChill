@@ -20,5 +20,3 @@ string Roedor:: que_come()
 {
     return COMIDA_ROEDOR;
 }
-
-Roedor::~Roedor(){};

@@ -20,5 +20,3 @@ string Caballo:: que_come()
 {
         return COMIDA_CABALLO;
 }
-
-Caballo::~Caballo(){};

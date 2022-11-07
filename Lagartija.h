@@ -17,8 +17,6 @@ class Lagartija : public Animal
         // PRE: -
         // POS: devuelve el nombre de la comida del animal.
         string que_come();
-
-        virtual ~Lagartija();
 };
 
 #endif

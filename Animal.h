@@ -81,7 +81,7 @@ class Animal
         virtual string que_come() = 0;
 
         // Destructor virtual
-        virtual ~Animal();
+        ~Animal();
 };
 
 #endif
