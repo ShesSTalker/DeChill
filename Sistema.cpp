@@ -514,7 +514,6 @@ void Sistema::mostrar_animal_espacio(Animal* animal, int posicion)
 void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posicion, bool* animales_validos, int &contador_validos)
 {
     char tamanio = animal -> obtener_tamanio_caracter();
-    contador_validos = 0;
 
     int espacio_int = stoi(espacio);
     
@@ -617,7 +616,7 @@ string Sistema::pedir_opcion_adopcion(bool* animales_validos)
 void Sistema::listar_animales_espacio(string espacio, int posicion , bool* animales_validos, int &animales_validados)
 {
     Animal* animal;
-    int contador_validos;
+    int contador_validos = 0;
 
     while (animales -> hay_siguiente())
     {
