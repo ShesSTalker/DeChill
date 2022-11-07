@@ -21,3 +21,5 @@ string Conejo::que_come()
 {
     return COMIDA_CONEJO;
 }
+
+Conejo::~Conejo(){}
