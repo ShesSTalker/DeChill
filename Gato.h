@@ -17,6 +17,9 @@ class Gato : public Animal
         // PRE: -
         // POS: devuelve el nombre de la comida del animal.
         string que_come();  
+
+        //Destructor virtual
+        virtual ~Gato();
 };
 
 #endif
