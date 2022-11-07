@@ -2,7 +2,6 @@
 #include <iostream>
 #include <fstream>
 #include "Constantes.h"
-#include "Animal.h"
 #include "Perro.h"
 #include "Caballo.h"
 #include "Gato.h"
