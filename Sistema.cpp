@@ -275,13 +275,13 @@ bool Sistema::verificar_intentar_de_nuevo(int posicion, string nombre)
     string decision;
 
     cout << "El nombre ingresado ya existe en la reserva." << endl <<
-    "Ingrese [1] si desea ingresar otro nombre, si desea volver al menu principal ingrese cualquier otro numero positivo: ";      
+    "Ingrese [1] si desea ingresar otro nombre, si desea volver al menu principal ingrese cualquier otro numero: ";      
         
     getline(cin >> ws, decision);
 
     while (!cadena_numeros_valida(decision))
     {
-        cout << endl << "Decision invalida, ingrese un numero positivo para su decision: ";
+        cout << endl << "Decision invalida, ingrese un numero para su decision: ";
         getline(cin >> ws, decision);
     }
     
@@ -297,13 +297,13 @@ void Sistema::rescatar_animal(string nombre)
 
     cout << endl << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
     endl << "- E (Erizo)" << endl << "- L (Lagartija)" << endl << "Ingrese el caracter la especie del animal: ";
-    cin >> especie;
+    getline(cin >> ws, especie);
 
     while ((especie[0] != PERRO && especie[0] != GATO && especie[0] != CABALLO && especie[0] != ROEDOR && especie[0] != CONEJO && especie[0] != ERIZO && especie[0] != LAGARTIJA) || especie.size() != 1)
     {
         cout << endl << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
         endl << "- E (Erizo)" << endl << "- L (Lagartija)" << endl << "Especie invalida, Ingrese el caracter la especie del animal: ";
-        cin >> especie;
+        getline(cin >> ws, especie);
     }
 
     cout << endl << "Ingrese la edad del animal: ";
@@ -317,24 +317,24 @@ void Sistema::rescatar_animal(string nombre)
 
     cout << endl << "- d (diminuto)" << endl << "- p (pequeño)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)" << 
     endl << "Ingrese el caracter del tamanio del animal: ";
-    cin >> tamanio;
+    getline(cin >> ws, tamanio);
 
     while ((tamanio[0] != DIMINUTO && tamanio[0] != PEQUENIO && tamanio[0] != MEDIANO && tamanio[0] != GRANDE && tamanio[0] != GIGANTE) || tamanio.size() != 1)
     {
-       cout << endl << "- d (diminuto)" << endl << "- p (pequenio)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)"  <<endl<<
+        cout << endl << "- d (diminuto)" << endl << "- p (pequenio)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)"  <<endl<<
         "Tamanio invalido, ingrese el caracter del tamanio del animal: ";
-        cin >> tamanio;
+        getline(cin >> ws, tamanio);
     }
 
     cout << endl << "- d (dormilon)" << endl << "- j (jugueton)" << endl << "- s (sociable)" << endl << "- t (travieso)" << endl << 
     "Ingrese el caracter de la personalidad del animal: ";
-    cin >> personalidad;
+    getline(cin >> ws, personalidad);
 
-    while ((personalidad[0] != DORMILON && personalidad[0] != JUGUETON && personalidad[0] != SOCIABLE && personalidad[0] != TRAVIESO) || personalidad.size() != 1) 
+    while ((personalidad[0] != DORMILON && personalidad[0] != JUGUETON && personalidad[0] != SOCIABLE && personalidad[0] != TRAVIESO) || personalidad.size() != 1)
     {
         cout << endl << "- d (dormilon)" << endl << "- j (jugueton)" << endl << "- s (sociable)" << endl << "- t (travieso)" << endl << 
         "Personalidad invalida, ingrese el caracter de la personalidad del animal: ";
-        cin >> personalidad;
+        getline(cin >> ws, personalidad);
     }
 
     cargar_animal(especie[0], nombre, stoi(edad), tamanio[0], personalidad[0]);
@@ -514,6 +514,7 @@ void Sistema::mostrar_animal_espacio(Animal* animal, int posicion)
 void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posicion, bool* animales_validos, int &contador_validos)
 {
     char tamanio = animal -> obtener_tamanio_caracter();
+    contador_validos = 0;
 
     int espacio_int = stoi(espacio);
     
@@ -616,7 +617,7 @@ string Sistema::pedir_opcion_adopcion(bool* animales_validos)
 void Sistema::listar_animales_espacio(string espacio, int posicion , bool* animales_validos, int &animales_validados)
 {
     Animal* animal;
-    int contador_validos = 0;
+    int contador_validos;
 
     while (animales -> hay_siguiente())
     {
