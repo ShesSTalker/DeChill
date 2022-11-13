@@ -21,5 +21,4 @@ class Caballo : public Animal
         //Destructor virtual
         virtual ~Caballo();
 };
-
 #endif

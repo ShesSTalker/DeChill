@@ -217,4 +217,4 @@ void Animal::duchar()
     higiene = HIGIENE_INICIAL;
 }
 
-Animal::~Animal(){};
+Animal::~Animal(){}

@@ -21,4 +21,4 @@ string Lagartija:: que_come()
     return COMIDA_LAGARTIJA;
 }
 
-Lagartija::~Lagartija(){};
+Lagartija::~Lagartija(){}
