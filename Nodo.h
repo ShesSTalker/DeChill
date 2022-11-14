@@ -24,11 +24,11 @@ class Nodo
         void establecer_dato(Tipo dato);
 
         //PRE: -
-        //POS: establece el puntero a la derecha al padre
+        //POS: establece el puntero al hijo derecho y al nodo padre
         void establecer_derecho(Nodo<Tipo>* derecho, Nodo<Tipo>* padre);
 
         //PRE: -
-        //POS: establece el puntero a la izquierda al padre
+        //POS: establece el puntero al hijo izquierdo y al nodo padre
         void establecer_izquierdo(Nodo<Tipo>* izquierdo, Nodo<Tipo>* padre);
 
         //PRE: -
@@ -81,6 +81,12 @@ template < typename Tipo >
 Tipo Nodo<Tipo>::obtener_dato()
 {
     return dato;
+}
+
+template < typename Tipo >
+void Nodo<Tipo>::establecer_dato(Tipo dato)
+{
+    this -> dato = dato;
 }
 
 template < typename Tipo >
