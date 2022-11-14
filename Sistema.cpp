@@ -82,6 +82,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
     bool volver_a_intentar = false;
 
     pasar_tiempo();
+    
     switch (opcion_tomada)
     {
         case LISTAR_ANIMALES:

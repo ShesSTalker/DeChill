@@ -94,10 +94,11 @@ enum opciones_menu_principal {
     BUSCAR_ANIMAL,
     CUIDAR_ANIMAL,
     ADOPTAR_ANIMAL,
+    CARGAR_COMBUSTIBLE,
     GUARDAR_Y_SALIR,
 };
 
-const int MAX_OPCIONES_MENU_PRINCIPAL= 6;
+const int MAX_OPCIONES_MENU_PRINCIPAL = 7;
 
 enum opciones_submenu {
     ELEGIR_INDIVIDUALMENTE = 1,

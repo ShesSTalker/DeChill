@@ -25,7 +25,8 @@ void Menu::mostrar_menu()
     "[3] Buscar animal." << endl <<
     "[4] Ciudar animales." << endl <<
     "[5] Adoptar animal." << endl <<
-    "[6] Guardar y salir." << endl << endl;
+    "[6] Cargar combustible." << endl <<
+    "[7] Guardar y salir." << endl << endl;
 }
 
 void Menu::pedir_opcion()
