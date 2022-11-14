@@ -4,39 +4,77 @@
 template < typename Tipo >
 class Nodo
 {
+    //Atributos
     private:
         Tipo dato;
-        Nodo* siguiente;
+        Nodo<Tipo>* izquierdo;
+        Nodo<Tipo>* derecho;
+        Nodo<Tipo>* padre;
 
+    //Metodos
     public:
-        //PRE: -
-        //POS: crea un nodo con el dato ingresado y siguente en 0 (puntero a NULL).
-        Nodo (Tipo dato);
-
-        //PRE: -
-        //POS: el puntero al siguiente nodo apunta al parámetro.
-        void cambiar_siguiente (Nodo* puntero);
-        
-        //PRE: -
-        //POS: devuelve el dato que contiene el nodo.
-        Tipo obtener_dato();
+        Nodo(Tipo dato);
 
         //PRE: - 
-        //POS: devuelve el puntero al siguiente nodo.
-        Nodo* obtener_siguiente(); 
+        //POS: devuelve el dato que contiene el nodo
+        Tipo obtener_dato();
+
+        //PRE: -
+        //POS: establece el dato en el nodo
+        void establecer_dato(Tipo dato);
+
+        //PRE: -
+        //POS: establece el puntero a la derecha al padre
+        void establecer_derecho(Nodo<Tipo>* derecho, Nodo<Tipo>* padre);
+
+        //PRE: -
+        //POS: establece el puntero a la izquierda al padre
+        void establecer_izquierdo(Nodo<Tipo>* izquierdo, Nodo<Tipo>* padre);
+
+        //PRE: -
+        //POS: establece el puntero al hijo derecho
+        void establecer_derecho(Nodo<Tipo>* derecho);
+
+        //PRE: -
+        //POS: establece el puntero al nodo izquierdo
+        void establecer_izquierdo(Nodo<Tipo>* izquierdo);
+
+        //PRE: -
+        //POS: establece el puntero al nodo padre
+        void establecer_padre(Nodo<Tipo>* padre);
+
+        //PRE: -
+        //POS: devuelve el puntero al nodo hijo derecho
+        Nodo<Tipo>* obtener_derecho();
+
+        //PRE: -
+        //POS: devuelve el puntero al nodo hijo izquierdo
+        Nodo<Tipo>* obtener_izquierdo();
+
+        //PRE: -
+        //POS: devuelve el puntero al padre
+        Nodo<Tipo>* obtener_padre();
+
+        //PRE: -
+        //POS: devuelve verdadero si el nodo es hoja y falso en caso contrario
+        bool es_hoja();
+
+        //PRE: -
+        //POS: devuelve verdadero si el nodo solo tiene hijo derecho y falso en caso contrario
+        bool solo_hijo_derecho();
+
+        //PRE: -
+        //POS: devuelve verdaderro si el nodo solo tiene hizo izquierdo y falso en caso contrario
+        bool solo_hijo_izquierdo();
 };
 
 template < typename Tipo >
 Nodo<Tipo>::Nodo(Tipo dato)
 {
     this -> dato = dato;
-    this -> siguiente = 0;
-}
-
-template < typename Tipo >
-void Nodo<Tipo>::cambiar_siguiente(Nodo* puntero)
-{
-    siguiente = puntero;
+    this -> derecho = NULL;
+    this -> izquierdo = NULL;
+    this -> padre = NULL;
 }
 
 template < typename Tipo >
@@ -46,9 +84,70 @@ Tipo Nodo<Tipo>::obtener_dato()
 }
 
 template < typename Tipo >
-Nodo<Tipo>* Nodo<Tipo>::obtener_siguiente() 
+void Nodo<Tipo>::establecer_derecho(Nodo<Tipo>* derecho, Nodo<Tipo>* padre)
 {
-    return siguiente;
+    this ->  derecho = derecho;
+    this -> padre = padre;
 }
 
+template < typename Tipo >
+void Nodo<Tipo>::establecer_izquierdo(Nodo<Tipo>* izquierdo, Nodo<Tipo>* padre)
+{
+    this -> izquierdo = izquierdo;
+    this -> padre = padre; 
+}
+
+template < typename Tipo > 
+void Nodo<Tipo>::establecer_derecho(Nodo<Tipo>* derecho)
+{
+    this -> derecho = derecho; 
+}
+
+template < typename Tipo > 
+void Nodo<Tipo>::establecer_izquierdo(Nodo<Tipo>* izquierdo)
+{
+    this -> izquierdo = izquierdo;
+}
+
+template < typename Tipo >
+void Nodo<Tipo>::establecer_padre(Nodo<Tipo>* padre)
+{
+    this -> padre = padre;
+}
+
+template < typename Tipo >
+Nodo<Tipo>* Nodo<Tipo>::obtener_derecho()
+{
+    return derecho;
+}
+
+template < typename Tipo >
+Nodo<Tipo>* Nodo<Tipo>::obtener_izquierdo()
+{
+    return izquierdo;
+}
+
+template < typename Tipo > 
+Nodo<Tipo>* Nodo<Tipo>::obtener_padre()
+{
+    return padre;
+}
+
+template < typename Tipo >
+bool Nodo<Tipo>::es_hoja()
+{
+    return (obtener_izquierdo() == NULL && obtener_derecho() == NULL);
+}
+
+template < typename Tipo >
+bool Nodo<Tipo>::solo_hijo_derecho()
+{
+    return (obtener_izquierdo() == NULL && obtener_derecho() != NULL);
+}
+
+template < typename Tipo >
+bool Nodo<Tipo>::solo_hijo_izquierdo()
+{
+    return (obtener_izquierdo() != NULL && obtener_derecho() == NULL);
+}
 #endif
