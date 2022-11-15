@@ -1,16 +1,19 @@
 #ifndef _NODO_H_
 #define _NODO_H_
 
+#include "Constantes.h"
+
 template < typename Tipo >
 class Nodo
 {
     //Atributos
     private:
-        Tipo[2] clave;
-        int cantidad_claves;
-        Nodo<Tipo>* izquierdo;
-        Nodo<Tipo>* derecho;
+        Tipo dato;
         Nodo<Tipo>* padre;
+        string claves[DOS_CLAVES];
+        Nodo<Tipo>* vias[TRES_VIAS]; 
+        int cantidad_claves;
+        int cantidad_vias;
 
     //Metodos
     public:
@@ -18,7 +21,7 @@ class Nodo
 
         //PRE: - 
         //POS: devuelve el dato que contiene el nodo
-        Tipo obtener_clave(int posicion);
+        string obtener_clave(int posicion);
 
         //PRE: -
         //POS: devuelve la caantidad de claves del nodo
@@ -77,13 +80,13 @@ template < typename Tipo >
 Nodo<Tipo>::Nodo(Tipo dato)
 {
     this -> dato = dato;
-    this -> derecho = NULL;
-    this -> izquierdo = NULL;
     this -> padre = NULL;
+    this -> claves = NULL; 
+    this -> vias = NULL;
 }
 
 template < typename Tipo >
-Tipo Nodo<Tipo>::obtener_clave(int posicion)
+string Nodo<Tipo>::obtener_clave(int posicion)
 {
     return clave[posicion];
 }

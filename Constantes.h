@@ -113,10 +113,16 @@ enum opciones_individuales {
     SALTEAR_ANIMAL,
 };
 
+// Constantes arbol b
 enum arbol_b{
-    PRIMER_HIJO,
-    SEGUNDO_HIJO,
-    TERCER_HIJO,
+    DOS_CLAVES = 2,
+    TRES_VIAS = 3,
+};
+
+enum vias{
+    PRIMERA_VIA,
+    SEGUNDA_VIA,
+    TERCERA_VIA,
 };
 
 #endif 
