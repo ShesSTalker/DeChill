@@ -6,7 +6,8 @@ class Nodo
 {
     //Atributos
     private:
-        Tipo dato;
+        Tipo[2] clave;
+        int cantidad_claves;
         Nodo<Tipo>* izquierdo;
         Nodo<Tipo>* derecho;
         Nodo<Tipo>* padre;
@@ -17,7 +18,11 @@ class Nodo
 
         //PRE: - 
         //POS: devuelve el dato que contiene el nodo
-        Tipo obtener_dato();
+        Tipo obtener_clave(int posicion);
+
+        //PRE: -
+        //POS: devuelve la caantidad de claves del nodo
+        int obtener_cantidad_claves();
 
         //PRE: -
         //POS: establece el dato en el nodo
@@ -78,9 +83,15 @@ Nodo<Tipo>::Nodo(Tipo dato)
 }
 
 template < typename Tipo >
-Tipo Nodo<Tipo>::obtener_dato()
+Tipo Nodo<Tipo>::obtener_clave(int posicion)
 {
-    return dato;
+    return clave[posicion];
+}
+
+template < typename Tipo >
+int Nodo<Tipo>::obtener_cantidad_claves()
+{
+    return cantidad_claves;
 }
 
 template < typename Tipo >

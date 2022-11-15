@@ -113,4 +113,10 @@ enum opciones_individuales {
     SALTEAR_ANIMAL,
 };
 
+enum arbol_b{
+    PRIMER_HIJO,
+    SEGUNDO_HIJO,
+    TERCER_HIJO,
+};
+
 #endif 
