@@ -180,7 +180,15 @@ Nodo<Tipo>* Arbol<Tipo>::insertar(Nodo<Tipo>* nodo, Tipo clave)
     }
     else if (clave < nodo -> obtener_clave(PRIMERA_CLAVE) && nodo -> obtener_cantidad_claves() == DOS_CLAVES)
     {
-        
+        nodo -> establecer_primera_via(insertar(nodo -> obtener_primera_via(), nodo));        
+    }
+    else if (clave > nodo -> obtener_clave(PRIMERA_CLAVE) && nodo -> obtener_cantidad_claves() == DOS_CLAVES && clave <  nodo -> obtener_clave(SEGUNDA_CLAVE))
+    {
+        nodo -> establecer_primera_via(insertar(nodo -> obtener_segunda_via(), nodo));
+    }
+    else if (clave > nodo -> obtener_clave(PRIMERA_CLAVE) && nodo -> obtener_cantidad_claves() == DOS_CLAVES && nodo -> obtener_clave(SEGUNDA_CLAVE))
+    {
+        nodo -> establecer_primera_via(insertar(nodo -> obtener_tercera_via(), nodo));
     }
 }
 
