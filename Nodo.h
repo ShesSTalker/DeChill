@@ -94,10 +94,10 @@ class Nodo
 template < typename Tipo >
 Nodo<Tipo>::Nodo(Tipo clave)
 {
-    this -> padre = nullptr;
+    this -> padre = NULL;
     this -> claves[PRIMERA_CLAVE] = clave; 
     for (int i = 0; i < TRES_VIAS; i++)
-        this -> vias[i] = nullptr;
+        this -> vias[i] = NULL;
     this -> cantidad_claves = 1;
     this -> cantidad_vias = 0;
 }
@@ -205,19 +205,19 @@ Nodo<Tipo>* Nodo<Tipo>::obtener_padre()
 template < typename Tipo >
 bool Nodo<Tipo>::es_hoja()
 {
-    return (obtener_primera_via() == nullptr && obtener_segunda_via() == nullptr && obtener_tercera_via() == nullptr);
+    return (obtener_primera_via() == NULL && obtener_segunda_via() == NULL && obtener_tercera_via() == NULL);
 }
 
 template < typename Tipo >
 bool Nodo<Tipo>::solo_primera_via()
 {
-    return (obtener_primera_via() != nullptr && obtener_segunda_via() == nullptr && obtener_tercera_via() != nullptr);
+    return (obtener_primera_via() != NULL && obtener_segunda_via() == NULL && obtener_tercera_via() != NULL);
 }
 
 template < typename Tipo >
 bool Nodo<Tipo>::solo_segunda_via()
 {
-    return (obtener_primera_via() == nullptr && obtener_segunda_via() != nullptr && obtener_tercera_via() == nullptr);
+    return (obtener_primera_via() == NULL && obtener_segunda_via() != NULL && obtener_tercera_via() == NULL);
 }
 
 #endif

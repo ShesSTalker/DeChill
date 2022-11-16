@@ -59,6 +59,113 @@ class Arbol
         void borrar_todo();
 
         ~Arbol<Tipo>();
+
+    private:
+        //PRE:
+        //POS:
+        Nodo<Tipo>* insertar(Nodo<Tipo>* nodo, Tipo clave); 
 };
+
+template < typename Tipo >
+Arbol<Tipo>::Arbol()
+{
+    this -> raiz = NULL;
+}
+
+template < typename Tipo >
+void Arbol<Tipo>::insertar(Tipo clave)
+{   
+    this -> raiz = insetar(this -> raiz, clave);
+}
+
+template < typename Tipo >
+void Arbol<Tipo>::mostrar_en_orden()
+{
+    mostrar_en_orden(this -> raiz);
+}
+
+template < typename Tipo >
+bool Arbol<Tipo>::buscar_clave(Tipo clave)
+{
+    Nodo<Tipo>* resultado = buscar_clave(this -> raiz, clave);
+}
+
+template < typename Tipo > 
+Tipo Arbol<Tipo>::buscar_minimo()
+{
+    return buscar_minimo(this -> raiz);
+}
+
+template < typename Tipo >
+Tipo Arbol<Tipo>::buscar_maximo()
+{
+    return buscar_maximo(this -> raiz);
+}
+
+template < typename Tipo >
+Tipo Arbol<Tipo>::hijo(Tipo clave)
+{
+    Nodo<Tipo>* clave_nodo = this -> buscar_clave(this -> raiz, clave);
+
+    if (clave_nodo == NULL)
+    {
+        return -1;
+    }
+    else
+    {
+        return hijo(clave_nodo);
+    }
+}
+
+template < typename Tipo >
+Tipo Arbol<Tipo>::padre(Tipo clave)
+{
+    Nodo<Tipo>* clave_nodo = this -> buscar_clave(this -> raiz, clave);
+
+    if (clave_nodo == NULL)
+    {
+        return -1;
+    }
+    else
+    {
+        return padre(clave_nodo);
+    }
+}
+
+template< typename Tipo >
+void Arbol<Tipo>::remover(Tipo clase)
+{
+    this -> raiz = remover(this -> raiz, clase);
+}
+
+template < typename Tipo > 
+Nodo<Tipo>* Arbol<Tipo>::obtener_raiz()
+{
+    return this -> raiz;
+}
+
+template < typename Tipo >
+bool Arbol<Tipo>::vacio()
+{
+    return this -> raiz == NULL;
+}
+
+template < typename Tipo >
+void Arbol<Tipo>::borrar_todo()
+{
+    borrar_todo(this -> raiz);
+}
+
+template < typename Tipo >
+Arbol<Tipo>::~Arbol()
+{
+    borrar_todo();
+}
+
+template < typename Tipo > 
+Nodo<Tipo>* Arbol<Tipo>::insertar(Nodo<Tipo>* nodo, Tipo clave)
+{
+    
+}
 
 #endif
