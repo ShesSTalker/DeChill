@@ -165,7 +165,14 @@ Arbol<Tipo>::~Arbol()
 template < typename Tipo > 
 Nodo<Tipo>* Arbol<Tipo>::insertar(Nodo<Tipo>* nodo, Tipo clave)
 {
-    
+    if (nodo == NULL)
+    {
+        nodo = new Nodo<Tipo>(clave);
+    }
+    else if (clave > nodo -> obtener_clave())
+    {
+        nodo -> 
+    }
 }
 
 #endif
