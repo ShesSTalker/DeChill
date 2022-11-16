@@ -8,56 +8,69 @@ class Nodo
 {
     //Atributos
     private:
-        Tipo dato;
         Nodo<Tipo>* padre;
-        string claves[DOS_CLAVES];
+        Tipo claves[DOS_CLAVES];
         Nodo<Tipo>* vias[TRES_VIAS]; 
         int cantidad_claves;
         int cantidad_vias;
 
     //Metodos
     public:
-        Nodo(Tipo dato);
+        Nodo(Tipo clave);
 
         //PRE: - 
         //POS: devuelve el dato que contiene el nodo
-        string obtener_clave(int posicion);
+        Tipo obtener_clave(int posicion);
 
         //PRE: -
-        //POS: devuelve la caantidad de claves del nodo
+        //POS: devuelve la cantidad de claves del nodo
         int obtener_cantidad_claves();
 
+        //PRE: - 
+        //POS: devuelve la cantidad de vias del nodo
+        int obtener_cantidad_vias();
+
         //PRE: -
-        //POS: establece el dato en el nodo
-        void establecer_dato(Tipo dato);
+        //POS: establece la clave en la posicion "posicion" en el nodo
+        void establecer_clave(Tipo clave, int posicion);
 
         //PRE: -
         //POS: establece el puntero al hijo derecho y al nodo padre
-        void establecer_derecho(Nodo<Tipo>* derecho, Nodo<Tipo>* padre);
+        void establecer_primera_via(Nodo<Tipo>* primera_via, Nodo<Tipo>* padre);
+
+        void establecer_segunda_via(Nodo<Tipo>* segunda_via, Nodo<Tipo>* padre);
 
         //PRE: -
         //POS: establece el puntero al hijo izquierdo y al nodo padre
-        void establecer_izquierdo(Nodo<Tipo>* izquierdo, Nodo<Tipo>* padre);
+        void establecer_segunda_via(Nodo<Tipo>* segunda_via, Nodo<Tipo>* padre);
 
         //PRE: -
-        //POS: establece el puntero al hijo derecho
-        void establecer_derecho(Nodo<Tipo>* derecho);
+        //POS: establece el puntero a la primera via del nodo
+        void establecer_primera_via(Nodo<Tipo>* primera_via);
 
         //PRE: -
-        //POS: establece el puntero al nodo izquierdo
-        void establecer_izquierdo(Nodo<Tipo>* izquierdo);
+        //POS: establece el puntero a la segunda via del nodo
+        void establecer_segunda_via(Nodo<Tipo>* segunda_via);
+
+        //PRE: -
+        //POS: establece el puntero a la tercera via del nodo
+        void establecer_tercera_via(Nodo<Tipo>* tercera_via);
 
         //PRE: -
         //POS: establece el puntero al nodo padre
         void establecer_padre(Nodo<Tipo>* padre);
 
         //PRE: -
-        //POS: devuelve el puntero al nodo hijo derecho
-        Nodo<Tipo>* obtener_derecho();
+        //POS: devuelve el puntero a la primera via del nodo
+        Nodo<Tipo>* obtener_primera_via();
 
         //PRE: -
-        //POS: devuelve el puntero al nodo hijo izquierdo
-        Nodo<Tipo>* obtener_izquierdo();
+        //POS: devuelve el puntero a la segunda via del nodo
+        Nodo<Tipo>* obtener_segunda_via();
+
+        //PRE: -
+        //POS: devuelve el puntero a la tercera via del nodo
+        Nodo<Tipo>* obtener_tercera_via();
 
         //PRE: -
         //POS: devuelve el puntero al padre
@@ -69,24 +82,26 @@ class Nodo
 
         //PRE: -
         //POS: devuelve verdadero si el nodo solo tiene hijo derecho y falso en caso contrario
-        bool solo_hijo_derecho();
+        bool solo_primera_via();
 
         //PRE: -
         //POS: devuelve verdaderro si el nodo solo tiene hizo izquierdo y falso en caso contrario
-        bool solo_hijo_izquierdo();
+        bool solo_segunda_via();
 };
 
 template < typename Tipo >
-Nodo<Tipo>::Nodo(Tipo dato)
+Nodo<Tipo>::Nodo(Tipo clave)
 {
-    this -> dato = dato;
-    this -> padre = NULL;
-    this -> claves = NULL; 
-    this -> vias = NULL;
+    this -> padre = nullptr;
+    this -> claves[PRIMERA_CLAVE] = clave; 
+    for (int i = 0; i < TRES_VIAS; i++)
+        this -> vias[i] = nullptr;
+    this -> cantidad_claves = 1;
+    this -> cantidad_vias = 0;
 }
 
 template < typename Tipo >
-string Nodo<Tipo>::obtener_clave(int posicion)
+Tipo Nodo<Tipo>::obtener_clave(int posicion)
 {
     return clave[posicion];
 }
@@ -98,35 +113,61 @@ int Nodo<Tipo>::obtener_cantidad_claves()
 }
 
 template < typename Tipo >
-void Nodo<Tipo>::establecer_dato(Tipo dato)
+int Nodo<Tipo>::obtener_cantidad_vias()
 {
-    this -> dato = dato;
+    return cantidad_vias;
 }
 
 template < typename Tipo >
-void Nodo<Tipo>::establecer_derecho(Nodo<Tipo>* derecho, Nodo<Tipo>* padre)
+void Nodo<Tipo>::establecer_clave(Tipo clave, int posicion)
 {
-    this ->  derecho = derecho;
+    this -> claves[posicion] = clave;
+    cantidad_claves++;
+}
+
+template < typename Tipo >
+void Nodo<Tipo>::establecer_primera_via(Nodo<Tipo>* primera_via, Nodo<Tipo>* padre)
+{
+    vias[PRIMERA_VIA] = primera_via;
     this -> padre = padre;
+    cantidad_vias++;
 }
 
 template < typename Tipo >
-void Nodo<Tipo>::establecer_izquierdo(Nodo<Tipo>* izquierdo, Nodo<Tipo>* padre)
+void Nodo<Tipo>::establecer_segunda_via(Nodo<Tipo>* segunda_via, Nodo<Tipo>* padre)
 {
-    this -> izquierdo = izquierdo;
+    vista[SEGUNDA_CLAVE] = segunda_via;
+    this -> padre = padre;
+    cantidad_vias++;
+}
+
+template < typename Tipo >
+void Nodo<Tipo>::establecer_segunda_via(Nodo<Tipo>* tercera_via, Nodo<Tipo>* padre)
+{
+    vias[TERCERA_VIA] = tercera_via;
     this -> padre = padre; 
+    cantidad_vias++;
 }
 
 template < typename Tipo > 
-void Nodo<Tipo>::establecer_derecho(Nodo<Tipo>* derecho)
+void Nodo<Tipo>::establecer_primera_via(Nodo<Tipo>* primera_via)
 {
-    this -> derecho = derecho; 
+    vias[PRIMERA_VIA] = primera_via; 
+    cantidad_vias++;
+}
+
+template < typename Tipo >
+void Nodo<Tipo>::establecer_segunda_via(Nodo<Tipo>* segunda_via)
+{
+    vias[SEGUNDA_VIA] = segunda_via;
+    cantidad_vias++;
 }
 
 template < typename Tipo > 
-void Nodo<Tipo>::establecer_izquierdo(Nodo<Tipo>* izquierdo)
+void Nodo<Tipo>::establecer_tercera_via(Nodo<Tipo>* tercera_via)
 {
-    this -> izquierdo = izquierdo;
+    vias[TERCERA_VIA] = tercera_via;
+    cantidad_vias++;
 }
 
 template < typename Tipo >
@@ -136,15 +177,21 @@ void Nodo<Tipo>::establecer_padre(Nodo<Tipo>* padre)
 }
 
 template < typename Tipo >
-Nodo<Tipo>* Nodo<Tipo>::obtener_derecho()
+Nodo<Tipo>* Nodo<Tipo>::obtener_primera_via()
 {
-    return derecho;
+    return vias[PRIMERA_VIA];
+}
+
+template < typename Tipo > 
+Nodo<Tipo>* Nodo<Tipo>::obtener_segunda_via()
+{
+    return vias[SEGUNDA_VIA];
 }
 
 template < typename Tipo >
-Nodo<Tipo>* Nodo<Tipo>::obtener_izquierdo()
+Nodo<Tipo>* Nodo<Tipo>::obtener_tercera_via()
 {
-    return izquierdo;
+    return vias[TERCERA_VIA];
 }
 
 template < typename Tipo > 
@@ -156,18 +203,19 @@ Nodo<Tipo>* Nodo<Tipo>::obtener_padre()
 template < typename Tipo >
 bool Nodo<Tipo>::es_hoja()
 {
-    return (obtener_izquierdo() == NULL && obtener_derecho() == NULL);
+    return (obtener_primera_via() == nullptr && obtener_segunda_via() == nullptr && obtener_tercera_via() == nullptr);
 }
 
 template < typename Tipo >
-bool Nodo<Tipo>::solo_hijo_derecho()
+bool Nodo<Tipo>::solo_primera_via()
 {
-    return (obtener_izquierdo() == NULL && obtener_derecho() != NULL);
+    return (obtener_primera_via() != nullptr && obtener_segunda_via() == nullptr && obtener_tercera_via() != nullptr);
 }
 
 template < typename Tipo >
-bool Nodo<Tipo>::solo_hijo_izquierdo()
+bool Nodo<Tipo>::solo_segunda_via()
 {
-    return (obtener_izquierdo() != NULL && obtener_derecho() == NULL);
+    return (obtener_primera_via() == nullptr && obtener_segunda_via() != nullptr && obtener_tercera_via() == nullptr);
 }
+
 #endif

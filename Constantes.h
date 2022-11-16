@@ -113,10 +113,15 @@ enum opciones_individuales {
     SALTEAR_ANIMAL,
 };
 
-// Constantes arbol b
+// Constantes Arbol B
 enum arbol_b{
     DOS_CLAVES = 2,
-    TRES_VIAS = 3,
+    TRES_VIAS,
+};
+
+enum claves {
+    PRIMERA_CLAVE,
+    SEGUNDA_CLAVE,
 };
 
 enum vias{
