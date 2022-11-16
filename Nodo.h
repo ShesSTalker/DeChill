@@ -35,14 +35,16 @@ class Nodo
         void establecer_clave(Tipo clave, int posicion);
 
         //PRE: -
-        //POS: establece el puntero al hijo derecho y al nodo padre
+        //POS: establece el puntero a la via primera y al nodo padre
         void establecer_primera_via(Nodo<Tipo>* primera_via, Nodo<Tipo>* padre);
 
+        //PRE: -
+        //POS: establece el puntero a la via segunda y al nodo padre
         void establecer_segunda_via(Nodo<Tipo>* segunda_via, Nodo<Tipo>* padre);
 
         //PRE: -
-        //POS: establece el puntero al hijo izquierdo y al nodo padre
-        void establecer_segunda_via(Nodo<Tipo>* segunda_via, Nodo<Tipo>* padre);
+        //POS: establece el puntero a la via tercera y al nodo padre
+        void establecer_tercera_via(Nodo<Tipo>* segunda_via, Nodo<Tipo>* padre);
 
         //PRE: -
         //POS: establece el puntero a la primera via del nodo
@@ -142,7 +144,7 @@ void Nodo<Tipo>::establecer_segunda_via(Nodo<Tipo>* segunda_via, Nodo<Tipo>* pad
 }
 
 template < typename Tipo >
-void Nodo<Tipo>::establecer_segunda_via(Nodo<Tipo>* tercera_via, Nodo<Tipo>* padre)
+void Nodo<Tipo>::establecer_tercera_via(Nodo<Tipo>* tercera_via, Nodo<Tipo>* padre)
 {
     vias[TERCERA_VIA] = tercera_via;
     this -> padre = padre; 
