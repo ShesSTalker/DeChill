@@ -1,6 +1,7 @@
 #ifndef _ARBOL_H_
 #define _ARBOL_H_
 
+#include "Constantes.h"
 #include "Nodo.h"
 
 template < typename Tipo >
@@ -169,9 +170,17 @@ Nodo<Tipo>* Arbol<Tipo>::insertar(Nodo<Tipo>* nodo, Tipo clave)
     {
         nodo = new Nodo<Tipo>(clave);
     }
-    else if (clave > nodo -> obtener_clave())
+    else if (clave > nodo -> obtener_clave(PRIMERA_CLAVE) && nodo -> obtener_cantidad_claves() < DOS_CLAVES)
     {
-        nodo -> 
+        nodo -> establecer_clave(clave, SEGUNDA_CLAVE);
+    }
+    else if (clave < nodo -> obtener_clave(PRIMERA_CLAVE) && nodo -> obtener_cantidad_claves() < DOS_CLAVES)
+    {
+        nodo -> cambiar_posicion(clave);
+    }
+    else if (clave < nodo -> obtener_clave(PRIMERA_CLAVE) && nodo -> obtener_cantidad_claves() == DOS_CLAVES)
+    {
+        
     }
 }
 

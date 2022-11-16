@@ -89,6 +89,10 @@ class Nodo
         //PRE: -
         //POS: devuelve verdaderro si el nodo solo tiene hizo izquierdo y falso en caso contrario
         bool solo_segunda_via();
+
+        //PRE: -
+        //POS:
+        void Nodo<Tipo>::cambiar_posicion(Tipo clave);
 };
 
 template < typename Tipo >
@@ -218,6 +222,16 @@ template < typename Tipo >
 bool Nodo<Tipo>::solo_segunda_via()
 {
     return (obtener_primera_via() == NULL && obtener_segunda_via() != NULL && obtener_tercera_via() == NULL);
+}
+
+template < typename Tipo > 
+void Nodo<Tipo>::cambiar_posicion(Tipo clave)
+{
+    Tipo auxiliar;
+
+    auxiliar = claves[PRIMERA_CLAVE];
+    claves[PRIMERA_CLAVE] = clave;
+    claves[SEGUNDA_CLAVE] = auxiliar;
 }
 
 #endif
