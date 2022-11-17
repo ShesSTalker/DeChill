@@ -87,6 +87,12 @@ COMIDA_CONEJO = "Lechuga",
 COMIDA_ERIZO = "Insectos",
 COMIDA_LAGARTIJA = "Insectos";
 
+// Constantes Auto
+const int
+CARGAR_COMBUSTIBLE_POR_ACCION = 5,
+CARGAR_COMBUSTIBLE_COMPLETO =100;
+
+
 // Constantes adopcion
 enum estado_adopcion {
     ADOPTADO,
