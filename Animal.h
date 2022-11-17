@@ -15,6 +15,7 @@ class Animal
         char especie;
         char tamanio;
         char personalidad;
+        int adoptado;
   
     public:
         //Constructor por defecto.

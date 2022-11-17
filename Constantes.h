@@ -87,6 +87,12 @@ COMIDA_CONEJO = "Lechuga",
 COMIDA_ERIZO = "Insectos",
 COMIDA_LAGARTIJA = "Insectos";
 
+// Constantes adopcion
+enum estado_adopcion {
+    ADOPTADO = 0,
+    NO_ADOPTADO,
+};
+
 // Constantes menues
 enum opciones_menu_principal {
     LISTAR_ANIMALES = 1,
