@@ -89,7 +89,7 @@ COMIDA_LAGARTIJA = "Insectos";
 
 // Constantes adopcion
 enum estado_adopcion {
-    ADOPTADO = 0,
+    ADOPTADO,
     NO_ADOPTADO,
 };
 

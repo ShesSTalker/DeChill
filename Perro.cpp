@@ -9,6 +9,7 @@ Perro::Perro(string nombre, int edad, char tamanio, char personalidad)
     this -> especie = PERRO;
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
+    this -> estado_adopcion = NO_ADOPTADO;
 }
 
 bool Perro::requiere_ducha()

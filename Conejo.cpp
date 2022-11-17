@@ -9,6 +9,7 @@ Conejo::Conejo(string nombre, int edad, char tamanio, char personalidad)
     this -> especie = CONEJO;
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
+    this -> estado_adopcion =  NO_ADOPTADO;
 }
 
 
