@@ -24,6 +24,18 @@ class Auto
         //PRE: -
         //POS: carga al 100 el combustible del auto
         void cargar_combustible_completo();
+
+        //PRE: -
+        //POS: resta 5 de combustible del auto
+        void restar_combustible_montania();
+
+        //PRE: -
+        //POS: resta 40 de combustible del auto
+        void restar_combustible_precipicio();
+
+        //PRE: -
+        //POS: resta 1 de combustible del auto
+        void restar_combustible_camino();
 };
 
 #endif

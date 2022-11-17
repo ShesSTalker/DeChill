@@ -19,3 +19,18 @@ void Auto::cargar_combustible_completo()
 {
     combustible = CARGAR_COMBUSTIBLE_COMPLETO;
 }
+
+void Auto::restar_combustible_montania()
+{
+    combustible -= RESTAR_COMBUSTIBLE_MONTANIA;
+}
+
+void Auto::restar_combustible_precipicio()
+{
+    combustible -= RESTAR_COMBUSTIBLE_PRECIPICIO;
+}
+
+void Auto::restar_combustible_camino()
+{
+    combustible -= RESTAR_COMBUSTIBLE_CAMINO;
+}
