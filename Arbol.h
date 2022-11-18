@@ -17,7 +17,7 @@ class Arbol
 
         //PRE:
         //POS:
-        void insertar(Tipo clave);
+        void insertar(string clave, Tipo dato);
 
         //PRE:
         //POS:
@@ -25,7 +25,7 @@ class Arbol
 
         //PRE:
         //POS:
-        bool buscar_clave(Tipo clave);
+        bool buscar_clave(string clave);
 
         //PRE:
         //POS:
@@ -37,15 +37,15 @@ class Arbol
 
         //PRE:
         //POS:
-        Tipo hijo(Tipo clave);
+        Tipo hijo(string clave);
 
         //PRE:
         //POS:
-        Tipo padre(Tipo clave);
+        Tipo padre(string clave);
 
         //PRE:
         //POS:
-        void remover(Tipo clave);
+        void remover(string clave);
 
         //PRE:
         //POS:
@@ -64,7 +64,7 @@ class Arbol
     private:
         //PRE:
         //POS:
-        Nodo<Tipo>* insertar(Nodo<Tipo>* nodo, Tipo clave); 
+        Nodo<Tipo>* insertar(Nodo<Tipo>* nodo, string clave, Tipo dato); 
 };
 
 template < typename Tipo >
@@ -74,9 +74,9 @@ Arbol<Tipo>::Arbol()
 }
 
 template < typename Tipo >
-void Arbol<Tipo>::insertar(Tipo clave)
+void Arbol<Tipo>::insertar(string clave, Tipo dato)
 {   
-    this -> raiz = insetar(this -> raiz, clave);
+    this -> raiz = insertar(this -> raiz, clave, dato);
 }
 
 template < typename Tipo >
@@ -86,7 +86,7 @@ void Arbol<Tipo>::mostrar_en_orden()
 }
 
 template < typename Tipo >
-bool Arbol<Tipo>::buscar_clave(Tipo clave)
+bool Arbol<Tipo>::buscar_clave(string clave)
 {
     Nodo<Tipo>* resultado = buscar_clave(this -> raiz, clave);
 }
@@ -104,7 +104,7 @@ Tipo Arbol<Tipo>::buscar_maximo()
 }
 
 template < typename Tipo >
-Tipo Arbol<Tipo>::hijo(Tipo clave)
+Tipo Arbol<Tipo>::hijo(string clave)
 {
     Nodo<Tipo>* clave_nodo = this -> buscar_clave(this -> raiz, clave);
 
@@ -119,7 +119,7 @@ Tipo Arbol<Tipo>::hijo(Tipo clave)
 }
 
 template < typename Tipo >
-Tipo Arbol<Tipo>::padre(Tipo clave)
+Tipo Arbol<Tipo>::padre(string clave)
 {
     Nodo<Tipo>* clave_nodo = this -> buscar_clave(this -> raiz, clave);
 
@@ -134,7 +134,7 @@ Tipo Arbol<Tipo>::padre(Tipo clave)
 }
 
 template< typename Tipo >
-void Arbol<Tipo>::remover(Tipo clase)
+void Arbol<Tipo>::remover(string clase)
 {
     this -> raiz = remover(this -> raiz, clase);
 }
@@ -164,7 +164,7 @@ Arbol<Tipo>::~Arbol()
 }
 
 template < typename Tipo > 
-Nodo<Tipo>* Arbol<Tipo>::insertar(Nodo<Tipo>* nodo, Tipo clave)
+Nodo<Tipo>* Arbol<Tipo>::insertar(Nodo<Tipo>* nodo, string clave, Tipo dato)
 {
     if (nodo == NULL)
     {

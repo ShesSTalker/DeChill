@@ -9,7 +9,8 @@ class Nodo
     //Atributos
     private:
         Nodo<Tipo>* padre;
-        Tipo claves[DOS_CLAVES];
+        string claves[DOS_CLAVES];
+        Tipo datos[DOS_CLAVES];
         Nodo<Tipo>* vias[TRES_VIAS]; 
         int cantidad_claves;
         int cantidad_vias;
@@ -17,11 +18,11 @@ class Nodo
 
     //Metodos
     public:
-        Nodo(Tipo clave);
+        Nodo(string clave, Tipo dato);
 
         //PRE: - 
         //POS: devuelve el dato que contiene el nodo
-        Tipo obtener_clave(int posicion);
+        string obtener_clave(int posicion);
 
         //PRE: -
         //POS: devuelve la cantidad de claves del nodo
@@ -31,9 +32,13 @@ class Nodo
         //POS: devuelve la cantidad de vias del nodo
         int obtener_cantidad_vias();
 
+        //PRE: - 
+        //POS: devuelve verdadero si el nodo esta eliminado y falso en caso contrario
+        bool esta_eliminado();
+        
         //PRE: -
         //POS: establece la clave en la posicion "posicion" en el nodo
-        void establecer_clave(Tipo clave, int posicion);
+        void establecer_clave(string clave, int posicion);
 
         //PRE: -
         //POS: establece el puntero a la via primera y al nodo padre
@@ -93,24 +98,26 @@ class Nodo
 
         //PRE: -
         //POS:
-        void Nodo<Tipo>::cambiar_posicion(Tipo clave);
+        void Nodo<Tipo>::cambiar_posicion(string clave, Tipo dato);
 };
 
 template < typename Tipo >
-Nodo<Tipo>::Nodo(Tipo clave)
+Nodo<Tipo>::Nodo(string clave, Tipo dato)
 {
     this -> padre = NULL;
     this -> claves[PRIMERA_CLAVE] = clave; 
+    this -> datos [PRIMERA_CLAVE] = dato;
     for (int i = 0; i < TRES_VIAS; i++)
         this -> vias[i] = NULL;
     this -> cantidad_claves = 1;
     this -> cantidad_vias = 0;
+    this -> eliminado = false;
 }
 
 template < typename Tipo >
-Tipo Nodo<Tipo>::obtener_clave(int posicion)
+string Nodo<Tipo>::obtener_clave(int posicion)
 {
-    return clave[posicion];
+    return claves[posicion];
 }
 
 template < typename Tipo >
@@ -126,7 +133,7 @@ int Nodo<Tipo>::obtener_cantidad_vias()
 }
 
 template < typename Tipo >
-void Nodo<Tipo>::establecer_clave(Tipo clave, int posicion)
+void Nodo<Tipo>::establecer_clave(string clave, int posicion)
 {
     this -> claves[posicion] = clave;
     cantidad_claves++;
@@ -226,13 +233,18 @@ bool Nodo<Tipo>::solo_segunda_via()
 }
 
 template < typename Tipo > 
-void Nodo<Tipo>::cambiar_posicion(Tipo clave)
+void Nodo<Tipo>::cambiar_posicion(string clave, Tipo dato)
 {
-    Tipo auxiliar;
+    string auxiliar1;
+    Tipo auxiliar2;
 
-    auxiliar = claves[PRIMERA_CLAVE];
+    auxiliar1 = claves[PRIMERA_CLAVE];
     claves[PRIMERA_CLAVE] = clave;
-    claves[SEGUNDA_CLAVE] = auxiliar;
+    claves[SEGUNDA_CLAVE] = auxiliar1;
+
+    auxiliar2 = datos[PRIMERA_CLAVE];
+    datos[PRIMERA_CLAVE] = dato;
+    datos[SEGUNDA_CLAVE] = auxiliar2;
 }
 
 #endif
