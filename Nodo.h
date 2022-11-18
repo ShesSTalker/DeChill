@@ -15,6 +15,7 @@ class Nodo
         int cantidad_claves;
         int cantidad_vias;
         bool eliminado;
+        bool es_hoja;
 
     //Metodos
     public:
@@ -98,7 +99,7 @@ class Nodo
 
         //PRE: -
         //POS:
-        void Nodo<Tipo>::cambiar_posicion(string clave, Tipo dato);
+        void Nodo<Tipo>::insertar_no_lleno(string nueva_clave, Tipo dato);
 };
 
 template < typename Tipo >
@@ -233,7 +234,7 @@ bool Nodo<Tipo>::solo_segunda_via()
 }
 
 template < typename Tipo > 
-void Nodo<Tipo>::cambiar_posicion(string clave, Tipo dato)
+void Nodo<Tipo>::insertar_no_lleno(string nueva_clave, Tipo dato)
 {
     string auxiliar1;
     Tipo auxiliar2;
