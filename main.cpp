@@ -1,31 +1,17 @@
 #include <iostream>
-#include "Menu.h"
+#include "NodoArbol.h"
 #include "Sistema.h"
+#include "Menu.h"
 
 using namespace std;
 
 int main()
 {
-    Menu* menu = new Menu();
-    Sistema* sistema = new Sistema();
-    int opcion;
+    NodoArbol<Animal> *miNodo = new NodoArbol<Animal>;
 
-    sistema -> leer_datos();
-    menu -> bienvenida();
-    
-    do
-    {
-        menu -> mostrar_menu();
-        menu -> pedir_opcion();
-        opcion = menu -> obtener_opcion_tomada();
-        sistema -> procesar_opcion(opcion);
-    }
-    while (opcion != GUARDAR_Y_SALIR);
+    cout << "TESTING TESTING 1 2 3" << endl;
 
-    sistema -> guardar();
-    
-    delete menu;
-    delete sistema;
+    delete miNodo;
 
     return 0;
 }
