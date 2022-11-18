@@ -10,6 +10,8 @@
 #include "Erizo.h"
 #include "Roedor.h"
 #include "Conejo.h"
+#include "Lista.h"
+#include "Auto.h"
 
 using namespace std;
 

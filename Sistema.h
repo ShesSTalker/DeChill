@@ -3,7 +3,6 @@
 
 #include "Menu.h"
 #include "Vector.h"
-#include "Auto.h"
 
 class Sistema
 {

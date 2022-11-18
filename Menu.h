@@ -4,6 +4,7 @@
 #include "Constantes.h"
 #include "Lista.h"
 #include "Animal.h"
+#include "Auto.h"
 
 class Menu 
 {

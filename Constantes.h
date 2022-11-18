@@ -94,7 +94,7 @@ enum opciones_menu_principal {
     GUARDAR_Y_SALIR,
 };
 
-const int MAX_OPCIONES_MENU_PRINCIPAL= 6;
+const int MAX_OPCIONES_MENU_PRINCIPAL= 7;
 
 enum opciones_submenu {
     ELEGIR_INDIVIDUALMENTE = 1,
