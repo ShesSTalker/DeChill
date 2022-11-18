@@ -13,6 +13,7 @@ class Nodo
         Nodo<Tipo>* vias[TRES_VIAS]; 
         int cantidad_claves;
         int cantidad_vias;
+        bool eliminado;
 
     //Metodos
     public:

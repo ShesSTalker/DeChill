@@ -98,10 +98,11 @@ RESTAR_COMBUSTIBLE_MONTANIA = 5,
 RESTAR_COMBUSTIBLE_PRECIPICIO = 40,
 RESTAR_COMBUSTIBLE_CAMINO = 1;
 
-// Constantes adopcion
-enum estado_adopcion {
+// Constantes estado animal
+enum estado_animal {
     ADOPTADO,
     NO_ADOPTADO,
+    FUGADO,
 };
 
 // Constantes menues
