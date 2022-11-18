@@ -61,6 +61,28 @@ COMIDA_CONEJO = "Lechuga",
 COMIDA_ERIZO = "Insectos",
 COMIDA_LAGARTIJA = "Insectos";
 
+
+// Constantes combustible Auto
+
+const int
+MAX_COMBUSTIBBLE = 100;
+// Constantes cargar combustible Auto
+const int
+CARGAR_COMBUSTIBLE_POR_ACCION = 5,
+CARGAR_COMBUSTIBLE_COMPLETO =100;
+
+// Constantes restar combustible Auto
+const int
+RESTAR_COMBUSTIBLE_MONTANIA = 5,
+RESTAR_COMBUSTIBLE_PRECIPICIO = 40,
+RESTAR_COMBUSTIBLE_CAMINO = 1;
+
+// Constantes adopcion
+enum estado_adopcion {
+    ADOPTADO,
+    NO_ADOPTADO,
+};
+
 // Constantes menues
 enum opciones_menu_principal {
     LISTAR_ANIMALES = 1 ,
@@ -68,6 +90,7 @@ enum opciones_menu_principal {
     BUSCAR_ANIMAL,
     CUIDAR_ANIMAL,
     ADOPTAR_ANIMAL,
+    CARGAR_COMBUSTIBLE,
     GUARDAR_Y_SALIR,
 };
 

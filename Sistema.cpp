@@ -17,6 +17,7 @@ Sistema::Sistema()
 {
     animales = new Lista<Animal*>;
     punteros_animales = new Vector<Animal*>;
+    vehiculo = new Auto;
 }
 
 void Sistema::leer_datos()
@@ -127,7 +128,15 @@ void Sistema::procesar_opcion(int opcion_tomada)
             break;
 
         case ADOPTAR_ANIMAL:
-            bool animales_validos[animales->obtener_cantidad()];
+            if(animales -> vacia())
+            {
+                cout << endl << "La reserva actualmente no tiene animales :(" << endl;
+                break;
+            }
+
+            cout << endl << "ADOPTAR ANIMAL:" << endl << endl;
+
+            bool animales_validos[animales -> obtener_cantidad()];
             posicion = 1;
             cout << endl << "ADOPTAR ANIMAL:" << endl << endl;
             pasar_tiempo();
@@ -143,6 +152,14 @@ void Sistema::procesar_opcion(int opcion_tomada)
                 animales -> baja(stoi(posicion_adopcion));
                 cout << "Felicidades por su adopcion!" << endl << endl;
             }
+            break;
+        case CARGAR_COMBUSTIBLE:
+            int combustible_cargar;
+            cout << endl << "CARGAR COMBUSTIBLE:" << endl << endl;
+            cout <<"Combustible actual:" <<vehiculo->obtener_combustible()<< endl << endl;
+            cout <<"Ingrese el combustible a cargar:"<<endl;
+            cin>>combustible_cargar;
+            vehiculo->cargar_combustible(combustible_cargar);
             break;
     }
 }
@@ -596,4 +613,5 @@ Sistema::~Sistema()
 {
     delete animales;
     delete punteros_animales;
+    delete vehiculo;
 }

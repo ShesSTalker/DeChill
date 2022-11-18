@@ -1,5 +1,9 @@
 {
+<<<<<<< Updated upstream
         "files.associations": {
                 "iostream": "cpp"
         }
+=======
+    "editor.fontFamily": "'Monocraft'"
+>>>>>>> Stashed changes
 }

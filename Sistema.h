@@ -3,6 +3,7 @@
 
 #include "Menu.h"
 #include "Vector.h"
+#include "Auto.h"
 
 class Sistema
 {
@@ -10,6 +11,7 @@ class Sistema
     private:
         Lista<Animal*>* animales;
         Vector<Animal*>* punteros_animales;
+        Auto * vehiculo;
 
     //Metodos
     public:
