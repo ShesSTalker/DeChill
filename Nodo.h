@@ -70,6 +70,10 @@ class Nodo
 
         //PRE:
         //POS:
+        void insertar_lleno(Nodo<Tipo>* nodo ,string nueva_clave, Tipo nuevo_dato);
+
+        //PRE:
+        //POS:
         void dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo_dato);
 
     private:
@@ -171,7 +175,14 @@ void Nodo<Tipo>::insertar_no_lleno(string nueva_clave, Tipo nuevo_dato)
     }
     else 
     {
-        if (obtener_clave(PRIMERA_CLAVE) < nueva_clave && obtener_clave(SEGUNDA_CLAVE) < nueva_clave)
+        
+    }
+}
+
+template < typename Tipo > 
+void Nodo<Tipo>::insertar_lleno(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo_dato)
+{
+    if (obtener_clave(PRIMERA_CLAVE) < nueva_clave && obtener_clave(SEGUNDA_CLAVE) < nueva_clave)
         {
             establecer_nueva_clave(CLAVE_EXTRA) = obtener_clave(SEGUNDA_CLAVE);
             establecer_nueva_clave(SEGUNDA_CLAVE) = obtener_clave(PRIMERA_CLAVE);
@@ -195,7 +206,7 @@ void Nodo<Tipo>::insertar_no_lleno(string nueva_clave, Tipo nuevo_dato)
             
             establecer_nuevo_dato(CLAVE_EXTRA)= nuevo_dato;
         }
-    }
+        dividir()
 }
 
 template <typename Tipo >
@@ -210,6 +221,8 @@ void Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo_dato)
         Nodo<Tipo>* derecho = new Nodo<Tipo>(nodo -> obtener_clave(CLAVE_EXTRA), nodo -> obtener_dato(CLAVE_EXTRA));
         derecho -> establecer_padre;
         nodo -> establecer_hijo_derecho(derecho);
+
+        nodo -> establecer_nueva_clave(nodo -> obtener_clave(SEGUNDA_CLAVE), PRIMERA_CLAVE)
     }
 }
 
