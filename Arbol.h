@@ -170,7 +170,6 @@ Nodo<Tipo>* Arbol<Tipo>::insertar(Nodo<Tipo>* nodo, string nueva_clave, Tipo nue
     {
         insertar(nodo -> obtener_hijo_mediano(), nueva_clave, nuevo_dato);
     }
-
 }
 
 #endif
