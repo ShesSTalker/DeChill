@@ -150,14 +150,27 @@ Nodo<Tipo>* Arbol<Tipo>::insertar(Nodo<Tipo>* nodo, string nueva_clave, Tipo nue
     {
         nodo = new Nodo<Tipo>(nueva_clave, nuevo_dato);
     }
-    if (nodo -> es_hoja() && nodo -> obtener_cantidad_claves() > DOS_CLAVES)
+    else if(nodo -> es_hoja() && nodo -> obtener_cantidad_claves() > DOS_CLAVES)
     {
         nodo -> insertar_no_lleno(nueva_clave, nuevo_dato)
     }
-    if (nodo -> obtener_cantidad_claves == 2)
+    else if(nodo -> obtener_cantidad_claves == DOS_CLAVES)
     {
-        
+        nodo -> insertar_lleno(nodo, nueva_clave, nuevo_dato)
     }
+    else if(nodo -> !es_hoja() && nodo -> obtener_clave(PRIMERA_CLAVE) > nueva_clave)
+    {
+        insertar(nodo -> obtener_hijo_izquierdo(), nueva_clave, nuevo_dato);
+    }
+    else if(nodo -> !es_hoja() && nodo -> obtener_clave(SEGUNDA_CLAVE) < nueva_clave)
+    {
+        insertar(nodo -> obtener_hijo_derecho(), nueva_clave, nuevo_dato);
+    }
+    else if(nodo -> !es_hoja() && nodo -> obtener_clave(PRIMERA_CLAVE) < nueva_clave && obtener_clave(SEGUNDA_CLAVE) > nueva_clave)
+    {
+        insertar(nodo -> obtener_hijo_mediano(), nueva_clave, nuevo_dato);
+    }
+
 }
 
 #endif
