@@ -29,14 +29,6 @@ class Arbol
 
         //PRE:
         //POS:
-        Tipo buscar_minimo();
-
-        //PRE:
-        //POS:
-        Tipo buscar_maximo();
-
-        //PRE:
-        //POS:
         Tipo hijo(string clave);
 
         //PRE:
@@ -70,7 +62,7 @@ class Arbol
 template < typename Tipo >
 Arbol<Tipo>::Arbol()
 {
-    this -> raiz = NULL;
+    this -> raiz = nullptr;
 }
 
 template < typename Tipo >
@@ -91,24 +83,12 @@ bool Arbol<Tipo>::buscar_clave(string clave)
     Nodo<Tipo>* resultado = buscar_clave(this -> raiz, clave);
 }
 
-template < typename Tipo > 
-Tipo Arbol<Tipo>::buscar_minimo()
-{
-    return buscar_minimo(this -> raiz);
-}
-
-template < typename Tipo >
-Tipo Arbol<Tipo>::buscar_maximo()
-{
-    return buscar_maximo(this -> raiz);
-}
-
 template < typename Tipo >
 Tipo Arbol<Tipo>::hijo(string clave)
 {
     Nodo<Tipo>* clave_nodo = this -> buscar_clave(this -> raiz, clave);
 
-    if (clave_nodo == NULL)
+    if (clave_nodo == nullptr)
     {
         return -1;
     }
@@ -123,7 +103,7 @@ Tipo Arbol<Tipo>::padre(string clave)
 {
     Nodo<Tipo>* clave_nodo = this -> buscar_clave(this -> raiz, clave);
 
-    if (clave_nodo == NULL)
+    if (clave_nodo == nullptr)
     {
         return -1;
     }
@@ -142,13 +122,13 @@ void Arbol<Tipo>::remover(string clase)
 template < typename Tipo > 
 Nodo<Tipo>* Arbol<Tipo>::obtener_raiz()
 {
-    return this -> raiz;
+    return raiz;
 }
 
 template < typename Tipo >
 bool Arbol<Tipo>::vacio()
 {
-    return this -> raiz == NULL;
+    return raiz == nullptr;
 }
 
 template < typename Tipo >
@@ -164,32 +144,19 @@ Arbol<Tipo>::~Arbol()
 }
 
 template < typename Tipo > 
-Nodo<Tipo>* Arbol<Tipo>::insertar(Nodo<Tipo>* nodo, string clave, Tipo dato)
+Nodo<Tipo>* Arbol<Tipo>::insertar(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo_dato)
 {
-    if (nodo == NULL)
+    if (nodo == nullptr)
     {
-        nodo = new Nodo<Tipo>(clave);
+        nodo = new Nodo<Tipo>(nueva_clave, nuevo_dato);
     }
-    else if (clave > nodo -> obtener_clave(PRIMERA_CLAVE) && nodo -> obtener_cantidad_claves() < DOS_CLAVES)
+    if (nodo -> es_hoja() && nodo -> obtener_cantidad_claves() > DOS_CLAVES)
     {
-        nodo -> establecer_clave(clave, SEGUNDA_CLAVE);
+        nodo -> insertar_no_lleno(nueva_clave, nuevo_dato)
     }
-    else if (clave < nodo -> obtener_clave(PRIMERA_CLAVE) && nodo -> obtener_cantidad_claves() < DOS_CLAVES)
+    if (nodo -> obtener_cantidad_claves == 2)
     {
-        nodo -> cambiar_posicion(clave);
-    }
-    else if (clave < nodo -> obtener_clave(PRIMERA_CLAVE) && nodo -> obtener_cantidad_claves() == DOS_CLAVES)
-    {
-        nodo -> establecer_primera_via(insertar(nodo -> obtener_primera_via(), nodo));
         
-    }
-    else if (clave > nodo -> obtener_clave(PRIMERA_CLAVE) && nodo -> obtener_cantidad_claves() == DOS_CLAVES && clave <  nodo -> obtener_clave(SEGUNDA_CLAVE))
-    {
-        nodo -> establecer_primera_via(insertar(nodo -> obtener_segunda_via(), nodo));
-    }
-    else if (clave > nodo -> obtener_clave(PRIMERA_CLAVE) && nodo -> obtener_cantidad_claves() == DOS_CLAVES && nodo -> obtener_clave(SEGUNDA_CLAVE))
-    {
-        nodo -> establecer_primera_via(insertar(nodo -> obtener_tercera_via(), nodo));
     }
 }
 

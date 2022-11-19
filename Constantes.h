@@ -140,12 +140,13 @@ enum arbol_b{
 enum claves {
     PRIMERA_CLAVE,
     SEGUNDA_CLAVE,
+    CLAVE_EXTRA,
 };
 
 enum vias{
-    PRIMERA_VIA,
-    SEGUNDA_VIA,
-    TERCERA_VIA,
+    HIJO_IZQUIERDO,
+    HIJO_MEDIANO,
+    HIJO_DERECHO,
 };
 
 #endif 
