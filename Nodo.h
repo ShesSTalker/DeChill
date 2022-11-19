@@ -13,7 +13,6 @@ class Nodo
         Tipo datos[DOS_CLAVES + 1];
         Nodo<Tipo>* hijos[TRES_VIAS]; 
         int cantidad_claves;
-        int cantidad_hijos;
         bool eliminado;
         bool es_hoja;
 
@@ -26,32 +25,16 @@ class Nodo
         string obtener_clave(int posicion);
 
         //PRE: -
+        //POS:
+        Tipo obtener_dato(int posicion);
+
+        //PRE: -
         //POS: devuelve la cantidad de claves del nodo
         int obtener_cantidad_claves();
 
         //PRE: - 
-        //POS: devuelve la cantidad de hijos del nodo
-        int obtener_cantidad_hijos();
-
-        //PRE: - 
         //POS: devuelve verdadero si el nodo esta eliminado y falso en caso contrario
         bool esta_eliminado();
-        
-        //PRE: -
-        //POS: establece la clave en la posicion "posicion" en el nodo
-        void establecer_clave(string clave, int posicion);
-
-        //PRE: -
-        //POS: establece el puntero al hijo izquierdo y al nodo padre
-        void establecer_hijo_izquierdo(Nodo<Tipo>* hijo_izquierdo, Nodo<Tipo>* padre);
-
-        //PRE: -
-        //POS: establece el puntero al hijo mediadno y al nodo padre
-        void establecer_hijo_mediano(Nodo<Tipo>* hijo_mediano, Nodo<Tipo>* padre);
-
-        //PRE: -
-        //POS: establece el puntero al hijo derecho y al nodo padre
-        void establecer_hijo_derecho(Nodo<Tipo>* hijo_derecho, Nodo<Tipo>* padre);
 
         //PRE: -
         //POS: establece el puntero al hijo izquierdo del nodo
@@ -70,16 +53,8 @@ class Nodo
         void establecer_padre(Nodo<Tipo>* padre);
 
         //PRE: -
-        //POS: devuelve el puntero al hijo izquierdo del nodo
-        Nodo<Tipo>* obtener_hijo_izquierdo();
-
-        //PRE: -
-        //POS: devuelve el puntero al hijo mediano del nodo
-        Nodo<Tipo>* obtener_hijo_mediano();
-
-        //PRE: -
-        //POS: devuelve el puntero al hijo derecho via del nodo
-        Nodo<Tipo>* obtener_hijo_derecho();
+        //POS: devuelve el puntero al hijo del nodo en la posicion "posicion"
+        Nodo<Tipo>* obtener_hijo(int posicion);
 
         //PRE: -
         //POS: devuelve el puntero al padre
@@ -96,6 +71,13 @@ class Nodo
         //PRE:
         //POS:
         void dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo_dato);
+
+    private:
+        void establecer_nueva_clave(string nueva_clave, int posicion);
+
+        void establecer_nuevo_dato(Tipo nuevo_dato, int posicion);
+
+        void cambiar_posiciones(string nueva_clave, Tipo nuevo_dato);
 };
 
 template < typename Tipo >
@@ -107,7 +89,6 @@ Nodo<Tipo>::Nodo(string clave, Tipo dato)
     for (int i = 0; i < TRES_VIAS; i++)
         this -> hijos[i] = nullptr;
     this -> cantidad_claves = 1;
-    this -> cantidad_vias = 0;
     this -> eliminado = false;
 }
 
@@ -117,68 +98,34 @@ string Nodo<Tipo>::obtener_clave(int posicion)
     return claves[posicion];
 }
 
+template < typename Tipo > 
+Tipo Nodo<Tipo>::obtener_dato(int posicion)
+{
+    return datos[posicion];
+}
+
 template < typename Tipo >
 int Nodo<Tipo>::obtener_cantidad_claves()
 {
     return cantidad_claves;
 }
 
-template < typename Tipo >
-int Nodo<Tipo>::obtener_cantidad_hijos()
-{
-    return cantidad_hijos;
-}
-
-template < typename Tipo >
-void Nodo<Tipo>::establecer_clave(string clave, int posicion)
-{
-    this -> claves[posicion] = clave;
-    cantidad_claves++;
-}
-
-template < typename Tipo >
-void Nodo<Tipo>::establecer_hijo_izquierdo(Nodo<Tipo>* hijo_izquierdo, Nodo<Tipo>* padre)
-{
-    hijos[HIJO_IZQUIERDO] = hijo_izquierdo;
-    this -> padre = padre;
-    cantidad_hijos++;
-}
-
-template < typename Tipo >
-void Nodo<Tipo>::establecer_hijo_mediano(Nodo<Tipo>* hijo_mediano, Nodo<Tipo>* padre)
-{
-    hijos[HIJO_MEDIANO] = hijo_mediano;
-    this -> padre = padre;
-    cantidad_hijos++;
-}
-
-template < typename Tipo >
-void Nodo<Tipo>::establecer_hijo_derecho(Nodo<Tipo>* hijo_derecho, Nodo<Tipo>* padre)
-{
-    hijos[HIJO_DERECHO] = hijo_derecho;
-    this -> padre = padre; 
-    cantidad_hijos++;
-}
-
 template < typename Tipo > 
 void Nodo<Tipo>::establecer_hijo_izquierdo(Nodo<Tipo>* hijo_izquierdo)
 {
     hijos[HIJO_IZQUIERDO] = hijo_izquierdo; 
-    cantidad_hijos++;
 }
 
 template < typename Tipo >
 void Nodo<Tipo>::establecer_hijo_mediano(Nodo<Tipo>* hijo_mediano)
 {
     hijos[HIJO_MEDIANO] = hijo_mediano;
-    cantidad_hijos++;
 }
 
 template < typename Tipo > 
 void Nodo<Tipo>::establecer_hijo_derecho(Nodo<Tipo>* hijo_derecho)
 {
     hijos[HIJO_DERECHO] = hijo_derecho;
-    cantidad_hijos++;
 }
 
 template < typename Tipo >
@@ -188,21 +135,9 @@ void Nodo<Tipo>::establecer_padre(Nodo<Tipo>* padre)
 }
 
 template < typename Tipo >
-Nodo<Tipo>* Nodo<Tipo>::obtener_hijo_izquierdo()
+Nodo<Tipo>* Nodo<Tipo>::obtener_hijo(int posicion)
 {
-    return hijos[HIJO_IZQUIERDO];
-}
-
-template < typename Tipo > 
-Nodo<Tipo>* Nodo<Tipo>::obtener_hijo_mediano()
-{
-    return hijos[HIJO_MEDIANO];
-}
-
-template < typename Tipo >
-Nodo<Tipo>* Nodo<Tipo>::obtener_hijo_derecho()
-{
-    return hijos[HIJO_DERECHO];
+    return hijos[posicion];
 }
 
 template < typename Tipo > 
@@ -220,43 +155,45 @@ bool Nodo<Tipo>::es_hoja()
 template < typename Tipo > 
 void Nodo<Tipo>::insertar_no_lleno(string nueva_clave, Tipo nuevo_dato)
 {
-    string auxiliar1;
-    Tipo auxiliar2;
-
-    if (es_hoja() && obtener_cantidad_claves < DOS_CLAVES)
+    if (es_hoja() && obtener_cantidad_claves() < DOS_CLAVES)
     {
-        auxiliar1 = claves[PRIMERA_CLAVE];
-        claves[PRIMERA_CLAVE] = nueva_clave;
-        claves[SEGUNDA_CLAVE] = auxiliar1;
-
-        auxiliar2 = datos[PRIMERA_CLAVE];
-        datos[PRIMERA_CLAVE] = dato;
-        datos[SEGUNDA_CLAVE] = auxiliar2;
+       if (obtener_clave(PRIMERA_CLAVE) < nueva_clave)
+       {
+            establecer_nueva_clave(SEGUNDA_CLAVE);
+            establecer_nuevo_dato(SEGUNDA_CLAVE);
+            cantidad_claves++;
+       }
+       else
+       {
+            cambiar_posiciones(nueva_clave, nuevo_dato);
+            cantidad_claves++;
+       }
     }
     else 
     {
-        if (nueva_clave < claves[PRIMERA_CLAVE] && nueva_clave < claves[SEGUNDA_CLAVE])
+        if (obtener_clave(PRIMERA_CLAVE) < nueva_clave && obtener_clave(SEGUNDA_CLAVE) < nueva_clave)
         {
-            claves[CLAVE_EXTRA] = claves[SEGUNDA_CLAVE];
-            claves[SEGUNDA_CLAVE] = claves[PRIMERA_CLAVE];
-            claves[PRIMERA_CLAVE] = nueva_clave;
+            establecer_nueva_clave(CLAVE_EXTRA) = obtener_clave(SEGUNDA_CLAVE);
+            establecer_nueva_clave(SEGUNDA_CLAVE) = obtener_clave(PRIMERA_CLAVE);
+            establecer_nueva_clave(PRIMERA_CLAVE) = nueva_clave;
 
-            datos[CLAVE_EXTRA] = datos[SEGUNDA_CLAVE];
-            datos[SEGUNDA_CLAVE] = datos[PRIMERA_CLAVE];
-            datos[PRIMERA_CLAVE] = nuevo_dato;
+            establecer_nuevo_dato(CLAVE_EXTRA) = obtener_dato(SEGUNDA_CLAVE);
+            establecer_nuevo_dato(SEGUNDA_CLAVE) = obtener_dato(PRIMERA_CLAVE);
+            establecer_nuevo_dato(PRIMERA_CLAVE) = nuevo_dato;
         }
-        else if (nueva_clave < claves[PRIMERA_CLAVE] && nueva_clave > claves[SEGUNDA_CLAVE])
+        else if (obtener_clave(PRIMERA_CLAVE) > nueva_clave && obtener_clave(SEGUNDA_CLAVE) < nueva_clave)
         {
-            claves[CLAVE_EXTRA] = claves[SEGUNDA_CLAVE];
-            claves[SEGUNDA_CLAVE] = nueva_clave;
+            establecer_nueva_clave(CLAVE_EXTRA) = obtener_clave(SEGUNDA_CLAVE);
+            establecer_nueva_clave(SEGUNDA_CLAVE) = nueva_clave;
             
-            datos[CLAVE_EXTRA] = datos[SEGUNDA_CLAVE];
-            datos[SEGUNDA_CLAVE] = nuevo_dato; 
+            establecer_nuevo_dato(CLAVE_EXTRA) = obtener_clave(SEGUNDA_CLAVE);
+            establecer_nuevo_dato(SEGUNDA_CLAVE) = nuevo_dato; 
         }
         else
         {
-            claves[CLAVE_EXTRA] = nueva_clave;
-            datos[CLAVE_EXTRA] = nuevo_dato;
+            establecer_nueva_clave(CLAVE_EXTRA) = nueva_clave;
+            
+            establecer_nuevo_dato(CLAVE_EXTRA)= nuevo_dato;
         }
     }
 }
@@ -264,7 +201,43 @@ void Nodo<Tipo>::insertar_no_lleno(string nueva_clave, Tipo nuevo_dato)
 template <typename Tipo >
 void Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo_dato)
 {
-    
+    if(nodo -> obtener_padre() == nullptr)
+    {
+        Nodo<Tipo>* izquierdo = new Nodo<Tipo>(nodo -> obtener_clave(PRIMERA_CLAVE), nodo -> obtener_dato(PRIMERA_CLAVE));
+        izquierdo -> establecer_padre(nodo);
+        nodo -> establecer_hijo_izquierdo(izquierdo);
+
+        Nodo<Tipo>* derecho = new Nodo<Tipo>(nodo -> obtener_clave(CLAVE_EXTRA), nodo -> obtener_dato(CLAVE_EXTRA));
+        derecho -> establecer_padre;
+        nodo -> establecer_hijo_derecho(derecho);
+    }
+}
+
+template <typename Tipo >
+void Nodo<Tipo>::establecer_nueva_clave(string nueva_clave, int posicion)
+{
+    claves[SEGUNDA_CLAVE] = nueva_clave;
+}
+
+template <typename Tipo >
+void Nodo<Tipo>::establecer_nuevo_dato(Tipo nuevo_dato, int posicion)
+{
+    datos[SEGUNDA_CLAVE] = nuevo_dato;
+}
+
+template < typename Tipo >
+void Nodo<Tipo>::cambiar_posiciones(string nueva_clave, Tipo nuevo_dato)
+{
+    string auxiliar1;
+    Tipo auxiliar2;
+
+    auxiliar1 = obtener_clave(PRIMERA_CLAVE);
+    establecer_nueva_clave(nueva_clave, PRIMERA_CLAVE);
+    establecer_nueva_clave(auxiliar1, SEGUNDA_CLAVE);
+
+    auxiliar2 = obtener_dato(PRIMERA_CLAVE);
+    establecer_nuevo_dato(nuevo_dato, PRIMERA_CLAVE);
+    establecer_nuevo_dato(auxiliar2, SEGUNDA_CLAVE);
 }
 
 #endif
