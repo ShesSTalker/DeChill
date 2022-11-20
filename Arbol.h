@@ -68,7 +68,13 @@ Arbol<Tipo>::Arbol()
 template < typename Tipo >
 void Arbol<Tipo>::insertar(string clave, Tipo dato)
 {   
-    this -> raiz = insertar(this -> raiz, clave, dato);
+    if(this -> raiz ->cantidad_claves()==DOS_CLAVES){
+
+        this -> raiz ->insertar_lleno(clave, dato);
+
+    }else{
+        this -> raiz ->insertar_no_lleno(clave,dato)
+    }
 }
 
 template < typename Tipo >
@@ -81,6 +87,7 @@ template < typename Tipo >
 bool Arbol<Tipo>::buscar_clave(string clave)
 {
     Nodo<Tipo>* resultado = buscar_clave(this -> raiz, clave);
+    
 }
 
 template < typename Tipo >
