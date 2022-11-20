@@ -7,7 +7,6 @@ class Vector
     //Atributos
     private:
         int longitud;
-        int cantidad;
         Tipo* elemento;
 
     //Metodos
@@ -19,8 +18,8 @@ class Vector
 
         //Constructor con parametros
         //PRE: cantidad debe ser mayor a 0 
-        //POS: crea un objeto Vector de longitud = cantidad 
-        Vector(int cantidad);
+        //POS: crea un objeto Vector de longitud = longitud_inicial 
+        Vector(int longitud_inicial);
 
         //PRE: 0 <= posicion < longitud
         //POS: carga elemento en la posicion "posicion". Si se inserta la posición "longitud", se redimensiona el Vector.
@@ -29,10 +28,6 @@ class Vector
         //PRE: 0 <= posicion < longitud
         //POS: devuelve el elemento que es en la posicion "posicion"
         Tipo obtener_elemento(int posicion);
-
-        //PRE: -
-        //POS: devuelve la cantidad de elementos que contiene el vector
-        int obtener_cantidad();
 
         //PRE: -
         //POS: devuelve la longitud del vector
@@ -44,7 +39,7 @@ class Vector
         ~Vector(); 
 
     private:
-        //PRE: longitud == posicon == cantidad
+        //PRE: longitud == posicion
         //POS: redimenciona la longitud del vector 
         void redimensionar_vector();
 };
@@ -53,14 +48,12 @@ template < class Tipo >
 Vector<Tipo>::Vector()
 {
     longitud = 0;
-    cantidad = 0;
     elemento = 0;
 }
 
 template < class Tipo >
 Vector<Tipo>::Vector(int longitud_inicial)
 {
-    cantidad = 0;
     longitud = longitud_inicial;
     elemento = new Tipo[longitud];
 }
@@ -74,7 +67,6 @@ void Vector<Tipo>::cargar(Tipo elemento, int posicion)
     }  
 
     this -> elemento[posicion] = elemento;
-    cantidad++;
 }
 
 template < class Tipo >
@@ -85,12 +77,6 @@ Tipo Vector<Tipo>::obtener_elemento(int posicion)
         elemento=elemento[posicion];
     }
     return elemento;
-}
-
-template < class Tipo >
-int Vector<Tipo>::obtener_cantidad()
-{
-    return cantidad;
 }
 
 template < class Tipo >

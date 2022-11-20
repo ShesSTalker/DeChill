@@ -7,7 +7,7 @@ class Conejo : public Animal
 {
     public:
         // PRE: -
-        // POS: inicializa los atributos.
+        // POS: crea un objeto Conejo e inicializa los atributos.
         Conejo(string nombre, int edad, char tamanio, char personalidad);
 
         // PRE: - 
@@ -18,6 +18,7 @@ class Conejo : public Animal
         // POS: devuelve el nombre de la comida del animal.
         string que_come();
 
+        //Destructor virtual
         virtual ~Conejo();
 };
 

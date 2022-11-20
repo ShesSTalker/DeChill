@@ -9,6 +9,7 @@ Caballo::Caballo(string nombre, int edad, char tamanio, char personalidad)
     this -> especie = CABALLO;
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
+    this -> estado_adopcion = NO_ADOPTADO; 
 }
 
 bool Caballo::requiere_ducha()
@@ -21,4 +22,4 @@ string Caballo:: que_come()
         return COMIDA_CABALLO;
 }
 
-Caballo::~Caballo(){};
+Caballo::~Caballo(){}

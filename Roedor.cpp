@@ -9,6 +9,7 @@ Roedor::Roedor(string nombre, int edad, char tamanio, char personalidad)
     this -> especie = ROEDOR;
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
+    this -> estado_adopcion = NO_ADOPTADO;
 }
 
 bool Roedor:: requiere_ducha()
@@ -21,4 +22,4 @@ string Roedor:: que_come()
     return COMIDA_ROEDOR;
 }
 
-Roedor::~Roedor(){};
+Roedor::~Roedor(){}

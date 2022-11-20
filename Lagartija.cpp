@@ -9,6 +9,7 @@ Lagartija::Lagartija(string nombre, int edad, char tamanio, char personalidad)
     this -> especie = LAGARTIJA;
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
+    this -> estado_adopcion = NO_ADOPTADO;
 }
 
 bool Lagartija:: requiere_ducha()
@@ -21,4 +22,4 @@ string Lagartija:: que_come()
     return COMIDA_LAGARTIJA;
 }
 
-Lagartija::~Lagartija(){};
+Lagartija::~Lagartija(){}

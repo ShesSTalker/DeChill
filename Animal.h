@@ -15,6 +15,7 @@ class Animal
         char especie;
         char tamanio;
         char personalidad;
+        int estado_adopcion;
   
     public:
         //Constructor por defecto.
@@ -81,7 +82,7 @@ class Animal
         virtual string que_come() = 0;
 
         // Destructor virtual
-        virtual ~Animal();
+        virtual~Animal();
 };
 
 #endif

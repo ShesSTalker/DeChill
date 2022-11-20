@@ -7,7 +7,7 @@ class Roedor : public Animal
 {
     public:
         // PRE: -
-        // POS: inicializa los atributos.
+        // POS: crea un objeto Roedor e inicializa los atributos.
         Roedor(string nombre, int edad, char tamanio, char personalidad);
 
         // PRE: - 
@@ -18,6 +18,7 @@ class Roedor : public Animal
         // POS: devuelve el nombre de la comida del animal.
         string que_come();
 
+        //Destructor virtual
         virtual ~Roedor();
 };
 

@@ -8,7 +8,6 @@ Auto::Auto()
 void Auto::cargar_combustible_por_accion()
 {
     combustible += CARGAR_COMBUSTIBLE_POR_ACCION;
-
 }
 
 int Auto::obtener_combustible()

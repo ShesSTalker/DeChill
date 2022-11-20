@@ -9,6 +9,7 @@ Gato::Gato(string nombre, int edad, char tamanio, char personalidad)
     this -> especie = GATO;
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
+    this -> estado_adopcion = NO_ADOPTADO;
 }
 
 bool Gato:: requiere_ducha()
@@ -21,4 +22,4 @@ string Gato:: que_come()
     return COMIDA_GATO;
 }
 
-Gato::~Gato(){};
+Gato::~Gato(){}

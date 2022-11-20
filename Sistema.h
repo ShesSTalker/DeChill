@@ -14,11 +14,9 @@ class Sistema
 
     //Metodos
     public:
+        //PRE: -
+        //POS: crea un objeto Sistema e incializa los atributos 
         Sistema();
-
-        //PRE: - 
-        //POS: agrega el puntero a animal pasado como parámetro a la lista de los punteros a los animales de la reserva.
-        void agregar_puntero_animal(Animal *nuevo_animal);
 
         //PRE: - 
         //POS: lee los datos del archivo CSV de la reserva.
@@ -32,7 +30,8 @@ class Sistema
         //POS: guarda todos los cambios realizados al archivo CSV de la reserva.
         void guardar();
         
-        //Destructor
+        //PRE: -
+        //POS: libera la memoria asociada con este objeto.
         ~Sistema();
 
     private:
@@ -60,9 +59,9 @@ class Sistema
         //POS: devuelve la posicion del animal en la lista si el nombre existe en la lista y -1 si no existe.      
         int buscar_nombre(string nombre);
 
-        //PRE: -
-        //POS: si el nombre ya existe en la lista, le da la opcion al usuario de volver a ingresar otro nombre o volver al menú principal. Si no existe, rescata al animal. 
-        void verificar_nombre(int posicion, string nombre);
+        //PRE: el nombre ingresado para un animal nuevo ya estaba en la reserva.
+        //POS: si el usuario ingresa que quiere intentar con un nombre diferente para un animal nuevo en la reserva, devuelve true. Caso contrario devuelve false.  
+        bool verificar_intentar_de_nuevo(int posicion, string nombre);
 
         //PRE: el nombre del animal no debe estar en la lista.
         //POS: pide el resto de datos del animal para rescatarlo y agregarlo a a la lista de animales.
@@ -118,19 +117,19 @@ class Sistema
 
         //PRE: -
         //POS: valida los animales para mostrar los que cumplen con el espacio disponible definido por el usuario.
-        void validar_animales_espacio(Animal* animal, string espacio, int posicion, bool * animales_validos); 
+        void validar_animales_espacio(Animal* animal, string espacio, int posicion, bool* animales_validos, int &contador_validos); 
         
         //PRE: -
-        //POS: valida los animales que cumplen con el espacio disponible definido por el usuario
-        bool posicion_espacio_validado(int posicion, bool * animales_validos);
+        //POS: valida los animales que cumplen con el espacio disponible definido por el usuario. Si posición está en -1, el usuario quiere cancelar la adopción.
+        bool posicion_espacio_validado(int posicion, bool* animales_validos);
 
         //PRE: -
         //POS: pide el número del animal que el usuario desea adoptar o 0 en caso de que desee cancelar la adopción y lo devuelve.
-        string pedir_opcion_adopcion(bool * animales_validos);
+        string pedir_opcion_adopcion(bool* animales_validos);
 
         //PRE: -
         //POS: muestra por pantalla todos los animales que cumplen con el espacio con el que dispone el usuario.
-        void listar_animales_espacio(string espacio, int posicion, bool * animales_validos);
+        void listar_animales_espacio(string espacio, int posicion, bool* animales_validos, int &animales_validados);
 };
 
 #endif
