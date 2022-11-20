@@ -223,6 +223,7 @@ void Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo_dato)
         nodo -> establecer_hijo_derecho(derecho);
 
         nodo -> establecer_nueva_clave(nodo -> obtener_clave(SEGUNDA_CLAVE), PRIMERA_CLAVE)
+        cantidad_claves--;
     }
 }
 
