@@ -19,17 +19,19 @@ class Nodo
 
     //Metodos
     public:
-        Nodo(int vias);
+        Nodo();
 
         void establecer_clave(strig nueva_clave, int posicion);
 
-        void establecer_dato(Tipo nuevo_dato, string posicion);
+        void establecer_dato(Tipo *nuevo_dato, int posicion);
 
         void establecer_padre(Nodo<Tipo>* padre);
 
         bool es_hoja();
 
         int obtener_claves_usadas();
+
+        void intercambiar(int posicion_1, int posicion_2);
 
         string* obtener_clave(int posicion);
 
@@ -56,14 +58,27 @@ class Nodo
 };
 
 template < typename Tipo >
-Nodo<Tipo>::Nodo(int vias)
+Nodo<Tipo>::Nodo()
 {
-    claves = new string[vias - 1];
-    datos = new Tipo[vias - 1];
-    hijos = Nodo<Tipo>*[vias];
+    claves = new string[2];
+    datos = new Tipo[2];
+    hijos = Nodo<Tipo>*[3];
     padre = nullptr;
     claves_usadas = 0;
     eliminado = false;
+}
+
+template < typename Tipo >
+void Nodo<Tipo>::intercambiar(int posicion_1, int posicion_2)
+{
+    string clave_aux = nodo -> obtener_clave(posicion_1);
+    Tipo *dato_aux = nodo -> obtener_dato(posicion_1);
+
+    nodo -> establecer_clave(nodo -> obtener_clave(posicion_2), posicion_1);
+    nodo -> establecer_dato(nodo -> obtener_dato(posicion_2), posicion_1);
+
+    nodo -> establecer_clave(clave_aux, posicion_2);
+    nodo -> establecer_dato(dato_aux, posicion_2);
 }
 
 template < typename Tipo >
@@ -73,7 +88,7 @@ void establecer_clave(string nueva_clave, int posicion)
 }
 
 template < typename Tipo >
-void establecer_dato(Tipo nuevo_dato, string posicion)
+void establecer_dato(Tipo *nuevo_dato, int posicion)
 {
    datos[posicion] = nuevo_dato; 
 }
@@ -116,7 +131,7 @@ void Nodo<Tipo>::sumar_clave_usada()
 
 template < typename Tipo >
 void Nodo<Tipo>::insertar_no_lleno(string nueva_clave, Tipo nuevo_dato)
-{
+{ // Claves usadas puede ser 1 o 0
     if(nodo -> obtener_claves_usadas() == 0)
     {
         establecer_clave(nueva_clave, 0);
@@ -143,73 +158,101 @@ void Nodo<Tipo>::insertar_no_lleno(string nueva_clave, Tipo nuevo_dato)
 
 template < typename Tipo >
 Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo_dato)
-{
+{   // Caso 1: raiz y hoja
     if(padre == nullptr && es_hoja)
     {
-        Nodo<Tipo> *nueva_raiz = new Nodo<Tipo>(3);
-        Nodo<Tipo> *izq = new Nodo<Tipo>(3);
-        Nodo<Tipo> *der = new Nodo<Tipo>(3);
+        Nodo<Tipo> *izq = new Nodo<Tipo>();
+        Nodo<Tipo> *der = new Nodo<Tipo>();
 
-        nueva_raiz -> es_hoja = false;
-        nueva_raiz -> establecer_hijo_derecho(der);
-        nueva_raiz -> establecer_hijo_izquierdo(izq);
-        der -> es_hoja = true;
-        der -> establecer_padre(nueva_raiz);
         izq -> es_hoja = true;
-        izq -> establecer_padre(nueva_raiz);
+        izq -> establecer_padre(nodo);
+        der -> es_hoja = true;
+        der -> establecer_padre(nodo);
 
-        if(nueva_clave > nodo -> obtener_clave(0))
+        nodo -> establecer_hijo_derecho(der);
+        nodo -> establecer_hijo_izquierdo(izq);
+        nodo -> es_hoja = false;
+
+        if(nueva_clave > nodo -> obtener_clave(0)) // Nueva clave es la mayor, va a izq y der se queda con posicion 1
         {
-            nueva_raiz -> establecer_clave(nodo -> obtener_clave(0), 0);
-            nueva_raiz -> establecer_dato(nodo -> obtener_dato(0), 0);
-            nueva_raiz -> sumar_clave_usada();
+            izq -> insertar_no_lleno(nueva_clave, nuevo_dato);
 
-            izq -> establecer_clave(nueva_clave, 0);
-            izq -> establecer_dato(nuevo_dato, 0);
-            izq -> sumar_clave_usada();
-
-            der -> establecer_clave(nodo -> obtener_clave(1), 0);
-            der -> establecer_dato(nodo -> obtener_dato(1), 0);
-            der -> sumar_clave_usada();
+            izq -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
         }
-        else if(nueva_clave < nodo -> obtener_clave(1))
+        else if(nueva_clave < nodo -> obtener_clave(1)) // Nueva clave es la menor, va a der y izq se queda con posicion 0
         {
-            nueva_raiz -> establecer_clave(nodo -> obtener_clave(1), 0);
-            nueva_raiz -> establecer_dato(nodo -> obtener_dato(1), 0);
-            nueva_raiz -> sumar_clave_usada();
+            der -> insertar_no_lleno(nueva_clave, nuevo_dato);
 
-            izq -> establecer_clave(nodo -> obtener_clave(0), 0);
-            izq -> establecer_dato(nodo -> obtener_dato(0), 0);
-            izq -> sumar_clave_usada();
+            izq -> insertar_no_lleno(nodo -> obtener_clave(0), nodo -> obtener_dato(0));
 
-            der -> establecer_clave(nueva_clave, 0);
-            der -> establecer_dat(nuevo_dato, 0);
-            der -> sumar_clave_usada();
+            nodo -> intercambiar(0, 1);
         }
-        else
+        else // Nueva clave es la media, queda en nodo y se distribuyen las otras claves
         {
-            nueva_raiz -> establecer_clave(nueva_clave, 0);
-            nueva_raiz -> establecer_dato(nuevo_dato, 0);
-            nueva_raiz -> sumar_clave_usada();
+            izq -> insertar_no_lleno(nodo -> obtener_clave(0), nodo -> obtener_dato(0));
 
-            izq -> establecer_clave(nodo -> obtener_clave(0), 0);
-            izq -> establecer_dato(nodo -> obtener_dato(0), 0);
-            izq -> sumar_clave_usada();
-
-            der -> establecer_clave(nodo -> obtener_clave(1), 0);
-            der -> establecer_dat(nodo -> obtener_dato(1), 0);
-            der -> sumar_clave_usada();
+            der -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
         }
 
-        delete nodo;
-        return nueva_raiz;
+        nodo -> establecer_clave(nullptr, 1);
+        nodo -> establecer_dato(nullptr, 1);
+        nodo -> claves_usadas--;
+        return;
     }
-
-    if(padre -> obtener_claves_usadas() = 1)
+    // Caso 2: hoja y padre no lleno.
+    if(padre -> obtener_claves_usadas() = 1 && es_hoja)
     {
-        
+        Nodo<Tipo> *nuevo = new Nodo<Tipo>();
+
+        nuevo -> es_hoja = true;
+        nuevo -> establecer_padre(padre);
+        // Establecer datos
+        if(nueva_clave > nodo -> obtener_clave(0)) // Nueva clave es la mayor, sube la posicion 0
+        {
+            nuevo -> establecer_clave(nodo -> obtener_clave(1), 0);
+            nuevo -> establecer_dato(nodo -> obtener_dato(1), 0);
+            nodo -> establecer_clave(nullptr, 1);
+            nodo -> establecer_dato(nullptr, 1);
+
+            padre -> insertar_no_lleno(nodo -> obtener_clave(0), nodo -> obtener_dato(0));
+
+            nodo -> establecer_clave(nueva_clave, 0);
+            nodo -> establecer_dato(nuevo_dato, 0);
+        }
+        else if(nueva_clave < nodo -> obtener_clave(1)) // Nueva clave es la menor, sube la posicion 1
+        {
+            nuevo -> establecer_clave(nueva_clave, 0);
+            nuevo -> establecer_dato(nuevo_dato, 0);
+
+            padre -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
+
+            nodo -> establecer_clave(nullptr, 1);
+            nodo -> establecer_dato(nullptr, 1);
+        }
+        else // Nueva clave es la media, sube ella
+        {
+            nuevo -> establecer_clave(nodo -> obtener_clave(1), 0);
+            nuevo -> establecer_dato(nodo -> obtener_dato(1), 0);
+            nodo -> establecer_clave(nullptr, 1);
+            nodo -> establecer_dato(nullptr, 1);
+
+            padre -> insertar_no_lleno(nueva_clave, nuevo_dato);
+        }
+        // Establecer hijos
+        if(nodo == padre -> obtener_hijo(0))
+        {
+            padre -> establecer_hijo_medio(nuevo);
+        }
+        else // Asumimos que los primeros dos hijos que se llenan son el izquierdo y el derecho
+        {    // (lo cual es cierto por como hicimos el caso 1)
+            padre -> establecer_hijo_medio(nodo);
+            padre -> establecer_hijo_derecho(nuevo);
+        }
+
+        return;
     }
-    
+    // Caso 3: la puta que me parió
+    return;
 }
 
 template < typename Tipo >
