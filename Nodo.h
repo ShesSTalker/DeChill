@@ -33,6 +33,8 @@ class Nodo
 
         void intercambiar(int posicion_1, int posicion_2);
 
+        Nodo<Tipo>* obtener_padre();
+
         string* obtener_clave(int posicion);
 
         Tipo obtener_dato(int posicion);
@@ -56,6 +58,12 @@ class Nodo
 
         void establecer_hijo_derecho(Nodo<Tipo>* hijo_derecho);
 };
+
+template < typename Tipo >
+Nodo<Tipo> *Nodo<Tipo>::obtener_padre()
+{
+    return padre;
+}
 
 template < typename Tipo >
 Nodo<Tipo>::Nodo()
@@ -158,179 +166,410 @@ void Nodo<Tipo>::insertar_no_lleno(string nueva_clave, Tipo nuevo_dato)
 
 template < typename Tipo >
 Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo_dato)
-{   // Caso 1: raiz y hoja
-    if(padre == nullptr && es_hoja)
+{
+    Nodo<Tipo> *mi_padre = nodo -> obtener_padre();
+    // Los primeros casos aplican a hojas
+    if(nodo -> es_hoja())
+    {
+        // Caso 1: raiz y hoja
+        if(mi_padre == nullptr)
+        {
+            Nodo<Tipo> *izq = new Nodo<Tipo>();
+            Nodo<Tipo> *der = new Nodo<Tipo>();
+
+            izq -> es_hoja = true;
+            izq -> establecer_padre(nodo);
+            der -> es_hoja = true;
+            der -> establecer_padre(nodo);
+
+            nodo -> establecer_hijo_derecho(der);
+            nodo -> establecer_hijo_izquierdo(izq);
+            nodo -> es_hoja = false;
+
+            if(nueva_clave > nodo -> obtener_clave(1)) // Nueva clave es la mayor, va a der y izq se queda con posicion 0
+            {
+                der -> insertar_no_lleno(nueva_clave, nuevo_dato);
+
+                izq -> insertar_no_lleno(nodo -> obtener_clave(0), nodo -> obtener_dato(0));
+
+                // Borrar una clave de nodo
+                nodo -> intercambiar(0, 1); 
+
+                nodo -> establecer_clave(nullptr, 1);
+                nodo -> establecer_dato(nullptr, 1);
+                nodo -> claves_usadas--;
+                return nullptr; // No hace falta retornar aca ya que nunca se llama este caso por recursion
+            }
+            else if(nueva_clave < nodo -> obtener_clave(0)) // Nueva clave es la menor, va a izq y der se queda con posicion 1
+            {
+                izq -> insertar_no_lleno(nueva_clave, nuevo_dato);
+
+                der -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
+
+                // Borrar una clave de nodo
+                nodo -> establecer_clave(nullptr, 1);
+                nodo -> establecer_dato(nullptr, 1);
+                nodo -> claves_usadas--;
+                return nullptr; // No hace falta retornar aca ya que nunca se llama este caso por recursion 
+            }
+            else // Nueva clave es la media, queda en nodo y se distribuyen las otras claves
+            {
+                der -> insertar_no_lleno(nodo -> obtener_clave(0), nodo -> obtener_dato(0));
+
+                izq -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
+
+                nodo -> establecer_clave(nueva_clave, 0);
+                nodo -> establecer_dato(nuevo_dato, 0);
+
+                // Borrar una clave de nodo
+                nodo -> establecer_clave(nullptr, 1);
+                nodo -> establecer_dato(nullptr, 1);
+                nodo -> claves_usadas--;
+                return nullptr; // No hace falta retornar aca ya que nunca se llama este caso por recursion
+            }
+        }
+        
+        // Caso 2: hoja y padre no lleno.
+        if(mi_padre -> obtener_claves_usadas() = 1)
+        {
+            Nodo<Tipo> *nuevo = new Nodo<Tipo>();
+
+            nuevo -> es_hoja = true;
+            nuevo -> establecer_padre(mi_padre);
+
+            // Establecer hijos
+            if(nodo == mi_padre -> obtener_hijo(0))
+            {
+                mi_padre -> establecer_hijo_medio(nuevo);
+            }
+            else // Asumimos que los primeros dos hijos que se llenan son el izquierdo y el derecho
+            {    // (lo cual es cierto por como hicimos el caso 1)
+                mi_padre -> establecer_hijo_medio(nodo);
+                mi_padre -> establecer_hijo_derecho(nuevo);
+            }
+
+            // Establecer datos
+            if(nueva_clave > nodo -> obtener_clave(1)) // Nueva clave es la mayor, sube la posicion 1
+            {
+                nuevo -> insertar_no_lleno(nueva_clave, nuevo_dato);
+
+                mi_padre -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
+
+                // Borrar una clave de nodo
+                nodo -> establecer_clave(nullptr, 1);
+                nodo -> establecer_dato(nullptr, 1);
+                nodo -> claves_usadas--;
+                return nullptr; // No hace falta retornar aca ya que nunca se llama este caso por recursion
+            }
+            else if(nueva_clave < nodo -> obtener_clave(0)) // Nueva clave es la menor, sube la posicion 0
+            {
+                nuevo -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_clave(1));
+
+                mi_padre -> insertar_no_lleno(nodo -> obtener_clave(0), nodo -> obtener_dato(0));
+
+                nodo -> establecer_clave(nueva_clave 0);
+                nodo -> establecer_dato(nuevo_dato, 0);
+
+                // Borrar una clave de nodo
+                nodo -> establecer_clave(nullptr, 1);
+                nodo -> establecer_dato(nullptr, 1);
+                nodo -> claves_usadas--;
+                return nullptr; // No hace falta retornar aca ya que nunca se llama este caso por recursion
+            }
+            else // Nueva clave es la media, sube ella
+            {
+                nuevo -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
+
+                mi_padre -> insertar_no_lleno(nueva_clave, nuevo_dato);
+
+                // Borrar una clave de nodo
+                nodo -> establecer_clave(nullptr, 1);
+                nodo -> establecer_dato(nullptr, 1);
+                nodo -> claves_usadas--;
+                return nullptr; // No hace falta retornar aca ya que nunca se llama este caso por recursion
+            }
+        }
+
+        // Caso 3: hoja y padre lleno (empieza recursion)
+        if(nueva_clave > nodo -> obtener_clave(1)) // Nueva clave es la mayor, sube la posicion 1
+        {
+            mi_padre = dividir(mi_padre, nodo -> obtener_clave(1), nodo -> obtener_dato(1));
+        }
+        else if(nueva_clave < nodo -> obtener_clave(0)) // Nueva clave es la menor, sube la posicion 0
+        {
+            mi_padre = dividir(mi_padre, nodo -> obtener_clave(0), nodo -> obtener_dato(0));
+        }
+        else // Nueva clave es la media, sube ella
+        {
+            mi_padre = dividir(mi_padre, nueva_clave, nuevo_dato);
+        }
+
+        Nodo<Tipo> *nuevo = new Nodo<Tipo>();
+
+        nuevo -> es_hoja = true;
+        nuevo -> establecer_padre(mi_padre);
+
+        if(mi_padre -> obtener_hijo(0) == nullptr)
+            mi_padre -> establecer_hijo_izquierdo(nuevo);
+        else
+        {
+            mi_padre -> establecer_hijo_izquierdo(nodo);
+            mi_padre -> establecer_hijo_derecho(nuevo);
+        }
+
+        // Establecer datos
+        if(nueva_clave > nodo -> obtener_clave(1)) // Nueva clave es la mayor, subió la posicion 1
+        {
+            nuevo -> insertar_no_lleno(nueva_clave, nuevo_dato);
+
+            // Borrar una clave de nodo
+            nodo -> establecer_clave(nullptr, 1);
+            nodo -> establecer_dato(nullptr, 1);
+            nodo -> claves_usadas--;
+            return nullptr; // No hace falta retornar aca ya que nunca se llama este caso por recursion
+        }
+        else if(nueva_clave < nodo -> obtener_clave(0)) // Nueva clave es la menor, subió la posicion 0
+        {
+            nuevo -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
+
+            nodo -> establecer_clave(nueva_clave 0);
+            nodo -> establecer_dato(nuevo_dato, 0);
+
+            // Borrar una clave de nodo
+            nodo -> establecer_clave(nullptr, 1);
+            nodo -> establecer_dato(nullptr, 1);
+            nodo -> claves_usadas--;
+            return nullptr ; // No hace falta retornar aca ya que nunca se llama este caso por recursion
+        }
+        else // Nueva clave es la media, subió ella
+        {
+            nuevo -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
+
+            // Borrar una clave de nodo
+            nodo -> establecer_clave(nullptr, 1);
+            nodo -> establecer_dato(nullptr, 1); 
+            nodo -> claves_usadas--;
+            return nullptr; // No hace falta retornar aca ya que nunca se llama este caso por recursion
+        }
+    }
+
+    // Caso 4: raiz y no hoja
+    if(mi_padre == nullptr)
     {
         Nodo<Tipo> *izq = new Nodo<Tipo>();
         Nodo<Tipo> *der = new Nodo<Tipo>();
 
-        izq -> es_hoja = true;
+        izq -> es_hoja = false;
         izq -> establecer_padre(nodo);
-        der -> es_hoja = true;
+        der -> es_hoja = false;
         der -> establecer_padre(nodo);
 
         nodo -> establecer_hijo_derecho(der);
         nodo -> establecer_hijo_izquierdo(izq);
         nodo -> es_hoja = false;
 
-        if(nueva_clave > nodo -> obtener_clave(0)) // Nueva clave es la mayor, va a izq y der se queda con posicion 1
-        {
-            izq -> insertar_no_lleno(nueva_clave, nuevo_dato);
-
-            izq -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
-        }
-        else if(nueva_clave < nodo -> obtener_clave(1)) // Nueva clave es la menor, va a der y izq se queda con posicion 0
+        if(nueva_clave > nodo -> obtener_clave(1)) // Nueva clave es la mayor, va a der y izq se queda con posicion 0
         {
             der -> insertar_no_lleno(nueva_clave, nuevo_dato);
 
             izq -> insertar_no_lleno(nodo -> obtener_clave(0), nodo -> obtener_dato(0));
 
-            nodo -> intercambiar(0, 1);
+            // Borrar una clave de nodo
+            nodo -> intercambiar(0, 1); 
+            nodo -> claves_usadas--;
+
+            // Cambiar hijos
+            izq -> establecer_hijo_izquierdo(nodo -> obtener_hijo(0));
+            izq -> establecer_hijo_derecho(nodo -> obtener_hijo(1));
+            der -> establecer_hijo_izquierdo(nodo -> obtener_hijo(2));
+
+            return der;
+        }
+        else if(nueva_clave < nodo -> obtener_clave(0)) // Nueva clave es la menor, va a izq y der se queda con posicion 1
+        {
+            izq -> insertar_no_lleno(nueva_clave, nuevo_dato);
+
+            der -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
+
+            // Borrar una clave de nodo
+            nodo -> claves_usadas--;
+
+            // Cambiar hijos
+            izq -> establecer_hijo_izquierdo(nodo -> obtener_hijo(0));
+            der -> establecer_hijo_izquierdo(nodo -> obtener_hijo(1));
+            der -> establecer_hijo_derecho(nodo -> obtener_hijo(2));
+
+            return izq;
         }
         else // Nueva clave es la media, queda en nodo y se distribuyen las otras claves
         {
-            izq -> insertar_no_lleno(nodo -> obtener_clave(0), nodo -> obtener_dato(0));
+            der -> insertar_no_lleno(nodo -> obtener_clave(0), nodo -> obtener_dato(0));
 
-            der -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
-        }
-
-        nodo -> establecer_clave(nullptr, 1);
-        nodo -> establecer_dato(nullptr, 1);
-        nodo -> claves_usadas--;
-        return;
-    }
-    // Caso 2: hoja y padre no lleno.
-    if(padre -> obtener_claves_usadas() = 1 && es_hoja)
-    {
-        Nodo<Tipo> *nuevo = new Nodo<Tipo>();
-
-        nuevo -> es_hoja = true;
-        nuevo -> establecer_padre(padre);
-        // Establecer datos
-        if(nueva_clave > nodo -> obtener_clave(0)) // Nueva clave es la mayor, sube la posicion 0
-        {
-            nuevo -> establecer_clave(nodo -> obtener_clave(1), 0);
-            nuevo -> establecer_dato(nodo -> obtener_dato(1), 0);
-            nodo -> establecer_clave(nullptr, 1);
-            nodo -> establecer_dato(nullptr, 1);
-
-            padre -> insertar_no_lleno(nodo -> obtener_clave(0), nodo -> obtener_dato(0));
+            izq -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
 
             nodo -> establecer_clave(nueva_clave, 0);
             nodo -> establecer_dato(nuevo_dato, 0);
-        }
-        else if(nueva_clave < nodo -> obtener_clave(1)) // Nueva clave es la menor, sube la posicion 1
-        {
-            nuevo -> establecer_clave(nueva_clave, 0);
-            nuevo -> establecer_dato(nuevo_dato, 0);
 
-            padre -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
+            // Borrar una clave de nodo
+            nodo -> claves_usadas--;
 
-            nodo -> establecer_clave(nullptr, 1);
-            nodo -> establecer_dato(nullptr, 1);
-        }
-        else // Nueva clave es la media, sube ella
-        {
-            nuevo -> establecer_clave(nodo -> obtener_clave(1), 0);
-            nuevo -> establecer_dato(nodo -> obtener_dato(1), 0);
-            nodo -> establecer_clave(nullptr, 1);
-            nodo -> establecer_dato(nullptr, 1);
+            // Cambiar hijos
+            izq -> establecer_hijo_izquierdo(nodo -> obtener_hijo(0));
+            izq -> establecer_hijo_derecho(nodo -> obtener_hijo(1));
+            der -> establecer_hijo_derecho(nodo -> obtener_hijo(2));
 
-            padre -> insertar_no_lleno(nueva_clave, nuevo_dato);
+            return der;
         }
-        // Establecer hijos
-        if(nodo == padre -> obtener_hijo(0))
+    }   
+ 
+    // Caso 5: no hoja y padre no lleno (viene de recursion y frena recursion)
+    if(mi_padre -> obtener_claves_usadas() = 1)
+    {
+        Nodo<Tipo> *nuevo = new Nodo<Tipo>();
+
+        nuevo -> es_hoja = false;
+        nuevo -> establecer_padre(mi_padre);
+
+        if(nodo == mi_padre -> obtener_hijo(0))
         {
-            padre -> establecer_hijo_medio(nuevo);
+            mi_padre -> establecer_hijo_medio(nuevo);
         }
         else // Asumimos que los primeros dos hijos que se llenan son el izquierdo y el derecho
         {    // (lo cual es cierto por como hicimos el caso 1)
-            padre -> establecer_hijo_medio(nodo);
-            padre -> establecer_hijo_derecho(nuevo);
+            mi_padre -> establecer_hijo_medio(nodo);
+            mi_padre -> establecer_hijo_derecho(nuevo);
         }
 
-        return;
+        // Establecer datos
+        if(nueva_clave > nodo -> obtener_clave(1)) // Nueva clave es la mayor, subió la posicion 1
+        {
+            nuevo -> insertar_no_lleno(nueva_clave, nuevo_dato);
+
+            // Borrar una clave de nodo
+            nodo -> establecer_clave(nullptr, 1);
+            nodo -> establecer_dato(nullptr, 1);
+            nodo -> claves_usadas--;
+
+            // Cambiar hijos
+            nodo -> establecer_hijo_derecho(nodo -> obtener_hijo(1));
+            nodo -> establecer_hijo_medio(nullptr);
+
+            return nuevo;
+        }
+        else if(nueva_clave < nodo -> obtener_clave(0)) // Nueva clave es la menor, subió la posicion 0
+        {
+            nuevo -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
+
+            nodo -> establecer_clave(nueva_clave, 0);
+            nodo -> establecer_dato(nuevo_dato, 0);
+
+            // Borrar una clave de nodo
+            nodo -> establecer_clave(nullptr, 1);
+            nodo -> establecer_dato(nullptr, 1);
+            nodo -> claves_usadas--;
+
+            // Cambiar hijos
+            nuevo -> establecer_hijo_izquierdo(nodo -> obtener_hijo(1));
+            nuevo -> establecer_hijo_derecho(nodo -> obtener_hijo(2));
+            nodo -> establecer_hijo_medio(nullptr);
+
+            return nodo;
+        }
+        else // Nueva clave es la media, subió ella
+        {
+            nuevo -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
+
+            // Borrar una clave de nodo
+            nodo -> establecer_clave(nullptr, 1);
+            nodo -> establecer_dato(nullptr, 1);
+            nodo -> claves_usadas--;
+
+            // Cambiar hijos
+            nodo -> establecer_hijo_derecho(nodo -> obtener_hijo(1));
+            nuevo -> establecer_hijo_derecho(nodo -> obtener_hijo(2));
+            nodo -> establecer_hijo_medio(nullptr);
+
+            return nuevo;
+        }
     }
-    // Caso 3: la puta que me parió
-    return;
-}
 
-template < typename Tipo >
-Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo_dato)
-{
-    if(padre == nullptr)
+    // Caso 6: no hoja y padre lleno (viene de recursion y continua recursion)
+    if(nueva_clave > nodo -> obtener_clave(1)) // Nueva clave es la mayor, sube la posicion 1
     {
-        if(nueva_clave > obtener_clave(0))
-        {
-            Nodo<Tipo>* padre = new Nodo<Tipo>(3);
-            padre -> establecer_clave(obtener_clave(0), 0);
-            padre -> establecer_dato(obtener_dato(0), 0);
+        mi_padre = dividir(mi_padre, nodo -> obtener_clave(1), nodo -> obtener_dato(1));
+    }
+    else if(nueva_clave < nodo -> obtener_clave(0)) // Nueva clave es la menor, sube la posicion 0
+    {
+        mi_padre = dividir(mi_padre, nodo -> obtener_clave(0), nodo -> obtener_dato(0));
+    }
+    else // Nueva clave es la media, sube ella
+    {
+        mi_padre = dividir(mi_padre, nueva_clave, nuevo_dato);
+    }
 
-            Nodo<Tipo>* hijo_izquierdo = new Nodo<Tipo>(3);
-            hijo_izquierdo -> establecer_clave(nueva_clave, 0);
-            hijo_izquierdo -> establecer_dato(nuevo_dato, 0);
-            hijo_izquierdo -> establecer_padre(padre);
+    Nodo<Tipo> *nuevo = new Nodo<Tipo>();
 
-            Nodo<Tipo>* hijo_derecho = new Nodo<Tipo>(3);
-            hijo_derecho -> establecer_clave(obtener_clave(1), 0);
-            hijo_derecho -> establecer_dato(obtener_dato(1), 0);
-            hijo_derecho -> establecer_padre(padre);
+    nuevo -> es_hoja = false;
+    nuevo -> establecer_padre(mi_padre);
 
-            padre -> establecer_hijo_izquierdo(hijo_izquierdo);
-            padre -> establecer_hijo_derecho(hijo_derecho);
+    if(mi_padre -> obtener_hijo(0) == nullptr)
+        mi_padre -> establecer_hijo_izquierdo(nuevo);
+    else
+    {
+        mi_padre -> establecer_hijo_izquierdo(nodo);
+        mi_padre -> establecer_hijo_derecho(nuevo);
+    }
 
-            if(!es_hoja)
-            {
+    // Establecer datos
+    if(nueva_clave > nodo -> obtener_clave(1)) // Nueva clave es la mayor, subió la posicion 1
+    {
+        nuevo -> insertar_no_lleno(nueva_clave, nuevo_dato);
 
-            }
+        // Borrar una clave de nodo
+        nodo -> establecer_clave(nullptr, 1);
+        nodo -> establecer_dato(nullptr, 1);
+        nodo -> claves_usadas--;
 
-            delete nodo;
+        // Cambiar hijos
+        nodo -> establecer_hijo_derecho(nodo -> obtener_hijo(1));
+        nodo -> establecer_hijo_medio(nullptr);
 
-            return hijo_izquierdo; 
-        }
-        if(nueva_clave > obtener_clave(1))
-        {
-            Nodo<Tipo>* padre = new Nodo<Tipo>(3);
-            padre -> establecer_clave(obtener_clave(1), 0);
-            padre -> establecer_dato(obtener_dato(1), 0);
+        return nuevo;
+    }
+    else if(nueva_clave < nodo -> obtener_clave(0)) // Nueva clave es la menor, subió la posicion 0
+    {
+        nuevo -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
 
-            Nodo<Tipo>* hijo_izquierdo = new Nodo<Tipo>(3);
-            hijo_izquierdo -> establecer_clave(obtener_clave(0), 0);
-            hijo_izquierdo -> establecer_dato(obtener_dato(0), 0);
-            hijo_izquierdo -> establecer_padre(padre);
+        nodo -> establecer_clave(nueva_clave, 0);
+        nodo -> establecer_dato(nuevo_dato, 0);
 
-            Nodo<Tipo>* hijo_derecho = new Nodo<Tipo>(3);
-            hijo_derecho -> establecer_clave(nueva_clave, 0);
-            hijo_derecho -> establecer_dato(nuevo_dato, 0);
-            hijo_derecho -> establecer_padre(padre);
+        // Borrar una clave de nodo
+        nodo -> establecer_clave(nullptr, 1);
+        nodo -> establecer_dato(nullptr, 1);
+        nodo -> claves_usadas--;
 
-            padre -> establecer_hijo_izquierdo(hijo_izquierdo);
-            padre -> establecer_hijo_derecho(hijo_derecho);
+        // Cambiar hijos
+        nuevo -> establecer_hijo_izquierdo(nodo -> obtener_hijo(1));
+        nuevo -> establecer_hijo_derecho(nodo -> obtener_hijo(2));
+        nodo -> establecer_hijo_medio(nullptr);
 
-            delete nodo;
-        }
-        else if (nueva_clave > obtener_clave(0) && nueva_clave < obtener_clave(1))
-        {
-            Nodo<Tipo>* padre = new Nodo<Tipo>(3);
-            padre -> establecer_clave(nueva_clave, 0);
-            padre -> establecer_dato(nuevo_dato, 0);
+        return nodo;
+    }
+    else // Nueva clave es la media, subió ella
+    {
+        nuevo -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
 
-            Nodo<Tipo>* hijo_izquierdo = new Nodo<Tipo>(3);
-            hijo_izquierdo -> establecer_clave(obtener_clave(0), 0);
-            hijo_izquierdo -> establecer_dato(obtener_dato(0), 0);
-            hijo_izquierdo -> establecer_padre(padre);
+        // Borrar una clave de nodo
+        nodo -> establecer_clave(nullptr, 1);
+        nodo -> establecer_dato(nullptr, 1);
+        nodo -> claves_usadas--;
 
-            Nodo<Tipo>* hijo_derecho = new Nodo<Tipo>(3);
-            hijo_derecho -> establecer_clave(obtener_clave(1), 0);
-            hijo_derecho -> establecer_dato(obtener_dato(1), 0);
-            hijo_derecho -> establecer_padre(padre);
+        // Cambiar hijos
+        nodo -> establecer_hijo_derecho(nodo -> obtener_hijo(1));
+        nuevo -> establecer_hijo_derecho(nodo -> obtener_hijo(2));
+        nodo -> establecer_hijo_medio(nullptr);
 
-            padre -> establecer_hijo_izquierdo(hijo_izquierdo);
-            padre -> establecer_hijo_derecho(hijo_derecho);
-
-            delete nodo;
-        }
-        return padre
+        return nuevo;
     }
 }
 
