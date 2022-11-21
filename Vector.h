@@ -91,17 +91,16 @@ int Vector<Tipo>::obtener_longitud()
 
 template < class Tipo >
 int obtener_posicion(Tipo buscado){
-    int posicion = 0;
+    int i = 0;
     bool encontro =false;
-    while (posicion < longitud && !encontro){
+    while (i < longitud && !encontro){
         if (elemento[i]==buscado){
             encontro=true;
         }else{
             i++;
         }
-
     }
-    return posicion;
+    return i;
 }
 template < class Tipo >
 void Vector<Tipo>::redimensionar_vector() 
