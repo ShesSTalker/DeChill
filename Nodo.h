@@ -11,11 +11,11 @@ class Nodo
     //Atributos
     private:
         string* claves;
-        Tipo* datos;
+        Tipo** datos;
         Nodo<Tipo>** hijos;
         Nodo<Tipo>* padre;
         int claves_usadas;
-        bool eliminado;
+        bool* eliminados;
 
     //Metodos
     public:
@@ -45,12 +45,14 @@ class Nodo
 
         Nodo<Tipo>* dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo_dato);
 
-        void marcar_como_borrado();
+        void marcar_como_eliminado(int posicion);
 
         ~Nodo();
 
     private:
         void sumar_clave_usada();
+
+        void restar_clave_usada();
 
         void establecer_hijo_izquierdo(Nodo<Tipo>* hijo_izquierdo);
 
@@ -70,10 +72,10 @@ Nodo<Tipo>::Nodo()
 {
     claves = new string[2];
     datos = new Tipo[2];
-    hijos = Nodo<Tipo>*[3];
+    hijos = new Nodo<Tipo>[3];
     padre = nullptr;
     claves_usadas = 0;
-    eliminado = false;
+    eliminados = new bool[3];
 }
 
 template < typename Tipo >
@@ -138,6 +140,12 @@ void Nodo<Tipo>::sumar_clave_usada()
 }
 
 template < typename Tipo >
+void Nodo<Tipo>::restar_clave_usada()
+{
+    claves_usadas--;
+}
+
+template < typename Tipo >
 void Nodo<Tipo>::insertar_no_lleno(string nueva_clave, Tipo nuevo_dato)
 { // Claves usadas puede ser 1 o 0
     if(nodo -> obtener_claves_usadas() == 0)
@@ -197,7 +205,7 @@ Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo
 
                 nodo -> establecer_clave(nullptr, 1);
                 nodo -> establecer_dato(nullptr, 1);
-                nodo -> claves_usadas--;
+                nodo -> restar_clave_usada();
                 return nullptr; // No hace falta retornar aca ya que nunca se llama este caso por recursion
             }
             else if(nueva_clave < nodo -> obtener_clave(0)) // Nueva clave es la menor, va a izq y der se queda con posicion 1
@@ -209,7 +217,7 @@ Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo
                 // Borrar una clave de nodo
                 nodo -> establecer_clave(nullptr, 1);
                 nodo -> establecer_dato(nullptr, 1);
-                nodo -> claves_usadas--;
+                nodo -> restar_clave_usada();
                 return nullptr; // No hace falta retornar aca ya que nunca se llama este caso por recursion 
             }
             else // Nueva clave es la media, queda en nodo y se distribuyen las otras claves
@@ -224,7 +232,7 @@ Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo
                 // Borrar una clave de nodo
                 nodo -> establecer_clave(nullptr, 1);
                 nodo -> establecer_dato(nullptr, 1);
-                nodo -> claves_usadas--;
+                nodo -> restar_clave_usada();
                 return nullptr; // No hace falta retornar aca ya que nunca se llama este caso por recursion
             }
         }
@@ -256,9 +264,8 @@ Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo
                 mi_padre -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
 
                 // Borrar una clave de nodo
-                nodo -> establecer_clave(nullptr, 1);
-                nodo -> establecer_dato(nullptr, 1);
-                nodo -> claves_usadas--;
+                nodo -> restar_clave_usada();
+
                 return nullptr; // No hace falta retornar aca ya que nunca se llama este caso por recursion
             }
             else if(nueva_clave < nodo -> obtener_clave(0)) // Nueva clave es la menor, sube la posicion 0
@@ -271,9 +278,8 @@ Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo
                 nodo -> establecer_dato(nuevo_dato, 0);
 
                 // Borrar una clave de nodo
-                nodo -> establecer_clave(nullptr, 1);
-                nodo -> establecer_dato(nullptr, 1);
-                nodo -> claves_usadas--;
+                nodo -> restar_clave_usada();
+
                 return nullptr; // No hace falta retornar aca ya que nunca se llama este caso por recursion
             }
             else // Nueva clave es la media, sube ella
@@ -283,9 +289,8 @@ Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo
                 mi_padre -> insertar_no_lleno(nueva_clave, nuevo_dato);
 
                 // Borrar una clave de nodo
-                nodo -> establecer_clave(nullptr, 1);
-                nodo -> establecer_dato(nullptr, 1);
-                nodo -> claves_usadas--;
+                nodo -> restar_clave_usada();
+
                 return nullptr; // No hace falta retornar aca ya que nunca se llama este caso por recursion
             }
         }
@@ -323,9 +328,8 @@ Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo
             nuevo -> insertar_no_lleno(nueva_clave, nuevo_dato);
 
             // Borrar una clave de nodo
-            nodo -> establecer_clave(nullptr, 1);
-            nodo -> establecer_dato(nullptr, 1);
-            nodo -> claves_usadas--;
+            nodo -> restar_clave_usada();
+
             return nullptr; // No hace falta retornar aca ya que nunca se llama este caso por recursion
         }
         else if(nueva_clave < nodo -> obtener_clave(0)) // Nueva clave es la menor, subió la posicion 0
@@ -336,19 +340,17 @@ Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo
             nodo -> establecer_dato(nuevo_dato, 0);
 
             // Borrar una clave de nodo
-            nodo -> establecer_clave(nullptr, 1);
-            nodo -> establecer_dato(nullptr, 1);
-            nodo -> claves_usadas--;
+            nodo -> restar_clave_usada();
+
             return nullptr ; // No hace falta retornar aca ya que nunca se llama este caso por recursion
         }
         else // Nueva clave es la media, subió ella
         {
             nuevo -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
 
-            // Borrar una clave de nodo
-            nodo -> establecer_clave(nullptr, 1);
-            nodo -> establecer_dato(nullptr, 1); 
-            nodo -> claves_usadas--;
+            // Borrar una clave de nodo 
+            nodo -> restar_clave_usada();
+
             return nullptr; // No hace falta retornar aca ya que nunca se llama este caso por recursion
         }
     }
@@ -376,7 +378,7 @@ Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo
 
             // Borrar una clave de nodo
             nodo -> intercambiar(0, 1); 
-            nodo -> claves_usadas--;
+            restar_clave_usada();
 
             // Cambiar hijos
             izq -> establecer_hijo_izquierdo(nodo -> obtener_hijo(0));
@@ -392,7 +394,7 @@ Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo
             der -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
 
             // Borrar una clave de nodo
-            nodo -> claves_usadas--;
+            nodo -> restar_clave_usada();
 
             // Cambiar hijos
             izq -> establecer_hijo_izquierdo(nodo -> obtener_hijo(0));
@@ -411,7 +413,7 @@ Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo
             nodo -> establecer_dato(nuevo_dato, 0);
 
             // Borrar una clave de nodo
-            nodo -> claves_usadas--;
+            nodo -> restar_clave_usada();
 
             // Cambiar hijos
             izq -> establecer_hijo_izquierdo(nodo -> obtener_hijo(0));
@@ -446,9 +448,7 @@ Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo
             nuevo -> insertar_no_lleno(nueva_clave, nuevo_dato);
 
             // Borrar una clave de nodo
-            nodo -> establecer_clave(nullptr, 1);
-            nodo -> establecer_dato(nullptr, 1);
-            nodo -> claves_usadas--;
+            nodo -> restar_clave_usada();
 
             // Cambiar hijos
             nodo -> establecer_hijo_derecho(nodo -> obtener_hijo(1));
@@ -464,9 +464,7 @@ Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo
             nodo -> establecer_dato(nuevo_dato, 0);
 
             // Borrar una clave de nodo
-            nodo -> establecer_clave(nullptr, 1);
-            nodo -> establecer_dato(nullptr, 1);
-            nodo -> claves_usadas--;
+            nodo -> restar_clave_usada();
 
             // Cambiar hijos
             nuevo -> establecer_hijo_izquierdo(nodo -> obtener_hijo(1));
@@ -480,9 +478,7 @@ Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo
             nuevo -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
 
             // Borrar una clave de nodo
-            nodo -> establecer_clave(nullptr, 1);
-            nodo -> establecer_dato(nullptr, 1);
-            nodo -> claves_usadas--;
+            nodo -> restar_clave_usada();
 
             // Cambiar hijos
             nodo -> establecer_hijo_derecho(nodo -> obtener_hijo(1));
@@ -526,9 +522,7 @@ Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo
         nuevo -> insertar_no_lleno(nueva_clave, nuevo_dato);
 
         // Borrar una clave de nodo
-        nodo -> establecer_clave(nullptr, 1);
-        nodo -> establecer_dato(nullptr, 1);
-        nodo -> claves_usadas--;
+        nodo -> restar_clave_usada();
 
         // Cambiar hijos
         nodo -> establecer_hijo_derecho(nodo -> obtener_hijo(1));
@@ -544,9 +538,7 @@ Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo
         nodo -> establecer_dato(nuevo_dato, 0);
 
         // Borrar una clave de nodo
-        nodo -> establecer_clave(nullptr, 1);
-        nodo -> establecer_dato(nullptr, 1);
-        nodo -> claves_usadas--;
+        nodo -> restar_clave_usada();
 
         // Cambiar hijos
         nuevo -> establecer_hijo_izquierdo(nodo -> obtener_hijo(1));
@@ -560,9 +552,7 @@ Nodo<Tipo>* Nodo<Tipo>::dividir(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo
         nuevo -> insertar_no_lleno(nodo -> obtener_clave(1), nodo -> obtener_dato(1));
 
         // Borrar una clave de nodo
-        nodo -> establecer_clave(nullptr, 1);
-        nodo -> establecer_dato(nullptr, 1);
-        nodo -> claves_usadas--;
+        nodo -> restar_clave_usada();
 
         // Cambiar hijos
         nodo -> establecer_hijo_derecho(nodo -> obtener_hijo(1));
@@ -592,18 +582,30 @@ void Nodo<Tipo>::establecer_hijo_derecho(Nodo<Tipo>* hijo_derecho)
 }
 
 template < typename Tipo >
-void Nodo<Tipo>::marcar_como_borrado()
+void Nodo<Tipo>::marcar_como_eliminado(int posicion)
 {
-    eliminado = true;
+    eliminado[posicion] = true;
 }
 
 template < typename Tipo >
 Nodo<Tipo>::~Nodo()
-{
-    claves[] delete;
-    datos[] delete;
-    hijos[] delete;
-    padre = nullptr;
+{   
+    int i;
+    for(i = 0; i < nodo -> obtener_claves_usadas(); i++)
+    {
+        if(!es_hoja)
+            delete hijos[i];
+
+        delete datos[i];
+    }
+    
+    if(!es_hoja)
+        delete hijos[i];
+
+    delete[] hijos;
+    delete[] datos;
+    delete[] claves;
+    delete[] eliminados;
 }
 
 #endif
