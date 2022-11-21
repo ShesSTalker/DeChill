@@ -23,7 +23,7 @@ class Vector
 
         //PRE: 0 <= posicion < longitud
         //POS: carga elemento en la posicion "posicion". Si se inserta la posición "longitud", se redimensiona el Vector.
-        void cargar(Tipo elemento, int posicion);
+        void cargar(Tipo cargado, int posicion);
 
         //PRE: 0 <= posicion < longitud
         //POS: devuelve el elemento que es en la posicion "posicion"
@@ -33,6 +33,10 @@ class Vector
         //POS: devuelve la longitud del vector
         int obtener_longitud();
 
+        //PRE: -
+        //POS: devuelve la posicion del elemento buscado
+        int obtener_posicion(Tipo buscado);
+
         //Desconstructor
         //Pre: -
         //Pos: libera la memoria pedida
@@ -40,7 +44,7 @@ class Vector
 
     private:
         //PRE: longitud == posicion
-        //POS: redimenciona la longitud del vector 
+        //POS: redimensiona la longitud del vector 
         void redimensionar_vector();
 };
 
@@ -59,14 +63,14 @@ Vector<Tipo>::Vector(int longitud_inicial)
 }
 
 template < class Tipo >
-void Vector<Tipo>::cargar(Tipo elemento, int posicion)
+void Vector<Tipo>::cargar(Tipo cargado, int posicion)
 {
     if (longitud == posicion)
     {
         redimensionar_vector();
     }  
 
-    this -> elemento[posicion] = elemento;
+    this -> elemento[posicion] = cargado;
 }
 
 template < class Tipo >
@@ -85,6 +89,20 @@ int Vector<Tipo>::obtener_longitud()
     return longitud;
 }
 
+template < class Tipo >
+int obtener_posicion(Tipo buscado){
+    int posicion = 0;
+    bool encontro =false;
+    while (posicion < longitud && !encontro){
+        if (elemento[i]==buscado){
+            encontro=true;
+        }else{
+            i++;
+        }
+
+    }
+    return posicion;
+}
 template < class Tipo >
 void Vector<Tipo>::redimensionar_vector() 
 {
