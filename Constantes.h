@@ -7,6 +7,8 @@ using namespace std;
 
 // Constantes leer datos
 const string PATH_ANIMALES = "animales.csv";
+// Constantes Grafos
+const int INFINITO = 100000;
 
 // Constantes pasar tiempo
 const int
@@ -17,7 +19,7 @@ RESTA_HIGIENE = 10,
 HAMBRE_MAX = 100,
 HIGIENE_MIN = 0;
 
-//Constantes buscar nombre
+//Constante de elemento no encontrado
 const int NO_ENCONTRO = -1;
 
 // Constantes tamanio (char)
