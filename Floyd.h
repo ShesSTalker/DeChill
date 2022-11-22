@@ -6,9 +6,6 @@ using namespace std;
 #include <string>
 #include <iostream>
 
-const int INFINITO = 100000;
-const int NO_ENCONTRO= -1;
-
 class Floyd {
     //Atributos
     private:
@@ -42,7 +39,7 @@ class Floyd {
 
     public:
     //PRE: -
-    //PRE: inicializa primero y cursor en 0 (punteros a NULL) y cantidad en 0.
+    //PRE: inicializa los vertices y matrices.
     Floyd(Vector<string>*vertices, int ** matrizAdyacencia);
     //PRE: -
     //POS: muestra por pantalla el camino mínimo entre el origen y el destino, detallando su recorrido y peso

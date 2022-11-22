@@ -9,8 +9,8 @@ class Grafo {
     //Atributos
     private:
     int ** matriz_de_adyacencia;
-    Vector<string>* vertices; //siempre inicializar con 0 espacios.
-    Floyd * Camino_minimo;
+    Vector<string>* vertices;
+    Floyd * minimo_camino;
 
     //Metodos
 
@@ -23,10 +23,10 @@ class Grafo {
 
     //PRE: la matriz que se le envie ya debe tener memoria reservada
     //POS: copia la matriz de adyacencia en la nueva matriz
-    void copiar_matriz_adyacente(int** nuevaAdyacente);
+    void copiar_matriz_adyacente(int** nueva_adyacente);
 
     //POS inicializa un nuevo vertice en la matriz de adyacencia con un valor de infinito
-    void inicializar_nuevo_vertice(int** nuevaAdyacente);
+    void inicializar_nuevo_vertice(int** nueva_adyacente);
 
     //POS libera la memoria de la matriz de adyacencia
     void liberar_matriz_adyacencia();
@@ -42,7 +42,7 @@ class Grafo {
     Grafo();
     //PRE: No hay vertices repetidos en nombre
     //POS: agrega un nuevo vertice al grafo
-    void agregar_vertice(string nuevoVertice);
+    void agregar_vertice(string nuevo_vertice);
 
     //PRE: se debe tener un algortimo para calcular el camino mínimo previamente elegido
     //POS: muestra por terminal el camino mínimo desde un origen a un destino

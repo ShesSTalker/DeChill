@@ -32,36 +32,16 @@ int ** Floyd::crear_matriz_costos(int ** matriz_adyacencia){
 }
 
 void Floyd::mostrar_matrices(){
-    cout << "Matriz de costos:      ||           Matriz de caminos:" << endl;
-    string filaCostos;
-    string filaCaminos;
-    for(int i = 0; i < cantidad_vertices; i++){
-        for(int j = 0; j < cantidad_vertices * 2; j++) {
-            if(j == cantidad_vertices * 2 - 1){
-                filaCostos += "            ||           ";
-                filaCaminos += "\n";
-            } else if(j % 2 == 0){
-                if(matriz_costos[i][j/2] == INFINITO){
-                    filaCostos += "∞";
-                } else {
-                    filaCostos += to_string(matriz_costos[i][j/2]);
-                }
-
-                if(matriz_caminos[i][j/2] == NO_ENCONTRO){
-                    filaCaminos += "-";
-                } else {
-                    filaCaminos += to_string(matriz_caminos[i][j/2]);
-                }
-            } else{
-                filaCaminos += "|";
-                filaCostos += "|";
-            }
+    int i,j;
+    for (i = 0; i < cantidad_vertices; i++)
+    {
+        cout<<"\nMinimo Costo Respecto de :"<<i<<endl;
+        for (j = 0; j < cantidad_vertices; j++)
+        {
+            cout<<matriz_costos[i][j]<<"\t";
         }
-        cout << filaCostos << filaCaminos;
-        filaCostos = "";
-        filaCaminos = "";
+
     }
-    cout << endl;
 }
 
 void Floyd::calcular_matrices() {
@@ -70,8 +50,24 @@ void Floyd::calcular_matrices() {
     matriz_costos = crear_matriz_costos(matriz_adyacencia);
     matriz_caminos = crear_matriz_caminos();
 
-    // ToDo: Escribir el código necesario
-
+    int i,j,k;
+    for (k = 0; k < cantidad_vertices; k++)
+    {
+        for (i = 0; i < cantidad_vertices; i++)
+        {
+            for (j = 0; j < cantidad_vertices; j++)
+            {
+                if ((matriz_costos[i][k] * matriz_costos[k][j] != 0) && (i != j))
+                {
+                    if ((matriz_costos[i][k] + matriz_costos[k][j] < matriz_costos[i][j]) || (matriz_costos[i][j] == 0))
+                    {
+                        matriz_costos[i][j] = matriz_costos[i][k] + matriz_costos[k][j];
+                    }
+                }
+            }
+        }
+    }
+    mostrar_matrices();
 }
 
 void Floyd::camino_minimo(int origen, int destino) {
@@ -108,16 +104,9 @@ void Floyd::liberar_matrices() {
 Floyd::~Floyd(){
     liberar_matrices();
 }
-void Floyd :: camino_minimo(int origen, int destino){
-
-}
 Floyd::Floyd(Vector<string> *vertices, int ** matriz_adyacencia) {
     this -> vertices = vertices;
     this -> matriz_adyacencia = matriz_adyacencia;
     cantidad_vertices = vertices -> obtener_longitud();  
     calcular_matrices();
 }
-
-
-
-

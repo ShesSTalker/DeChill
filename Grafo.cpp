@@ -4,12 +4,12 @@
 Grafo::Grafo() {
     matriz_de_adyacencia = nullptr;
     vertices = new Vector<string>;
-    Camino_minimo = nullptr;
+    minimo_camino = nullptr;
 }
 
-void Grafo::agregar_vertice(string nuevoVertice) {
+void Grafo::agregar_vertice(string nuevo_vertice) {
     agrandar_matriz_de_adyacencia();
-    vertices -> cargar(nuevoVertice, vertices->obtener_longitud());
+    vertices -> cargar(nuevo_vertice, vertices->obtener_longitud());
 }
 
 void Grafo::mostrar_grafo() {
@@ -50,11 +50,11 @@ void Grafo::camino_minimo(string origen, string destino) {
 
 void Grafo::agrandar_matriz_de_adyacencia() {
     int** matrizAuxiliar;
-    int nuevaCantidadDeVertices = vertices->obtener_longitud() + 1;
+    int nueva_cantidad_de_vertices = vertices->obtener_longitud() + 1;
 
-    matrizAuxiliar = new int*[nuevaCantidadDeVertices];
-    for(int i = 0; i < nuevaCantidadDeVertices; i++){
-        matrizAuxiliar[i] = new int[nuevaCantidadDeVertices];
+    matrizAuxiliar = new int*[nueva_cantidad_de_vertices];
+    for(int i = 0; i < nueva_cantidad_de_vertices; i++){
+        matrizAuxiliar[i] = new int[nueva_cantidad_de_vertices];
     }
 
     copiar_matriz_adyacente(matrizAuxiliar);
@@ -63,20 +63,20 @@ void Grafo::agrandar_matriz_de_adyacencia() {
     matriz_de_adyacencia = matrizAuxiliar;
 }
 
-void Grafo::copiar_matriz_adyacente(int** nuevaAdyacente) {
+void Grafo::copiar_matriz_adyacente(int** nueva_adyacente) {
     for(int i = 0; i < vertices -> obtener_longitud(); i++){
         for(int j = 0; j < vertices -> obtener_longitud(); j++){
-            nuevaAdyacente[i][j] = matriz_de_adyacencia[i][j];
+            nueva_adyacente[i][j] = matriz_de_adyacencia[i][j];
         }
     }
 }
 
-void Grafo::inicializar_nuevo_vertice(int** nuevaAdyacente) {
+void Grafo::inicializar_nuevo_vertice(int** nueva_adyacente) {
     for(int i = 0; i < vertices -> obtener_longitud(); i++){
-        nuevaAdyacente[vertices -> obtener_longitud()][i] = INFINITO;
-        nuevaAdyacente[i][vertices -> obtener_longitud()] = INFINITO;
+        nueva_adyacente[vertices -> obtener_longitud()][i] = INFINITO;
+        nueva_adyacente[i][vertices -> obtener_longitud()] = INFINITO;
     }
-    nuevaAdyacente[vertices -> obtener_longitud()][vertices -> obtener_longitud()] = 0;
+    nueva_adyacente[vertices -> obtener_longitud()][vertices -> obtener_longitud()] = 0;
 }
 
 void Grafo::liberar_matriz_adyacencia() {
@@ -90,7 +90,7 @@ Grafo::~Grafo() {
     liberar_matriz_adyacencia();
     matriz_de_adyacencia = nullptr;
     delete vertices;
-    delete Camino_minimo;
+    delete minimo_camino;
 }
 
 void Grafo::mostrar_vertices() {
@@ -125,10 +125,10 @@ void Grafo::mostrar_matriz_adyacencia() {
 }
 
 void Grafo::camino_minimo(int origen, int destino) {
-    Camino_minimo -> camino_minimo(origen, destino);
+    minimo_camino -> camino_minimo(origen, destino);
 }
 
 void Grafo::usar_floyd() {
-    delete Camino_minimo;
-    Camino_minimo = new Floyd(vertices, matriz_de_adyacencia);
+    delete minimo_camino;
+    minimo_camino = new Floyd(vertices, matriz_de_adyacencia);
 }

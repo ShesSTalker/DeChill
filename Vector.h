@@ -1,13 +1,15 @@
 #ifndef _VECTOR_H_
 #define _VECTOR_H_
 
+#include "Constantes.h"
+
 template < class Tipo >
 class Vector
 {
     //Atributos
     private:
         int longitud;
-        Tipo* elemento;
+        Tipo* elementos;
 
     //Metodos
     public:
@@ -52,14 +54,14 @@ template < class Tipo >
 Vector<Tipo>::Vector()
 {
     longitud = 0;
-    elemento = 0;
+    elementos = 0;
 }
 
 template < class Tipo >
 Vector<Tipo>::Vector(int longitud_inicial)
 {
     longitud = longitud_inicial;
-    elemento = new Tipo[longitud];
+    elementos = new Tipo[longitud];
 }
 
 template < class Tipo >
@@ -70,15 +72,16 @@ void Vector<Tipo>::cargar(Tipo cargado, int posicion)
         redimensionar_vector();
     }  
 
-    this -> elemento[posicion] = cargado;
+    this -> elementos[posicion] = cargado;
 }
 
 template < class Tipo >
 Tipo Vector<Tipo>::obtener_elemento(int posicion)
-{   
-    Tipo elemento = 0;
+{  
+    Tipo elemento;
+
     if (posicion < longitud){
-        elemento=elemento[posicion];
+        elemento=elementos[posicion];
     }
     return elemento;
 }
@@ -90,16 +93,20 @@ int Vector<Tipo>::obtener_longitud()
 }
 
 template < class Tipo >
-int obtener_posicion(Tipo buscado){
+int Vector<Tipo>::obtener_posicion(Tipo buscado){
     int i = 0;
     bool encontro =false;
     while (i < longitud && !encontro){
-        if (elemento[i]==buscado){
+        if (elementos[i]==buscado){
             encontro=true;
         }else{
             i++;
         }
     }
+    if(!encontro){
+        return NO_ENCONTRO;
+    }
+    
     return i;
 }
 template < class Tipo >
@@ -111,23 +118,19 @@ void Vector<Tipo>::redimensionar_vector()
     
     for (int i = 0; i < longitud; i++)
     {
-        vector_auxiliar[i] = elemento[i];
+        vector_auxiliar[i] = elementos[i];
     }
     
-    delete [] elemento;
-    this -> elemento = vector_auxiliar;
+    delete [] elementos;
+    this -> elementos = vector_auxiliar;
     longitud = nueva_longitud;
 }
 
 template < class Tipo >
 Vector<Tipo>::~Vector()
 {
-    for(int i = 0; i < longitud; i++)
-    {
-        delete elemento[i];
-    }
 
-    delete[] elemento;
+    delete[] elementos;
 }
 
 #endif
