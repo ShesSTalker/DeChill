@@ -16,7 +16,7 @@ class ArbolB
 
         Nodo<Tipo>* obtener_raiz();
 
-        void insertar(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo_dato);
+        void insertar(Nodo<Tipo>* nodo, string nueva_clave, Tipo *nuevo_dato);
 
         bool buscar();
 
@@ -30,7 +30,6 @@ template < typename Tipo >
 ArbolB<Tipo>::ArbolB()
 {
     this -> raiz = nullptr;
-    bool clave_ubicada = false;
 }
 
 template < typename Tipo >
@@ -46,13 +45,13 @@ void ArbolB<Tipo>::establecer_raiz(Nodo<Tipo> *nueva_raiz)
 }
 
 template < typename Tipo > 
-void ArbolB<Tipo>::insertar(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo_dato)
+void ArbolB<Tipo>::insertar(Nodo<Tipo>* nodo, string nueva_clave, Tipo *nuevo_dato)
 {
     if (obtener_raiz() == nullptr)
     {
-        nodo = new Nodo<Tipo>(3);
+        nodo = new Nodo<Tipo>();
         establecer_raiz(nodo);
-        nodo -> insertar_no_lleno(nueva_clave, nuevo_dato)
+        nodo -> insertar_no_lleno(nueva_clave, nuevo_dato);
 
         return;
     }
