@@ -129,7 +129,11 @@ void Vector<Tipo>::redimensionar_vector()
 template < class Tipo >
 Vector<Tipo>::~Vector()
 {
+    for (int i = 0; i < longitud,i++){
+        delete elementos[i];
 
+    }
+    
     delete[] elementos;
 }
 

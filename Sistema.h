@@ -39,6 +39,10 @@ class Sistema
         //POS: carga los parámetros como un animal nuevo en la reserva.
         void cargar_animal(char especie, string nombre, int edad, char tamanio, char personalidad);
 
+        //PRE: -
+        //POS: carga el mapa al sistema
+        void cargar_mapa(string PATH_MAPA);
+
         // PRE: -
         // POS: aumenta el hambre del animal y reduce (o no) su higiene, basándose en las características del animal particular.
         void pasar_tiempo();

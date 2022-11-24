@@ -7,8 +7,17 @@ using namespace std;
 
 // Constantes leer datos
 const string PATH_ANIMALES = "animales.csv";
+const string PATH_MAPA = "mapa.csv";
+
 // Constantes Grafos
 const int INFINITO = 100000;
+
+//Constantes Mapa
+const string 
+MONTANIA= "Montania",
+PRECIPICIO= "Precipicio",
+TIERRA= "Tierra",
+CAMINO= "Camino";
 
 // Constantes pasar tiempo
 const int
@@ -103,7 +112,8 @@ CARGAR_COMBUSTIBLE_COMPLETO =100;
 const int
 RESTAR_COMBUSTIBLE_MONTANIA = 5,
 RESTAR_COMBUSTIBLE_PRECIPICIO = 40,
-RESTAR_COMBUSTIBLE_CAMINO = 1;
+RESTAR_COMBUSTIBLE_CAMINO = 1,
+RESTAR_COMBUSTIBLE_TIERRA = 2;
 
 // Constantes estado animal
 enum estado_animal {
