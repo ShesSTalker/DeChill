@@ -212,7 +212,7 @@ bool ArbolB<Tipo>::empujar(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nuevo_nodo, str
 template < typename Tipo >
 void ArbolB<Tipo>::meter_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* rama_derecha, string nueva_clave, Tipo nuevo_dato, int posicion)
 {
-    for(int i = nodo_actual -> obtener_cantidad_claves_usadas(); i >= posicion; i--)
+    for(int i = nodo_actual -> obtener_cantidad_claves_usadas(); i > posicion; i--)
     {
         nodo_actual -> establecer_clave(i, nodo_actual -> obtener_clave(i - 1));
         nodo_actual -> establecer_dato(i, nodo_actual -> obtenener_dato(i - 1));
@@ -229,10 +229,10 @@ void ArbolB<Tipo>::meter_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* rama_derecha,
 template < typename Tipo >
 void ArbolB<Tipo>::dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* nodo, string &pivote, Tipo nuevo_dato, int posicion)
 {
-    int mitad, posicion_pivote;
+    int posicion_nodo, posicion_pivote;
     Nodo<Tipo>* nuevo_nodo = new Nodo<Tipo>(obtener_orden());
 
-    mitad = posicion;
+    posicion_nodo = posicion;
 
     if (obtener_orden() % 2 == 0)
     {
@@ -251,13 +251,13 @@ void ArbolB<Tipo>::dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* nodo, strin
     }
     nuevo_nodo -> cambiar_cantidad_claves_usadas((obtener_orden() - 1) - posicion_pivote);
     
-    if(mitad <= obtener_orden() / 2)
+    if(posicion_nodo <= obtener_orden() / 2)
     {
         meter_nodo(nodo_actual, nodo, pivote, nuevo_dato, posicion);
     }
     else
     {
-        posicion = mitad - posicion_pivote;
+        posicion = posicion_nodo - posicion_pivote;
         meter_nodo(nuevo_nodo, nodo, pivote, nuevo_dato, posicion);
     }
     pivote = nodo_actual -> obtener_clave(nodo_actual -> obtener_cantidad_claves_usadas());
