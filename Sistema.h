@@ -3,6 +3,10 @@
 
 #include "Menu.h"
 #include "Vector.h"
+#include "Grafo.h"
+#include "Casilla.h"
+#include "Auto.h"
+#include "Animal.h"
 
 class Sistema
 {
@@ -11,16 +15,23 @@ class Sistema
         Lista<Animal*>* animales;
         Vector<Animal*>* punteros_animales;
         Auto * vehiculo;
-
+        Casilla** mapa;
+        int filas;
+        int columnas;
     //Metodos
     public:
+        Grafo* grafo;
         //PRE: -
         //POS: crea un objeto Sistema e incializa los atributos 
         Sistema();
 
-        //PRE: - 
-        //POS: lee los datos del archivo CSV de la reserva.
-        void leer_datos();
+        //PRE: el archivo debe estar bien formado
+        //POS: lee los datos del archivo PATH_ANIMALES de la reserva.
+        void leer_animales();
+
+        //PRE: el archivo debe estar bien formado
+        //POS: carga el mapa del archivo PATH_MAPA al grafo del sistema
+        void cargar_mapa_grafo();
 
         //PRE: 0 < opcion_tomada <= 5.
         //POS: procesa opcion_tomada para ejecutar las operaciones de la opción correspondiente.
@@ -40,8 +51,20 @@ class Sistema
         void cargar_animal(char especie, string nombre, int edad, char tamanio, char personalidad);
 
         //PRE: -
-        //POS: carga el mapa al sistema
-        void cargar_mapa(string PATH_MAPA);
+        //POS: carga la casilla al mapa
+        void cargar_casilla(int fila,int columna,string vertice,string terreno);
+
+        //PRE: -    
+        //POS: carga el grafo con los caminos 
+        void cargar_caminos();
+
+        //PRE: -    
+        //POS: inicializa las dimensiones del mapa 
+        void inicializar_mapa();
+
+        //PRE: -
+        //POS: devuelve true si esta dentro del rango del mapa y false si no
+        bool dentro_de_rango(int fila, int columna);
 
         // PRE: -
         // POS: aumenta el hambre del animal y reduce (o no) su higiene, basándose en las características del animal particular.

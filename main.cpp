@@ -8,11 +8,11 @@ int main()
 {
     Menu* menu = new Menu();
     Sistema* sistema = new Sistema();
-    int opcion;
+    //int opcion;
 
-    sistema -> leer_datos();
+    //sistema -> leer_animales();
     menu -> bienvenida();
-    
+    /*
     do
     {
         menu -> mostrar_menu();
@@ -23,7 +23,7 @@ int main()
     while (opcion != GUARDAR_Y_SALIR);
 
     sistema -> guardar();
-    
+    */
     delete menu;
     delete sistema;
 
