@@ -6,19 +6,20 @@
 using namespace std;
 
 // Constantes leer datos
-const string PATH_ANIMALES = "animales.csv";
-const string PATH_MAPA = "mapa.csv";
+const string 
+PATH_ANIMALES = "animales.csv",
+PATH_MAPA = "mapa.csv";
 
 // Constantes Grafos
 const int INFINITO = 100000;
 
 //Constantes Mapa
 const string 
-MONTANIA= "montania",
-PRECIPICIO= "precipicio",
-TIERRA= "tierra",
-CAMINO= "camino",
-ANIMAL ="animal";
+MONTANIA= "Montania",
+PRECIPICIO= "Precipicio",
+TIERRA= "Tierra",
+CAMINO= "Camino",
+ANIMAL = "Animal";
 
 // Constantes pasar tiempo
 const int
