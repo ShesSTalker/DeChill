@@ -7,8 +7,18 @@ using namespace std;
 
 // Constantes leer datos
 const string PATH_ANIMALES = "animales.csv";
+const string PATH_MAPA = "mapa.csv";
+
 // Constantes Grafos
 const int INFINITO = 100000;
+
+//Constantes Mapa
+const string 
+MONTANIA= "montania",
+PRECIPICIO= "precipicio",
+TIERRA= "tierra",
+CAMINO= "camino",
+ANIMAL ="animal";
 
 // Constantes pasar tiempo
 const int
@@ -89,6 +99,11 @@ COMIDA_CONEJO = "Lechuga",
 COMIDA_ERIZO = "Insectos",
 COMIDA_LAGARTIJA = "Insectos";
 
+
+// Constantes combustible Auto
+
+const int
+MAX_COMBUSTIBBLE = 100;
 // Constantes cargar combustible Auto
 const int
 CARGAR_COMBUSTIBLE_POR_ACCION = 5,
@@ -98,7 +113,8 @@ CARGAR_COMBUSTIBLE_COMPLETO =100;
 const int
 RESTAR_COMBUSTIBLE_MONTANIA = 5,
 RESTAR_COMBUSTIBLE_PRECIPICIO = 40,
-RESTAR_COMBUSTIBLE_CAMINO = 1;
+RESTAR_COMBUSTIBLE_CAMINO = 1,
+RESTAR_COMBUSTIBLE_TIERRA = 2;
 
 // Constantes estado animal
 enum estado_animal {
@@ -118,7 +134,7 @@ enum opciones_menu_principal {
     GUARDAR_Y_SALIR,
 };
 
-const int MAX_OPCIONES_MENU_PRINCIPAL = 7;
+const int MAX_OPCIONES_MENU_PRINCIPAL= 7;
 
 enum opciones_submenu {
     ELEGIR_INDIVIDUALMENTE = 1,

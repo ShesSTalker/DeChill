@@ -26,6 +26,10 @@ class Auto
         void cargar_combustible_completo();
 
         //PRE: -
+        //POS: carga la cantidad de combustible recibida
+        void cargar_combustible(int combustible_cargar);
+
+        //PRE: -
         //POS: resta 5 de combustible del auto
         void restar_combustible_montania();
 
