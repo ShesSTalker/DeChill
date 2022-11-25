@@ -258,7 +258,8 @@ void ArbolB<Tipo>::dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* nodo, strin
         nuevo_dato -> establecer_hijo(0, nodo_actual -> obtener_hijo(i));
     }
     nuevo_nodo -> cambiar_cantidad_claves_usadas((obtener_orden() - 1) - posicion_pivote);
-    
+    nodo_actual -> cambiar_cantidad_claves_usadas(posicion_pivote);
+
     if(posicion_nodo <= obtener_orden() / 2)
     {
         meter_nodo(nodo_actual, nodo, pivote, nuevo_dato, posicion);
