@@ -2,8 +2,6 @@
 #define _MENU_H_
 
 #include "Constantes.h"
-#include "Lista.h"
-#include "Animal.h"
 
 class Menu 
 {

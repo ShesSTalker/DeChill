@@ -19,6 +19,16 @@ void Auto::cargar_combustible_completo()
 {
     combustible = CARGAR_COMBUSTIBLE_COMPLETO;
 }
+void Auto::cargar_combustible(int combustible_cargar){
+    
+    combustible = +combustible_cargar;
+
+    if(combustible > MAX_COMBUSTIBBLE){
+        
+        combustible = MAX_COMBUSTIBBLE;
+    }
+
+}
 
 void Auto::restar_combustible_montania()
 {

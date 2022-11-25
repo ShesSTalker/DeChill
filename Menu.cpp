@@ -2,7 +2,6 @@
 #include <cctype>
 
 #include "Menu.h"
-#include "Constantes.h"
 
 using namespace std;
 
@@ -25,7 +24,7 @@ void Menu::mostrar_menu()
     "[3] Buscar animal." << endl <<
     "[4] Cuidar animales." << endl <<
     "[5] Adoptar animal." << endl <<
-    "[6] Cargar combustible." << endl <<
+    "[6] Cargar Combustible." << endl <<
     "[7] Guardar y salir." << endl << endl;
 }
 

@@ -180,5 +180,4 @@ bool ArbolB<Tipo>::empujar(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* nuevo_nodo, stri
             
         }
     }
-
 }
