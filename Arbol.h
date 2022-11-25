@@ -28,6 +28,8 @@ class ArbolB
         Nodo<Tipo>* buscar(string clave, int &posicion);
 
         void mostrar();
+
+        ~ArbolB();
     
     private:
         Nodo<Tipo>* buscar(Nodo<Tipo>* nodo_actual, string clave, int &posicion);
@@ -44,6 +46,12 @@ class ArbolB
 };
 
 #endif
+
+template < typename Tipo >
+ArbolB<Tipo>::~ArbolB()
+{
+    delete obtener_raiz();
+}
 
 template < typename Tipo >
 ArbolB<Tipo>::ArbolB(int orden)

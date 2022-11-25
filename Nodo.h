@@ -25,6 +25,8 @@ class Nodo
 
         string obtener_clave(int posicion);
 
+        Tipo obtener_dato(int posicion);
+
         void establecer_clave(int posicion, string nueva_clave);
 
         Nodo<Tipo>* obtener_hijo(int posicion);
@@ -32,9 +34,50 @@ class Nodo
         void establecer_hijo(int posicion, Nodo<Tipo>* nuevo_hijo);
 
         int obtener_cantidad_claves_usadas();
+
+        bool es_hoja();
+
+        ~Nodo();
     private:
         void cambiar_cantidad_claves_usadas(int valor);
 };
+
+template < typename Tipo >
+bool Nodo<Tipo>::es_hoja()
+{
+    bool hoja = true;
+    for(int i = 0; i < obtener_cantidad_claves_usadas() + 1; i++)
+    {
+        if(obtener_hijo(i) != nullptr)
+        {
+            hoja = false;
+            break;
+        }
+    }
+
+    return hoja;
+}
+
+template < typename Tipo >
+Nodo<Tipo>::~Nodo()
+{
+    int i;
+    bool hoja = es_hoja();
+    for(i = 0; i < obtener_cantidad_claves_usadas(); i++)
+    {
+        if(!hoja)
+            delete obtener_hijo(i);
+
+        delete obtener_dato(i);
+    }
+
+    if(!hoja)
+        delete obtener_hijo(i);
+
+    delete[] claves;
+    delete[] datos;
+    delete[] hijos;
+}
 
 template < typename Tipo >
 Nodo<Tipo>::Nodo(int orden)
@@ -59,6 +102,12 @@ template < typename Tipo >
 string Nodo<Tipo>::obtener_clave(int posicion)
 {
     return claves[posicion];
+}
+
+template < typename Tipo > 
+Tipo Nodo<Tipo>::obtener_dato(int posicion)
+{
+    return datos[posicion];
 }
 
 template < typename Tipo >
