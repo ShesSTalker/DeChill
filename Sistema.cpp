@@ -86,20 +86,21 @@ void Sistema::cargar_mapa_grafo(){
     fstream archivo (PATH_MAPA);
     if (archivo.is_open())
     {   
-        string vertice, total_filas, total_columnas, fila , columna , terreno;
+        string vertice, total_filas, total_columnas, fila , columna , terreno, salto_linea;
         getline(archivo,total_filas,',');
         getline(archivo,total_columnas,',');
-        getline(archivo,terreno);
+        getline(archivo,terreno,';');
 
         filas= stoi(total_filas);
         columnas= stoi(total_columnas);
 
         inicializar_mapa();
 
-        while(getline(archivo,fila,','))
-        {
+        while(getline(archivo,salto_linea,'\n'))
+        {   
+            getline(archivo,fila,',');
             getline(archivo,columna,',');
-            getline(archivo,terreno);
+            getline(archivo,terreno,';');
             
             vertice = fila + columna;
             cargar_casilla(stoi(fila)-1 , stoi(columna)-1 , vertice, terreno);
