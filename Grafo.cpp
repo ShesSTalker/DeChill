@@ -30,7 +30,6 @@ void Grafo::agregar_camino(string origen, string destino, int peso){
 
     if(!(posicion_destino == NO_ENCONTRO || posicion_origen == NO_ENCONTRO)) {
         matriz_de_adyacencia[posicion_origen][posicion_destino] = peso;
-        matriz_de_adyacencia[posicion_destino][posicion_origen] = peso;
     }
 }
 
