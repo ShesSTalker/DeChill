@@ -235,41 +235,43 @@ void ArbolB<Tipo>::meter_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* rama_derecha,
 template < typename Tipo >
 void ArbolB<Tipo>::dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* nodo, string &pivote, Tipo* nuevo_dato, int posicion)
 {
-    int posicion_nodo, posicion_pivote;
+    int posicion_ideal, posicion_medio;
     Nodo<Tipo>* nuevo_nodo = new Nodo<Tipo>(obtener_orden());
 
-    posicion_nodo = posicion;
+    posicion_ideal = posicion;
 
     if (obtener_orden() % 2 == 0)
     {
-        posicion_pivote = (obtener_orden() / 2) - 1;
+        posicion_medio = (obtener_orden() / 2) - 1;
     }
     else
     {
-        posicion_pivote = (obtener_orden() / 2);
+        posicion_medio = (obtener_orden() / 2);
     }
 
-    for(int i = posicion_pivote + 1; i < obtener_orden(); i++)
+    for(int i = posicion_medio + 1; i < obtener_orden(); i++)
     {
-        nuevo_nodo -> establecer_clave(0, nodo_actual -> obtener_clave(i));
-        nuevo_nodo -> establecer_dato(0, nodo_actual -> obtener_dato(i));
-        nuevo_nodo -> establecer_hijo(0, nodo_actual -> obtener_hijo(i));
+        nuevo_nodo -> establecer_clave(i - posicion_medio, nodo_actual -> obtener_clave(i));
+        nuevo_nodo -> establecer_dato(i - posicion_medio, nodo_actual -> obtener_dato(i));
+        nuevo_nodo -> establecer_hijo(i - posicion_medio, nodo_actual -> obtener_hijo(i + 1));
     }
-    nuevo_nodo -> cambiar_cantidad_claves_usadas((obtener_orden() - 1) - posicion_pivote);
-    nodo_actual -> cambiar_cantidad_claves_usadas(posicion_pivote);
+    nuevo_nodo -> cambiar_cantidad_claves_usadas((obtener_orden() - 1) - posicion_medio);
+    nodo_actual -> cambiar_cantidad_claves_usadas(posicion_medio);
 
-    if(posicion_nodo <= obtener_orden() / 2)
+    if(posicion_ideal <= obtener_orden() / 2)
     {
         meter_nodo(nodo_actual, nodo, pivote, nuevo_dato, posicion);
+        nuevo_nodo -> establecer_hijo(0, nodo_actual -> obtener_hijo(nodo_actual -> obtener_cantidad_claves_usadas()));
+        nodo_actual -> cambiar_cantidad_claves_usadas(nodo_actual -> obtener_cantidad_claves_usadas() - 1);
     }
     else
     {
-        posicion = posicion_nodo - posicion_pivote;
+        posicion = posicion_ideal - posicion_medio;
         meter_nodo(nuevo_nodo, nodo, pivote, nuevo_dato, posicion);
+        nuevo_nodo -> establecer_hijo(0, nodo_actual -> obtener_hijo(nodo_actual -> obtener_cantidad_claves_usadas()));
     }
+    
     pivote = nodo_actual -> obtener_clave(nodo_actual -> obtener_cantidad_claves_usadas());
-    nuevo_nodo -> establecer_hijo(0, nodo_actual -> obtener_hijo(nodo_actual -> obtener_cantidad_claves_usadas()));
-    nodo_actual -> cambiar_cantidad_claves_usadas(nodo_actual -> obtener_cantidad_claves_usadas() - 1);
     nodo = nuevo_nodo; 
 }
 
