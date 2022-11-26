@@ -1,182 +1,276 @@
-#ifndef _ARBOL_H_
-#define _ARBOL_H_
+#ifndef _ARBOLB_H_
+#define _ARBOLB_H_
 
-#include "Constantes.h"
 #include "Nodo.h"
 
+using namespace std;
+
 template < typename Tipo >
-class Arbol
+class ArbolB
 {
     //Atributos
     private:
         Nodo<Tipo>* raiz;
+        int orden;
 
     //Metodos
     public:
-        Arbol();
+        ArbolB(int orden);
 
-        //PRE:
-        //POS:
-        void insertar(string clave, Tipo dato);
+        bool arbol_vacio();
 
-        //PRE:
-        //POS:
-        void mostrar_en_orden();
-
-        //PRE:
-        //POS:
-        bool buscar_clave(string clave);
-
-        //PRE:
-        //POS:
-        Tipo hijo(string clave);
-
-        //PRE:
-        //POS:
-        Tipo padre(string clave);
-
-        //PRE:
-        //POS:
-        void remover(string clave);
-
-        //PRE:
-        //POS:
         Nodo<Tipo>* obtener_raiz();
 
-        //PRE:
-        //POS:
-        bool vacio();
+        void establecer_raiz(Nodo<Tipo>* nueva_raiz);
 
-        //PRE:
-        //POS:
-        void borrar_todo();
+        int obtener_orden();
 
-        ~Arbol<Tipo>();
+        void insertar(string nueva_clave, Tipo* nuevo_dato);
 
+        Nodo<Tipo>* buscar(string clave, int &posicion);
+
+        ~ArbolB();
+    
     private:
-        //PRE:
-        //POS:
-        Nodo<Tipo>* insertar(Nodo<Tipo>* nodo, string clave, Tipo dato); 
+        Nodo<Tipo>* buscar(Nodo<Tipo>* nodo_actual, string clave, int &posicion);
+
+        bool buscar_nodo_actual(Nodo<Tipo>* nodo_actual, string clave, int &posicion);
+
+        Nodo<Tipo>* insertar(Nodo<Tipo>* raiz, string nueva_clave, Tipo* nuevo_dato);
+
+        bool empujar(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nuevo_nodo, string nueva_clave, Tipo* nuevo_dato, string &pivote); 
+
+        void meter_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* rama_derecha, string nueva_clave, Tipo* nuevo_dato, int posicion);
+
+        void dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* nodo, string &pivote, Tipo* nuevo_dato, int posicion);
 };
 
 template < typename Tipo >
-Arbol<Tipo>::Arbol()
+ArbolB<Tipo>::~ArbolB()
 {
-    this -> raiz = nullptr;
+    if(!arbol_vacio())
+        delete obtener_raiz();
 }
 
 template < typename Tipo >
-void Arbol<Tipo>::insertar(string clave, Tipo dato)
-{   
-    if(this -> raiz ->cantidad_claves()==DOS_CLAVES){
-
-        this -> raiz ->insertar_lleno(clave, dato);
-
-    }else{
-        this -> raiz ->insertar_no_lleno(clave,dato)
-    }
+ArbolB<Tipo>::ArbolB(int orden)
+{
+    raiz = NULL;
+    this -> orden = orden;
 }
 
 template < typename Tipo >
-void Arbol<Tipo>::mostrar_en_orden()
+bool ArbolB<Tipo>::arbol_vacio()
 {
-    mostrar_en_orden(this -> raiz);
+    return raiz == NULL;
 }
 
 template < typename Tipo >
-bool Arbol<Tipo>::buscar_clave(string clave)
-{
-    Nodo<Tipo>* resultado = buscar_clave(this -> raiz, clave);
-    
-}
-
-template < typename Tipo >
-Tipo Arbol<Tipo>::hijo(string clave)
-{
-    Nodo<Tipo>* clave_nodo = this -> buscar_clave(this -> raiz, clave);
-
-    if (clave_nodo == nullptr)
-    {
-        return -1;
-    }
-    else
-    {
-        return hijo(clave_nodo);
-    }
-}
-
-template < typename Tipo >
-Tipo Arbol<Tipo>::padre(string clave)
-{
-    Nodo<Tipo>* clave_nodo = this -> buscar_clave(this -> raiz, clave);
-
-    if (clave_nodo == nullptr)
-    {
-        return -1;
-    }
-    else
-    {
-        return padre(clave_nodo);
-    }
-}
-
-template< typename Tipo >
-void Arbol<Tipo>::remover(string clase)
-{
-    this -> raiz = remover(this -> raiz, clase);
-}
-
-template < typename Tipo > 
-Nodo<Tipo>* Arbol<Tipo>::obtener_raiz()
+Nodo<Tipo>* ArbolB <Tipo>::obtener_raiz()
 {
     return raiz;
 }
 
 template < typename Tipo >
-bool Arbol<Tipo>::vacio()
+void ArbolB<Tipo>::establecer_raiz(Nodo<Tipo>* nueva_raiz)
 {
-    return raiz == nullptr;
+    raiz = nueva_raiz;
 }
 
 template < typename Tipo >
-void Arbol<Tipo>::borrar_todo()
+int ArbolB<Tipo>::obtener_orden()
 {
-    borrar_todo(this -> raiz);
+    return orden;
 }
 
 template < typename Tipo >
-Arbol<Tipo>::~Arbol()
+Nodo<Tipo>* ArbolB<Tipo>::buscar(string clave, int &posicion)
 {
-    borrar_todo();
+    return buscar(raiz, clave, posicion);
+}
+
+template < typename Tipo >
+void ArbolB<Tipo>::insertar(string nueva_clave, Tipo* nuevo_dato)
+{
+    raiz = insertar(raiz, nueva_clave, nuevo_dato);
 }
 
 template < typename Tipo > 
-Nodo<Tipo>* Arbol<Tipo>::insertar(Nodo<Tipo>* nodo, string nueva_clave, Tipo nuevo_dato)
+Nodo<Tipo>* ArbolB<Tipo>::insertar(Nodo<Tipo>* raiz, string nueva_clave, Tipo* nuevo_dato)
 {
-    if (nodo == nullptr)
+    bool sube_arriba;
+    string pivote;
+    Nodo<Tipo>* nodo;
+
+    if(raiz == NULL)
     {
-        nodo = new Nodo<Tipo>(nueva_clave, nuevo_dato);
+        raiz = new Nodo<Tipo>(obtener_orden());
     }
-    else if(nodo -> es_hoja() && nodo -> obtener_cantidad_claves() > DOS_CLAVES)
+
+    sube_arriba = empujar(raiz, nodo, nueva_clave, nuevo_dato, pivote);
+    if (sube_arriba)
+    { 
+        cout << "ups" << endl;
+        Nodo<Tipo>* nuevo_nodo = new Nodo<Tipo>(obtener_orden());
+        nuevo_nodo -> cambiar_cantidad_claves_usadas(1);  // cuenta(1)
+        nuevo_nodo -> establecer_clave(1, pivote);        // clave(1, mediana)
+        nuevo_nodo -> establecer_hijo(0, raiz);           // rama(0, raiz)
+        nuevo_nodo -> establecer_hijo(1, nodo);           // rama(1, nodo)
+        raiz = nuevo_nodo;
+    }
+    return raiz;
+}   
+
+template < typename Tipo > 
+Nodo<Tipo>* ArbolB<Tipo>::buscar(Nodo<Tipo>* nodo_actual, string clave, int &posicion)
+{
+    bool encontrado;
+
+    if(nodo_actual == NULL)
     {
-        nodo -> insertar_no_lleno(nueva_clave, nuevo_dato)
+        return NULL;
     }
-    else if(nodo -> obtener_cantidad_claves == DOS_CLAVES)
+    else
     {
-        nodo -> insertar_lleno(nodo, nueva_clave, nuevo_dato)
+        encontrado = buscar_nodo_actual(nodo_actual, clave, posicion);
+        
+        if (encontrado)
+        {
+            return nodo_actual;
+        }
+        else 
+        {
+            return buscar(nodo_actual -> obtener_hijo(posicion), clave, posicion);
+        }
     }
-    else if(nodo -> !es_hoja() && nodo -> obtener_clave(PRIMERA_CLAVE) > nueva_clave)
+}
+
+template < typename Tipo >
+bool ArbolB<Tipo>::buscar_nodo_actual(Nodo<Tipo>* nodo_actual, string clave, int &posicion)
+{
+    int i = nodo_actual -> obtener_cantidad_claves_usadas();
+    bool encontrado = false;
+
+    if (i == 0)
     {
-        insertar(nodo -> obtener_hijo_izquierdo(), nueva_clave, nuevo_dato);
+        posicion = 0;
     }
-    else if(nodo -> !es_hoja() && nodo -> obtener_clave(SEGUNDA_CLAVE) < nueva_clave)
+    else if(clave < nodo_actual -> obtener_clave(0))
+    {       
+        posicion = 0;
+    }
+    else if(clave > nodo_actual -> obtener_clave(i - 1))
     {
-        insertar(nodo -> obtener_hijo_derecho(), nueva_clave, nuevo_dato);
+        posicion = i;
     }
-    else if(nodo -> !es_hoja() && nodo -> obtener_clave(PRIMERA_CLAVE) < nueva_clave && obtener_clave(SEGUNDA_CLAVE) > nueva_clave)
+    else
     {
-        insertar(nodo -> obtener_hijo_mediano(), nueva_clave, nuevo_dato);
+        i -= 1;
+
+        while(clave < nodo_actual -> obtener_clave(i) && i > 0 && !encontrado)
+        {
+            if (clave == nodo_actual -> obtener_clave(i))
+            {
+                encontrado = true;
+            }
+             i--;
+        }
+        posicion = i + 1;
     }
+    
+    return encontrado;
+}
+
+template < typename Tipo >
+bool ArbolB<Tipo>::empujar(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nuevo_nodo, string nueva_clave, Tipo* nuevo_dato, string &pivote)
+{
+    int posicion;
+    bool sube_arriba = false;
+
+    if(nodo_actual == NULL)
+    {
+        sube_arriba = true;
+        pivote = nueva_clave;
+        nuevo_nodo = NULL;
+    }
+    else
+    {
+        buscar_nodo_actual(nodo_actual, nueva_clave, posicion);
+  
+        sube_arriba = empujar(nodo_actual -> obtener_hijo(posicion), nuevo_nodo, nueva_clave, nuevo_dato, pivote);
+
+        if(sube_arriba)
+        {
+            if(nodo_actual -> nodo_lleno())
+            {
+                dividir_nodo(nodo_actual, nuevo_nodo, pivote, nuevo_dato, posicion);
+            } 
+            else
+            {
+                meter_nodo(nodo_actual, nuevo_nodo, pivote, nuevo_dato, posicion);
+                sube_arriba = false;
+            } 
+        }
+    }
+    return sube_arriba;
+}
+
+template < typename Tipo >
+void ArbolB<Tipo>::meter_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* rama_derecha, string nueva_clave, Tipo* nuevo_dato, int posicion)
+{
+    for(int i = nodo_actual -> obtener_cantidad_claves_usadas(); i > posicion; i--)
+    {
+        nodo_actual -> establecer_clave(i, nodo_actual -> obtener_clave(i - 1));
+        nodo_actual -> establecer_dato(i, nodo_actual -> obtener_dato(i - 1));
+        nodo_actual -> establecer_hijo(i, nodo_actual -> obtener_hijo(i - 1));
+    }
+
+    nodo_actual -> establecer_clave(posicion, nueva_clave);
+    nodo_actual -> establecer_dato(posicion, nuevo_dato);
+    nodo_actual -> establecer_hijo(posicion, rama_derecha);
+
+    nodo_actual -> cambiar_cantidad_claves_usadas(nodo_actual -> obtener_cantidad_claves_usadas() + 1);
+}
+
+template < typename Tipo >
+void ArbolB<Tipo>::dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* nodo, string &pivote, Tipo* nuevo_dato, int posicion)
+{
+    int posicion_nodo, posicion_pivote;
+    Nodo<Tipo>* nuevo_nodo = new Nodo<Tipo>(obtener_orden());
+
+    posicion_nodo = posicion;
+
+    if (obtener_orden() % 2 == 0)
+    {
+        posicion_pivote = (obtener_orden() / 2) - 1;
+    }
+    else
+    {
+        posicion_pivote = (obtener_orden() / 2);
+    }
+
+    for(int i = posicion_pivote + 1; i < obtener_orden(); i++)
+    {
+        nuevo_nodo -> establecer_clave(0, nodo_actual -> obtener_clave(i));
+        nuevo_nodo -> establecer_dato(0, nodo_actual -> obtener_dato(i));
+        nuevo_nodo -> establecer_hijo(0, nodo_actual -> obtener_hijo(i));
+    }
+    nuevo_nodo -> cambiar_cantidad_claves_usadas((obtener_orden() - 1) - posicion_pivote);
+    nodo_actual -> cambiar_cantidad_claves_usadas(posicion_pivote);
+
+    if(posicion_nodo <= obtener_orden() / 2)
+    {
+        meter_nodo(nodo_actual, nodo, pivote, nuevo_dato, posicion);
+    }
+    else
+    {
+        posicion = posicion_nodo - posicion_pivote;
+        meter_nodo(nuevo_nodo, nodo, pivote, nuevo_dato, posicion);
+    }
+    pivote = nodo_actual -> obtener_clave(nodo_actual -> obtener_cantidad_claves_usadas());
+    nuevo_nodo -> establecer_hijo(0, nodo_actual -> obtener_hijo(nodo_actual -> obtener_cantidad_claves_usadas()));
+    nodo_actual -> cambiar_cantidad_claves_usadas(nodo_actual -> obtener_cantidad_claves_usadas() - 1);
+    nodo = nuevo_nodo; 
 }
 
 #endif

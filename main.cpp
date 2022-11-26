@@ -1,31 +1,40 @@
 #include <iostream>
-#include "Menu.h"
-#include "Sistema.h"
+#include "Lagartija.h"
+#include "Constantes.h"
+#include "Arbol.h"
 
 using namespace std;
 
 int main()
 {
-    Menu* menu = new Menu();
-    Sistema* sistema = new Sistema();
-    //int opcion;
 
-    //sistema -> leer_animales();
-    menu -> bienvenida();
+    ArbolB<Animal> *mi_arbol = new ArbolB<Animal>(3);
+    
+    Lagartija *L1 = new Lagartija("Juan", 1, DIMINUTO, TRAVIESO);
+    mi_arbol->insertar(L1->obtener_nombre(), L1);
+    
+    Lagartija *L2 = new Lagartija("Martin", 1, DIMINUTO, TRAVIESO);
+    mi_arbol->insertar(L2->obtener_nombre(), L2);
     /*
-    do
-    {
-        menu -> mostrar_menu();
-        menu -> pedir_opcion();
-        opcion = menu -> obtener_opcion_tomada();
-        sistema -> procesar_opcion(opcion);
-    }
-    while (opcion != GUARDAR_Y_SALIR);
+    Lagartija *L3 = new Lagartija("Andy", 1, DIMINUTO, TRAVIESO);
+    mi_arbol->insertar(L3->obtener_nombre(), L3);
 
-    sistema -> guardar();
+    Lagartija *L4 = new Lagartija("Dom", 1, DIMINUTO, TRAVIESO);
+    mi_arbol->insertar(L4->obtener_nombre(), L4);
+
+    Lagartija *L5 = new Lagartija("Pepe", 1, DIMINUTO, TRAVIESO);
+    mi_arbol->insertar(L5->obtener_nombre(), L5);
+
+    Lagartija *L6 = new Lagartija("ASadad", 1, DIMINUTO, TRAVIESO);
+    mi_arbol->insertar(L6->obtener_nombre(), L6);
+
+    Lagartija *L7 = new Lagartija("Zzzz", 1, DIMINUTO, TRAVIESO);
+    mi_arbol->insertar(L7->obtener_nombre(), L7);
+
+    Lagartija *L8 = new Lagartija("Wtf", 1, DIMINUTO, TRAVIESO);
+    mi_arbol->insertar(L8->obtener_nombre(), L8);
     */
-    delete menu;
-    delete sistema;
+    delete mi_arbol;
 
     return 0;
 }
