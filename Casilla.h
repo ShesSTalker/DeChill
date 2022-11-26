@@ -6,24 +6,27 @@
 class Casilla
 {   //Atributos
     private:
-        string terreno; //define el tipo de terreno : Tierra , Camino , etc
-        string nombre;  //define el nombre con el que se identificara la casilla
+        string terreno;
+        string nombre;
         int costo;      //el costo de pisar esa casilla
+        char contenido; 
+
+
     //Metodos    
     public:
         //Constructor por defecto
         Casilla(){};
         // PRE: -
         // POS: crea un objeto Casilla e inicializa los atributos.
-        Casilla(string nombre, string terreno,int costo);
+        Casilla(string nombre, string terreno,int costo, char contenido);
 
         // PRE: -
         // POS: devuelve el tipo de terreno
         string obtener_terreno();
 
         // PRE: -
-        // POS: devuelve el tipo de terreno en formato caracter
-        char obtener_terreno_char();
+        // POS: devuelve el contenido de la casilla
+        char obtener_contenido();
 
         // PRE: -
         // POS: devuelve nombre de la casilla

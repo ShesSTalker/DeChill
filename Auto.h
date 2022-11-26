@@ -30,16 +30,8 @@ class Auto
         void cargar_combustible(int combustible_cargar);
 
         //PRE: -
-        //POS: resta 5 de combustible del auto
-        void restar_combustible_montania();
-
-        //PRE: -
-        //POS: resta 40 de combustible del auto
-        void restar_combustible_precipicio();
-
-        //PRE: -
-        //POS: resta 1 de combustible del auto
-        void restar_combustible_camino();
+        //POS: le resta combustible al auto
+        void restar_combustible(int combustible);
 };
 
 #endif

@@ -30,17 +30,7 @@ void Auto::cargar_combustible(int combustible_cargar){
 
 }
 
-void Auto::restar_combustible_montania()
+void Auto::restar_combustible(int combustible)
 {
-    combustible -= RESTAR_COMBUSTIBLE_MONTANIA;
-}
-
-void Auto::restar_combustible_precipicio()
-{
-    combustible -= RESTAR_COMBUSTIBLE_PRECIPICIO;
-}
-
-void Auto::restar_combustible_camino()
-{
-    combustible -= RESTAR_COMBUSTIBLE_CAMINO;
+    this->combustible -= combustible;
 }

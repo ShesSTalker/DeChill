@@ -4,7 +4,6 @@
 #include "Menu.h"
 #include "Vector.h"
 #include "Grafo.h"
-#include "Casilla.h"
 #include "Auto.h"
 #include "Animal.h"
 

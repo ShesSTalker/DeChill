@@ -49,6 +49,12 @@ int Menu::obtener_opcion_tomada()
     return opcion_tomada;
 }
 
+
+void Menu::mostrar_mapa(Casilla** mapa)
+{
+    //MOSTRAR EL MAPA 
+}
+
 bool Menu::cadena_numeros_valida(string numeros)
 {
     int i = 0;

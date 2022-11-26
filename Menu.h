@@ -2,6 +2,7 @@
 #define _MENU_H_
 
 #include "Constantes.h"
+#include "Casilla.h"
 
 class Menu 
 {
@@ -33,6 +34,10 @@ class Menu
         //PRE: -
         //POS: valida que el string recibido conste completamente de numeros, devolviendo true en caso afirmativo y false en caso contrario.
         bool cadena_numeros_valida(string numeros);
+
+        //PRE: -
+        //POS: imprime por pantalla el mapa con su contenido.
+        void mostrar_mapa(Casilla** mapa);
 };
 
 #endif
