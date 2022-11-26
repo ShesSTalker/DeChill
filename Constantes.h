@@ -20,6 +20,10 @@ PRECIPICIO= "Precipicio",
 TIERRA= "Tierra",
 CAMINO= "Camino",
 ANIMAL = "Animal";
+const char 
+VACIO =' ',
+VEHICULO= 'A';
+
 
 // Constantes pasar tiempo
 const int

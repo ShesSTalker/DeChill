@@ -86,20 +86,21 @@ void Sistema::cargar_mapa_grafo(){
     fstream archivo (PATH_MAPA);
     if (archivo.is_open())
     {   
-        string vertice, total_filas, total_columnas, fila , columna , terreno;
+        string vertice, total_filas, total_columnas, fila , columna , terreno, salto_linea;
         getline(archivo,total_filas,',');
         getline(archivo,total_columnas,',');
-        getline(archivo,terreno);
+        getline(archivo,terreno,';');
 
         filas= stoi(total_filas);
         columnas= stoi(total_columnas);
 
         inicializar_mapa();
 
-        while(getline(archivo,fila,','))
-        {
+        while(getline(archivo,salto_linea,'\n'))
+        {   
+            getline(archivo,fila,',');
             getline(archivo,columna,',');
-            getline(archivo,terreno);
+            getline(archivo,terreno,';');
             
             vertice = fila + columna;
             cargar_casilla(stoi(fila)-1 , stoi(columna)-1 , vertice, terreno);
@@ -129,19 +130,19 @@ void Sistema::inicializar_mapa(){
 void Sistema::cargar_casilla(int fila,int columna,string vertice,string terreno){
     if(terreno==TIERRA){
 
-        mapa[fila][columna]= Casilla (vertice, TIERRA, RESTAR_COMBUSTIBLE_TIERRA);
+        mapa[fila][columna]= Casilla (vertice, TIERRA, RESTAR_COMBUSTIBLE_TIERRA, VACIO);
 
     }else if (terreno== PRECIPICIO){
 
-        mapa[fila][columna]= Casilla (vertice, PRECIPICIO, RESTAR_COMBUSTIBLE_PRECIPICIO);
+        mapa[fila][columna]= Casilla (vertice, PRECIPICIO, RESTAR_COMBUSTIBLE_PRECIPICIO, VACIO);
 
     }else if (terreno== MONTANIA){ 
 
-        mapa[fila][columna]= Casilla (vertice, MONTANIA, RESTAR_COMBUSTIBLE_MONTANIA);
+        mapa[fila][columna]= Casilla (vertice, MONTANIA, RESTAR_COMBUSTIBLE_MONTANIA, VACIO);
 
     }else{
 
-        mapa[fila][columna]= Casilla (vertice, CAMINO, RESTAR_COMBUSTIBLE_CAMINO);
+        mapa[fila][columna]= Casilla (vertice, CAMINO, RESTAR_COMBUSTIBLE_CAMINO, VACIO);
     }
 }
 
@@ -176,12 +177,14 @@ void Sistema::procesar_opcion(int opcion_tomada)
     cargar_caminos();
     grafo->usar_floyd();
     grafo->mostrar_grafo();
+    /*
     for (int i = 0; i < this->filas; i++){
         for (int j = 0; j < this->columnas; j++){
             cout <<mapa[i][j].obtener_terreno_char();
         }
         cout<<endl;
     }
+    */
     /*
     string nombre, espacio, opcion_submenu, posicion_adopcion;
     int posicion, animales_validados;

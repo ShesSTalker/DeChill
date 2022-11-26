@@ -35,10 +35,11 @@ void Floyd::mostrar_matrices(){
     int i,j;
     for (i = 0; i < cantidad_vertices; i++)
     {
-        cout<<"\nMinimo Costo Respecto de :"<<i<<endl;
+        cout<<"\nMinimo Costo Respecto de :"<<vertices->obtener_elemento(i)<<endl;
         for (j = 0; j < cantidad_vertices; j++)
         {
-            cout<<matriz_costos[i][j]<<"\t";
+            cout << "(" << vertices->obtener_elemento(j) <<": ";
+            cout<<matriz_costos[i][j]<<") ";
         }
 
     }   
@@ -47,23 +48,23 @@ void Floyd::mostrar_matrices(){
 
 void Floyd::calcular_matrices() {
 
+    int i,j,k;
+    
     cantidad_vertices = vertices -> obtener_longitud();
     matriz_costos = crear_matriz_costos(matriz_adyacencia);
     matriz_caminos = crear_matriz_caminos();
 
-    int i,j,k;
-    for (k = 0; k < cantidad_vertices; k++)
-    {
-        for (i = 0; i < cantidad_vertices; i++)
-        {
-            for (j = 0; j < cantidad_vertices; j++)
-            {
-                if ((matriz_costos[i][k] * matriz_costos[k][j] != 0) && (i != j))
-                {
-                    if ((matriz_costos[i][k] + matriz_costos[k][j] < matriz_costos[i][j]) || (matriz_costos[i][j] == 0))
-                    {
-                        matriz_costos[i][j] = matriz_costos[i][k] + matriz_costos[k][j];
-                    }
+
+    for (k = 0; k < cantidad_vertices; k++) {
+
+        for (i = 0; i < cantidad_vertices; i++) {
+
+            for (j = 0; j < cantidad_vertices; j++) {
+
+                if (matriz_costos[i][k] + matriz_costos[k][j] < matriz_costos[i][j]){
+
+                    matriz_costos[i][j] = matriz_costos[i][k] + matriz_costos[k][j];
+
                 }
             }
         }
@@ -73,7 +74,7 @@ void Floyd::calcular_matrices() {
 
 void Floyd::camino_minimo(int origen, int destino) {
 
-    if(matriz_caminos[origen][destino] == NO_ENCONTRO){
+    if(matriz_caminos[origen][destino] == NO_ENCONTRO || matriz_costos[origen][destino] == INFINITO){
         cout << "No hay un camino que conecte " <<  vertices->obtener_elemento(origen) << " con " << vertices->obtener_elemento(destino);
     } else {
         cout << "El camino minimo que une " <<  vertices->obtener_elemento(origen) << " con " << vertices->obtener_elemento(destino);
@@ -87,8 +88,8 @@ void Floyd::camino_minimo(int origen, int destino) {
     cout << endl;
 
 }
+int Floyd::obtener_costo_camino(int origen, int destino) {
 
-int Floyd::obtener_costo_camino(int origen, int destino){
     return matriz_costos[origen][destino];
 }
 
