@@ -155,21 +155,10 @@ enum opciones_individuales {
 };
 
 // Constantes Arbol B
-enum arbol_b{
-    DOS_CLAVES = 2,
-    TRES_VIAS,
-};
 
-enum claves {
-    PRIMERA_CLAVE,
-    SEGUNDA_CLAVE,
-    CLAVE_EXTRA,
-};
+const int PRIMERA_CLAVE = 0;
 
-enum vias{
-    HIJO_IZQUIERDO,
-    HIJO_MEDIANO,
-    HIJO_DERECHO,
-};
+const int PRIMER_HIJO = 0,
+SEGUNDO_HIJO = 1;
 
 #endif 
