@@ -233,7 +233,7 @@ bool ArbolB<Tipo>::empujar(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nuevo_nodo, str
             else
             { 
                 cout << "entro a meter_nodo()..." << endl;
-                meter_nodo(nodo_actual, nuevo_nodo, pivote, nuevo_dato, posicion);
+                meter_nodo(nodo_actual, nuevo_nodo, pivote, pivote_dato, posicion);
                 sube_arriba = false;
             } 
         }
@@ -249,14 +249,18 @@ void ArbolB<Tipo>::meter_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* hijo, string 
     {
         nodo_actual -> establecer_clave(i, nodo_actual -> obtener_clave(i - 1));
         nodo_actual -> establecer_dato(i, nodo_actual -> obtener_dato(i - 1));
-        cout << "Hijo " << i << " establecido" << endl;
+        cout << "Hijo " << i << " establecido en for loop de meter_nodo()" << endl;
         nodo_actual -> establecer_hijo(i, nodo_actual -> obtener_hijo(i - 1));
     }
 
     nodo_actual -> establecer_clave(posicion, nueva_clave);
+    cout << "Clave tocada " << nueva_clave << endl;
     nodo_actual -> establecer_dato(posicion, nuevo_dato);
-    cout << "Hijo " << posicion << " establecido" << endl;
-    nodo_actual -> establecer_hijo(posicion, hijo);
+
+    cout << "Hijo " << posicion << " establecido en meter_nodo(), direccion " << hijo << endl; //////////
+    if(hijo != NULL) ////////////////////////////////////////////////////////////////////////////////////
+        nodo_actual -> establecer_hijo(posicion + 1, hijo); /////////////////////////////////////////////
+
     cout << "cambiando cantidad en meter_nodo(): ";
     nodo_actual -> cambiar_cantidad_claves_usadas(nodo_actual -> obtener_cantidad_claves_usadas() + 1);
     cout << nodo_actual -> obtener_cantidad_claves_usadas() << endl;
@@ -281,9 +285,10 @@ void ArbolB<Tipo>::dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nodo, stri
 
     for(int i = posicion_medio + 1; i < obtener_orden(); i++)
     {
+        cout << "Clave tocada " << nodo_actual -> obtener_clave(i) << endl;
         nuevo_nodo -> establecer_clave(i - posicion_medio - 1, nodo_actual -> obtener_clave(i));
         nuevo_nodo -> establecer_dato(i - posicion_medio - 1, nodo_actual -> obtener_dato(i));
-        cout << "Hijo " << i - posicion_medio << " establecido" << endl;
+        cout << "Hijo " << i - posicion_medio << " establecido en for loop dividir_nodo(), direccion " << nodo_actual -> obtener_hijo(i)  << endl;
         nuevo_nodo -> establecer_hijo(i - posicion_medio, nodo_actual -> obtener_hijo(i));
     }
     cout << "cambiando en dividir 1: " << (obtener_orden() - 1) - posicion_medio << endl;
@@ -304,8 +309,8 @@ void ArbolB<Tipo>::dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nodo, stri
         nuevo_nodo -> establecer_hijo(0, nodo_actual -> obtener_hijo(nodo_actual -> obtener_cantidad_claves_usadas()));
     }
     */
-    cout << "Hijo " << PRIMER_HIJO << " establecido" << endl;
-    nuevo_nodo -> establecer_hijo(PRIMER_HIJO, nodo_actual -> obtener_hijo(nodo_actual -> obtener_cantidad_claves_usadas() + 1));
+    cout << "Hijo " << PRIMER_HIJO << " establecido en dividir_nodo(), direccion " << nodo_actual -> obtener_hijo(nodo_actual -> obtener_cantidad_claves_usadas() + 1) << endl;
+    nuevo_nodo -> establecer_hijo(PRIMER_HIJO, nodo_actual -> obtener_hijo(nodo_actual -> obtener_cantidad_claves_usadas()));
     pivote = nodo_actual -> obtener_clave(nodo_actual -> obtener_cantidad_claves_usadas());
     pivote_dato = nodo_actual -> obtener_dato(nodo_actual -> obtener_cantidad_claves_usadas());
     nodo = nuevo_nodo; 
