@@ -78,6 +78,7 @@ Nodo<Tipo>::Nodo(int orden)
     {
         claves[i] = "";
         hijos[i] = NULL;
+        datos[i] = NULL;
     }
     cantidad_claves_usadas = 0;
 }
@@ -142,6 +143,7 @@ bool Nodo<Tipo>::es_hoja()
     bool hoja = true;
     int i = 0;
 
+    cout << "cantidad: " << obtener_cantidad_claves_usadas() << endl;
     while(i < obtener_cantidad_claves_usadas() + 1  && hoja)
     {
         if(obtener_hijo(i) != NULL)
@@ -165,7 +167,6 @@ Nodo<Tipo>::~Nodo()
         {
             delete obtener_hijo(i); 
         }
-
         delete obtener_dato(i);
     }
 
