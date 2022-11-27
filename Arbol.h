@@ -118,7 +118,7 @@ Nodo<Tipo>* ArbolB<Tipo>::insertar(Nodo<Tipo>* raiz, string nueva_clave, Tipo* n
     if(raiz == NULL)
     {
         raiz = new Nodo<Tipo>(obtener_orden());
-        meter_nodo(raiz, NULL, nueva_clave, nuevo_dato, 0)
+        meter_nodo(raiz, NULL, nueva_clave, nuevo_dato, 0);
     }
 
     sube_arriba = empujar(raiz, nodo, nueva_clave, nuevo_dato, pivote);
