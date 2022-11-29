@@ -249,7 +249,7 @@ void ArbolB<Tipo>::meter_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* hijo, string 
 {
     if(nodo_actual -> es_hoja())
     {
-        for(int i = nodo_actual -> obtener_cantidad_claves_usadas(); i > posicion; i--)
+        for(int i = nodo_actual -> obtener_cantidad_claves_usadas(); i >= posicion; i--)
         {
             nodo_actual -> establecer_clave(i, nodo_actual -> obtener_clave(i - 1));
             nodo_actual -> establecer_dato(i, nodo_actual -> obtener_dato(i - 1));
@@ -258,11 +258,13 @@ void ArbolB<Tipo>::meter_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* hijo, string 
     }
     else 
     {
-        for(int j = nodo_actual -> obtener_cantidad_claves_usadas(); j > posicion + 1; j--)
+        for(int j = nodo_actual -> obtener_cantidad_claves_usadas(); j >= posicion + 1; j--)
         {
+           cout << "CANTIDAD DE ELEMENTOS: " << nodo_actual -> obtener_cantidad_claves_usadas() << endl;
             nodo_actual -> establecer_clave(j, nodo_actual -> obtener_clave(j - 1));
             nodo_actual -> establecer_dato(j, nodo_actual -> obtener_dato(j - 1));
-            nodo_actual -> establecer_hijo(j, nodo_actual -> obtener_hijo(j - 1));
+            cout << "Establesco en posicion: " << j << " con direccion: "  << nodo_actual -> obtener_hijo(j - 1) << endl; 
+            nodo_actual -> establecer_hijo(j + 1, nodo_actual -> obtener_hijo(j));
         }
     }
     cout << "Clave guardada " << nueva_clave << endl;
@@ -271,7 +273,7 @@ void ArbolB<Tipo>::meter_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* hijo, string 
 
     if(hijo != NULL)
     {
-        cout << "Hijo no hoja " << posicion << " establecido en meter_nodo(), direccion " << hijo << endl; 
+        cout << "Hijo no hoja " << posicion + 1 << " establecido en meter_nodo(), direccion " << hijo << endl; 
         nodo_actual -> establecer_hijo(posicion + 1, hijo); 
     }
     else
