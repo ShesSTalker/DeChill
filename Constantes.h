@@ -161,4 +161,6 @@ const int PRIMERA_CLAVE = 0;
 const int PRIMER_HIJO = 0,
 SEGUNDO_HIJO = 1;
 
+const int HIJO_AUXILIAR = 3; 
+
 #endif 

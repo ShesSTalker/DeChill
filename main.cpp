@@ -30,9 +30,15 @@ int main()
     cout << endl << "L7" << endl;
     Lagartija *L7 = new Lagartija("Zzzz", 1, DIMINUTO, TRAVIESO);
     mi_arbol->insertar(L7->obtener_nombre(), L7);
-    /*cout << endl << "L8" << endl;
+    cout << endl << "L8" << endl;
     Lagartija *L8 = new Lagartija("Wtf", 1, DIMINUTO, TRAVIESO);
-    mi_arbol->insertar(L8->obtener_nombre(), L8);*/
+    mi_arbol->insertar(L8->obtener_nombre(), L8);
+    cout << endl << "L9" << endl;
+    Lagartija *L9 = new Lagartija("G", 1, DIMINUTO, TRAVIESO);
+    mi_arbol->insertar(L9->obtener_nombre(), L8);
+    cout << endl << "L9" << endl;
+    Lagartija *L10 = new Lagartija("L", 1, DIMINUTO, TRAVIESO);
+    mi_arbol->insertar(L10->obtener_nombre(), L8);
     cout << endl;
     mi_arbol -> listar_creciente();
 

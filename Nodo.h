@@ -17,6 +17,7 @@ class Nodo
         Nodo<Tipo>* padre;
         int maximo_claves;
         int cantidad_claves_usadas;
+        int cantidad_hijos;
 
     //Metodos
     public:
@@ -26,6 +27,10 @@ class Nodo
         //PRE: - 
         //POS: devuelve verdadero si el nodo esta lleno y falso en caso contrario.
         bool nodo_lleno();
+
+        //PRE: -
+        //POS: devuelve verdadero si el hijo axiliar esta siendo ocupado y falso en caso contrario.
+        bool hijo_auxiliar_ocupado();
 
         //PRE: -
         //POS: devuelve la clave que se encuentra en la posicion "posicion".
@@ -73,20 +78,30 @@ Nodo<Tipo>::Nodo(int orden)
     maximo_claves = orden;
     claves = new string[orden];
     datos = new Tipo*[orden];
-    hijos = new Nodo<Tipo>*[orden];
+    hijos = new Nodo<Tipo>*[orden + 1];
     for(int i = 0; i < orden; i++)
     {
         claves[i] = "";
-        hijos[i] = NULL;
         datos[i] = NULL;
     }
+    for(int j = 0; j < orden + 1; j++)
+    {
+        hijos[j] = NULL; 
+    }
     cantidad_claves_usadas = 0;
+    cantidad_hijos = 0;
 }
 
 template < typename Tipo >
 bool Nodo<Tipo>::nodo_lleno()
 {
     return(obtener_cantidad_claves_usadas() == maximo_claves - 1);
+}
+
+template < typename Tipo >
+bool Nodo<Tipo>::hijo_auxiliar_ocupado()
+{
+    return (hijos[HIJO_AUXILIAR] != NULL);
 }
 
 template < typename Tipo > 
@@ -143,7 +158,6 @@ bool Nodo<Tipo>::es_hoja()
     bool hoja = true;
     int i = 0;
 
-    cout << "cantidad: " << obtener_cantidad_claves_usadas() << endl;
     while(i < obtener_cantidad_claves_usadas() + 1  && hoja)
     {
         if(obtener_hijo(i) != NULL)

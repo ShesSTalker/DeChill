@@ -1,4 +1,4 @@
-#include "Sistema.h"
+/*#include "Sistema.h"
 #include <iostream>
 #include <fstream>
 #include "Constantes.h"
@@ -177,15 +177,14 @@ void Sistema::procesar_opcion(int opcion_tomada)
     cargar_caminos();
     grafo->usar_floyd();
     grafo->mostrar_grafo();
-    /*
+
     for (int i = 0; i < this->filas; i++){
         for (int j = 0; j < this->columnas; j++){
             cout <<mapa[i][j].obtener_terreno_char();
         }
         cout<<endl;
     }
-    */
-    /*
+   
     string nombre, espacio, opcion_submenu, posicion_adopcion;
     int posicion, animales_validados;
     bool volver_a_intentar = false;
@@ -310,7 +309,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
             }
             break;
     }
-    */
+
 }
 
 void Sistema::pasar_tiempo()
@@ -772,3 +771,4 @@ Sistema::~Sistema()
     }
     delete [] mapa;
 }
+*/
