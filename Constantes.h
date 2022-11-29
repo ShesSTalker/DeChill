@@ -5,6 +5,9 @@
 
 using namespace std;
 
+// Constantes ArbolB
+const int GRADO = 3;
+
 // Constantes leer datos
 const string 
 PATH_ANIMALES = "animales.csv",

@@ -12,6 +12,7 @@ class ArbolB
     private:
         Nodo<Tipo>* raiz;
         int orden;
+        int cantidad_claves_totales;
 
     //Metodos
     public:
@@ -21,6 +22,10 @@ class ArbolB
         //PRE: -
         //POS: devuelve true si el arbol esta vacio o falso en caso contrario.
         bool arbol_vacio();
+
+        //PRE: -
+        //POS: devuelve la cantidad de claves totales que posee el Arbol B.
+        int obtener_cantidad_claves_totales();
 
         //PRE: -
         //POS: devuelve el puntero raiz.
@@ -34,17 +39,26 @@ class ArbolB
         //POS: devuelve el orden (cantidad maxima de vias/hijos) del Arbol B.
         int obtener_orden();
 
-        //PRE: -
-        //POS:
+        //PRE: nueva_clave no se encuentra en el Arbol B.
+        //POS: nueva_clave y nuevo_dato se insertan en el Arbol B.
         void insertar(string nueva_clave, Tipo* nuevo_dato);
 
         //PRE: - 
-        //POS: Busca el nombre del animal que buscamos mediante la clave (nombre) y nos devuelve el nodo y la posicion en la que se encuentra.
+        //POS: segun una clave, se devuelve el nodo que la contiene y la posicion (por referencia) en la que se encuentra dentro del nodo.
         Nodo<Tipo>* buscar(string clave, int &posicion);
 
         //PRE: -
-        //POS: lista los animales almacenados en el Arbol B de manera creciente segun la clave (nombre).
+        //POS: devuelve true si la clave se encuentra en el Arbol B y false en caso contrario.
+        bool buscar(string clave);
+
+        //PRE: -
+        //POS: lista los datos almacenados en el Arbol B de manera creciente, segun sus claves.
         void listar_creciente();
+
+        //PRE: -
+        //POS: recorre los datos almacenados en el Arbol B y les aplica la funcion fooptr 
+        //     a cada uno de manera creciente, segun sus claves.
+        void realizar_creciente(void (*fooptr)(Tipo* dato, int i));
 
         //Destructor. 
         ~ArbolB();
@@ -63,6 +77,8 @@ class ArbolB
         void dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nodo, string &pivote, Tipo* &pivote_dato, Tipo* nuevo_dato, int posicion);
 
         void in_orden(Nodo<Tipo>* nodo_actual);
+
+        void in_orden(Nodo<Tipo>* nodo_actual, void (*fooptr)(Tipo* dato, int i), int &iteracion);
 };
 
 template < typename Tipo >
@@ -70,6 +86,13 @@ ArbolB<Tipo>::ArbolB(int orden)
 {
     raiz = NULL;
     this -> orden = orden;
+    cantidad_claves_totales = 0;
+}
+
+template < typename Tipo >
+int ArbolB<Tipo>::obtener_cantidad_claves_totales()
+{
+    return cantidad_claves_totales;
 }
 
 template < typename Tipo >
@@ -106,6 +129,7 @@ template < typename Tipo >
 void ArbolB<Tipo>::insertar(string nueva_clave, Tipo* nuevo_dato)
 {
     raiz = insertar(raiz, nueva_clave, nuevo_dato);
+    cantidad_claves_totales++;
 }
 
 template < typename Tipo > 
@@ -170,6 +194,44 @@ void ArbolB<Tipo>::listar_creciente()
 {
     in_orden(raiz);
 }
+
+template < typename Tipo >
+void ArbolB<Tipo>::realizar_creciente(void (*fooptr)(Tipo* dato, int i))
+{
+    int iteracion = 0;
+    in_orden(raiz, fooptr, iteracion);
+}
+
+template <typename Tipo>
+void ArbolB<Tipo>::in_orden(Nodo<Tipo>* nodo_actual)
+{
+    if(nodo_actual != NULL)
+    {
+        in_orden(nodo_actual -> obtener_hijo(PRIMER_HIJO));
+
+        for(int i = 0; i < nodo_actual -> obtener_cantidad_claves_usadas(); i++)
+        {
+            cout << nodo_actual -> obtener_clave(i) << endl;
+            in_orden(nodo_actual -> obtener_hijo(i + 1));
+        }
+    }
+} 
+
+template <typename Tipo>
+void ArbolB<Tipo>::in_orden(Nodo<Tipo>* nodo_actual, void (*fooptr)(Tipo* dato, int i), int &iteracion)
+{
+    if(nodo_actual != NULL)
+    {
+        in_orden(nodo_actual -> obtener_hijo(PRIMER_HIJO), fooptr, iteracion);
+
+        for(int i = 0; i < nodo_actual -> obtener_cantidad_claves_usadas(); i++)
+        {
+            iteracion++;
+            fooptr(nodo_actual -> obtener_dato(i), iteracion);
+            in_orden(nodo_actual -> obtener_hijo(i + 1), fooptr, iteracion);
+        }
+    }
+} 
 
 template < typename Tipo >
 bool ArbolB<Tipo>::buscar_nodo_actual(Nodo<Tipo>* nodo_actual, string clave, int &posicion)
@@ -315,21 +377,6 @@ void ArbolB<Tipo>::dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nodo, stri
     pivote_dato = nodo_actual -> obtener_dato(nodo_actual -> obtener_cantidad_claves_usadas());
     nodo = nuevo_nodo; 
 }
-
-template <typename Tipo>
-void ArbolB<Tipo>::in_orden(Nodo<Tipo>* nodo_actual)
-{
-    if(nodo_actual != NULL)
-    {
-        in_orden(nodo_actual -> obtener_hijo(PRIMER_HIJO));
-
-        for(int i = 0; i < nodo_actual -> obtener_cantidad_claves_usadas(); i++)
-        {
-            cout << nodo_actual -> obtener_clave(i) << endl;
-            in_orden(nodo_actual -> obtener_hijo(i + 1));
-        }
-    }
-} 
 
 template < typename Tipo >
 ArbolB<Tipo>::~ArbolB()

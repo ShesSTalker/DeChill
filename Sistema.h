@@ -7,19 +7,21 @@
 #include "Auto.h"
 #include "Animal.h"
 
+#include "Arbol.h"
+
 class Sistema
 {
     //Atributos
     private:
-        Lista<Animal*>* animales;
+        ArbolB<Animal>* animales;
         Vector<Animal*>* punteros_animales;
         Auto * vehiculo;
         Casilla** mapa;
         int filas;
         int columnas;
+        Grafo* grafo;
     //Metodos
     public:
-        Grafo* grafo;
         //PRE: -
         //POS: crea un objeto Sistema e incializa los atributos 
         Sistema();
@@ -75,15 +77,15 @@ class Sistema
 
         //PRE: -
         //POS: muestra por pantalla la información del animal.
-        void mostrar_animal(Animal* mi_animal);
+        // void mostrar_animal(Animal* mi_animal);
 
         //PRE: -
         //POS: le pide al usario que ingrese el nombre del animal rescatado.
         void pedir_nombre(string &nombre);
 
         //PRE: - 
-        //POS: devuelve la posicion del animal en la lista si el nombre existe en la lista y -1 si no existe.      
-        int buscar_nombre(string nombre);
+        //POS: devuelve true si el nombre del animal se encuentra en la reserva y false en caso contrario.      
+        bool buscar_nombre(string nombre);
 
         //PRE: el nombre ingresado para un animal nuevo ya estaba en la reserva.
         //POS: si el usuario ingresa que quiere intentar con un nombre diferente para un animal nuevo en la reserva, devuelve true. Caso contrario devuelve false.  
