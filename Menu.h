@@ -2,7 +2,10 @@
 #define _MENU_H_
 
 #include "Constantes.h"
+#include "Lista.h"
+#include "Animal.h"
 #include "Casilla.h"
+#include "Colores.h"
 
 class Menu 
 {
@@ -21,6 +24,10 @@ class Menu
         //PRE: -
         //POS: imprime por pantalla el menú con las opciones.
         void mostrar_menu();
+
+        //PRE: -
+        //POS: imprime por pantalla el mapa.
+        void mostrar_mapa(Casilla** mapa, int filas , int columnas);
        
         //PRE: -
         //POS: solicita al usuario que ingrese el numero de la opción que desea ejecutar.
@@ -34,10 +41,6 @@ class Menu
         //PRE: -
         //POS: valida que el string recibido conste completamente de numeros, devolviendo true en caso afirmativo y false en caso contrario.
         bool cadena_numeros_valida(string numeros);
-
-        //PRE: -
-        //POS: imprime por pantalla el mapa con su contenido.
-        void mostrar_mapa(Casilla** mapa);
 };
 
 #endif

@@ -1,16 +1,5 @@
 #include "Sistema.h"
 #include <iostream>
-#include <fstream>
-#include "Constantes.h"
-#include "Perro.h"
-#include "Caballo.h"
-#include "Gato.h"
-#include "Lagartija.h"
-#include "Erizo.h"
-#include "Roedor.h"
-#include "Conejo.h"
-#include "Lista.h"
-#include "Auto.h"
 
 using namespace std;
 
@@ -20,6 +9,7 @@ Sistema::Sistema()
     punteros_animales = new Vector<Animal*>;
     vehiculo = new Auto;
     grafo= new Grafo();
+    menu = new Menu();
     mapa= nullptr;
     filas=0;
     columnas=0;
@@ -88,8 +78,7 @@ void Sistema::cargar_mapa_grafo(){
     {   
         string vertice, total_filas, total_columnas, fila , columna , terreno, salto_linea;
         getline(archivo,total_filas,',');
-        getline(archivo,total_columnas,',');
-        getline(archivo,terreno,';');
+        getline(archivo,total_columnas,';');
 
         filas= stoi(total_filas);
         columnas= stoi(total_columnas);
@@ -106,8 +95,7 @@ void Sistema::cargar_mapa_grafo(){
             cargar_casilla(stoi(fila)-1 , stoi(columna)-1 , vertice, terreno);
             grafo->agregar_vertice(vertice);
             
-        }
-        
+        }    
     }
     else
     {
@@ -128,6 +116,7 @@ void Sistema::inicializar_mapa(){
 }
 
 void Sistema::cargar_casilla(int fila,int columna,string vertice,string terreno){
+
     if(terreno==TIERRA){
 
         mapa[fila][columna]= Casilla (vertice, TIERRA, RESTAR_COMBUSTIBLE_TIERRA, VACIO);
@@ -151,33 +140,128 @@ void Sistema::cargar_caminos(){
     for (int i = 0; i < this->filas; i++)
     {
         for (int j = 0; j < this->columnas; j++){
+
             origen = mapa[i][j].obtener_nombre();
 
             if (dentro_de_rango(i-1,j)){
-                grafo->agregar_camino(origen, mapa[i-1][j].obtener_nombre(), mapa[i-1][j].obtener_costo() );
+
+                grafo->agregar_camino(origen, mapa[i-1][j].obtener_nombre(), mapa[i-1][j].obtener_costo());
+
             }
             if (dentro_de_rango(i+1,j)){
+
                 grafo->agregar_camino(origen, mapa[i+1][j].obtener_nombre(), mapa[i+1][j].obtener_costo());
+
             }
             if (dentro_de_rango(i,j-1)){
+
                 grafo->agregar_camino(origen, mapa[i][j-1].obtener_nombre(), mapa[i][j-1].obtener_costo());
+
             }
             if (dentro_de_rango(i,j+1)){
+
                 grafo->agregar_camino(origen, mapa[i][j+1].obtener_nombre(), mapa[i][j+1].obtener_costo());
+
             }
         }
     } 
 }
 
+void Sistema::cargar_contenido_mapa(){
+    mapa[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(AUTO);
+    int fila_animal=0, columna_animal=0, animal_random;
+
+    for (int i = 0 ; i < ANIMALES_MAPA; i++){
+        animal_random =  rand() % CANTIDAD_ESPECIES;
+
+        do{
+        fila_animal= rand() % filas;
+        columna_animal= rand() % columnas;
+            
+        }while (mapa[fila_animal][columna_animal].obtener_contenido() != VACIO);
+
+        switch (animal_random)
+        {
+        case 0:
+            mapa[fila_animal][columna_animal].asignar_contenido(PERRO);
+            break;
+        case 1:
+            mapa[fila_animal][columna_animal].asignar_contenido(GATO);
+            break;
+        case 2:
+            mapa[fila_animal][columna_animal].asignar_contenido(CABALLO);
+            break;
+        case 3:
+            mapa[fila_animal][columna_animal].asignar_contenido(ROEDOR);
+            break;
+        case 4:
+            mapa[fila_animal][columna_animal].asignar_contenido(CONEJO);
+            break;
+        case 5:
+            mapa[fila_animal][columna_animal].asignar_contenido(ERIZO);
+            break;
+        case 6:
+            mapa[fila_animal][columna_animal].asignar_contenido(LAGARTIJA);
+            break;
+        }
+    }
+}
+
 bool Sistema::dentro_de_rango(int fila, int columna){
     return (fila >= 0 && fila < this->filas && columna >= 0 && columna < this->columnas);
+}
+
+void Sistema::procesar_movimiento(){
+    int fila , columna;
+    do{
+        cout<<"Ingrese la fila donde desea moverse: "<<endl;
+        cin>>fila;
+        cout<<"Ingrese la columna donde desea moverse: "<<endl;
+        cin>>columna;
+    }while(!dentro_de_rango(fila-1,columna -1));
+
+    mapa[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(VACIO);
+    
+    switch (mapa[fila][columna].obtener_contenido())
+    {
+    case PERRO:
+            
+        break;
+    case GATO:
+            
+        break;
+    case CABALLO:
+            
+        break;
+    case ROEDOR:
+            
+        break;
+    case CONEJO:
+            
+        break;
+    case ERIZO:
+            
+        break;
+    case LAGARTIJA:
+            
+        break;
+    }
+    vehiculo->cambiar_posicion(fila,columna);
+    mapa[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(AUTO);
 }
 void Sistema::procesar_opcion(int opcion_tomada)
 {   
     cargar_caminos();
+    cargar_contenido_mapa();
     grafo->usar_floyd();
-    grafo->mostrar_grafo();
+    menu->mostrar_mapa(mapa , filas , columnas);
+
     /*
+    grafo->minimo_camino("11", "88");
+    grafo->minimo_camino("11", "56");
+    grafo->minimo_camino("11", "23");
+    grafo->minimo_camino("11", "73");
+
     for (int i = 0; i < this->filas; i++){
         for (int j = 0; j < this->columnas; j++){
             cout <<mapa[i][j].obtener_terreno_char();
@@ -767,6 +851,8 @@ Sistema::~Sistema()
     delete punteros_animales;
     delete vehiculo;
     delete grafo;
+    delete menu;
+
     for (int i =0 ; i < this->filas; i++){
         delete []mapa[i];
     }

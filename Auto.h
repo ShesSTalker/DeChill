@@ -8,6 +8,8 @@ class Auto
     //Atributos 
     private:
         int combustible;
+        int fila;
+        int columna;
 
     //Metodos
     public:
@@ -16,11 +18,22 @@ class Auto
         //PRE: Se debe ejecutar una accion del menu principal
         //POS: carga 5 de combustible 
         void cargar_combustible_por_accion();
+        //PRE: 
+        //POS: modifica la posicion del auto 
+        void cambiar_posicion(int fila, int columna);
 
         //PRE: -
         //POS: devuelve la cantidad de combustible del auto
         int obtener_combustible();
         
+        //PRE: -
+        //POS: devuelve la fila
+        int obtener_fila();
+
+        //PRE: -
+        //POS: devuelve la columna en la que se encuentra el auto
+        int obtener_columna();
+
         //PRE: -
         //POS: carga al 100 el combustible del auto
         void cargar_combustible_completo();
@@ -30,8 +43,16 @@ class Auto
         void cargar_combustible(int combustible_cargar);
 
         //PRE: -
-        //POS: le resta combustible al auto
-        void restar_combustible(int combustible);
+        //POS: resta 5 de combustible del auto
+        void restar_combustible_montania();
+
+        //PRE: -
+        //POS: resta 40 de combustible del auto
+        void restar_combustible_precipicio();
+
+        //PRE: -
+        //POS: resta 1 de combustible del auto
+        void restar_combustible_camino();
 };
 
 #endif

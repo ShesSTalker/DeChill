@@ -5,7 +5,17 @@
 #include "Vector.h"
 #include "Grafo.h"
 #include "Auto.h"
-#include "Animal.h"
+#include <fstream>
+#include "Constantes.h"
+#include "Perro.h"
+#include "Caballo.h"
+#include "Gato.h"
+#include "Lagartija.h"
+#include "Erizo.h"
+#include "Roedor.h"
+#include "Conejo.h"
+#include "Lista.h"
+
 
 class Sistema
 {
@@ -17,6 +27,8 @@ class Sistema
         Casilla** mapa;
         int filas;
         int columnas;
+        Menu * menu;
+
     //Metodos
     public:
         Grafo* grafo;
@@ -45,6 +57,7 @@ class Sistema
         ~Sistema();
 
     private:
+
         //PRE: -
         //POS: carga los parámetros como un animal nuevo en la reserva.
         void cargar_animal(char especie, string nombre, int edad, char tamanio, char personalidad);
@@ -56,6 +69,14 @@ class Sistema
         //PRE: -    
         //POS: carga el grafo con los caminos 
         void cargar_caminos();
+
+        //PRE: -    
+        //POS: carga el mapa con su contenido ( Auto y Animales)
+        void cargar_contenido_mapa();
+
+        //PRE: -    
+        //POS: mueve el vehiculo a la posicion indicada
+        void procesar_movimiento();
 
         //PRE: -    
         //POS: inicializa las dimensiones del mapa 

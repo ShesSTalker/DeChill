@@ -18,12 +18,16 @@ const string
 MONTANIA= "Montania",
 PRECIPICIO= "Precipicio",
 TIERRA= "Tierra",
-CAMINO= "Camino",
-ANIMAL = "Animal";
-const char 
-VACIO =' ',
-VEHICULO= 'A';
+CAMINO= "Camino";
 
+const char 
+VACIO = ' ',
+AUTO = 'A';
+
+const int 
+FILA_INICIAL_AUTO = 0,
+COLUMNA_INICIAL_AUTO = 0,
+ANIMALES_MAPA = 5;
 
 // Constantes pasar tiempo
 const int
@@ -74,7 +78,10 @@ JUGUETON_TEXTO = "jugueton",
 SOCIABLE_TEXTO = "sociable",
 TRAVIESO_TEXTO = "travieso";
 
-// Constantes especie (char)
+// Constantes especie
+const int
+CANTIDAD_ESPECIES=7;
+
 const char 
 PERRO = 'P',
 GATO = 'G',

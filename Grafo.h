@@ -8,14 +8,14 @@ class Grafo {
     //Atributos
     private:
         int ** matriz_de_adyacencia;
-        Vector<string>* vertices;
+        Vector <string>* vertices;
         Floyd * floyd;
 
     //Metodos
 
         //PRE: tienen que existir tanto el origen como el destino. Ademas se deben haber calculado las matrices de Floyd
         //POS: muestra el camino minimo entre el origen y el destino
-        void camino_minimo(int origen, int destino);
+        void calcular_camino_minimo(int origen, int destino);
 
         //POS: agranda dinamicamente la matriz de adyacencia
         void agrandar_matriz_de_adyacencia();
@@ -37,7 +37,9 @@ class Grafo {
         void mostrar_matriz_adyacencia();
 
     public:
-
+    
+        //PRE: -
+        //POS: crea un objeto Grafo e incializa los atributos
         Grafo();
         //PRE: No hay vertices repetidos en nombre
         //POS: agrega un nuevo vertice al grafo
@@ -45,7 +47,7 @@ class Grafo {
 
         //PRE: se debe tener un algortimo para calcular el camino mínimo previamente elegido
         //POS: muestra por terminal el camino mínimo desde un origen a un destino
-        void camino_minimo(string origen, string destino);
+        void minimo_camino(string origen, string destino);
 
         //PRE: 
         //POS: devuelve el costo del camino

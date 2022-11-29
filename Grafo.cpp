@@ -3,7 +3,7 @@
 
 Grafo::Grafo(){
     matriz_de_adyacencia = nullptr;
-    vertices = new Vector<string>;
+    vertices = new Vector<string>();
     floyd = nullptr;
 }
 
@@ -33,7 +33,8 @@ void Grafo::agregar_camino(string origen, string destino, int peso){
     }
 }
 
-void Grafo::camino_minimo(string origen, string destino){
+void Grafo::minimo_camino(string origen, string destino){
+
     int posicion_origen = vertices ->obtener_posicion(origen);
     int posicion_destino = vertices ->obtener_posicion(destino);
 
@@ -44,7 +45,7 @@ void Grafo::camino_minimo(string origen, string destino){
         cout << "El vertice " << destino << " no existe en el grafo" << endl;
     }
 
-    camino_minimo(posicion_origen, posicion_destino);
+    calcular_camino_minimo(posicion_origen, posicion_destino);
 }
 
 void Grafo::agrandar_matriz_de_adyacencia(){
@@ -96,7 +97,7 @@ Grafo::~Grafo(){
 void Grafo::mostrar_vertices(){
     cout << "Lista de vértices: [";
     for(int i = 0; i < vertices -> obtener_longitud(); i++){
-        cout << vertices -> obtener_elemento(i + 1);
+        cout << vertices -> obtener_elemento(i);
         if(i + 1 != vertices -> obtener_longitud()){
             cout << ", ";
         }
@@ -124,8 +125,10 @@ void Grafo::mostrar_matriz_adyacencia(){
     cout << endl;
 }
 
-void Grafo::camino_minimo(int origen, int destino){
+void Grafo::calcular_camino_minimo(int origen, int destino){
+
     floyd -> camino_minimo(origen, destino);
+    
 }
 
 int Grafo::costo_camino(string origen, string destino){
