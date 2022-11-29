@@ -117,6 +117,7 @@ int main()
     cout << endl << "L27" << endl;
     Lagartija *L27 = new Lagartija("V", 1, DIMINUTO, TRAVIESO);
     mi_arbol->insertar(L27->obtener_nombre(), L27);
+    
     cout << endl;
     mi_arbol -> listar_creciente();
 

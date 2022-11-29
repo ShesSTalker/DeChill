@@ -174,21 +174,36 @@ template < typename Tipo >
 Nodo<Tipo>::~Nodo()
 {
     int i;
+    cout << "es_hoja()" << endl;
     bool hoja = es_hoja();
+    cout << "obtener_cantidad_claves_usadas()" << endl;
     for(i = 0; i < obtener_cantidad_claves_usadas(); i++)
     {
         if(!hoja)
         {
+            cout << "obtener_hijo(" << i << ")" << endl;
             delete obtener_hijo(i); 
         }
-        delete obtener_dato(i);
+        cout << "Borrando " << obtener_clave(i) << endl;
+        if(obtener_clave(i) == "Z" || obtener_clave(i) == "K" || obtener_clave(i) == "U")
+        {
+            cout << obtener_dato(i) << endl;
+        }
+        else
+            delete obtener_dato(i);
     }
 
     if(!hoja)
+    {
+        cout << "obtener_hijo(" << i << ")" << endl;
         delete obtener_hijo(i);
+    }
 
+    cout << "delete[] claves" << endl;
     delete[] claves;
+    cout << "delete[] datos" << endl;
     delete[] datos;
+    cout << "delete[] hijos" << endl;
     delete[] hijos;
 }
 
