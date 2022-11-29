@@ -18,6 +18,7 @@ class Auto
         //PRE: Se debe ejecutar una accion del menu principal
         //POS: carga 5 de combustible 
         void cargar_combustible_por_accion();
+        
         //PRE: 
         //POS: modifica la posicion del auto 
         void cambiar_posicion(int fila, int columna);
