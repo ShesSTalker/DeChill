@@ -12,6 +12,7 @@ void Auto::cargar_combustible_por_accion()
     combustible += CARGAR_COMBUSTIBLE_POR_ACCION;
 }
 
+void Auto::cambiar_posicion(int fila, int columna)
 {
     this->fila=fila;
     this->columna=columna;
