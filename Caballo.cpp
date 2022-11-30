@@ -9,7 +9,7 @@ Caballo::Caballo(string nombre, int edad, char tamanio, char personalidad)
     this -> especie = CABALLO;
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
-    this -> estado_adopcion = NO_ADOPTADO; 
+    this -> estado_animal = NO_ADOPTADO; 
 }
 
 bool Caballo::requiere_ducha()

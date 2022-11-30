@@ -77,9 +77,7 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
             break;
     }
 
-    animales -> alta(animal, animales -> obtener_cantidad() + 1);
-
-    punteros_animales -> cargar(animal, punteros_animales -> obtener_longitud());
+    arbol_b -> insertar(animal -> obtener_nombre(), animales);
 }
 
 void Sistema::cargar_mapa_grafo(){

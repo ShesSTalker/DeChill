@@ -15,7 +15,7 @@ class Animal
         char especie;
         char tamanio;
         char personalidad;
-        int estado_adopcion;
+        int estado_animal;
   
     public:
         //Constructor por defecto.
@@ -57,6 +57,10 @@ class Animal
         // POS: devuelve la personalidad del animal en formato de texto (forma completa).
         string obtener_personalidad_texto();
 
+        //PRE: -
+        //POS: devuelve el estado de adopcion del animal.
+        int obtener_estado_animal();
+
         // PRE: -
         // POS: aumenta el hambre del animal (varía dependiendo de la personalidad).
         void aumentar_hambre();
@@ -81,7 +85,11 @@ class Animal
         // POS: devuelve el nombre de la comida del animal.
         virtual string que_come() = 0;
 
-        //PRE: -
+        //PRE: el animal debe haber sido adoptado o se fugo de la reserva.
+        //POS: cambia el estado del animal.
+        void cambiar_estado_animal(int estado);
+
+        //PRE: el animal no debe estar adoptado ni fugado.
         //POS: muestra por pantalla la información del animal.
         void mostrar_animal();
 

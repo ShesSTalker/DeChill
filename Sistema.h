@@ -6,12 +6,13 @@
 #include "Grafo.h"
 #include "Auto.h"
 #include "Animal.h"
+#include "Arbol.h"
 
 class Sistema
 {
     //Atributos
     private:
-        Lista<Animal*>* animales;
+        ArbolB<Animal*>* arbol_b;
         Vector<Animal*>* punteros_animales;
         Auto * vehiculo;
         Casilla** mapa;

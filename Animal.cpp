@@ -159,6 +159,11 @@ string Animal::obtener_personalidad_texto()
     return personalidad_texto;
 }
 
+int Animal::obtener_estado_animal()
+{
+    return estado_animal;
+}
+
 void Animal::aumentar_hambre()
 {
     int tipo_personalidad = int(personalidad);
@@ -215,6 +220,11 @@ void Animal::alimentar()
 void Animal::duchar()
 {
     higiene = HIGIENE_INICIAL;
+}
+
+void Animal::cambiar_estado_animal(int estado)
+{
+    estado_animal = estado;
 }
 
 void Animal::mostrar_animal()

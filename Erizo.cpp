@@ -9,7 +9,7 @@ Erizo::Erizo(string nombre, int edad, char tamanio, char personalidad)
     this -> especie = ERIZO;
     this -> tamanio = tamanio;
     this -> personalidad = personalidad;
-    this -> estado_adopcion = NO_ADOPTADO;
+    this -> estado_animal = NO_ADOPTADO;
 }
 
 bool Erizo::requiere_ducha()
