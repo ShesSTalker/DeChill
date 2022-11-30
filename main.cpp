@@ -1,14 +1,31 @@
 #include <iostream>
-#include "Lagartija.h"
-#include "Constantes.h"
-#include "Arbol.h"
+#include "Sistema.h"
+#include "Menu.h"
 
 using namespace std;
 
 int main()
 {
+    Menu *menu = new Menu;
+    Sistema *sistema = new Sistema;
 
-    ArbolB<Animal> *mi_arbol = new ArbolB<Animal>(3);
+    int opcion;
+
+    sistema -> leer_animales();
+    menu -> bienvenida();
+    
+    do
+    {
+        menu -> mostrar_menu();
+        menu -> pedir_opcion();
+        opcion = menu -> obtener_opcion_tomada();
+        sistema -> procesar_opcion(opcion);
+    }
+    while (opcion != GUARDAR_Y_SALIR);
+    
+    delete menu;
+    delete sistema;
+    /*ArbolB<Animal> *mi_arbol = new ArbolB<Animal>(3);
     
     cout << "L1" << endl;
     Lagartija *L1 = new Lagartija("C", 1, DIMINUTO, TRAVIESO);
@@ -122,6 +139,7 @@ int main()
     mi_arbol -> listar_creciente();
 
     delete mi_arbol;
+    */
 
     return 0;
 }

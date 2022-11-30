@@ -62,7 +62,7 @@ class ArbolB
 
         void dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nodo, string &pivote, Tipo* &pivote_dato, Tipo* nuevo_dato, int posicion);
 
-        void in_orden(Nodo<Tipo>* nodo_actual, int nivel);
+        void mostrar_en_orden(Nodo<Tipo>* nodo_actual, int nivel);
 };
 
 template < typename Tipo >
@@ -168,7 +168,7 @@ Nodo<Tipo>* ArbolB<Tipo>::buscar(Nodo<Tipo>* nodo_actual, string clave, int &pos
 template < typename Tipo >
 void ArbolB<Tipo>::listar_creciente()
 {
-    in_orden(raiz, 0);
+    mostrar_en_orden(raiz, PRIMER_DATO);
 }
 
 template < typename Tipo >
@@ -326,20 +326,23 @@ void ArbolB<Tipo>::dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nodo, stri
 }
 
 template <typename Tipo>
-void ArbolB<Tipo>::in_orden(Nodo<Tipo>* nodo_actual, int nivel)
+void ArbolB<Tipo>::mostrar_en_orden(Nodo<Tipo>* nodo_actual, int nivel)
 {
     Animal* animal;
 
     if(nodo_actual != NULL)
     {
-        in_orden(nodo_actual -> obtener_hijo(PRIMER_HIJO), nivel + 1);
+        mostrar_en_orden(nodo_actual -> obtener_hijo(PRIMER_HIJO), nivel + 1);
 
         for(int i = 0; i < nodo_actual -> obtener_cantidad_claves_usadas(); i++)
         {   
             animal = nodo_actual -> obtener_dato(i);
-            animal -> mostrar_animal();
-            cout << nivel << ") " << nodo_actual -> obtener_clave(i) << endl;
-            in_orden(nodo_actual -> obtener_hijo(i + 1), nivel + 1);
+            if(animal  -> obtener_estado_animal() != ADOPTADO && animal -> obtener_estado_animal() != FUGADO)
+            {
+                animal -> mostrar_animal(); 
+                cout << nivel << ") " << nodo_actual -> obtener_clave(i) << endl;
+            }
+            mostrar_en_orden(nodo_actual -> obtener_hijo(i + 1), nivel + 1);
         }
     }
 } 

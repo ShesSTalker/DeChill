@@ -155,11 +155,14 @@ enum opciones_individuales {
 };
 
 // Constantes Arbol B
+const int TRES_VIAS = 3;
 
 const int PRIMERA_CLAVE = 0;
 
 const int PRIMER_HIJO = 0,
 SEGUNDO_HIJO = 1;
+
+const int PRIMER_DATO = 0;
 
 const int HIJO_AUXILIAR = 3; 
 
