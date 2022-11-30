@@ -338,18 +338,6 @@ void Sistema::listar_animales()
     animales -> iniciar();
 }
 
-void Sistema::mostrar_animal(Animal* animal)
-{
-    cout << "---------------------------------------------------" << endl << endl;
-    cout << "Nombre: " << animal -> obtener_nombre() << endl <<
-    "Edad: " << animal -> obtener_edad() << endl <<
-    "Tamanio: " << animal -> obtener_tamanio_texto() << endl <<
-    "Especie: " << animal -> obtener_especie_texto() << endl <<
-    "Personalidad: " << animal -> obtener_personalidad_texto() << endl <<
-    "Hambre: " << animal -> obtener_hambre() << endl <<
-    "Higiene: " << animal -> obtener_higiene() << endl << endl;
-}
-
 void Sistema::pedir_nombre(string &nombre)
 {
     cout << "Ingrese el nombre del animal: ";

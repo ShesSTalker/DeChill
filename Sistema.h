@@ -74,10 +74,6 @@ class Sistema
         void listar_animales(); 
 
         //PRE: -
-        //POS: muestra por pantalla la información del animal.
-        void mostrar_animal(Animal* mi_animal);
-
-        //PRE: -
         //POS: le pide al usario que ingrese el nombre del animal rescatado.
         void pedir_nombre(string &nombre);
 

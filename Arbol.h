@@ -328,12 +328,16 @@ void ArbolB<Tipo>::dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nodo, stri
 template <typename Tipo>
 void ArbolB<Tipo>::in_orden(Nodo<Tipo>* nodo_actual, int nivel)
 {
+    Animal* animal;
+
     if(nodo_actual != NULL)
     {
         in_orden(nodo_actual -> obtener_hijo(PRIMER_HIJO), nivel + 1);
 
         for(int i = 0; i < nodo_actual -> obtener_cantidad_claves_usadas(); i++)
-        {
+        {   
+            animal = nodo_actual -> obtener_dato(i);
+            animal -> mostrar_animal();
             cout << nivel << ") " << nodo_actual -> obtener_clave(i) << endl;
             in_orden(nodo_actual -> obtener_hijo(i + 1), nivel + 1);
         }

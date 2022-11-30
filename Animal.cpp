@@ -217,4 +217,16 @@ void Animal::duchar()
     higiene = HIGIENE_INICIAL;
 }
 
+void Animal::mostrar_animal()
+{
+    cout << "---------------------------------------------------" << endl << endl;
+    cout << "Nombre: " << obtener_nombre() << endl <<
+    "Edad: " << obtener_edad() << endl <<
+    "Tamanio: " <<  obtener_tamanio_texto() << endl <<
+    "Especie: " << obtener_especie_texto() << endl <<
+    "Personalidad: " << obtener_personalidad_texto() << endl <<
+    "Hambre: " << obtener_hambre() << endl <<
+    "Higiene: " << obtener_higiene() << endl << endl;
+}
+
 Animal::~Animal(){}
