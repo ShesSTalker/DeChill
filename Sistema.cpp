@@ -616,9 +616,9 @@ void Sistema::rescatar_animal(string nombre,string especie)
 
     edad = rand() % DELIMITADOR_EDAD;
 
-    tamanio = tamanio_animal_aleatorio (rand() % DELIMITADOR_TAMANIO);
+    tamanio = tamanio_animal_aleatorio ((rand() % DELIMITADOR_TAMANIO) + 1);
 
-    personalidad = personalidad_animal_aleatoria (rand() % DELIMITADOR_PERSONALIDAD);
+    personalidad = personalidad_animal_aleatoria ((rand() % DELIMITADOR_PERSONALIDAD) + 1);
 
     cargar_animal(especie[0], nombre, stoi(edad), tamanio[0], personalidad[0]);
 }
