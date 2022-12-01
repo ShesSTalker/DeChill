@@ -120,6 +120,13 @@ int ArbolB<Tipo>::obtener_orden()
 }
 
 template < typename Tipo >
+bool ArbolB<Tipo>::buscar(string clave)
+{
+    int posicion;
+    return (buscar(raiz, clave, posicion) != NULL);
+}
+
+template < typename Tipo >
 Nodo<Tipo>* ArbolB<Tipo>::buscar(string clave, int &posicion)
 {
     return buscar(raiz, clave, posicion);

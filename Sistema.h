@@ -102,11 +102,11 @@ class Sistema
         //PRE: -
         //POS: le pide al usuario que ingrese la opción del submenú que desea ejecutar y realiza la validación correspondiente.
         void ingresar_opcion_submenu(string &opcion_submenu);
-
+        
         //PRE: 1 <= opcion_submenu <= 3.
         //POS: realiza la opcion del submenú tomada por el usuario.
         void procesar_opcion_submenu(string opcion_submenu);
-
+        
         //PRE: - 
         //POS: imprime por pantalla las opciones individuales para cada animal de la reserva.
         void mostrar_opciones_individuales();
@@ -118,19 +118,19 @@ class Sistema
         //PRE: la opción individual tomada por el usuario no debe ser la tercera de las opciones individuales.
         //POS: realiza la opción individual tomada por el usuario.
         void procesar_opcion_individual (int opcion_individual, Animal* animal);
-
+        
         //PRE: -
         //POS: recorre toda la lista para que el usuario pueda elegir qué hacer (opciones individuales) con cada animal de la reserva.
-        void eleccion_individual();
+        void eleccion_individual(){};
 
         //PRE: -
         //POS: reduce a 0 el hambre de todos los animales de la reserva.
-        void alimentar_todos();
+        void alimentar_todos(){};
 
         //PRE: -
         //POS: por cada animal de la reserva, incrementa su higiene a 100 o imprime que no requiere una ducha.
-        void duchar_todos();
-
+        void duchar_todos(){};
+        
         //PRE: -
         //POS: le pide al usuario el espacio disponible para la adopción de un animal y hace la validación correspondiente.
         void pedir_espacio(string &espacio);
