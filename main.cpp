@@ -19,6 +19,7 @@ int main()
         menu -> mostrar_menu();
         menu -> pedir_opcion();
         opcion = menu -> obtener_opcion_tomada();
+        sistema -> limpiar_pantalla();
         sistema -> procesar_opcion(opcion);
     }
     while (opcion != GUARDAR_Y_SALIR);
@@ -140,6 +141,5 @@ int main()
 
     delete mi_arbol;
     */
-
     return 0;
 }

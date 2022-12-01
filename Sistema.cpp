@@ -19,11 +19,11 @@ Sistema::Sistema()
 {
     arbol_b = new ArbolB<Animal>(TRES_VIAS);
     //punteros_animales = new Vector<Animal*>;
-    vehiculo = new Auto;
-    grafo= new Grafo();
-    mapa= nullptr;
-    filas=0;
-    columnas=0;
+    //vehiculo = new Auto;
+    //grafo= new Grafo();
+    //mapa= nullptr;
+    //filas=0;
+    //columnas=0;
 }
 
 void Sistema::leer_animales()
@@ -223,7 +223,6 @@ void Sistema::procesar_opcion(int opcion_tomada)
 
             break;
     }
-    limpiar_interfaz();
 }
 
 /*(void Sistema::pasar_tiempo()
@@ -243,14 +242,13 @@ void Sistema::procesar_opcion(int opcion_tomada)
     animales -> iniciar();
 }*/
 
-void Sistema::limpiar_interfaz()
+void Sistema::limpiar_pantalla()
 {
-    string enter;
-
-    cout << endl << endl << "aprete ENTER para continuar";
-    cin >> enter;
-
-    system("clear");
+    #ifdef _WIN32
+            system("cls");
+    #else
+            system ("clear");
+    #endif
 }
 
 /*void Sistema::listar_animales()
@@ -672,14 +670,15 @@ void Sistema::guardar()
     archivo.close();
 }*/
 
+
 Sistema::~Sistema()
 {
     delete arbol_b;
-    //delete punteros_animales;
+    /*delete punteros_animales;
     delete vehiculo;
     delete grafo;
     for (int i =0 ; i < this->filas; i++){
         delete []mapa[i];
     }
-    delete [] mapa;
+    delete [] mapa;*/
 }

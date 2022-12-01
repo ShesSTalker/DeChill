@@ -14,10 +14,8 @@ class Nodo
         string* claves;
         Tipo** datos;
         Nodo<Tipo>** hijos;
-        Nodo<Tipo>* padre;
         int maximo_claves;
         int cantidad_claves_usadas;
-        int cantidad_hijos;
 
     //Metodos
     public:
@@ -89,7 +87,6 @@ Nodo<Tipo>::Nodo(int orden)
         hijos[j] = NULL; 
     }
     cantidad_claves_usadas = 0;
-    cantidad_hijos = 0;
 }
 
 template < typename Tipo >

@@ -35,7 +35,7 @@ class ArbolB
         int obtener_orden();
 
         //PRE: -
-        //POS:
+        //POS: inserta una nueva clave y un nuevo dato en el arbol.
         void insertar(string nueva_clave, Tipo* nuevo_dato);
 
         //PRE: - 
@@ -116,6 +116,8 @@ Nodo<Tipo>* ArbolB<Tipo>::insertar(Nodo<Tipo>* raiz, string nueva_clave, Tipo* n
     Tipo* pivote_dato;
     Nodo<Tipo>* nodo = NULL;
 
+    cout << endl << endl << "INGRESO NUEVA CLAVE" << endl;
+
     if(raiz == NULL)
     {
         raiz = new Nodo<Tipo>(obtener_orden());
@@ -129,11 +131,11 @@ Nodo<Tipo>* ArbolB<Tipo>::insertar(Nodo<Tipo>* raiz, string nueva_clave, Tipo* n
         { 
             Nodo<Tipo>* nuevo_nodo = new Nodo<Tipo>(obtener_orden());
             cout << "cambiando cantidad en insertar(): 1" << endl;
-            nuevo_nodo -> cambiar_cantidad_claves_usadas(1);       // cuenta(1)
-            nuevo_nodo -> establecer_clave(PRIMERA_CLAVE, pivote); // clave(1, mediana)
-            nuevo_nodo -> establecer_dato(PRIMERA_CLAVE, pivote_dato);
-            nuevo_nodo -> establecer_hijo(PRIMER_HIJO, raiz);      // rama(0, raiz)
-            nuevo_nodo -> establecer_hijo(SEGUNDO_HIJO, nodo);     // rama(1, nodo)
+            nuevo_nodo -> cambiar_cantidad_claves_usadas(1);    
+            nuevo_nodo -> establecer_clave(PRIMERA_CLAVE, pivote); 
+            nuevo_nodo -> establecer_dato(PRIMER_DATO, pivote_dato);
+            nuevo_nodo -> establecer_hijo(PRIMER_HIJO, raiz);    
+            nuevo_nodo -> establecer_hijo(SEGUNDO_HIJO, nodo);    
             raiz = nuevo_nodo;
         }
     }
@@ -249,7 +251,8 @@ void ArbolB<Tipo>::meter_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* hijo, string 
 {
     if(nodo_actual -> es_hoja())
     {
-        for(int i = nodo_actual -> obtener_cantidad_claves_usadas(); i >= posicion && i > 0; i--)
+        cout << "NO HOJA" << endl;
+        for(int i = nodo_actual -> obtener_cantidad_claves_usadas(); i > posicion; i--)
         {
             nodo_actual -> establecer_clave(i, nodo_actual -> obtener_clave(i - 1));
             nodo_actual -> establecer_dato(i, nodo_actual -> obtener_dato(i - 1));
@@ -267,7 +270,7 @@ void ArbolB<Tipo>::meter_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* hijo, string 
             nodo_actual -> establecer_hijo(j + 1, nodo_actual -> obtener_hijo(j));
         }
     }
-    cout << "Clave guardada " << nueva_clave << endl;
+    cout << "Clave guardada " << nueva_clave  << " en posicion: " << posicion << endl;
     nodo_actual -> establecer_clave(posicion, nueva_clave);
     nodo_actual -> establecer_dato(posicion, nuevo_dato);
 

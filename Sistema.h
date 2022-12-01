@@ -15,13 +15,13 @@ class Sistema
     private:
         ArbolB<Animal>* arbol_b;
         //Vector<Animal*>* punteros_animales;
-        Auto * vehiculo;
-        Casilla** mapa;
-        int filas;
-        int columnas;
+        //Auto* vehiculo;
+        //Casilla** mapa;
+        //int filas;
+        //int columnas;
     //Metodos
     public:
-        Grafo* grafo;
+        //Grafo* grafo;
         //PRE: -
         //POS: crea un objeto Sistema e incializa los atributos 
         Sistema();
@@ -42,6 +42,10 @@ class Sistema
         //POS: guarda todos los cambios realizados al archivo CSV de la reserva.
         void guardar();
         
+        //PRE: - 
+        //POS: limpia la pantalla para mejorar la interfaz del usuario.
+        void limpiar_pantalla();
+
         //PRE: -
         //POS: libera la memoria asociada con este objeto.
         ~Sistema();
@@ -70,10 +74,6 @@ class Sistema
         // PRE: -
         // POS: aumenta el hambre del animal y reduce (o no) su higiene, basándose en las características del animal particular.
         void pasar_tiempo();
-
-        //PRE: - 
-        //POS: limpia la interfaz del usuario.
-        void limpiar_interfaz();
 
         //PRE: -
         //POS: imprime por pantalla todos los animales de la lista.
