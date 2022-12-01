@@ -15,14 +15,14 @@ const int INFINITO = 100000;
 
 //Constantes Mapa
 const string 
-MONTANIA= "Montania",
-PRECIPICIO= "Precipicio",
-TIERRA= "Tierra",
-CAMINO= "Camino",
+MONTANIA = "Montania",
+PRECIPICIO = "Precipicio",
+TIERRA = "Tierra",
+CAMINO = "Camino",
 ANIMAL = "Animal";
 const char 
-VACIO =' ',
-VEHICULO= 'A';
+VACIO = ' ',
+VEHICULO = 'A';
 
 
 // Constantes pasar tiempo
@@ -157,13 +157,10 @@ enum opciones_individuales {
 const int TRES_VIAS = 3;
 
 // Constantes nodo de Arbol B
-const int PRIMERA_CLAVE = 0;
-
-const int PRIMER_HIJO = 0,
-SEGUNDO_HIJO = 1;
-
-const int PRIMER_DATO = 0;
-
-const int HIJO_AUXILIAR = 3; 
+const int 
+PRIMERA_CLAVE = 0,
+PRIMER_HIJO = 0,
+SEGUNDO_HIJO = 1,
+PRIMER_DATO = 0;
 
 #endif 

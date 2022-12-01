@@ -332,7 +332,7 @@ void ArbolB<Tipo>::dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nodo, stri
     
     if(nodo_actual -> hijo_auxiliar_ocupado())
     {
-        nuevo_nodo -> establecer_hijo(nuevo_nodo -> obtener_cantidad_claves_usadas(), nodo_actual -> obtener_hijo(HIJO_AUXILIAR));
+        nuevo_nodo -> establecer_hijo(nuevo_nodo -> obtener_cantidad_claves_usadas(), nodo_actual -> obtener_hijo(orden));
     }
 
     pivote = nodo_actual -> obtener_clave(nodo_actual -> obtener_cantidad_claves_usadas());
