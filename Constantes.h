@@ -17,10 +17,11 @@ const int INFINITO = 100000;
 
 // Constantes Mapa
 const string 
-MONTANIA= "Montania",
-PRECIPICIO= "Precipicio",
-TIERRA= "Tierra",
-CAMINO= "Camino";
+MONTANIA = "Montania",
+PRECIPICIO = "Precipicio",
+TIERRA = "Tierra",
+CAMINO = "Camino",
+ANIMAL = "Animal";
 
 const char 
 VACIO = ' ',
