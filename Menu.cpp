@@ -28,9 +28,6 @@ void Menu::mostrar_menu()
 }
 
 void Menu::mostrar_mapa(Casilla** mapa, int filas, int columnas){
-    for (int k = 0; k < columnas;k++){
-        cout <<"|"<< k <<endl;
-    }
     for (int i = 0; i < filas; i++){
         for (int j = 0; j < columnas; j++){
             if (mapa[i][j].obtener_terreno()== CAMINO){
@@ -51,7 +48,7 @@ void Menu::mostrar_mapa(Casilla** mapa, int filas, int columnas){
 
             }
         }    
-        cout <<"|" <<i <<endl;
+        cout <<"|" <<i + 1 <<endl;
     }
 }
 

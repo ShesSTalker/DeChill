@@ -24,7 +24,7 @@ class Sistema
 {
     //Atributos
     private:
-        Lista<Animal*>* animales;
+        //Lista<Animal*>* animales;
         Vector<Animal*>* punteros_animales;
         Menu * menu;
         Mapa * mapa;
@@ -33,7 +33,6 @@ class Sistema
         ArbolB<Animal>* arbol_b;
     //Metodos
     public:
-        //Grafo* grafo;
         //PRE: -
         //POS: crea un objeto Sistema e incializa los atributos. 
         Sistema();
@@ -116,10 +115,6 @@ class Sistema
         //PRE: -
         //POS: llama a los metodos correspondientes a cuidar animal.
         void cuidar_animal();
-
-        //PRE: el nombre ingresado para un animal nuevo ya estaba en la reserva.
-        //POS: si el usuario ingresa que quiere intentar con un nombre diferente para un animal nuevo en la reserva, devuelve true. Caso contrario devuelve false.  
-        bool verificar_intentar_de_nuevo(int posicion, string nombre);
 
         //PRE: -
         //POS: devuelve un tamanio de animal aleatorio

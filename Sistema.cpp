@@ -5,7 +5,7 @@ using namespace std;
 
 Sistema::Sistema()
 {
-    animales = new Lista<Animal*>;
+    //animales = new Lista<Animal*>;
     punteros_animales = new Vector<Animal*>;
     grafo= new Grafo();
     menu = new Menu();
@@ -97,7 +97,10 @@ void Sistema::cargar_mapa_grafo(){
             mapa->cargar_casilla(stoi(fila)-1 , stoi(columna)-1 , vertice, terreno);
             grafo->agregar_vertice(vertice);
             
-        }    
+        } 
+        cargar_caminos();
+        cargar_contenido_mapa();
+        grafo->usar_floyd();   
     }
     else
     {
@@ -191,111 +194,108 @@ bool Sistema::dentro_de_rango(int fila, int columna){
 }
 
 void Sistema::pedir_movimiento(int &fila , int &columna){
-    do{
-        cout<<"Ingrese la fila donde desea moverse: "<<endl;
+    
+    cout<<"Ingrese la fila donde desea moverse: "<<endl;
+    cin>>fila;
+    cout<<"Ingrese la columna donde desea moverse: "<<endl;
+    cin>>columna;
+     
+    while (!dentro_de_rango(fila-1,columna -1)){
+        cout<<"Ingrese una fila valida para moverse: "<<endl;
         cin>>fila;
-        cout<<"Ingrese la columna donde desea moverse: "<<endl;
+        cout<<"Ingrese una columna valida para moverse: "<<endl;
         cin>>columna;
-    }while(!dentro_de_rango(fila-1,columna -1));
+    }
+    fila--;
+    columna--;
 }
 void Sistema::procesar_movimiento(){
-    int fila , columna;
+    int fila , columna, costo_combustible;
     string nombre;
     
     pedir_movimiento(fila , columna);
+    costo_combustible= grafo->costo_camino( mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].obtener_nombre(), mapa->obtener_tablero()[fila][columna].obtener_nombre());
+    if (vehiculo->obtener_combustible() < costo_combustible){
 
-    mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(VACIO);
-    
-    switch (mapa->obtener_tablero()[fila][columna].obtener_contenido())
-    {
-    case PERRO:
+        cout<<"Combustible insuficiente ("<<vehiculo->obtener_combustible()<<")"<<endl;
+
+    }else{
+
+        vehiculo->restar_combustible(costo_combustible);
+        mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(VACIO);
         
-        cout<<"Encontraste un Perro!"<<endl;
+        switch (mapa->obtener_tablero()[fila][columna].obtener_contenido())
+        {
+        case PERRO:
+            
+            cout<<"Encontraste un Perro!"<<endl;
 
-        pedir_nombre(nombre);
-        rescatar_animal(nombre, PERRO);
-        break;
+            pedir_nombre(nombre);
+            rescatar_animal(nombre, PERRO);
+            break;
 
-    case GATO:
+        case GATO:
+            
+            cout<<"Encontraste un Gato!"<<endl;
+
+            pedir_nombre(nombre);
+            rescatar_animal(nombre, GATO);     
+            break;
+
+        case CABALLO:
+            
+            cout<<"Encontraste un Caballo!"<<endl;
+
+            pedir_nombre(nombre);
+            rescatar_animal(nombre, CABALLO);
+            
+            break;
+
+        case ROEDOR:
+            
+            cout<<"Encontraste un Roedor!"<<endl;
+
+            pedir_nombre(nombre);
+            rescatar_animal(nombre, ROEDOR);
         
-        cout<<"Encontraste un Gato!"<<endl;
+            break;
 
-        pedir_nombre(nombre);
-        rescatar_animal(nombre, GATO);     
-        break;
+        case CONEJO:
+            
+            cout<<"Encontraste un Conejo!"<<endl;
 
-    case CABALLO:
+            pedir_nombre(nombre);
+            rescatar_animal(nombre, CONEJO);
         
-        cout<<"Encontraste un Caballo!"<<endl;
+            break;
 
-        pedir_nombre(nombre);
-        rescatar_animal(nombre, CABALLO);
-        
-        break;
+        case ERIZO:
+            
+            cout<<"Encontraste un Erizo!"<<endl;
 
-    case ROEDOR:
-        
-        cout<<"Encontraste un Roedor!"<<endl;
+            pedir_nombre(nombre);
+            rescatar_animal(nombre, ERIZO);   
+            break;
 
-        pedir_nombre(nombre);
-        rescatar_animal(nombre, ROEDOR);
-    
-        break;
+        case LAGARTIJA:
+            
+            cout<<"Encontraste una Lagartija!"<<endl;
+            
+            pedir_nombre(nombre);
+            rescatar_animal(nombre, LAGARTIJA);
+            break;
 
-    case CONEJO:
-        
-        cout<<"Encontraste un Conejo!"<<endl;
-
-        pedir_nombre(nombre);
-        rescatar_animal(nombre, CONEJO);
-    
-        break;
-
-    case ERIZO:
-        
-        cout<<"Encontraste un Erizo!"<<endl;
-
-        pedir_nombre(nombre);
-        rescatar_animal(nombre, ERIZO);   
-        break;
-
-    case LAGARTIJA:
-        
-        cout<<"Encontraste una Lagartija!"<<endl;
-        
-        pedir_nombre(nombre);
-        rescatar_animal(nombre, LAGARTIJA);
-        break;
-
+        }
+        vehiculo->cambiar_posicion(fila,columna);
+        mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(AUTO);
     }
-    vehiculo->cambiar_posicion(fila,columna);
-    mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(AUTO);
 }
 void Sistema::procesar_opcion(int opcion_tomada)
 {   
-    cargar_caminos();
-    cargar_contenido_mapa();
-    grafo->usar_floyd();
-    menu->mostrar_mapa(mapa->obtener_tablero() , mapa->obtener_filas() , mapa->obtener_columnas());
-
-    /*
-    grafo->minimo_camino("11", "88");
-    grafo->minimo_camino("11", "56");
-    grafo->minimo_camino("11", "23");
-    grafo->minimo_camino("11", "73");
-
-    for (int i = 0; i < this->filas; i++){
-        for (int j = 0; j < this->columnas; j++){
-            cout <<mapa[i][j].obtener_terreno_char();
-        }
-        cout<<endl;
-    }
     
     string nombre, espacio, opcion_submenu, posicion_adopcion;
-    int posicion, animales_validados;
-    bool volver_a_intentar = false;
 
-    pasar_tiempo();
+    //pasar_tiempo();
 
     switch (opcion_tomada)
     {
@@ -307,32 +307,10 @@ void Sistema::procesar_opcion(int opcion_tomada)
         case RESCATAR_ANIMAL: 
             cout << endl << "RESCATAR ANIMAL:" << endl << endl;
 
-            pedir_nombre(nombre);
-            
-            posicion = buscar_nombre(nombre);
+            menu->mostrar_mapa(mapa->obtener_tablero() , mapa->obtener_filas() , mapa->obtener_columnas());
+            procesar_movimiento();
+            menu->mostrar_mapa(mapa->obtener_tablero() , mapa->obtener_filas() , mapa->obtener_columnas());
 
-            if(posicion != NO_ENCONTRO)
-                volver_a_intentar = verificar_intentar_de_nuevo(posicion, nombre);
-
-            while(volver_a_intentar == true)
-            {
-                pedir_nombre(nombre);
-                posicion = buscar_nombre(nombre);
-
-                if(posicion != NO_ENCONTRO)
-                {
-                    volver_a_intentar = verificar_intentar_de_nuevo(posicion, nombre);
-                }
-                else
-                {
-                    volver_a_intentar = false;
-                }
-            }
-
-            if(posicion == NO_ENCONTRO)
-            {
-                rescatar_animal(nombre, especie);
-            }
             break;
 
         case BUSCAR_ANIMAL:
@@ -354,7 +332,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
 
             break;
     }
-    */
+    
 }
 /*
 (void Sistema::pasar_tiempo()
@@ -433,10 +411,6 @@ void Sistema::mostrar_busqueda(Animal* animal)
     }
 }
 
-bool Sistema::verificar_intentar_de_nuevo(int posicion, string nombre)
-{
-
-}
 void Sistema::cuidar_animal()
 {
     string opcion_submenu;
@@ -466,6 +440,7 @@ void Sistema::cuidar_animal()
 
     return false;
 }
+*/
 
 string Sistema::tamanio_animal_aleatorio (int numero)
 {
@@ -521,7 +496,6 @@ string Sistema::personalidad_animal_aleatoria (int numero)
     }
     return personalidad;
 }
-*/
 
 void Sistema::rescatar_animal(string nombre,char especie)
 {
@@ -578,9 +552,9 @@ void Sistema::rescatar_animal(string nombre,char especie)
 
     edad = rand() % DELIMITADOR_EDAD;
 
-    tamanio = tamanio_animal_aleatorio ((rand() % DELIMITADOR_TAMANIO - 1) + 1);
+    tamanio = tamanio_animal_aleatorio (1 + (rand() % CANTIDAD_TAMANIOS));
 
-    personalidad = personalidad_animal_aleatoria ((rand() % DELIMITADOR_PERSONALIDAD - 1) + 1);
+    personalidad = personalidad_animal_aleatoria (1 + (rand() % CANTIDAD_PERSONALIDADES));
 
     cargar_animal(especie, nombre, edad, tamanio[0], personalidad[0]);
 }
@@ -608,7 +582,7 @@ void Sistema::procesar_opcion_submenu(string opcion_submenu)
     switch(stoi(opcion_submenu))
     {
         case ELEGIR_INDIVIDUALMENTE:
-            eleccion_individual();
+            //eleccion_individual();
             break;
     }
 }
@@ -655,7 +629,6 @@ void Sistema::procesar_opcion_individual(int opcion_individual, Animal* animal)
             break;
     }
 }
-
 void Sistema::eleccion_individual()
 {
     Animal* animal;
@@ -664,7 +637,7 @@ void Sistema::eleccion_individual()
     while(animales ->hay_siguiente())
     {
         animal = animales -> siguiente ();
-        mostrar_animal(animal);
+        //mostrar_animal(animal);
         mostrar_opciones_individuales();
         pedir_opciones_individuales(opcion_individual);
         
@@ -707,7 +680,7 @@ void Sistema::duchar_todos()
     }
     animales -> iniciar();
 }
-
+*/
 void Sistema::pedir_espacio(string &espacio)
 {
     cout << "Ingrese el espacio disponible para el animal en m² (mayor a 0): ";
@@ -814,6 +787,7 @@ void Sistema::validar_animales_espacio(Animal* animal, string espacio, int posic
         contador_validos++;
     }
 } 
+/*
 
 bool Sistema::posicion_espacio_validado(int posicion, bool* animales_validos)
 {
@@ -847,7 +821,6 @@ string Sistema::pedir_opcion_adopcion(bool* animales_validos)
 
     return posicion_adopcion;
 }
-
 void Sistema::listar_animales_espacio(string espacio, int posicion , bool* animales_validos, int &animales_validados)
 {
     Animal* animal;
@@ -863,8 +836,8 @@ void Sistema::listar_animales_espacio(string espacio, int posicion , bool* anima
     animales_validados = contador_validos;
 
     animales -> iniciar();
-}*/
-
+}
+*/
 void guardar_animal(Animal* animal, ofstream& archivo)
 {
     archivo << 
