@@ -2,9 +2,9 @@
 #define SISTEMA_H
 
 #include "Menu.h"
+#include "Auto.h"
 #include "Vector.h"
 #include "Grafo.h"
-#include "Auto.h"
 #include <fstream>
 #include "Constantes.h"
 #include "Perro.h"
@@ -15,6 +15,7 @@
 #include "Roedor.h"
 #include "Conejo.h"
 #include "Lista.h"
+#include "Mapa.h"
 
 
 class Sistema
@@ -23,11 +24,9 @@ class Sistema
     private:
         Lista<Animal*>* animales;
         Vector<Animal*>* punteros_animales;
-        Auto * vehiculo;
-        Casilla** mapa;
-        int filas;
-        int columnas;
         Menu * menu;
+        Mapa * mapa;
+        Auto * vehiculo;
 
     //Metodos
     public:
@@ -62,9 +61,6 @@ class Sistema
         //POS: carga los parámetros como un animal nuevo en la reserva.
         void cargar_animal(char especie, string nombre, int edad, char tamanio, char personalidad);
 
-        //PRE: -
-        //POS: carga la casilla al mapa
-        void cargar_casilla(int fila,int columna,string vertice,string terreno);
 
         //PRE: -    
         //POS: carga el grafo con los caminos 
@@ -75,12 +71,12 @@ class Sistema
         void cargar_contenido_mapa();
 
         //PRE: -    
-        //POS: mueve el vehiculo a la posicion indicada
-        void procesar_movimiento();
+        //POS: le pide al usuario ingresar la fila y columna donde desea moverse
+        void pedir_movimiento(int &fila , int &columna);
 
         //PRE: -    
-        //POS: inicializa las dimensiones del mapa 
-        void inicializar_mapa();
+        //POS: mueve el vehiculo a la posicion indicada
+        void procesar_movimiento();
 
         //PRE: -
         //POS: devuelve true si esta dentro del rango del mapa y false si no
@@ -112,7 +108,7 @@ class Sistema
 
         //PRE: el nombre del animal no debe estar en la lista.
         //POS: pide el resto de datos del animal para rescatarlo y agregarlo a a la lista de animales.
-        void rescatar_animal(string nombre);
+        void rescatar_animal(string nombre, string especie);
 
         //PRE: -
         //POS: imprime por pantalla las opciones del submenú.

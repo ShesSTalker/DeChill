@@ -38,6 +38,7 @@ class Menu
         int obtener_opcion_tomada();
 
     private:
+    
         //PRE: -
         //POS: valida que el string recibido conste completamente de numeros, devolviendo true en caso afirmativo y false en caso contrario.
         bool cadena_numeros_valida(string numeros);

@@ -7,12 +7,10 @@ Sistema::Sistema()
 {
     animales = new Lista<Animal*>;
     punteros_animales = new Vector<Animal*>;
-    vehiculo = new Auto;
     grafo= new Grafo();
     menu = new Menu();
-    mapa= nullptr;
-    filas=0;
-    columnas=0;
+    vehiculo = new Auto();
+    mapa= new Mapa();
 }
 
 void Sistema::leer_animales()
@@ -80,10 +78,9 @@ void Sistema::cargar_mapa_grafo(){
         getline(archivo,total_filas,',');
         getline(archivo,total_columnas,';');
 
-        filas= stoi(total_filas);
-        columnas= stoi(total_columnas);
-
-        inicializar_mapa();
+        mapa->establecer_filas(stoi(total_filas));
+        mapa->establecer_columnas(stoi(total_columnas));
+        mapa->inicializar_tablero();
 
         while(getline(archivo,salto_linea,'\n'))
         {   
@@ -92,7 +89,7 @@ void Sistema::cargar_mapa_grafo(){
             getline(archivo,terreno,';');
             
             vertice = fila + columna;
-            cargar_casilla(stoi(fila)-1 , stoi(columna)-1 , vertice, terreno);
+            mapa->cargar_casilla(stoi(fila)-1 , stoi(columna)-1 , vertice, terreno);
             grafo->agregar_vertice(vertice);
             
         }    
@@ -104,63 +101,33 @@ void Sistema::cargar_mapa_grafo(){
     archivo.close();
 }
 
-void Sistema::inicializar_mapa(){
-
-    mapa = new Casilla*[filas]();
-
-    for (int i =0 ; i < filas; i++){
-
-        mapa[i]= new Casilla[columnas]();
-
-    }
-}
-
-void Sistema::cargar_casilla(int fila,int columna,string vertice,string terreno){
-
-    if(terreno==TIERRA){
-
-        mapa[fila][columna]= Casilla (vertice, TIERRA, RESTAR_COMBUSTIBLE_TIERRA, VACIO);
-
-    }else if (terreno== PRECIPICIO){
-
-        mapa[fila][columna]= Casilla (vertice, PRECIPICIO, RESTAR_COMBUSTIBLE_PRECIPICIO, VACIO);
-
-    }else if (terreno== MONTANIA){ 
-
-        mapa[fila][columna]= Casilla (vertice, MONTANIA, RESTAR_COMBUSTIBLE_MONTANIA, VACIO);
-
-    }else{
-
-        mapa[fila][columna]= Casilla (vertice, CAMINO, RESTAR_COMBUSTIBLE_CAMINO, VACIO);
-    }
-}
 
 void Sistema::cargar_caminos(){
     string origen;
-    for (int i = 0; i < this->filas; i++)
+    for (int i = 0; i < this->mapa->obtener_filas(); i++)
     {
-        for (int j = 0; j < this->columnas; j++){
+        for (int j = 0; j < this->mapa->obtener_columnas(); j++){
 
-            origen = mapa[i][j].obtener_nombre();
+            origen = mapa->obtener_tablero()[i][j].obtener_nombre();
 
             if (dentro_de_rango(i-1,j)){
 
-                grafo->agregar_camino(origen, mapa[i-1][j].obtener_nombre(), mapa[i-1][j].obtener_costo());
+                grafo->agregar_camino(origen, mapa->obtener_tablero()[i-1][j].obtener_nombre(), mapa->obtener_tablero()[i-1][j].obtener_costo());
 
             }
             if (dentro_de_rango(i+1,j)){
 
-                grafo->agregar_camino(origen, mapa[i+1][j].obtener_nombre(), mapa[i+1][j].obtener_costo());
+                grafo->agregar_camino(origen, mapa->obtener_tablero()[i+1][j].obtener_nombre(), mapa->obtener_tablero()[i+1][j].obtener_costo());
 
             }
             if (dentro_de_rango(i,j-1)){
 
-                grafo->agregar_camino(origen, mapa[i][j-1].obtener_nombre(), mapa[i][j-1].obtener_costo());
+                grafo->agregar_camino(origen, mapa->obtener_tablero()[i][j-1].obtener_nombre(), mapa->obtener_tablero()[i][j-1].obtener_costo());
 
             }
             if (dentro_de_rango(i,j+1)){
 
-                grafo->agregar_camino(origen, mapa[i][j+1].obtener_nombre(), mapa[i][j+1].obtener_costo());
+                grafo->agregar_camino(origen, mapa->obtener_tablero()[i][j+1].obtener_nombre(), mapa->obtener_tablero()[i][j+1].obtener_costo());
 
             }
         }
@@ -168,93 +135,112 @@ void Sistema::cargar_caminos(){
 }
 
 void Sistema::cargar_contenido_mapa(){
-    mapa[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(AUTO);
+    mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(AUTO);
     int fila_animal=0, columna_animal=0, animal_random;
 
     for (int i = 0 ; i < ANIMALES_MAPA; i++){
         animal_random =  rand() % CANTIDAD_ESPECIES;
 
         do{
-        fila_animal= rand() % filas;
-        columna_animal= rand() % columnas;
+        fila_animal= rand() % mapa->obtener_filas();
+        columna_animal= rand() % mapa->obtener_columnas();
             
-        }while (mapa[fila_animal][columna_animal].obtener_contenido() != VACIO);
+        }while (mapa->obtener_tablero()[fila_animal][columna_animal].obtener_contenido() != VACIO);
 
         switch (animal_random)
         {
         case 0:
-            mapa[fila_animal][columna_animal].asignar_contenido(PERRO);
+            mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(PERRO);
             break;
         case 1:
-            mapa[fila_animal][columna_animal].asignar_contenido(GATO);
+            mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(GATO);
             break;
         case 2:
-            mapa[fila_animal][columna_animal].asignar_contenido(CABALLO);
+            mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(CABALLO);
             break;
         case 3:
-            mapa[fila_animal][columna_animal].asignar_contenido(ROEDOR);
+            mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(ROEDOR);
             break;
         case 4:
-            mapa[fila_animal][columna_animal].asignar_contenido(CONEJO);
+            mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(CONEJO);
             break;
         case 5:
-            mapa[fila_animal][columna_animal].asignar_contenido(ERIZO);
+            mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(ERIZO);
             break;
         case 6:
-            mapa[fila_animal][columna_animal].asignar_contenido(LAGARTIJA);
+            mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(LAGARTIJA);
             break;
         }
     }
 }
 
 bool Sistema::dentro_de_rango(int fila, int columna){
-    return (fila >= 0 && fila < this->filas && columna >= 0 && columna < this->columnas);
+    return (fila >= 0 && fila < this->mapa->obtener_filas() && columna >= 0 && columna < this->mapa->obtener_columnas());
 }
 
-void Sistema::procesar_movimiento(){
-    int fila , columna;
+void Sistema::pedir_movimiento(int &fila , int &columna){
     do{
         cout<<"Ingrese la fila donde desea moverse: "<<endl;
         cin>>fila;
         cout<<"Ingrese la columna donde desea moverse: "<<endl;
         cin>>columna;
     }while(!dentro_de_rango(fila-1,columna -1));
+}
+void Sistema::procesar_movimiento(){
+    int fila , columna, edad;
+    string nombre;
+    char tamanio, personalidad;
+    pedir_movimiento(fila , columna);
 
-    mapa[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(VACIO);
+    mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(VACIO);
     
-    switch (mapa[fila][columna].obtener_contenido())
+    switch (mapa->obtener_tablero()[fila][columna].obtener_contenido())
     {
     case PERRO:
-            
+        cout<<"Encontraste un Perro!"<<endl;
+        //pedir nombre y inicializar , edad , tamanio y personalidades
+        cargar_animal(PERRO, nombre,  edad, tamanio, personalidad);
         break;
     case GATO:
-            
+        cout<<"Encontraste un Gato!"<<endl;
+        //pedir nombre y inicializar , edad , tamanio y personalidades
+        cargar_animal(GATO, nombre,  edad, tamanio, personalidad);     
         break;
     case CABALLO:
-            
+        cout<<"Encontraste un Caballo!"<<endl;
+        //pedir nombre y inicializar , edad , tamanio y personalidades
+        cargar_animal(CABALLO, nombre,  edad, tamanio, personalidad);    
         break;
     case ROEDOR:
-            
+        cout<<"Encontraste un Roedor!"<<endl;
+        //pedir nombre y inicializar , edad , tamanio y personalidades
+        cargar_animal(ROEDOR, nombre,  edad, tamanio, personalidad);    
         break;
     case CONEJO:
-            
+        cout<<"Encontraste un Conejo!"<<endl;
+        //pedir nombre y inicializar , edad , tamanio y personalidades
+        cargar_animal(CONEJO, nombre,  edad, tamanio, personalidad);    
         break;
     case ERIZO:
-            
+        cout<<"Encontraste un Erizo!"<<endl;
+        //pedir nombre y inicializar , edad , tamanio y personalidades
+        cargar_animal(ERIZO, nombre,  edad, tamanio, personalidad);   
         break;
     case LAGARTIJA:
-            
+        cout<<"Encontraste una Lagartija!"<<endl;
+        //pedir nombre y inicializar , edad , tamanio y personalidades
+        cargar_animal(LAGARTIJA, nombre,  edad, tamanio, personalidad);    
         break;
     }
     vehiculo->cambiar_posicion(fila,columna);
-    mapa[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(AUTO);
+    mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(AUTO);
 }
 void Sistema::procesar_opcion(int opcion_tomada)
 {   
     cargar_caminos();
     cargar_contenido_mapa();
     grafo->usar_floyd();
-    menu->mostrar_mapa(mapa , filas , columnas);
+    menu->mostrar_mapa(mapa->obtener_tablero() , mapa->obtener_filas() , mapa->obtener_columnas());
 
     /*
     grafo->minimo_camino("11", "88");
@@ -268,8 +254,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
         }
         cout<<endl;
     }
-    */
-    /*
+    
     string nombre, espacio, opcion_submenu, posicion_adopcion;
     int posicion, animales_validados;
     bool volver_a_intentar = false;
@@ -293,6 +278,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
             cout << endl << "RESCATAR ANIMAL:" << endl << endl;
 
             pedir_nombre(nombre);
+            
             posicion = buscar_nombre(nombre);
 
             if(posicion != NO_ENCONTRO)
@@ -315,7 +301,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
 
             if(posicion == NO_ENCONTRO)
             {
-                rescatar_animal(nombre);
+                rescatar_animal(nombre, especie);
             }
             break;
 
@@ -485,9 +471,11 @@ bool Sistema::verificar_intentar_de_nuevo(int posicion, string nombre)
     return false;
 }
 
-void Sistema::rescatar_animal(string nombre)
+void Sistema::rescatar_animal(string nombre,string especie)
 {
-    string edad, especie, tamanio, personalidad;
+    string edad, tamanio, personalidad;
+    /*
+    //LOS ANIMALES RECATADOS YA TIENEN SU ESPECIE INICIALIZADA
 
     cout << endl << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
     endl << "- E (Erizo)" << endl << "- L (Lagartija)" << endl << "Ingrese el caracter la especie del animal: ";
@@ -499,7 +487,7 @@ void Sistema::rescatar_animal(string nombre)
         endl << "- E (Erizo)" << endl << "- L (Lagartija)" << endl << "Especie invalida, Ingrese el caracter la especie del animal: ";
         getline(cin >> ws, especie);
     }
-
+    */
     cout << endl << "Ingrese la edad del animal: ";
     getline(cin >> ws, edad);
 
@@ -852,9 +840,4 @@ Sistema::~Sistema()
     delete vehiculo;
     delete grafo;
     delete menu;
-
-    for (int i =0 ; i < this->filas; i++){
-        delete []mapa[i];
-    }
-    delete [] mapa;
 }
