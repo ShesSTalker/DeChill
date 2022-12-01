@@ -23,7 +23,7 @@ class Sistema
     public:
         //Grafo* grafo;
         //PRE: -
-        //POS: crea un objeto Sistema e incializa los atributos 
+        //POS: crea un objeto Sistema e incializa los atributos. 
         Sistema();
 
         //PRE: el archivo debe estar bien formado
@@ -34,7 +34,7 @@ class Sistema
         //POS: carga el mapa del archivo PATH_MAPA al grafo del sistema
         void cargar_mapa_grafo();
 
-        //PRE: 0 < opcion_tomada <= 5.
+        //PRE: 0 < opcion_tomada <= 6.
         //POS: procesa opcion_tomada para ejecutar las operaciones de la opción correspondiente.
         void procesar_opcion(int opcion_tomada);
 
@@ -56,19 +56,19 @@ class Sistema
         void cargar_animal(char especie, string nombre, int edad, char tamanio, char personalidad);
 
         //PRE: -
-        //POS: carga la casilla al mapa
+        //POS: carga la casilla al mapa.
         void cargar_casilla(int fila,int columna,string vertice,string terreno);
 
         //PRE: -    
-        //POS: carga el grafo con los caminos 
+        //POS: carga el grafo con los caminos.
         void cargar_caminos();
 
         //PRE: -    
-        //POS: inicializa las dimensiones del mapa 
+        //POS: inicializa las dimensiones del mapa.
         void inicializar_mapa();
 
         //PRE: -
-        //POS: devuelve true si esta dentro del rango del mapa y false si no
+        //POS: devuelve verdadero si esta dentro del rango del mapa y falso en caso contrario.
         bool dentro_de_rango(int fila, int columna);
 
         // PRE: -
@@ -76,8 +76,12 @@ class Sistema
         void pasar_tiempo();
 
         //PRE: -
-        //POS: imprime por pantalla los datos del animal si el nombre fue encontrado en la reserva o un mensaje de error en caso contrario.
-        void mostrar_busqueda(Animal* animal);
+        //POS: lista los animales del la reserva.
+        void listar_animales();
+
+        //PRE: -
+        //POS: realiza llama a los metodos correspondientes a buscar animal.
+        void buscar_animal();
 
         //PRE: -
         //POS: le pide al usario que ingrese el nombre del animal rescatado.
@@ -86,6 +90,10 @@ class Sistema
         //PRE: - 
         //POS: devuelve el animal si se encuentra en el arbol y NULL en caso contrario      
         Animal* buscar_nombre(string nombre);
+
+        //PRE: -
+        //POS: imprime por pantalla los datos del animal si el nombre fue encontrado en la reserva o un mensaje de error en caso contrario.
+        void mostrar_busqueda(Animal* animal);
 
         //PRE: el nombre ingresado para un animal nuevo ya estaba en la reserva.
         //POS: si el usuario ingresa que quiere intentar con un nombre diferente para un animal nuevo en la reserva, devuelve true. Caso contrario devuelve false.  
