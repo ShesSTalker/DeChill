@@ -311,7 +311,7 @@ void Sistema::cuidar_animal()
 
     mostrar_submenu();
     ingresar_opcion_submenu(opcion_submenu);
-
+    procesar_opcion_submenu(opcion_submenu);
 }
 
 /*bool Sistema::verificar_intentar_de_nuevo(int posicion, string nombre)
@@ -407,12 +407,16 @@ void Sistema::procesar_opcion_submenu(string opcion_submenu)
     switch(stoi(opcion_submenu))
     {
         case ELEGIR_INDIVIDUALMENTE:
-            eleccion_individual();
             break;
     }
 }
 
-/*void Sistema::mostrar_opciones_individuales()
+void Sistema::elegir_individualmente()
+{
+    string opcion_individual;
+}
+
+void Sistema::mostrar_opciones_individuales()
 {
     cout << "[1] Duchar." << endl <<
     "[2] Alimentar." << endl << 
@@ -450,12 +454,12 @@ void Sistema::procesar_opcion_individual(int opcion_individual, Animal* animal)
 
         case ALIMENTAR:
             animal -> alimentar();
-            cout << animal -> obtener_nombre() << " ha sido alimentado" << endl;
+            cout << animal -> obtener_nombre() << " ha sido alimentado con " << animal -> que_come() << endl;
             break;
     }
 }
 
-void Sistema::eleccion_individual()
+/*void Sistema::eleccion_individual()
 {
     Animal* animal;
     string opcion_individual;
@@ -517,7 +521,7 @@ void Sistema::pedir_espacio(string &espacio)
         cout << "Espacio invalido, ingrese el espacio en  m² disponible para el animal (mayor a 0): ";
         getline(cin >> ws, espacio);
     }
-}
+}*/
 
 bool Sistema::cadena_numeros_valida(string numeros)
 {
@@ -536,7 +540,7 @@ bool Sistema::cadena_numeros_valida(string numeros)
     return valido;
 }
 
-void Sistema::mostrar_animal_espacio(Animal* animal, int posicion)
+/*void Sistema::mostrar_animal_espacio(Animal* animal, int posicion)
 {
     cout << posicion << ") " << "Nombre: " << animal -> obtener_nombre() << endl <<
     "Edad: " << animal -> obtener_edad() << endl <<
