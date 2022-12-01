@@ -39,7 +39,7 @@ void Auto::cargar_combustible_completo()
 }
 void Auto::cargar_combustible(int combustible_cargar){
     
-    combustible = +combustible_cargar;
+    combustible += combustible_cargar;
 
     if(combustible > MAX_COMBUSTIBBLE){
         
