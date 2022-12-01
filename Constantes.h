@@ -24,6 +24,7 @@ CAMINO = "Camino",
 ANIMAL = "Animal";
 
 const char 
+
 VACIO = ' ',
 AUTO = 'A';
 

@@ -255,22 +255,6 @@ void Sistema::limpiar_pantalla()
     #endif
 }
 
-void mostrar_animal(Animal* animal, int &iteracion)
-{
-    if(animal -> obtener_estado_animal() == NO_ADOPTADO)
-    {
-        cout <<
-        ++iteracion << ") " << animal -> obtener_nombre() << endl <<
-        "Edad: " << animal -> obtener_edad() << endl <<
-        "Tamanio: " << animal -> obtener_tamanio_texto() << endl <<
-        "Especie: " << animal -> obtener_especie_texto() << endl <<
-        "Personalidad: " << animal -> obtener_personalidad_texto() << endl <<
-        "Hambre: " << animal -> obtener_hambre() << endl <<
-        "Higiene: " << animal -> obtener_higiene() << endl << endl <<
-        "---------------------------------------------------" << endl << endl;
-    }
-}
-
 void Sistema::listar_animales()
 {
     if(arbol_b -> arbol_vacio())
@@ -279,7 +263,7 @@ void Sistema::listar_animales()
     }
     else
     {
-        arbol_b -> listar_creciente(mostrar_animal);
+        arbol_b -> listar_creciente();
     }
 }
 
@@ -313,14 +297,6 @@ void Sistema::mostrar_busqueda(Animal* animal)
     if(animal == NULL)
     {
         cout << endl << "No se pudo encontrar el nombre en la reserva." << endl;
-    }
-    else if(animal -> obtener_estado_animal() == ADOPTADO)
-    {
-        cout << animal -> obtener_nombre() << " ya ha sido adoptado! :)" << endl;
-    }
-    else if(animal -> obtener_estado_animal() == FUGADO)
-    {
-        cout << animal -> obtener_nombre() << " no estaba feliz en la reserva y ya se ha fugado! :(" << endl;
     }
     else
     {
@@ -438,6 +414,8 @@ void Sistema::procesar_opcion_submenu(string opcion_submenu)
 void Sistema::elegir_individualmente()
 {
     string opcion_individual;
+
+    
 }
 
 void Sistema::mostrar_opciones_individuales()
