@@ -43,8 +43,8 @@ class ArbolB
         Tipo* buscar_clave(string clave);
 
         //PRE: -
-        //POS: lista los animales almacenados en el Arbol B de manera creciente segun la clave (nombre).
-        void listar_creciente();
+        //POS: lista los animales almacenados en el Arbol B de manera creciente segun la clave (nombre) y de acuerdo a la funcion de listado dado.
+        void listar_creciente(void (*listado)(Tipo* dato, int &iteracion));
 
         //PRE: el archivo está abierto.
         //POS: envia la información de todos los animales de la reserva al archivo indicado utilizando la funcion de guardado dada.
@@ -66,7 +66,7 @@ class ArbolB
 
         void dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nodo, string &pivote, Tipo* &pivote_dato, Tipo* nuevo_dato, int posicion);
 
-        void mostrar_en_orden(Nodo<Tipo>* nodo_actual, int nivel);
+        void listar_creciente(Nodo<Tipo>* nodo_actual, int &iteracion, void (*listado)(Tipo* dato, int &iteracion));
 
         void guardar_creciente(Nodo<Tipo>* nodo_actual, ofstream& archivo, void (*guardado)(Tipo* dato, ofstream& archivo));
 };
@@ -206,12 +206,6 @@ Nodo<Tipo>* ArbolB<Tipo>::buscar(Nodo<Tipo>* nodo_actual, string clave, int &pos
 }
 
 template < typename Tipo >
-void ArbolB<Tipo>::listar_creciente()
-{
-    mostrar_en_orden(raiz, PRIMER_DATO);
-}
-
-template < typename Tipo >
 bool ArbolB<Tipo>::buscar_nodo_actual(Nodo<Tipo>* nodo_actual, string clave, int &posicion)
 {
     int i = nodo_actual -> obtener_cantidad_claves_usadas();
@@ -338,7 +332,7 @@ void ArbolB<Tipo>::dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nodo, stri
     
     if(nodo_actual -> hijo_auxiliar_ocupado())
     {
-        nuevo_nodo -> establecer_hijo(nuevo_nodo -> obtener_cantidad_claves_usadas(), nodo_actual -> obtener_hijo(HIJO_AUXILIAR));
+        nuevo_nodo -> establecer_hijo(nuevo_nodo -> obtener_cantidad_claves_usadas(), nodo_actual -> obtener_hijo(orden));
     }
 
     pivote = nodo_actual -> obtener_clave(nodo_actual -> obtener_cantidad_claves_usadas());
@@ -346,24 +340,27 @@ void ArbolB<Tipo>::dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nodo, stri
     nodo = nuevo_nodo;
 }
 
-template <typename Tipo> // CAMBIAR ESTO, EL TEMPLATE NO DEBERIA REFERENCIAR A ANIMAL
-void ArbolB<Tipo>::mostrar_en_orden(Nodo<Tipo>* nodo_actual, int nivel)
+template < typename Tipo >
+void ArbolB<Tipo>::listar_creciente(void (*listado)(Tipo* dato, int &iteracion))
 {
-    Animal* animal;
+    int iteracion = 0;
+    listar_creciente(raiz, iteracion, listado);
+}
+
+template <typename Tipo> 
+void ArbolB<Tipo>::listar_creciente(Nodo<Tipo>* nodo_actual, int &iteracion, void (*listado)(Tipo* dato, int &iteracion))
+{
+    Tipo* dato_actual;
 
     if(nodo_actual != NULL)
     {
-        mostrar_en_orden(nodo_actual -> obtener_hijo(PRIMER_HIJO), nivel + 1);
+        listar_creciente(nodo_actual -> obtener_hijo(PRIMER_HIJO), iteracion, listado);
 
         for(int i = 0; i < nodo_actual -> obtener_cantidad_claves_usadas(); i++)
         {   
-            animal = nodo_actual -> obtener_dato(i);
-            if(animal  -> obtener_estado_animal() != ADOPTADO && animal -> obtener_estado_animal() != FUGADO)
-            {
-                animal -> mostrar_animal(); // Cambiar este cout del nivel en el arbol
-                cout << nivel << ") " << nodo_actual -> obtener_clave(i) << endl;
-            }
-            mostrar_en_orden(nodo_actual -> obtener_hijo(i + 1), nivel + 1);
+            dato_actual = nodo_actual -> obtener_dato(i);
+            listado(dato_actual, iteracion);
+            listar_creciente(nodo_actual -> obtener_hijo(i + 1), iteracion, listado);
         }
     }
 } 
