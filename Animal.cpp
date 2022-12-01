@@ -229,14 +229,15 @@ void Animal::cambiar_estado_animal(int estado)
 
 void Animal::mostrar_animal()
 {
-    cout << "---------------------------------------------------" << endl << endl;
-    cout << "Nombre: " << obtener_nombre() << endl <<
+    cout <<
+    "Nombre: " << obtener_nombre() << endl <<
     "Edad: " << obtener_edad() << endl <<
-    "Tamanio: " <<  obtener_tamanio_texto() << endl <<
+    "Tamanio: " << obtener_tamanio_texto() << endl <<
     "Especie: " << obtener_especie_texto() << endl <<
     "Personalidad: " << obtener_personalidad_texto() << endl <<
     "Hambre: " << obtener_hambre() << endl <<
-    "Higiene: " << obtener_higiene() << endl << endl;
+    "Higiene: " << obtener_higiene() << endl << endl <<
+    "---------------------------------------------------" << endl << endl;
 }
 
 Animal::~Animal(){}

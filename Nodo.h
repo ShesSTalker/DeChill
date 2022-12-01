@@ -98,7 +98,7 @@ bool Nodo<Tipo>::nodo_lleno()
 template < typename Tipo >
 bool Nodo<Tipo>::hijo_auxiliar_ocupado()
 {
-    return (hijos[HIJO_AUXILIAR] != NULL);
+    return (hijos[maximo_claves] != NULL);
 }
 
 template < typename Tipo > 
