@@ -194,9 +194,8 @@ void Sistema::pedir_movimiento(int &fila , int &columna){
     }while(!dentro_de_rango(fila-1,columna -1));
 }
 void Sistema::procesar_movimiento(){
-    int fila , columna, edad;
+    int fila , columna;
     string nombre;
-    char tamanio, personalidad;
     
     pedir_movimiento(fila , columna);
 
@@ -560,8 +559,8 @@ string Sistema::personalidad_animal_aleatoria (int numero)
 
 void Sistema::rescatar_animal(string nombre,char especie)
 {
-    string edad, tamanio, personalidad;
-
+    string tamanio, personalidad;
+    int edad;
     int posicion = buscar_nombre(nombre);
     verificar_intentar_de_nuevo(posicion, nombre);
 
@@ -616,7 +615,7 @@ void Sistema::rescatar_animal(string nombre,char especie)
 
     personalidad = personalidad_animal_aleatoria ((rand() % DELIMITADOR_PERSONALIDAD - 1) + 1);
 
-    cargar_animal(especie, nombre, stoi(edad), tamanio[0], personalidad[0]);
+    cargar_animal(especie, nombre, edad, tamanio[0], personalidad[0]);
 }
 
 void Sistema::mostrar_submenu()
