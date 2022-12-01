@@ -45,7 +45,7 @@ void Grafo::minimo_camino(string origen, string destino){
         cout << "El vertice " << destino << " no existe en el grafo" << endl;
     }
 
-    calcular_camino_minimo(posicion_origen, posicion_destino);
+    mostrar_camino_minimo(posicion_origen, posicion_destino);
 }
 
 void Grafo::agrandar_matriz_de_adyacencia(){
@@ -125,7 +125,7 @@ void Grafo::mostrar_matriz_adyacencia(){
     cout << endl;
 }
 
-void Grafo::calcular_camino_minimo(int origen, int destino){
+void Grafo::mostrar_camino_minimo(int origen, int destino){
 
     floyd -> camino_minimo(origen, destino);
     

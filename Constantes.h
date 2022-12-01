@@ -162,6 +162,9 @@ enum opciones_menu_principal {
 };
 
 const int MAX_OPCIONES_MENU_PRINCIPAL= 7;
+const char
+SI= 'S',
+NO= 'N';
 
 enum opciones_submenu {
     ELEGIR_INDIVIDUALMENTE = 1,

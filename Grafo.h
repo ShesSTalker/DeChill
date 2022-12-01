@@ -15,7 +15,7 @@ class Grafo {
                 
         //PRE: tienen que existir tanto el origen como el destino. Ademas se deben haber calculado las matrices de Floyd
         //POS: muestra el camino minimo entre el origen y el destino
-        void calcular_camino_minimo(int origen, int destino);
+        void mostrar_camino_minimo(int origen, int destino);
 
         //POS: agranda dinamicamente la matriz de adyacencia
         void agrandar_matriz_de_adyacencia();

@@ -210,22 +210,43 @@ void Sistema::pedir_movimiento(int &fila , int &columna){
     columna--;
 }
 void Sistema::procesar_movimiento(){
-    int fila , columna, costo_combustible;
-    string nombre;
-    
+    int fila , columna, costo_combustible, combustible_cargar;
+    string nombre, origen , destino;
+    char opcion;
+
     pedir_movimiento(fila , columna);
-    costo_combustible= grafo->costo_camino( mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].obtener_nombre(), mapa->obtener_tablero()[fila][columna].obtener_nombre());
+
+    origen= mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].obtener_nombre();
+
+    destino= mapa->obtener_tablero()[fila][columna].obtener_nombre();
+
+    costo_combustible= grafo->costo_camino( origen, destino);
+
     if (vehiculo->obtener_combustible() < costo_combustible){
 
         cout<<"Combustible insuficiente "<<endl;
         cout<< "Combustible actual: "<<vehiculo->obtener_combustible()<<endl;
         cout<<"Combustible necesario: "<< costo_combustible <<endl;
 
+        cout <<"Desea cargar combustible? (S/N)"<<endl;
+        cin>>opcion;
+        
+        if(opcion == SI){
+            do{
+            cout<<"Ingrese la cantidad de combustible que desea cargar: "<<endl;
+            cin>>combustible_cargar;
+                
+            }while(combustible_cargar >= 100 || combustible_cargar < 1);
+
+            vehiculo->cargar_combustible(combustible_cargar);
+        }
+
     }else{
 
         vehiculo->restar_combustible(costo_combustible);
-        cout<< "Combustible actual: "<<vehiculo->obtener_combustible()<<endl;
-        
+        grafo->minimo_camino(origen, destino);
+        cout<< "Combustible restante: "<<vehiculo->obtener_combustible()<<endl;
+
         mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(VACIO);
         
         switch (mapa->obtener_tablero()[fila][columna].obtener_contenido())
@@ -313,7 +334,6 @@ void Sistema::procesar_opcion(int opcion_tomada)
 
             menu->mostrar_mapa(mapa->obtener_tablero() , mapa->obtener_filas() , mapa->obtener_columnas());
             procesar_movimiento();
-            menu->mostrar_mapa(mapa->obtener_tablero() , mapa->obtener_filas() , mapa->obtener_columnas());
 
             break;
 
