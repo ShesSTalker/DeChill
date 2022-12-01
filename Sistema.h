@@ -80,7 +80,7 @@ class Sistema
         void listar_animales();
 
         //PRE: -
-        //POS: realiza llama a los metodos correspondientes a buscar animal.
+        //POS: llama a los metodos correspondientes a buscar animal.
         void buscar_animal();
 
         //PRE: -
@@ -94,6 +94,10 @@ class Sistema
         //PRE: -
         //POS: imprime por pantalla los datos del animal si el nombre fue encontrado en la reserva o un mensaje de error en caso contrario.
         void mostrar_busqueda(Animal* animal);
+
+        //PRE: -
+        //POS: llama a los metodos correspondientes a cuidar animal.
+        void cuidar_animal();
 
         //PRE: el nombre ingresado para un animal nuevo ya estaba en la reserva.
         //POS: si el usuario ingresa que quiere intentar con un nombre diferente para un animal nuevo en la reserva, devuelve true. Caso contrario devuelve false.  

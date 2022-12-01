@@ -214,7 +214,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
 
         case CUIDAR_ANIMAL:
             cout << endl << "CUIDAR ANIMAL:" << endl << endl;
-            mostrar_submenu();
+            cuidar_animal();
             break;
 
         case ADOPTAR_ANIMAL:
@@ -329,6 +329,15 @@ void Sistema::mostrar_busqueda(Animal* animal)
     }
 }
 
+void Sistema::cuidar_animal()
+{
+    string opcion_submenu;
+
+    mostrar_submenu();
+    ingresar_opcion_submenu(opcion_submenu);
+
+}
+
 /*bool Sistema::verificar_intentar_de_nuevo(int posicion, string nombre)
 {
     string decision;
@@ -405,7 +414,7 @@ void Sistema::mostrar_submenu()
     "[2] Regresar al inicio." << endl << endl;
 }
 
-/*void Sistema::ingresar_opcion_submenu(string &opcion_submenu)
+void Sistema::ingresar_opcion_submenu(string &opcion_submenu)
 {
     cout << "Ingrese el numero de la opcion que desa ejecutar: ";
     getline(cin >> ws, opcion_submenu);
@@ -424,20 +433,10 @@ void Sistema::procesar_opcion_submenu(string opcion_submenu)
         case ELEGIR_INDIVIDUALMENTE:
             eleccion_individual();
             break;
-
-        case ALIMENTAR_A_TODOS:
-            alimentar_todos();
-            cout << "se ha alimentado a todos los animales con exito." << endl << endl;
-            break;
-
-        case DUCHAR_A_TODOS:
-            duchar_todos();
-            cout << "se ha duchado a todos los animales con exito." << endl << endl;
-            break;
     }
 }
 
-void Sistema::mostrar_opciones_individuales()
+/*void Sistema::mostrar_opciones_individuales()
 {
     cout << "[1] Duchar." << endl <<
     "[2] Alimentar." << endl << 
