@@ -191,6 +191,10 @@ class Sistema
         //PRE: -
         //POS: muestra por pantalla todos los animales que cumplen con el espacio con el que dispone el usuario.
         void listar_animales_espacio(string espacio, int posicion, bool* animales_validos, int &animales_validados);
+
+        //PRE: -
+        //POS: le pide al usuario la cantidad de combustible y valida esta.
+        void carga_de_combustible(int combustible);
 };
 
 #endif

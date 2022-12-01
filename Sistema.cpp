@@ -301,9 +301,9 @@ void Sistema::procesar_movimiento(){
         mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(AUTO);
     }
 }
+
 void Sistema::procesar_opcion(int opcion_tomada)
 {   
-    int combustible_cargar;
     string nombre, espacio, opcion_submenu, posicion_adopcion;
 
     //pasar_tiempo();
@@ -341,13 +341,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
 
             cout << endl << "CARGAR_COMBUSTIBLE:" << endl << endl;
 
-            do{
-                cout<<"Ingrese la cantidad de combustible que desea cargar: "<<endl;
-                cin>>combustible_cargar;
-                
-            }while(combustible_cargar >= 100 || combustible_cargar < 1);
-
-            vehiculo->cargar_combustible(combustible_cargar);
+            carga_de_combustible(vehiculo->obtener_combustible());
 
             break;
         case GUARDAR_Y_SALIR:
@@ -581,6 +575,39 @@ void Sistema::rescatar_animal(string nombre,char especie)
     personalidad = personalidad_animal_aleatoria (1 + (rand() % CANTIDAD_PERSONALIDADES));
 
     cargar_animal(especie, nombre, edad, tamanio[0], personalidad[0]);
+}
+
+void Sistema::carga_de_combustible (int numero)
+{
+    string combustible_cargar, opcion;
+
+
+    cout << "Combustible actual: " << numero << endl;
+
+    cout << "Desea cargar combustible? (S/N): ";
+    cin >> opcion;
+
+    while (opcion != SI && opcion != NO)
+    {
+        cout << "La opcion ingresada no es válida, ingrese nuevamente:";
+        cin >> opcion;
+    }
+
+    if (opcion == SI)
+    {
+        cout << "Ingrese la cantidad de combustible que desea cargar: ";
+        cin>>combustible_cargar;
+        
+        while (!cadena_numeros_valida(combustible_cargar) || stoi(combustible_cargar) < 1)
+    {
+        cout << endl << "La cantidad de combustible no es válida. Ingrese nuevamente: ";
+        cin>>combustible_cargar;
+    }
+
+        vehiculo->cargar_combustible (stoi(combustible_cargar));
+        cout << "Combustible actual: "<< vehiculo->obtener_combustible() << endl;
+    }
+
 }
 
 void Sistema::mostrar_submenu()
