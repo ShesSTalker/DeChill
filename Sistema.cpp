@@ -39,6 +39,11 @@ void Sistema::leer_animales()
             getline(archivo,especie,',');
             getline(archivo,personalidad);
 
+            if(tamanio == GIGANTE_TEXTO)
+            {
+                tamanio[0] = GIGANTE;
+            }
+
             cargar_animal(especie[0], nombre, stoi(edad), tamanio[0], personalidad[0]);
         }
     }
