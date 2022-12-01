@@ -23,6 +23,8 @@ int main()
         sistema -> procesar_opcion(opcion);
     }
     while (opcion != GUARDAR_Y_SALIR);
+
+    sistema -> guardar();
     
     delete menu;
     delete sistema;

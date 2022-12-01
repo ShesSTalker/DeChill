@@ -647,27 +647,32 @@ void Sistema::listar_animales_espacio(string espacio, int posicion , bool* anima
     animales_validados = contador_validos;
 
     animales -> iniciar();
+}*/
+
+void guardar_animal(Animal* animal, ofstream& archivo)
+{
+    archivo << 
+    animal -> obtener_nombre() << "," << 
+    animal -> obtener_edad()<< "," << 
+    animal -> obtener_tamanio_texto() << "," << 
+    animal -> obtener_especie_caracter() << "," << 
+    animal -> obtener_personalidad_texto() << 
+    endl;
 }
 
 void Sistema::guardar()
 {
-    Animal * animal;
     ofstream archivo (PATH_ANIMALES);
     if (archivo.is_open())
     {
-        for (int i = 1; i <= animales -> obtener_cantidad(); i++)
-        {
-            animal = animales -> consulta(i);
-            archivo << animal -> obtener_nombre() << "," << animal -> obtener_edad()<< "," << animal -> obtener_tamanio_texto() <<
-            "," << animal -> obtener_especie_caracter() << "," << animal -> obtener_personalidad_texto() << endl;
-        }        
+        arbol_b -> guardar_creciente(archivo, guardar_animal);      
     }
     else
     {
         cout << "No se pudo abrir el archivo" << endl;
     }
     archivo.close();
-}*/
+}
 
 
 Sistema::~Sistema()
