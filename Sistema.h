@@ -1,6 +1,7 @@
 #ifndef SISTEMA_H
 #define SISTEMA_H
 
+#include<stdlib.h>
 #include "Menu.h"
 #include "Auto.h"
 #include "Vector.h"
@@ -16,6 +17,7 @@
 #include "Conejo.h"
 #include "Lista.h"
 #include "Mapa.h"
+#include "Arbol.h"
 
 
 class Sistema
@@ -26,13 +28,14 @@ class Sistema
         Vector<Animal*>* punteros_animales;
         Menu * menu;
         Mapa * mapa;
+        Grafo * grafo;
         Auto * vehiculo;
-
+        ArbolB<Animal>* arbol_b;
     //Metodos
     public:
-        Grafo* grafo;
+        //Grafo* grafo;
         //PRE: -
-        //POS: crea un objeto Sistema e incializa los atributos 
+        //POS: crea un objeto Sistema e incializa los atributos. 
         Sistema();
 
         //PRE: el archivo debe estar bien formado
@@ -43,7 +46,7 @@ class Sistema
         //POS: carga el mapa del archivo PATH_MAPA al grafo del sistema
         void cargar_mapa_grafo();
 
-        //PRE: 0 < opcion_tomada <= 5.
+        //PRE: 0 < opcion_tomada <= 6.
         //POS: procesa opcion_tomada para ejecutar las operaciones de la opción correspondiente.
         void procesar_opcion(int opcion_tomada);
 
@@ -51,6 +54,10 @@ class Sistema
         //POS: guarda todos los cambios realizados al archivo CSV de la reserva.
         void guardar();
         
+        //PRE: - 
+        //POS: limpia la pantalla para mejorar la interfaz del usuario.
+        void limpiar_pantalla();
+
         //PRE: -
         //POS: libera la memoria asociada con este objeto.
         ~Sistema();
@@ -63,7 +70,7 @@ class Sistema
 
 
         //PRE: -    
-        //POS: carga el grafo con los caminos 
+        //POS: carga el grafo con los caminos.
         void cargar_caminos();
 
         //PRE: -    
@@ -79,7 +86,7 @@ class Sistema
         void procesar_movimiento();
 
         //PRE: -
-        //POS: devuelve true si esta dentro del rango del mapa y false si no
+        //POS: devuelve verdadero si esta dentro del rango del mapa y falso en caso contrario.
         bool dentro_de_rango(int fila, int columna);
 
         // PRE: -
@@ -87,20 +94,24 @@ class Sistema
         void pasar_tiempo();
 
         //PRE: -
-        //POS: imprime por pantalla todos los animales de la lista.
-        void listar_animales(); 
+        //POS: lista los animales del la reserva.
+        void listar_animales();
 
         //PRE: -
-        //POS: muestra por pantalla la información del animal.
-        void mostrar_animal(Animal* mi_animal);
+        //POS: realiza llama a los metodos correspondientes a buscar animal.
+        void buscar_animal();
 
         //PRE: -
         //POS: le pide al usario que ingrese el nombre del animal rescatado.
         void pedir_nombre(string &nombre);
 
         //PRE: - 
-        //POS: devuelve la posicion del animal en la lista si el nombre existe en la lista y -1 si no existe.      
-        int buscar_nombre(string nombre);
+        //POS: devuelve el animal si se encuentra en el arbol y NULL en caso contrario      
+        Animal* buscar_nombre(string nombre);
+
+        //PRE: -
+        //POS: imprime por pantalla los datos del animal si el nombre fue encontrado en la reserva o un mensaje de error en caso contrario.
+        void mostrar_busqueda(Animal* animal);
 
         //PRE: el nombre ingresado para un animal nuevo ya estaba en la reserva.
         //POS: si el usuario ingresa que quiere intentar con un nombre diferente para un animal nuevo en la reserva, devuelve true. Caso contrario devuelve false.  
@@ -110,6 +121,8 @@ class Sistema
         //POS: devuelve un tamanio de animal aleatorio
         string tamanio_animal_aleatorio(int numero);
 
+        //PRE: -
+        //POS: devuelve una personalidad de animal aleatorio
         string personalidad_animal_aleatoria (int numero);
 
         //PRE: el nombre del animal no debe estar en la lista.

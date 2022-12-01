@@ -47,7 +47,7 @@ HIGIENE_MIN = 0;
 const int DELIMITADOR_EDAD = 101;
 
 
-// Constante delimitador tamanio
+// Constante delimitador tamanio 
 
 const int DELIMITADOR_TAMANIO = 6;
 

@@ -11,6 +11,8 @@ Sistema::Sistema()
     menu = new Menu();
     vehiculo = new Auto();
     mapa= new Mapa();
+    arbol_b = new ArbolB<Animal>(TRES_VIAS);
+
 }
 
 void Sistema::leer_animales()
@@ -25,6 +27,11 @@ void Sistema::leer_animales()
             getline(archivo,tamanio,',');
             getline(archivo,especie,',');
             getline(archivo,personalidad);
+
+            if(tamanio == GIGANTE_TEXTO)
+            {
+                tamanio[0] = GIGANTE;
+            }
 
             cargar_animal(especie[0], nombre, stoi(edad), tamanio[0], personalidad[0]);
         }
@@ -65,9 +72,7 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
             break;
     }
 
-    animales -> alta(animal, animales -> obtener_cantidad() + 1);
-
-    punteros_animales -> cargar(animal, punteros_animales -> obtener_longitud());
+    arbol_b -> insertar(animal -> obtener_nombre(), animal);
 }
 
 void Sistema::cargar_mapa_grafo(){
@@ -291,17 +296,11 @@ void Sistema::procesar_opcion(int opcion_tomada)
     bool volver_a_intentar = false;
 
     pasar_tiempo();
+
     switch (opcion_tomada)
     {
         case LISTAR_ANIMALES:
-            if(animales -> vacia())
-            {
-                cout << endl << "La reserva actualmente no tiene animales :(" << endl;
-                break;
-            }
-
-            cout << endl << "LISTA DE ANIMALES EN LA RESERVA:" << endl << endl;
-            
+            cout << "LISTAR ANIMALES:" << endl << endl;
             listar_animales();
             break;
 
@@ -337,84 +336,28 @@ void Sistema::procesar_opcion(int opcion_tomada)
             break;
 
         case BUSCAR_ANIMAL:
-            if(animales -> vacia())
-            {
-                cout << endl << "La reserva actualmente no tiene animales :(" << endl;
-                break;
-            }
-
-            cout << endl << "BUSCAR ANIMAL DE LA RESERVA:" << endl << endl;
-
-            pedir_nombre(nombre);
-            posicion = buscar_nombre(nombre);
-            if (posicion != NO_ENCONTRO)
-            {
-                mostrar_animal(animales -> consulta(posicion));
-            }
-            else
-            {
-                cout << endl << "No se pudo encontrar el nombre ingresado." << endl << endl;
-            }
+            buscar_animal();
             break;
 
         case CUIDAR_ANIMAL:
-            if(animales -> vacia())
-            {
-                cout << endl << "La reserva actualmente no tiene animales :(" << endl;
-                break;
-            }
-
-            cout << endl << "CUIDAR ANIMALES:" << endl << endl;
-
+            cout << endl << "CUIDAR ANIMAL:" << endl << endl;
             mostrar_submenu();
-            ingresar_opcion_submenu(opcion_submenu); 
-            procesar_opcion_submenu(opcion_submenu);
-            while (stoi(opcion_submenu) != REGRESAR_INICIO)
-            {
-                mostrar_submenu();
-                ingresar_opcion_submenu(opcion_submenu); 
-                procesar_opcion_submenu(opcion_submenu);
-            }
             break;
 
         case ADOPTAR_ANIMAL:
-            if(animales -> vacia())
-            {
-                cout << endl << "La reserva actualmente no tiene animales :(" << endl;
-                break;
-            }
-
             cout << endl << "ADOPTAR ANIMAL:" << endl << endl;
 
-            bool animales_validos[animales -> obtener_cantidad()];
-            posicion = 1;
-            
-            pedir_espacio(espacio);
-            listar_animales_espacio(espacio, posicion, animales_validos, animales_validados);
-            
-            if (animales_validados == 0)
-            {
-                cout << "La reserva no dispone de animales que puedan cumplir con el espacio solicitado." << endl << endl;
-            }
-            else
-            {
-                posicion_adopcion = pedir_opcion_adopcion(animales_validos); 
-                if (stoi(posicion_adopcion) == 0)
-                {
-                    cout << "Se ha cancelado la adopcion." << endl << endl;
-                } 
-                else
-                {
-                    animales -> baja(stoi(posicion_adopcion));
-                    cout << "Felicidades por su adopcion!" << endl << endl;
-                }
-            }
+            break;
+        
+        case CARGAR_COMBUSTIBLE:
+            cout << endl << "CARGAR_COMBUSTIBLE:" << endl << endl;
+
             break;
     }
     */
 }
-
-void Sistema::pasar_tiempo()
+/*
+(void Sistema::pasar_tiempo()
 {
     Animal* animal;
 
@@ -429,27 +372,37 @@ void Sistema::pasar_tiempo()
         animal -> aumentar_hambre();
     }
     animales -> iniciar();
+}*/
+
+void Sistema::limpiar_pantalla()
+{
+    #ifdef _WIN32
+            system("cls");
+    #else
+            system ("clear");
+    #endif
 }
 
 void Sistema::listar_animales()
 {
-    while (animales -> hay_siguiente())
-    { 
-        mostrar_animal(animales -> siguiente());
+    if(arbol_b -> arbol_vacio())
+    {
+        cout << endl << "La reserva actualmente no tiene animales :( " << endl << endl;
     }
-    animales -> iniciar();
+    else
+    {
+        arbol_b -> listar_creciente();
+    }
 }
 
-void Sistema::mostrar_animal(Animal* animal)
+void Sistema::buscar_animal()
 {
-    cout << "---------------------------------------------------" << endl << endl;
-    cout << "Nombre: " << animal -> obtener_nombre() << endl <<
-    "Edad: " << animal -> obtener_edad() << endl <<
-    "Tamanio: " << animal -> obtener_tamanio_texto() << endl <<
-    "Especie: " << animal -> obtener_especie_texto() << endl <<
-    "Personalidad: " << animal -> obtener_personalidad_texto() << endl <<
-    "Hambre: " << animal -> obtener_hambre() << endl <<
-    "Higiene: " << animal -> obtener_higiene() << endl << endl;
+    string nombre;
+    Animal* animal;
+
+    pedir_nombre(nombre);
+    animal = buscar_nombre(nombre);
+    mostrar_busqueda(animal);
 }
 
 void Sistema::pedir_nombre(string &nombre)
@@ -458,27 +411,26 @@ void Sistema::pedir_nombre(string &nombre)
     getline (cin >> ws, nombre);
 }
 
-int Sistema::buscar_nombre(string nombre)
+Animal* Sistema::buscar_nombre(string nombre)
 {
-    bool encontrado = false;
-    int posicion = NO_ENCONTRO, i = 1;
-    Animal* animal; 
-    
-    while (animales -> hay_siguiente() && !encontrado)
-    {
-        animal = animales -> siguiente();
+    Animal* animal;
 
-        if (nombre == animal -> obtener_nombre())
-        {
-            encontrado = true;
-            posicion = i;
-        }
-        i++;
+    animal = arbol_b -> buscar_clave(nombre);
+
+    return animal;
+}
+
+void Sistema::mostrar_busqueda(Animal* animal)
+{
+    if(animal == NULL)
+    {
+        cout << endl << "No se pudo encontrar el nombre en la reserva." << endl;
     }
-    
-    animales -> iniciar();
-    
-    return posicion;
+    else
+    {
+        cout << "Datos del animal: " << endl;
+        animal -> mostrar_animal();
+    }
 }
 
 bool Sistema::verificar_intentar_de_nuevo(int posicion, string nombre)
@@ -561,9 +513,10 @@ void Sistema::rescatar_animal(string nombre,char especie)
 {
     string tamanio, personalidad;
     int edad;
+    /*
     int posicion = buscar_nombre(nombre);
     verificar_intentar_de_nuevo(posicion, nombre);
-
+    */
     /*
     //LOS ANIMALES RECATADOS YA TIENEN SU ESPECIE INICIALIZADA
 
@@ -621,12 +574,10 @@ void Sistema::rescatar_animal(string nombre,char especie)
 void Sistema::mostrar_submenu()
 {
     cout << "[1] Elegir individualmente." << endl <<
-    "[2] Alimentar a todos." <<endl << 
-    "[3] Duchar a todos." <<endl <<
-    "[4] Regresar al inicio." << endl << endl;
+    "[2] Regresar al inicio." << endl << endl;
 }
 
-void Sistema::ingresar_opcion_submenu(string &opcion_submenu)
+/*void Sistema::ingresar_opcion_submenu(string &opcion_submenu)
 {
     cout << "Ingrese el numero de la opcion que desa ejecutar: ";
     getline(cin >> ws, opcion_submenu);
@@ -662,7 +613,8 @@ void Sistema::mostrar_opciones_individuales()
 {
     cout << "[1] Duchar." << endl <<
     "[2] Alimentar." << endl << 
-    "[3] Saltear animal." << endl << endl;
+    "[3] Saltear animal." << endl <<
+    "[4]volver al inicio." << endl << endl;
 }
 
 void Sistema::pedir_opciones_individuales(string &opcion_individual)
@@ -907,20 +859,25 @@ void Sistema::listar_animales_espacio(string espacio, int posicion , bool* anima
     animales_validados = contador_validos;
 
     animales -> iniciar();
+}*/
+
+void guardar_animal(Animal* animal, ofstream& archivo)
+{
+    archivo << 
+    animal -> obtener_nombre() << "," << 
+    animal -> obtener_edad()<< "," << 
+    animal -> obtener_tamanio_texto() << "," << 
+    animal -> obtener_especie_caracter() << "," << 
+    animal -> obtener_personalidad_texto() << 
+    endl;
 }
 
 void Sistema::guardar()
 {
-    Animal * animal;
     ofstream archivo (PATH_ANIMALES);
     if (archivo.is_open())
     {
-        for (int i = 1; i <= animales -> obtener_cantidad(); i++)
-        {
-            animal = animales -> consulta(i);
-            archivo << animal -> obtener_nombre() << "," << animal -> obtener_edad()<< "," << animal -> obtener_tamanio_texto() <<
-            "," << animal -> obtener_especie_caracter() << "," << animal -> obtener_personalidad_texto() << endl;
-        }        
+        arbol_b -> guardar_creciente(archivo, guardar_animal);      
     }
     else
     {
@@ -929,9 +886,10 @@ void Sistema::guardar()
     archivo.close();
 }
 
+
 Sistema::~Sistema()
 {
-    delete animales;
+    delete arbol_b;
     delete punteros_animales;
     delete vehiculo;
     delete grafo;

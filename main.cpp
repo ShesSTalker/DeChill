@@ -11,11 +11,27 @@ int main()
     //Semilla para generar numeros aleatorios
     
     srand((unsigned) time(NULL));
-    Sistema* sistema = new Sistema();
+    Menu *menu = new Menu;
+    Sistema *sistema = new Sistema;
 
-    sistema->cargar_mapa_grafo();
-    sistema->procesar_opcion(0);
+    int opcion;
+
+    sistema -> leer_animales();
+    menu -> bienvenida();
+    
+    do
+    {
+        menu -> mostrar_menu();
+        menu -> pedir_opcion();
+        opcion = menu -> obtener_opcion_tomada();
+        sistema -> limpiar_pantalla();
+        sistema -> procesar_opcion(opcion);
+    }
+    while (opcion != GUARDAR_Y_SALIR);
+
+    sistema -> guardar();
+    
+    delete menu;
     delete sistema;
-
     return 0;
 }
