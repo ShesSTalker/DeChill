@@ -209,8 +209,7 @@ void Sistema::procesar_movimiento(){
         cout<<"Encontraste un Perro!"<<endl;
 
         pedir_nombre(nombre);
-        rescatar_animal(nombre, PERRO_TEXTO);
-        cargar_animal(PERRO, nombre,  edad, tamanio, personalidad);
+        rescatar_animal(nombre, PERRO);
         break;
 
     case GATO:
@@ -218,8 +217,7 @@ void Sistema::procesar_movimiento(){
         cout<<"Encontraste un Gato!"<<endl;
 
         pedir_nombre(nombre);
-        rescatar_animal(nombre, GATO_TEXTO);
-        cargar_animal(GATO, nombre,  edad, tamanio, personalidad);     
+        rescatar_animal(nombre, GATO);     
         break;
 
     case CABALLO:
@@ -227,8 +225,8 @@ void Sistema::procesar_movimiento(){
         cout<<"Encontraste un Caballo!"<<endl;
 
         pedir_nombre(nombre);
-        rescatar_animal(nombre, CABALLO_TEXTO);
-        cargar_animal(CABALLO, nombre,  edad, tamanio, personalidad);    
+        rescatar_animal(nombre, CABALLO);
+        
         break;
 
     case ROEDOR:
@@ -236,8 +234,8 @@ void Sistema::procesar_movimiento(){
         cout<<"Encontraste un Roedor!"<<endl;
 
         pedir_nombre(nombre);
-        rescatar_animal(nombre, ROEDOR_TEXTO);
-        cargar_animal(ROEDOR, nombre,  edad, tamanio, personalidad);    
+        rescatar_animal(nombre, ROEDOR);
+    
         break;
 
     case CONEJO:
@@ -245,8 +243,8 @@ void Sistema::procesar_movimiento(){
         cout<<"Encontraste un Conejo!"<<endl;
 
         pedir_nombre(nombre);
-        rescatar_animal(nombre, CONEJO_TEXTO);
-        cargar_animal(CONEJO, nombre,  edad, tamanio, personalidad);    
+        rescatar_animal(nombre, CONEJO);
+    
         break;
 
     case ERIZO:
@@ -254,8 +252,7 @@ void Sistema::procesar_movimiento(){
         cout<<"Encontraste un Erizo!"<<endl;
 
         pedir_nombre(nombre);
-        rescatar_animal(nombre, ERIZO_TEXTO);
-        cargar_animal(ERIZO, nombre,  edad, tamanio, personalidad);   
+        rescatar_animal(nombre, ERIZO);   
         break;
 
     case LAGARTIJA:
@@ -263,8 +260,7 @@ void Sistema::procesar_movimiento(){
         cout<<"Encontraste una Lagartija!"<<endl;
         
         pedir_nombre(nombre);
-        rescatar_animal(nombre, LAGARTIJA_TEXTO);
-        cargar_animal(LAGARTIJA, nombre,  edad, tamanio, personalidad);  
+        rescatar_animal(nombre, LAGARTIJA);
         break;
 
     }
@@ -562,7 +558,7 @@ string Sistema::personalidad_animal_aleatoria (int numero)
     return personalidad;
 }
 
-void Sistema::rescatar_animal(string nombre,string especie)
+void Sistema::rescatar_animal(string nombre,char especie)
 {
     string edad, tamanio, personalidad;
 
@@ -616,11 +612,11 @@ void Sistema::rescatar_animal(string nombre,string especie)
 
     edad = rand() % DELIMITADOR_EDAD;
 
-    tamanio = tamanio_animal_aleatorio ((rand() % DELIMITADOR_TAMANIO) + 1);
+    tamanio = tamanio_animal_aleatorio ((rand() % DELIMITADOR_TAMANIO - 1) + 1);
 
-    personalidad = personalidad_animal_aleatoria ((rand() % DELIMITADOR_PERSONALIDAD) + 1);
+    personalidad = personalidad_animal_aleatoria ((rand() % DELIMITADOR_PERSONALIDAD - 1) + 1);
 
-    cargar_animal(especie[0], nombre, stoi(edad), tamanio[0], personalidad[0]);
+    cargar_animal(especie, nombre, stoi(edad), tamanio[0], personalidad[0]);
 }
 
 void Sistema::mostrar_submenu()

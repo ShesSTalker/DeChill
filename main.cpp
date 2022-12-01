@@ -2,13 +2,14 @@
 #include <cstdlib>
 #include "Menu.h"
 #include "Sistema.h"
-#include "time.h"
+#include <ctime>
 
 using namespace std;
 
 int main()
 {
     //Semilla para generar numeros aleatorios
+    
     srand((unsigned) time(NULL));
     Sistema* sistema = new Sistema();
 

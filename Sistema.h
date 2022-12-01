@@ -114,7 +114,7 @@ class Sistema
 
         //PRE: el nombre del animal no debe estar en la lista.
         //POS: pide el resto de datos del animal para rescatarlo y agregarlo a a la lista de animales.
-        void rescatar_animal(string nombre, string especie);
+        void rescatar_animal(string nombre, char especie);
 
         //PRE: -
         //POS: imprime por pantalla las opciones del submenú.
