@@ -50,7 +50,7 @@ void Auto::cargar_combustible(int combustible_cargar){
 
 void Auto::restar_combustible(int combustible_restar){
     
-    combustible = -combustible_restar;
+    combustible -= combustible_restar;
 
     if(combustible < MIN_COMBUSTIBLE){
         

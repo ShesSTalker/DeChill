@@ -217,11 +217,15 @@ void Sistema::procesar_movimiento(){
     costo_combustible= grafo->costo_camino( mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].obtener_nombre(), mapa->obtener_tablero()[fila][columna].obtener_nombre());
     if (vehiculo->obtener_combustible() < costo_combustible){
 
-        cout<<"Combustible insuficiente ("<<vehiculo->obtener_combustible()<<")"<<endl;
+        cout<<"Combustible insuficiente "<<endl;
+        cout<< "Combustible actual: "<<vehiculo->obtener_combustible()<<endl;
+        cout<<"Combustible necesario: "<< costo_combustible <<endl;
 
     }else{
 
         vehiculo->restar_combustible(costo_combustible);
+        cout<< "Combustible actual: "<<vehiculo->obtener_combustible()<<endl;
+        
         mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(VACIO);
         
         switch (mapa->obtener_tablero()[fila][columna].obtener_contenido())
