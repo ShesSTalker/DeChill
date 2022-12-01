@@ -36,8 +36,6 @@ class Menu
         //PRE: -
         //POS: devuelve la opción tomada por el usuario.
         int obtener_opcion_tomada();
-
-    private:
     
         //PRE: -
         //POS: valida que el string recibido conste completamente de numeros, devolviendo true en caso afirmativo y false en caso contrario.

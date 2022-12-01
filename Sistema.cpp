@@ -210,9 +210,8 @@ void Sistema::pedir_movimiento(int &fila , int &columna){
     columna--;
 }
 void Sistema::procesar_movimiento(){
-    int fila , columna, costo_combustible, combustible_cargar;
+    int fila , columna, costo_combustible;
     string nombre, origen , destino;
-    char opcion;
 
     pedir_movimiento(fila , columna);
 
@@ -227,19 +226,6 @@ void Sistema::procesar_movimiento(){
         cout<<"Combustible insuficiente "<<endl;
         cout<< "Combustible actual: "<<vehiculo->obtener_combustible()<<endl;
         cout<<"Combustible necesario: "<< costo_combustible <<endl;
-
-        cout <<"Desea cargar combustible? (S/N)"<<endl;
-        cin>>opcion;
-        
-        if(opcion == SI){
-            do{
-            cout<<"Ingrese la cantidad de combustible que desea cargar: "<<endl;
-            cin>>combustible_cargar;
-                
-            }while(combustible_cargar >= 100 || combustible_cargar < 1);
-
-            vehiculo->cargar_combustible(combustible_cargar);
-        }
 
     }else{
 
@@ -317,7 +303,7 @@ void Sistema::procesar_movimiento(){
 }
 void Sistema::procesar_opcion(int opcion_tomada)
 {   
-    
+    int combustible_cargar;
     string nombre, espacio, opcion_submenu, posicion_adopcion;
 
     //pasar_tiempo();
@@ -352,9 +338,23 @@ void Sistema::procesar_opcion(int opcion_tomada)
             break;
         
         case CARGAR_COMBUSTIBLE:
+
             cout << endl << "CARGAR_COMBUSTIBLE:" << endl << endl;
 
+            do{
+                cout<<"Ingrese la cantidad de combustible que desea cargar: "<<endl;
+                cin>>combustible_cargar;
+                
+            }while(combustible_cargar >= 100 || combustible_cargar < 1);
+
+            vehiculo->cargar_combustible(combustible_cargar);
+
             break;
+        case GUARDAR_Y_SALIR:
+
+            guardar();
+
+            break;    
     }
     
 }
