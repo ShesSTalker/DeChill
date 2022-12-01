@@ -46,6 +46,10 @@ class ArbolB
         //POS: lista los animales almacenados en el Arbol B de manera creciente segun la clave (nombre).
         void listar_creciente();
 
+        //PRE: el archivo está abierto.
+        //POS: envia la información de todos los animales de la reserva al archivo indicado utilizando la funcion de guardado dada.
+        void guardar_creciente(ofstream& archivo, void (*guardado)(Tipo* dato, ofstream& archivo));
+
         //Destructor. 
         ~ArbolB();
     
@@ -63,7 +67,33 @@ class ArbolB
         void dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nodo, string &pivote, Tipo* &pivote_dato, Tipo* nuevo_dato, int posicion);
 
         void mostrar_en_orden(Nodo<Tipo>* nodo_actual, int nivel);
+
+        void guardar_creciente(Nodo<Tipo>* nodo_actual, ofstream& archivo, void (*guardado)(Tipo* dato, ofstream& archivo));
 };
+
+template < typename Tipo >
+void ArbolB<Tipo>::guardar_creciente(ofstream& archivo, void (*guardado)(Tipo* dato, ofstream& archivo))
+{
+    guardar_creciente(raiz, archivo, guardado);
+}
+
+template < typename Tipo >
+void ArbolB<Tipo>::guardar_creciente(Nodo<Tipo>* nodo_actual, ofstream& archivo, void (*guardado)(Tipo* dato, ofstream& archivo))
+{
+    Tipo* dato_actual;
+
+    if(nodo_actual != NULL)
+    {
+        guardar_creciente(nodo_actual -> obtener_hijo(PRIMER_HIJO), archivo, guardado);
+
+        for(int i = 0; i < nodo_actual -> obtener_cantidad_claves_usadas(); i++)
+        {   
+            dato_actual = nodo_actual -> obtener_dato(i);
+            guardado(dato_actual, archivo);
+            guardar_creciente(nodo_actual -> obtener_hijo(i + 1), archivo, guardado);
+        }
+    }
+}
 
 template < typename Tipo >
 ArbolB<Tipo>::ArbolB(int orden)
@@ -316,7 +346,7 @@ void ArbolB<Tipo>::dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nodo, stri
     nodo = nuevo_nodo;
 }
 
-template <typename Tipo>
+template <typename Tipo> // CAMBIAR ESTO, EL TEMPLATE NO DEBERIA REFERENCIAR A ANIMAL
 void ArbolB<Tipo>::mostrar_en_orden(Nodo<Tipo>* nodo_actual, int nivel)
 {
     Animal* animal;
