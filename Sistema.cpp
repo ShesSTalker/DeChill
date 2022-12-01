@@ -255,6 +255,22 @@ void Sistema::limpiar_pantalla()
     #endif
 }
 
+void mostrar_animal(Animal* animal, int &iteracion)
+{
+    if(animal -> obtener_estado_animal() == NO_ADOPTADO)
+    {
+        cout <<
+        ++iteracion << ") " << animal -> obtener_nombre() << endl <<
+        "Edad: " << animal -> obtener_edad() << endl <<
+        "Tamanio: " << animal -> obtener_tamanio_texto() << endl <<
+        "Especie: " << animal -> obtener_especie_texto() << endl <<
+        "Personalidad: " << animal -> obtener_personalidad_texto() << endl <<
+        "Hambre: " << animal -> obtener_hambre() << endl <<
+        "Higiene: " << animal -> obtener_higiene() << endl << endl <<
+        "---------------------------------------------------" << endl << endl;
+    }
+}
+
 void Sistema::listar_animales()
 {
     if(arbol_b -> arbol_vacio())
@@ -263,7 +279,7 @@ void Sistema::listar_animales()
     }
     else
     {
-        arbol_b -> listar_creciente();
+        arbol_b -> listar_creciente(mostrar_animal);
     }
 }
 
