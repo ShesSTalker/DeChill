@@ -184,32 +184,38 @@ void ArbolB<Tipo>::listar_creciente()
 template < typename Tipo >
 bool ArbolB<Tipo>::buscar_nodo_actual(Nodo<Tipo>* nodo_actual, string clave, int &posicion)
 {
+    cout << "buscar_nodo_actual()" << endl;
     int i = nodo_actual -> obtener_cantidad_claves_usadas();
     bool encontrado = false;
 
     if(clave < nodo_actual -> obtener_clave(PRIMERA_CLAVE))
-    {       
+    {   
+        cout << "Primer if" << endl;    
         posicion = 0;
     }
     else if(clave > nodo_actual -> obtener_clave(i - 1))
     {
+        cout << "Primer else" << endl;
         posicion = i;
     }
     else
     {
+        cout << "Segundo else" << endl;
         i -= 1;
-
-        while(clave <= nodo_actual -> obtener_clave(i) && i >= 0 && !encontrado)
+        cout << "Entrando al while loop" << endl;
+        while(encontrado == false && clave <= nodo_actual -> obtener_clave(i) && i >= 0)
         {
+            cout << "Iteracion " << i << " del while loop" << endl;
             if (clave == nodo_actual -> obtener_clave(i))
             {
+                cout << "Encontrado!" << endl;
                 encontrado = true;
             }
             i--;
         }
         posicion = i + 1;
     }
-    
+    cout << "Posicion: " << posicion << endl << endl;
     return encontrado;
 }
 
