@@ -106,6 +106,12 @@ class Sistema
         //POS: si el usuario ingresa que quiere intentar con un nombre diferente para un animal nuevo en la reserva, devuelve true. Caso contrario devuelve false.  
         bool verificar_intentar_de_nuevo(int posicion, string nombre);
 
+        //PRE: -
+        //POS: devuelve un tamanio de animal aleatorio
+        string tamanio_animal_aleatorio(int numero);
+
+        string personalidad_animal_aleatoria (int numero);
+
         //PRE: el nombre del animal no debe estar en la lista.
         //POS: pide el resto de datos del animal para rescatarlo y agregarlo a a la lista de animales.
         void rescatar_animal(string nombre, string especie);

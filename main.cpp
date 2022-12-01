@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include "Menu.h"
 #include "Sistema.h"
+#include "time.h"
 
 using namespace std;
 

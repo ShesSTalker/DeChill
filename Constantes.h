@@ -10,10 +10,12 @@ const string
 PATH_ANIMALES = "animales.csv",
 PATH_MAPA = "mapa.csv";
 
+
 // Constantes Grafos
 const int INFINITO = 100000;
 
-//Constantes Mapa
+
+// Constantes Mapa
 const string 
 MONTANIA= "Montania",
 PRECIPICIO= "Precipicio",
@@ -29,6 +31,7 @@ FILA_INICIAL_AUTO = 0,
 COLUMNA_INICIAL_AUTO = 0,
 ANIMALES_MAPA = 5;
 
+
 // Constantes pasar tiempo
 const int
 HAMBRE_INICIAL = 0,
@@ -38,8 +41,25 @@ RESTA_HIGIENE = 10,
 HAMBRE_MAX = 100,
 HIGIENE_MIN = 0;
 
+
+// Constante delimitador edad
+
+const int DELIMITADOR_EDAD = 101;
+
+
+// Constante delimitador tamanio
+
+const int DELIMITADOR_TAMANIO = 6;
+
+
+// Constante delimitador personalidad
+
+const int DELIMITADOR_PERSONALIDAD = 5;
+
+
 //Constante de elemento no encontrado
 const int NO_ENCONTRO = -1;
+
 
 // Constantes tamanio (char)
 const char
@@ -49,6 +69,7 @@ MEDIANO = 'm',
 GRANDE = 'g',
 GIGANTE = 't';
 
+
 // Constantes tamanio (string)
 const string
 DIMINUTO_TEXTO = "diminuto",
@@ -57,12 +78,14 @@ MEDIANO_TEXTO = "mediano",
 GRANDE_TEXTO = "grande",
 GIGANTE_TEXTO = "gigante";
 
+
 // Constantes delimitadores tamanio 
 const int
 DELIMITADOR_DIMINUTO = 2,
 DELIMITADOR_PEQUENIO_MEDIANO = 10,
 DELIMITADOR_GRANDE = 20,
 DELIMITADOR_GIGANTE = 50;
+
 
 // Constantes personalidad (int)
 const int
@@ -71,12 +94,14 @@ JUGUETON = 'j',
 SOCIABLE = 's',
 TRAVIESO = 't';
 
+
 // Constantes personalidad (string)
 const string
 DORMILON_TEXTO = "dormilon",
 JUGUETON_TEXTO = "jugueton",
 SOCIABLE_TEXTO = "sociable",
 TRAVIESO_TEXTO = "travieso";
+
 
 // Constantes especie
 const int
@@ -91,6 +116,7 @@ CONEJO = 'O',
 ERIZO = 'E',
 LAGARTIJA = 'L';
 
+
 // Constantes especie (string)
 const string
 PERRO_TEXTO = "perro",
@@ -100,6 +126,7 @@ ROEDOR_TEXTO = "roedor",
 CONEJO_TEXTO = "conejo",
 ERIZO_TEXTO = "erizo",
 LAGARTIJA_TEXTO = "lagartija";
+
 
 // Constantes comida (string)
 const string
@@ -112,14 +139,17 @@ COMIDA_ERIZO = "Insectos",
 COMIDA_LAGARTIJA = "Insectos";
 
 
+
 // Constantes combustible Auto
 
 const int
 MAX_COMBUSTIBBLE = 100;
+
 // Constantes cargar combustible Auto
 const int
 CARGAR_COMBUSTIBLE_POR_ACCION = 5,
 CARGAR_COMBUSTIBLE_COMPLETO =100;
+
 
 // Constantes restar combustible Auto
 const int
@@ -128,12 +158,14 @@ RESTAR_COMBUSTIBLE_PRECIPICIO = 40,
 RESTAR_COMBUSTIBLE_CAMINO = 1,
 RESTAR_COMBUSTIBLE_TIERRA = 2;
 
+
 // Constantes estado animal
 enum estado_animal {
     ADOPTADO,
     NO_ADOPTADO,
     FUGADO,
 };
+
 
 // Constantes menues
 enum opciones_menu_principal {
@@ -160,6 +192,7 @@ enum opciones_individuales {
     ALIMENTAR,
     SALTEAR_ANIMAL,
 };
+
 
 // Constantes Arbol B
 enum arbol_b{

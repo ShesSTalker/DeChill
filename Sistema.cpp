@@ -135,8 +135,8 @@ void Sistema::cargar_caminos(){
 }
 
 void Sistema::cargar_contenido_mapa(){
-    mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(AUTO);
     int fila_animal=0, columna_animal=0, animal_random;
+    mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(AUTO);
 
     for (int i = 0 ; i < ANIMALES_MAPA; i++){
         animal_random =  rand() % CANTIDAD_ESPECIES;
@@ -152,24 +152,31 @@ void Sistema::cargar_contenido_mapa(){
         case 0:
             mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(PERRO);
             break;
+
         case 1:
             mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(GATO);
             break;
+
         case 2:
             mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(CABALLO);
             break;
+
         case 3:
             mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(ROEDOR);
             break;
+
         case 4:
             mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(CONEJO);
             break;
+
         case 5:
             mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(ERIZO);
             break;
+
         case 6:
             mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(LAGARTIJA);
             break;
+
         }
     }
 }
@@ -190,6 +197,7 @@ void Sistema::procesar_movimiento(){
     int fila , columna, edad;
     string nombre;
     char tamanio, personalidad;
+    
     pedir_movimiento(fila , columna);
 
     mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(VACIO);
@@ -197,40 +205,68 @@ void Sistema::procesar_movimiento(){
     switch (mapa->obtener_tablero()[fila][columna].obtener_contenido())
     {
     case PERRO:
+        
         cout<<"Encontraste un Perro!"<<endl;
-        //pedir nombre y inicializar , edad , tamanio y personalidades
+
+        pedir_nombre(nombre);
+        rescatar_animal(nombre, PERRO_TEXTO);
         cargar_animal(PERRO, nombre,  edad, tamanio, personalidad);
         break;
+
     case GATO:
+        
         cout<<"Encontraste un Gato!"<<endl;
-        //pedir nombre y inicializar , edad , tamanio y personalidades
+
+        pedir_nombre(nombre);
+        rescatar_animal(nombre, GATO_TEXTO);
         cargar_animal(GATO, nombre,  edad, tamanio, personalidad);     
         break;
+
     case CABALLO:
+        
         cout<<"Encontraste un Caballo!"<<endl;
-        //pedir nombre y inicializar , edad , tamanio y personalidades
+
+        pedir_nombre(nombre);
+        rescatar_animal(nombre, CABALLO_TEXTO);
         cargar_animal(CABALLO, nombre,  edad, tamanio, personalidad);    
         break;
+
     case ROEDOR:
+        
         cout<<"Encontraste un Roedor!"<<endl;
-        //pedir nombre y inicializar , edad , tamanio y personalidades
+
+        pedir_nombre(nombre);
+        rescatar_animal(nombre, ROEDOR_TEXTO);
         cargar_animal(ROEDOR, nombre,  edad, tamanio, personalidad);    
         break;
+
     case CONEJO:
+        
         cout<<"Encontraste un Conejo!"<<endl;
-        //pedir nombre y inicializar , edad , tamanio y personalidades
+
+        pedir_nombre(nombre);
+        rescatar_animal(nombre, CONEJO_TEXTO);
         cargar_animal(CONEJO, nombre,  edad, tamanio, personalidad);    
         break;
+
     case ERIZO:
+        
         cout<<"Encontraste un Erizo!"<<endl;
-        //pedir nombre y inicializar , edad , tamanio y personalidades
+
+        pedir_nombre(nombre);
+        rescatar_animal(nombre, ERIZO_TEXTO);
         cargar_animal(ERIZO, nombre,  edad, tamanio, personalidad);   
         break;
+
     case LAGARTIJA:
+        
         cout<<"Encontraste una Lagartija!"<<endl;
-        //pedir nombre y inicializar , edad , tamanio y personalidades
-        cargar_animal(LAGARTIJA, nombre,  edad, tamanio, personalidad);    
+        
+        pedir_nombre(nombre);
+        rescatar_animal(nombre, LAGARTIJA_TEXTO);
+        cargar_animal(LAGARTIJA, nombre,  edad, tamanio, personalidad);  
         break;
+
     }
     vehiculo->cambiar_posicion(fila,columna);
     mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(AUTO);
@@ -471,9 +507,68 @@ bool Sistema::verificar_intentar_de_nuevo(int posicion, string nombre)
     return false;
 }
 
+string Sistema::tamanio_animal_aleatorio (int numero)
+{
+    string tamanio;
+    
+    switch(numero)
+    {
+    case 1: 
+        tamanio = DIMINUTO_TEXTO;
+        break;
+
+    case 2:
+        tamanio = PEQUENIO_TEXTO;
+        break;
+
+    case 3:
+        tamanio = MEDIANO_TEXTO;
+        break;
+
+    case 4:
+        tamanio = GRANDE_TEXTO;
+        break;
+
+    case 5:
+        tamanio = GIGANTE_TEXTO;
+        break;
+    }
+    return tamanio;
+}
+
+string Sistema::personalidad_animal_aleatoria (int numero)
+{
+    string personalidad;
+    
+    switch(numero)
+    {
+    case 1: 
+        personalidad = DORMILON_TEXTO;
+        break;
+
+    case 2:
+        personalidad = JUGUETON_TEXTO;
+        break;
+
+    case 3:
+        personalidad = SOCIABLE_TEXTO;
+        break;
+
+    case 4:
+        personalidad = TRAVIESO_TEXTO;
+        break;
+
+    }
+    return personalidad;
+}
+
 void Sistema::rescatar_animal(string nombre,string especie)
 {
     string edad, tamanio, personalidad;
+
+    int posicion = buscar_nombre(nombre);
+    verificar_intentar_de_nuevo(posicion, nombre);
+
     /*
     //LOS ANIMALES RECATADOS YA TIENEN SU ESPECIE INICIALIZADA
 
@@ -487,7 +582,6 @@ void Sistema::rescatar_animal(string nombre,string especie)
         endl << "- E (Erizo)" << endl << "- L (Lagartija)" << endl << "Especie invalida, Ingrese el caracter la especie del animal: ";
         getline(cin >> ws, especie);
     }
-    */
     cout << endl << "Ingrese la edad del animal: ";
     getline(cin >> ws, edad);
 
@@ -518,6 +612,13 @@ void Sistema::rescatar_animal(string nombre,string especie)
         "Personalidad invalida, ingrese el caracter de la personalidad del animal: ";
         getline(cin >> ws, personalidad);
     }
+    */
+
+    edad = rand() % DELIMITADOR_EDAD;
+
+    tamanio = tamanio_animal_aleatorio (rand() % DELIMITADOR_TAMANIO);
+
+    personalidad = personalidad_animal_aleatoria (rand() % DELIMITADOR_PERSONALIDAD);
 
     cargar_animal(especie[0], nombre, stoi(edad), tamanio[0], personalidad[0]);
 }
