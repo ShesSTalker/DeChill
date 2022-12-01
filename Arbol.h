@@ -39,8 +39,8 @@ class ArbolB
         void insertar(string nueva_clave, Tipo* nuevo_dato);
 
         //PRE: - 
-        //POS: Busca el nombre del animal que buscamos mediante la clave (nombre) y nos devuelve el nodo y la posicion en la que se encuentra.
-        Nodo<Tipo>* buscar(string clave, int &posicion);
+        //POS: Busca la clave y nos devuelve el dato correspondiente a la clave si lo encuentra y NULL en caso contrario.
+        Tipo* buscar_clave(string clave);
 
         //PRE: -
         //POS: lista los animales almacenados en el Arbol B de manera creciente segun la clave (nombre).
@@ -97,15 +97,27 @@ int ArbolB<Tipo>::obtener_orden()
 }
 
 template < typename Tipo >
-Nodo<Tipo>* ArbolB<Tipo>::buscar(string clave, int &posicion)
+Tipo* ArbolB<Tipo>::buscar_clave(string clave)
 {
-    return buscar(raiz, clave, posicion);
+    Nodo<Tipo>* nodo;
+    int posicion;
+    
+    nodo = buscar(obtener_raiz(), clave, posicion);
+
+    if(nodo == NULL)
+    {
+        return NULL;
+    }
+    else
+    {
+        return nodo -> obtener_dato(posicion);
+    }
 }
 
 template < typename Tipo >
 void ArbolB<Tipo>::insertar(string nueva_clave, Tipo* nuevo_dato)
 {
-    raiz = insertar(raiz, nueva_clave, nuevo_dato);
+    raiz = insertar(obtener_raiz(), nueva_clave, nuevo_dato);
 }
 
 template < typename Tipo > 
@@ -155,7 +167,6 @@ Nodo<Tipo>* ArbolB<Tipo>::buscar(Nodo<Tipo>* nodo_actual, string clave, int &pos
     else
     {
         encontrado = buscar_nodo_actual(nodo_actual, clave, posicion);
-        
         if (encontrado)
         {
             return nodo_actual;
@@ -191,7 +202,7 @@ bool ArbolB<Tipo>::buscar_nodo_actual(Nodo<Tipo>* nodo_actual, string clave, int
     {
         i -= 1;
 
-        while(clave < nodo_actual -> obtener_clave(i) && i > 0 && !encontrado)
+        while(clave <= nodo_actual -> obtener_clave(i) && i >= 0 && !encontrado)
         {
             if (clave == nodo_actual -> obtener_clave(i))
             {

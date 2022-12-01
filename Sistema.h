@@ -76,16 +76,16 @@ class Sistema
         void pasar_tiempo();
 
         //PRE: -
-        //POS: imprime por pantalla todos los animales de la lista.
-        void listar_animales(); 
+        //POS: imprime por pantalla los datos del animal si el nombre fue encontrado en la reserva o un mensaje de error en caso contrario.
+        void mostrar_busqueda(Animal* animal);
 
         //PRE: -
         //POS: le pide al usario que ingrese el nombre del animal rescatado.
         void pedir_nombre(string &nombre);
 
         //PRE: - 
-        //POS: devuelve la posicion del animal en la lista si el nombre existe en la lista y -1 si no existe.      
-        int buscar_nombre(string nombre);
+        //POS: devuelve el animal si se encuentra en el arbol y NULL en caso contrario      
+        Animal* buscar_nombre(string nombre);
 
         //PRE: el nombre ingresado para un animal nuevo ya estaba en la reserva.
         //POS: si el usuario ingresa que quiere intentar con un nombre diferente para un animal nuevo en la reserva, devuelve true. Caso contrario devuelve false.  

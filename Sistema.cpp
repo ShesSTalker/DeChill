@@ -174,6 +174,8 @@ bool Sistema::dentro_de_rango(int fila, int columna){
 
 void Sistema::procesar_opcion(int opcion_tomada)
 {   
+    string nombre;
+    Animal* animal;
     /*cargar_caminos();
     grafo->usar_floyd();
     grafo->mostrar_grafo();
@@ -205,7 +207,9 @@ void Sistema::procesar_opcion(int opcion_tomada)
 
         case BUSCAR_ANIMAL:
             cout << endl << "BUSCAR ANIMAL:" << endl << endl;
-
+            pedir_nombre(nombre);
+            animal = buscar_nombre(nombre);
+            mostrar_busqueda(animal);
             break;
 
         case CUIDAR_ANIMAL:
@@ -251,13 +255,17 @@ void Sistema::limpiar_pantalla()
     #endif
 }
 
-/*void Sistema::listar_animales()
+void Sistema::mostrar_busqueda(Animal* animal)
 {
-    while (animales -> hay_siguiente())
-    { 
-        mostrar_animal(animales -> siguiente());
+    if(animal == NULL)
+    {
+        cout << endl << "No se pudo encontrar el nombre en la reserva." << endl;
     }
-    animales -> iniciar();
+    else
+    {
+        cout << "Datos del animal: " << endl;
+        animal -> mostrar_animal();
+    }
 }
 
 void Sistema::pedir_nombre(string &nombre)
@@ -266,30 +274,16 @@ void Sistema::pedir_nombre(string &nombre)
     getline (cin >> ws, nombre);
 }
 
-int Sistema::buscar_nombre(string nombre)
+Animal* Sistema::buscar_nombre(string nombre)
 {
-    bool encontrado = false;
-    int posicion = NO_ENCONTRO, i = 1;
-    Animal* animal; 
-    
-    while (animales -> hay_siguiente() && !encontrado)
-    {
-        animal = animales -> siguiente();
+    Animal* animal;
 
-        if (nombre == animal -> obtener_nombre())
-        {
-            encontrado = true;
-            posicion = i;
-        }
-        i++;
-    }
-    
-    animales -> iniciar();
-    
-    return posicion;
+    animal = arbol_b -> buscar_clave(nombre);
+
+    return animal;
 }
 
-bool Sistema::verificar_intentar_de_nuevo(int posicion, string nombre)
+/*bool Sistema::verificar_intentar_de_nuevo(int posicion, string nombre)
 {
     string decision;
 
