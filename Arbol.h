@@ -218,7 +218,7 @@ bool ArbolB<Tipo>::buscar_nodo_actual(Nodo<Tipo>* nodo_actual, string clave, int
     bool encontrado = false;
 
     if(clave < nodo_actual -> obtener_clave(PRIMERA_CLAVE))
-    {     
+    {       
         posicion = 0;
     }
     else if(clave > nodo_actual -> obtener_clave(i - 1))
@@ -238,7 +238,6 @@ bool ArbolB<Tipo>::buscar_nodo_actual(Nodo<Tipo>* nodo_actual, string clave, int
         }
         posicion = i + 1;
     }
-    
     return encontrado;
 }
 

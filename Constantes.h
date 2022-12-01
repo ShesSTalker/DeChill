@@ -143,8 +143,6 @@ const int MAX_OPCIONES_MENU_PRINCIPAL= 7;
 
 enum opciones_submenu {
     ELEGIR_INDIVIDUALMENTE = 1,
-    ALIMENTAR_A_TODOS,
-    DUCHAR_A_TODOS,
     REGRESAR_INICIO,
 };
 
@@ -152,11 +150,13 @@ enum opciones_individuales {
     DUCHAR = 1,
     ALIMENTAR,
     SALTEAR_ANIMAL,
+    VOLVER_INICIO,
 };
 
 // Constantes Arbol B
 const int TRES_VIAS = 3;
 
+// Constantes nodo de Arbol B
 const int PRIMERA_CLAVE = 0;
 
 const int PRIMER_HIJO = 0,
