@@ -119,6 +119,10 @@ class Sistema
         //POS: realiza la opcion del submenú tomada por el usuario.
         void procesar_opcion_submenu(string opcion_submenu);
 
+        //PRE: -
+        //POS: llama a los metodos correspondientes a elegir individualmente.
+        void elegir_individualmente();
+
         //PRE: - 
         //POS: imprime por pantalla las opciones individuales para cada animal de la reserva.
         void mostrar_opciones_individuales();
