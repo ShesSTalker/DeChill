@@ -431,7 +431,7 @@ void Sistema::procesar_opcion_submenu(string opcion_submenu)
     switch(stoi(opcion_submenu))
     {
         case ELEGIR_INDIVIDUALMENTE:
-            eleccion_individual();
+            //eleccion_individual();
             break;
     }
 }
@@ -542,7 +542,7 @@ void Sistema::pedir_espacio(string &espacio)
         getline(cin >> ws, espacio);
     }
 }
-
+*/
 bool Sistema::cadena_numeros_valida(string numeros)
 {
     int i = 0;
@@ -559,7 +559,7 @@ bool Sistema::cadena_numeros_valida(string numeros)
     } 
     return valido;
 }
-
+/*
 void Sistema::mostrar_animal_espacio(Animal* animal, int posicion)
 {
     cout << posicion << ") " << "Nombre: " << animal -> obtener_nombre() << endl <<
