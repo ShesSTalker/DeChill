@@ -5,7 +5,6 @@ using namespace std;
 
 Sistema::Sistema()
 {
-    //animales = new Lista<Animal*>;
     punteros_animales = new Vector<Animal*>;
     grafo= new Grafo();
     menu = new Menu();
@@ -210,6 +209,7 @@ void Sistema::pedir_movimiento(int &fila , int &columna){
     columna--;
 }
 void Sistema::procesar_movimiento(){
+
     int fila , columna, costo_combustible;
     string nombre, origen , destino;
 
@@ -259,7 +259,6 @@ void Sistema::procesar_movimiento(){
 
             pedir_nombre(nombre);
             rescatar_animal(nombre, CABALLO);
-            
             break;
 
         case ROEDOR:
@@ -268,7 +267,6 @@ void Sistema::procesar_movimiento(){
 
             pedir_nombre(nombre);
             rescatar_animal(nombre, ROEDOR);
-        
             break;
 
         case CONEJO:
@@ -277,7 +275,6 @@ void Sistema::procesar_movimiento(){
 
             pedir_nombre(nombre);
             rescatar_animal(nombre, CONEJO);
-        
             break;
 
         case ERIZO:
