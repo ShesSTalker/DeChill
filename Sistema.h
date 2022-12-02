@@ -40,6 +40,10 @@ class Sistema
         //POS: devuelve la cantidad de animales que se han fugado de la reserva.
         int obtener_animales_fugados();
 
+        //PRE: cantidad debe ser menor a la cantidad maxima de fugados en la reserva.
+        //POS: establece la cantidad de fugados como el parametro pasado.
+        void establecer_animales_fugados(int cantidad);
+
         //PRE: el archivo debe estar bien formado
         //POS: lee los datos del archivo PATH_ANIMALES de la reserva.
         void leer_animales();
@@ -73,6 +77,14 @@ class Sistema
         void procesar_opcion_individual (int opcion_individual, Animal* animal);
 
         //PRE: -
+        //POS: manda a recorrer el arbol b para aumentar el hambre y reducir la higiene del animal. En el caso de que se deba clausurar la reserva, devuelve false.
+        bool pasar_tiempo();
+
+        //PRE: la cantidad de fugados se pasó del máximo admitido.
+        //POS: imprime mensajes informando al usuario de la clausura :(
+        void clausurar();
+
+        //PRE: -
         //POS: libera la memoria asociada con este objeto.
         ~Sistema();
 
@@ -101,10 +113,6 @@ class Sistema
         //PRE: -
         //POS: devuelve verdadero si esta dentro del rango del mapa y falso en caso contrario.
         bool dentro_de_rango(int fila, int columna);
-
-        //PRE: -
-        //POS: manda a recorrer el arbol b para aumentar el hambre y reducir la higiene del animal.
-        void pasar_tiempo();
 
         //PRE: -
         //POS: lista los animales del la reserva.

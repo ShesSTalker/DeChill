@@ -5,18 +5,15 @@
 
 using namespace std;
 
-// Constantes ArbolB
-const int GRADO = 3;
+const int CANTIDAD_MAXIMA_FUGADOS = 3;
 
 // Constantes leer datos
 const string 
 PATH_ANIMALES = "animales.csv",
 PATH_MAPA = "mapa.csv";
 
-
 // Constantes Grafos
 const int INFINITO = 100000;
-
 
 // Constantes Mapa
 const string 
@@ -178,6 +175,7 @@ enum opciones_individuales {
 };
 
 // Constantes Arbol B
+const int GRADO = 3;
 const int TRES_VIAS = 3;
 
 // Constantes nodo de Arbol B

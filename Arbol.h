@@ -50,8 +50,12 @@ class ArbolB
         void listar_creciente(void (*listado)(Tipo* dato, int &iteracion));
 
         //PRE: -
-        //POS: llama por cada dato recorrido de manera creciente a la funcion recorrido_pasar_tiempo.
-        void recorrer_creciente(void (*recorrido_pasar_tiempo)(Tipo* dato));
+        //POS: llama por cada dato recorrido de manera creciente a la funcion recorrido.
+        void recorrer_creciente(void (*recorrido)(Tipo* dato));
+
+        //PRE: -
+        //POS: llama por cada dato recorrido de manera creciente a la funcion recorrido_contando, guardando informacion en un contador.
+        void recorrer_creciente_contando(int &contador, void (*recorrido_contando)(Tipo* dato, int &contador));
 
         //PRE: el archivo está abierto.
         //POS: envia la información de todos los animales de la reserva al archivo indicado utilizando la funcion de guardado dada.
@@ -79,7 +83,9 @@ class ArbolB
 
         void listar_creciente(Nodo<Tipo>* nodo_actual, int &iteracion, void (*listado)(Tipo* dato, int &iteracion));
 
-        void pasar_tiempo(Nodo<Tipo>* nodo_actual, void (*recorrido_pasar_tiempo)(Tipo* dato));
+        void pasar_tiempo(Nodo<Tipo>* nodo_actual, void (*recorrido)(Tipo* dato));
+
+        void recorrer_creciente_contando(Nodo<Tipo>* nodo_actual, int &contador, void (*recorrido_contando)(Tipo* dato, int &contador));
 
         void guardar_creciente(Nodo<Tipo>* nodo_actual, ofstream& archivo, void (*guardado)(Tipo* dato, ofstream& archivo));
 
@@ -149,9 +155,15 @@ void ArbolB<Tipo>::listar_creciente(void (*listado)(Tipo* dato, int &iteracion))
 }
 
 template < typename Tipo >
-void ArbolB<Tipo>::recorrer_creciente(void (*recorrido_pasar_tiempo)(Tipo* dato))
+void ArbolB<Tipo>::recorrer_creciente(void (*recorrido)(Tipo* dato))
 {
-    pasar_tiempo(obtener_raiz(), recorrido_pasar_tiempo);
+    pasar_tiempo(obtener_raiz(), recorrido);
+}
+
+template < typename Tipo >
+void ArbolB<Tipo>::recorrer_creciente_contando(int &contador, void (*recorrido_contando)(Tipo* dato, int &contador))
+{
+    recorrer_creciente_contando(obtener_raiz(), contador, recorrido_contando);
 }
 
 template < typename Tipo >
@@ -377,19 +389,37 @@ void ArbolB<Tipo>::listar_creciente(Nodo<Tipo>* nodo_actual, int &iteracion, voi
 } 
 
 template < typename Tipo >
-void ArbolB<Tipo>::pasar_tiempo(Nodo<Tipo>* nodo_actual, void (*recorrido_pasar_tiempo)(Tipo* dato))
+void ArbolB<Tipo>::pasar_tiempo(Nodo<Tipo>* nodo_actual, void (*recorrido)(Tipo* dato))
 {
     Tipo* dato_actual;
 
     if(nodo_actual != NULL)
     {
-        pasar_tiempo(nodo_actual -> obtener_hijo(PRIMER_HIJO), recorrido_pasar_tiempo);
+        pasar_tiempo(nodo_actual -> obtener_hijo(PRIMER_HIJO), recorrido);
 
         for(int i = 0; i < nodo_actual -> obtener_cantidad_claves_usadas(); i++)
         {   
             dato_actual = nodo_actual -> obtener_dato(i);
-            recorrido_pasar_tiempo(dato_actual);
-            pasar_tiempo(nodo_actual -> obtener_hijo(i + 1), recorrido_pasar_tiempo);
+            recorrido(dato_actual);
+            pasar_tiempo(nodo_actual -> obtener_hijo(i + 1), recorrido);
+        }
+    }
+}
+
+template < typename Tipo >
+void ArbolB<Tipo>::recorrer_creciente_contando(Nodo<Tipo>* nodo_actual, int &contador, void (*recorrido_contando)(Tipo* dato, int &contador))
+{
+    Tipo* dato_actual;
+
+    if(nodo_actual != NULL)
+    {
+        recorrer_creciente_contando(nodo_actual -> obtener_hijo(PRIMER_HIJO), contador, recorrido_contando);
+
+        for(int i = 0; i < nodo_actual -> obtener_cantidad_claves_usadas(); i++)
+        {   
+            dato_actual = nodo_actual -> obtener_dato(i);
+            recorrido_contando(dato_actual, contador);
+            recorrer_creciente_contando(nodo_actual -> obtener_hijo(i + 1), contador, recorrido_contando);
         }
     }
 }
