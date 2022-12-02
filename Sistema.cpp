@@ -230,41 +230,8 @@ void Sistema::procesar_opcion(int opcion_tomada)
         
         case CARGAR_COMBUSTIBLE:
             cout << endl << "CARGAR_COMBUSTIBLE:" << endl << endl;
-
             carga_de_combustible(vehiculo->obtener_combustible());
-
             break;
-    }
-}
-
-void Sistema::carga_de_combustible (int numero)
-{
-    string combustible_cargar, opcion;
-
-
-    cout << "Combustible actual: " << numero << endl;
-
-    cout << "Desea cargar combustible? (S/N): ";
-    cin >> opcion;
-
-    while (opcion != SI && opcion != NO)
-    {
-        cout << "La opcion ingresada no es válida, ingrese nuevamente:";
-        cin >> opcion;
-    }
-
-    if (opcion == SI)
-    {
-        cout << "\nIngrese la cantidad de combustible que desea cargar: ";
-        cin >> combustible_cargar;
-
-        while(!cadena_numeros_valida(combustible_cargar) || stoi(combustible_cargar) < 1)
-        {
-            cout << "\nLa cantidad de combustible ingresada es inválida, ingrese nuevamente: "<<endl;
-            cin >> combustible_cargar;
-        }
-        
-        vehiculo->cargar_combustible(stoi(combustible_cargar));
     }
 }
 
@@ -301,15 +268,8 @@ void mostrar_animal(Animal* animal, int &iteracion)
 {
     if(animal -> obtener_estado_animal() == NO_ADOPTADO)
     {
-        cout <<
-        ++iteracion << ") " << animal -> obtener_nombre() << endl <<
-        "Edad: " << animal -> obtener_edad() << endl <<
-        "Tamanio: " << animal -> obtener_tamanio_texto() << endl <<
-        "Especie: " << animal -> obtener_especie_texto() << endl <<
-        "Personalidad: " << animal -> obtener_personalidad_texto() << endl <<
-        "Hambre: " << animal -> obtener_hambre() << endl <<
-        "Higiene: " << animal -> obtener_higiene() << endl << endl <<
-        "---------------------------------------------------" << endl << endl;
+        cout << ++iteracion << ") ";
+        animal -> mostrar_animal();
     }
 }
 
@@ -727,6 +687,36 @@ void Sistema::listar_animales_espacio(string espacio, int posicion , bool* anima
 
     animales -> iniciar();
 }*/
+
+void Sistema::carga_de_combustible (int numero)
+{
+    string combustible_cargar, opcion;
+
+    cout << "Combustible actual: " << numero << endl << endl;
+
+    cout << "Desea cargar combustible? (SI/NO): ";
+    cin >> opcion;
+
+    while (opcion != SI && opcion != NO)
+    {
+        cout << "La opcion ingresada no es valida, ingrese nuevamente:";
+        cin >> opcion;
+    }
+
+    if (opcion == SI)
+    {
+        cout << endl << "Ingrese la cantidad de combustible que desea cargar: ";
+        cin >> combustible_cargar;
+
+        while(!cadena_numeros_valida(combustible_cargar) || stoi(combustible_cargar) < 1)
+        {
+            cout << endl <<"La cantidad de combustible ingresada es inválida, ingrese nuevamente: "<< endl;
+            cin >> combustible_cargar;
+        }
+        
+        vehiculo -> cargar_combustible(stoi(combustible_cargar));
+    }
+}
 
 void guardar_animal(Animal* animal, ofstream& archivo)
 {
