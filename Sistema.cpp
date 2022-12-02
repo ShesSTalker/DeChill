@@ -549,55 +549,7 @@ void Sistema::rescatar_animal(string nombre,char especie)
 {
     string tamanio, personalidad;
     int edad;
-    /*
-    int posicion = buscar_nombre(nombre);
-    verificar_intentar_de_nuevo(posicion, nombre);
-    */
-    /*
-    //LOS ANIMALES RECATADOS YA TIENEN SU ESPECIE INICIALIZADA
-
-    cout << endl << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
-    endl << "- E (Erizo)" << endl << "- L (Lagartija)" << endl << "Ingrese el caracter la especie del animal: ";
-    getline(cin >> ws, especie);
-
-    while ((especie[0] != PERRO && especie[0] != GATO && especie[0] != CABALLO && especie[0] != ROEDOR && especie[0] != CONEJO && especie[0] != ERIZO && especie[0] != LAGARTIJA) || especie.size() != 1)
-    {
-        cout << endl << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
-        endl << "- E (Erizo)" << endl << "- L (Lagartija)" << endl << "Especie invalida, Ingrese el caracter la especie del animal: ";
-        getline(cin >> ws, especie);
-    }
-    cout << endl << "Ingrese la edad del animal: ";
-    getline(cin >> ws, edad);
-
-    while (!cadena_numeros_valida(edad) || stoi(edad) > 100)
-    {
-        cout << endl << "Edad invalida, ingrese la edad del animal: ";
-        getline(cin >> ws, edad);
-    }
-
-    cout << endl << "- d (diminuto)" << endl << "- p (pequeño)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)" << 
-    endl << "Ingrese el caracter del tamanio del animal: ";
-    getline(cin >> ws, tamanio);
-
-    while ((tamanio[0] != DIMINUTO && tamanio[0] != PEQUENIO && tamanio[0] != MEDIANO && tamanio[0] != GRANDE && tamanio[0] != GIGANTE) || tamanio.size() != 1)
-    {
-        cout << endl << "- d (diminuto)" << endl << "- p (pequenio)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)"  <<endl<<
-        "Tamanio invalido, ingrese el caracter del tamanio del animal: ";
-        getline(cin >> ws, tamanio);
-    }
-
-    cout << endl << "- d (dormilon)" << endl << "- j (jugueton)" << endl << "- s (sociable)" << endl << "- t (travieso)" << endl << 
-    "Ingrese el caracter de la personalidad del animal: ";
-    getline(cin >> ws, personalidad);
-
-    while ((personalidad[0] != DORMILON && personalidad[0] != JUGUETON && personalidad[0] != SOCIABLE && personalidad[0] != TRAVIESO) || personalidad.size() != 1)
-    {
-        cout << endl << "- d (dormilon)" << endl << "- j (jugueton)" << endl << "- s (sociable)" << endl << "- t (travieso)" << endl << 
-        "Personalidad invalida, ingrese el caracter de la personalidad del animal: ";
-        getline(cin >> ws, personalidad);
-    }
-    */
-
+    
     edad = rand() % DELIMITADOR_EDAD;
 
     tamanio = tamanio_animal_aleatorio (1 + (rand() % CANTIDAD_TAMANIOS));
