@@ -33,17 +33,13 @@ int Auto::obtener_columna()
     return columna;
 }
 
-void Auto::cargar_combustible_completo()
-{
-    combustible = CARGAR_COMBUSTIBLE_COMPLETO;
-}
 void Auto::cargar_combustible(int combustible_cargar){
     
     combustible += combustible_cargar;
 
-    if(combustible > MAX_COMBUSTIBBLE){
+    if(combustible > MAX_COMBUSTIBLE){
         
-        combustible = MAX_COMBUSTIBBLE;
+        combustible = MAX_COMBUSTIBLE;
     }
 
 }

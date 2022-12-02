@@ -198,11 +198,15 @@ void Sistema::pedir_movimiento(int &fila , int &columna){
     cout<<"Ingrese la columna donde desea moverse: "<<endl;
     cin>>columna;
      
-    while (!dentro_de_rango(fila-1,columna -1)){
-        cout<<"Ingrese una fila valida para moverse: "<<endl;
-        cin>>fila;
-        cout<<"Ingrese una columna valida para moverse: "<<endl;
-        cin>>columna;
+    while (!dentro_de_rango(fila-1,columna -1))
+    {
+        cout << "Uno o ambos datos ingresados no son válidos, ingreselos nuevamente." << endl;
+        
+        cout << "Fila: " << endl;
+        cin >> fila;
+        
+        cout << "Columna: " << endl;
+        cin >> columna;
     }
     fila--;
     columna--;
@@ -299,7 +303,6 @@ void Sistema::procesar_movimiento(){
 }
 void Sistema::procesar_opcion(int opcion_tomada)
 {   
-    int combustible_cargar;
     string nombre, espacio, opcion_submenu, posicion_adopcion;
 
     //pasar_tiempo();
@@ -337,13 +340,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
 
             cout << endl << "CARGAR_COMBUSTIBLE:" << endl << endl;
 
-            do{
-                cout<<"Ingrese la cantidad de combustible que desea cargar: "<<endl;
-                cin>>combustible_cargar;
-                
-            }while(combustible_cargar >= 100 || combustible_cargar < 1);
-
-            vehiculo->cargar_combustible(combustible_cargar);
+            carga_de_combustible(vehiculo->obtener_combustible());
 
             break;
         case GUARDAR_Y_SALIR:
@@ -353,6 +350,37 @@ void Sistema::procesar_opcion(int opcion_tomada)
             break;    
     }
     
+}
+
+void Sistema::carga_de_combustible (int numero)
+{
+    string combustible_cargar, opcion;
+
+
+    cout << "Combustible actual: " << numero << endl;
+
+    cout << "Desea cargar combustible? (S/N): ";
+    cin >> opcion;
+
+    while (opcion != SI && opcion != NO)
+    {
+        cout << "La opcion ingresada no es válida, ingrese nuevamente:";
+        cin >> opcion;
+    }
+
+    if (opcion == SI)
+    {
+        cout << "\nIngrese la cantidad de combustible que desea cargar: ";
+        cin >> combustible_cargar;
+
+        while(!cadena_numeros_valida(combustible_cargar) || stoi(combustible_cargar) < 1)
+        {
+            cout << "\nLa cantidad de combustible ingresada es inválida, ingrese nuevamente: "<<endl;
+            cin >> combustible_cargar;
+        }
+        
+        vehiculo->cargar_combustible(stoi(combustible_cargar));
+    }
 }
 /*
 (void Sistema::pasar_tiempo()
@@ -389,7 +417,7 @@ void Sistema::listar_animales()
     }
     else
     {
-        arbol_b -> listar_creciente();
+//        arbol_b -> listar_creciente();
     }
 }
 

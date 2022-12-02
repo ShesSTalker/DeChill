@@ -131,7 +131,7 @@ COMIDA_LAGARTIJA = "Insectos";
 
 const int
 MIN_COMBUSTIBLE = 0,
-MAX_COMBUSTIBBLE = 100;
+MAX_COMBUSTIBLE = 100;
 // Constantes cargar combustible Auto
 const int
 CARGAR_COMBUSTIBLE_POR_ACCION = 5,
@@ -163,9 +163,9 @@ enum opciones_menu_principal {
 };
 
 const int MAX_OPCIONES_MENU_PRINCIPAL= 7;
-const char
-SI= 'S',
-NO= 'N';
+const string
+SI= "S",
+NO= "N";
 
 enum opciones_submenu {
     ELEGIR_INDIVIDUALMENTE = 1,
