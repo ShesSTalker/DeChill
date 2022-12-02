@@ -72,6 +72,30 @@ class ArbolB
 };
 
 template < typename Tipo >
+void ArbolB<Tipo>::guardar_creciente(ofstream& archivo, void (*guardado)(Tipo* dato, ofstream& archivo))
+{
+    guardar_creciente(raiz, archivo, guardado);
+}
+
+template < typename Tipo >
+void ArbolB<Tipo>::guardar_creciente(Nodo<Tipo>* nodo_actual, ofstream& archivo, void (*guardado)(Tipo* dato, ofstream& archivo))
+{
+    Tipo* dato_actual;
+
+    if(nodo_actual != NULL)
+    {
+        guardar_creciente(nodo_actual -> obtener_hijo(PRIMER_HIJO), archivo, guardado);
+
+        for(int i = 0; i < nodo_actual -> obtener_cantidad_claves_usadas(); i++)
+        {   
+            dato_actual = nodo_actual -> obtener_dato(i);
+            guardado(dato_actual, archivo);
+            guardar_creciente(nodo_actual -> obtener_hijo(i + 1), archivo, guardado);
+        }
+    }
+}
+
+template < typename Tipo >
 ArbolB<Tipo>::ArbolB(int orden)
 {
     raiz = NULL;
@@ -103,12 +127,6 @@ int ArbolB<Tipo>::obtener_orden()
 }
 
 template < typename Tipo >
-void ArbolB<Tipo>::insertar(string nueva_clave, Tipo* nuevo_dato)
-{
-    raiz = insertar(obtener_raiz(), nueva_clave, nuevo_dato);
-}
-
-template < typename Tipo >
 Tipo* ArbolB<Tipo>::buscar_clave(string clave)
 {
     Nodo<Tipo>* nodo;
@@ -127,17 +145,42 @@ Tipo* ArbolB<Tipo>::buscar_clave(string clave)
 }
 
 template < typename Tipo >
-void ArbolB<Tipo>::listar_creciente(void (*listado)(Tipo* dato, int &iteracion))
+void ArbolB<Tipo>::insertar(string nueva_clave, Tipo* nuevo_dato)
 {
-    int iteracion = 0;
-    listar_creciente(raiz, iteracion, listado);
+    raiz = insertar(obtener_raiz(), nueva_clave, nuevo_dato);
 }
 
-template < typename Tipo >
-void ArbolB<Tipo>::guardar_creciente(ofstream& archivo, void (*guardado)(Tipo* dato, ofstream& archivo))
+template < typename Tipo > 
+Nodo<Tipo>* ArbolB<Tipo>::insertar(Nodo<Tipo>* raiz, string nueva_clave, Tipo* nuevo_dato)
 {
-    guardar_creciente(raiz, archivo, guardado);
-}
+    bool sube_arriba;
+    string pivote;
+    Tipo* pivote_dato;
+    Nodo<Tipo>* nodo = NULL;
+
+    if(raiz == NULL)
+    {
+        raiz = new Nodo<Tipo>(obtener_orden());
+        meter_nodo(raiz, NULL, nueva_clave, nuevo_dato, 0);
+    }
+    else
+    {
+        sube_arriba = empujar(raiz, nodo, nueva_clave, nuevo_dato, pivote, pivote_dato);
+    
+        if (sube_arriba)
+        { 
+            Nodo<Tipo>* nuevo_nodo = new Nodo<Tipo>(obtener_orden());
+            nuevo_nodo -> cambiar_cantidad_claves_usadas(1);    
+            nuevo_nodo -> establecer_clave(PRIMERA_CLAVE, pivote); 
+            nuevo_nodo -> establecer_dato(PRIMER_DATO, pivote_dato);
+            nuevo_nodo -> establecer_hijo(PRIMER_HIJO, raiz);    
+            nuevo_nodo -> establecer_hijo(SEGUNDO_HIJO, nodo);    
+            raiz = nuevo_nodo;
+        }
+    }
+
+    return raiz;
+}   
 
 template < typename Tipo > 
 Nodo<Tipo>* ArbolB<Tipo>::buscar(Nodo<Tipo>* nodo_actual, string clave, int &posicion)
@@ -191,38 +234,6 @@ bool ArbolB<Tipo>::buscar_nodo_actual(Nodo<Tipo>* nodo_actual, string clave, int
     }
     return encontrado;
 }
-
-template < typename Tipo > 
-Nodo<Tipo>* ArbolB<Tipo>::insertar(Nodo<Tipo>* raiz, string nueva_clave, Tipo* nuevo_dato)
-{
-    bool sube_arriba;
-    string pivote;
-    Tipo* pivote_dato;
-    Nodo<Tipo>* nodo = NULL;
-
-    if(raiz == NULL)
-    {
-        raiz = new Nodo<Tipo>(obtener_orden());
-        meter_nodo(raiz, NULL, nueva_clave, nuevo_dato, PRIMERA_CLAVE);
-    }
-    else
-    {
-        sube_arriba = empujar(raiz, nodo, nueva_clave, nuevo_dato, pivote, pivote_dato);
-    
-        if (sube_arriba)
-        { 
-            Nodo<Tipo>* nuevo_nodo = new Nodo<Tipo>(obtener_orden());
-            nuevo_nodo -> cambiar_cantidad_claves_usadas(1);    
-            nuevo_nodo -> establecer_clave(PRIMERA_CLAVE, pivote); 
-            nuevo_nodo -> establecer_dato(PRIMER_DATO, pivote_dato);
-            nuevo_nodo -> establecer_hijo(PRIMER_HIJO, raiz);    
-            nuevo_nodo -> establecer_hijo(SEGUNDO_HIJO, nodo);    
-            raiz = nuevo_nodo;
-        }
-    }
-
-    return raiz;
-}   
 
 template < typename Tipo >
 bool ArbolB<Tipo>::empujar(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nuevo_nodo, string nueva_clave, Tipo* nuevo_dato, string &pivote, Tipo* &pivote_dato)
@@ -329,6 +340,13 @@ void ArbolB<Tipo>::dividir_nodo(Nodo<Tipo>* nodo_actual, Nodo<Tipo>* &nodo, stri
     nodo = nuevo_nodo;
 }
 
+template < typename Tipo >
+void ArbolB<Tipo>::listar_creciente(void (*listado)(Tipo* dato, int &iteracion))
+{
+    int iteracion = 0;
+    listar_creciente(raiz, iteracion, listado);
+}
+
 template <typename Tipo> 
 void ArbolB<Tipo>::listar_creciente(Nodo<Tipo>* nodo_actual, int &iteracion, void (*listado)(Tipo* dato, int &iteracion))
 {
@@ -346,24 +364,6 @@ void ArbolB<Tipo>::listar_creciente(Nodo<Tipo>* nodo_actual, int &iteracion, voi
         }
     }
 } 
-
-template < typename Tipo >
-void ArbolB<Tipo>::guardar_creciente(Nodo<Tipo>* nodo_actual, ofstream& archivo, void (*guardado)(Tipo* dato, ofstream& archivo))
-{
-    Tipo* dato_actual;
-
-    if(nodo_actual != NULL)
-    {
-        guardar_creciente(nodo_actual -> obtener_hijo(PRIMER_HIJO), archivo, guardado);
-
-        for(int i = 0; i < nodo_actual -> obtener_cantidad_claves_usadas(); i++)
-        {   
-            dato_actual = nodo_actual -> obtener_dato(i);
-            guardado(dato_actual, archivo);
-            guardar_creciente(nodo_actual -> obtener_hijo(i + 1), archivo, guardado);
-        }
-    }
-}
 
 template < typename Tipo >
 ArbolB<Tipo>::~ArbolB()
