@@ -28,32 +28,37 @@ void Menu::mostrar_menu()
     "[7] Guardar y salir." << endl << endl;
 }
 
-void Menu::mostrar_mapa(Casilla** mapa, int filas, int columnas){
-    for (int k= 0; k < filas; k++){
-        cout <<"|"<<k + 1;
+void Menu::mostrar_mapa(Casilla** mapa, int filas, int columnas)
+{
+    for (int k = 0; k < filas; k++)
+    {
+        cout << "|" << k + 1;
     }
-    cout<<"|X"<< endl;
-    for (int i = 0; i < filas; i++){
-        for (int j = 0; j < columnas; j++){
-            if (mapa[i][j].obtener_terreno()== CAMINO){
-
+    cout << "|X" << endl;
+    for (int i = 0; i < filas; i++)
+    {
+        for (int j = 0; j < columnas; j++)
+        {
+            if (mapa[i][j].obtener_terreno() == CAMINO)
+            {
                 cout<<"|" << BGND_GRAY_240 <<mapa[i][j].obtener_contenido() << END_COLOR; 
-
-            }else if (mapa[i][j].obtener_terreno()== TIERRA){
-
-                cout<<"|" << BGND_BROWN_136 <<mapa[i][j].obtener_contenido()<< END_COLOR; 
-
-            }else if (mapa[i][j].obtener_terreno()== MONTANIA){
-
-                cout<<"|" << BGND_DARK_RED_88 <<mapa[i][j].obtener_contenido()<< END_COLOR; 
-
-            }else if (mapa[i][j].obtener_terreno()== PRECIPICIO){
-
-                cout<<"|" << BGND_BLACK_16 <<mapa[i][j].obtener_contenido()<< END_COLOR; 
+            }
+            else if (mapa[i][j].obtener_terreno() == TIERRA)
+            {
+                cout<<"|" << BGND_BROWN_136 <<mapa[i][j].obtener_contenido() << END_COLOR; 
 
             }
-        }    
-        cout <<"|" <<i + 1 <<endl;
+            else if (mapa[i][j].obtener_terreno() == MONTANIA)
+            {
+                cout<<"|" << BGND_DARK_RED_88 <<mapa[i][j].obtener_contenido() << END_COLOR; 
+            }
+            else if (mapa[i][j].obtener_terreno() == PRECIPICIO)
+            {
+                cout<<"|" << BGND_BLACK_16 <<mapa[i][j].obtener_contenido()<< END_COLOR; 
+            }
+        }   
+
+        cout << "|" << i + 1 << endl;
     }
 }
 

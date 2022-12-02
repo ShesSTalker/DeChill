@@ -2,6 +2,7 @@
 #define FLOYD_H
 
 using namespace std;
+
 #include "Vector.h"
 #include <string>
 #include <iostream>
@@ -9,20 +10,20 @@ using namespace std;
 class Floyd {
     //Atributos
     private:
-        int ** matriz_costos;
-        int ** matriz_caminos;
-        int ** matriz_adyacencia;
-        Vector <string> * vertices;
+        int** matriz_costos;
+        int** matriz_caminos;
+        int** matriz_adyacencia;
+        Vector<string>* vertices;
         int cantidad_vertices;
 
     //Metodos
         //PRE: matriz de adyacencia bien cargada
         //POS: crea la matriz costo inicializandola con los valores de la matriz de adyacencia
-        int ** crear_matriz_costos(int ** matrizAdyacencia);
+        int** crear_matriz_costos(int** matrizAdyacencia);
 
         //PRE: -
         //POS: crea una matriz de caminos
-        int ** crear_matriz_caminos();
+        int** crear_matriz_caminos();
         
         //PRE: -
         //POS: libera la memoria de las matrices utilizadas
@@ -36,7 +37,8 @@ class Floyd {
     
         //PRE: -
         //PRE: inicializa los vertices y matrices.
-        Floyd(Vector<string>*vertices, int ** matrizAdyacencia);
+        Floyd(Vector<string>*vertices, int** matrizAdyacencia);
+
         //PRE: -
         //POS: muestra por pantalla el camino mínimo entre el origen y el destino, detallando su recorrido y peso
         void camino_minimo(int origen, int destino);
@@ -45,8 +47,7 @@ class Floyd {
         //POS: devuelve el costo del camino
         int obtener_costo_camino(int origen, int destino);
 
-        ~Floyd() ;
+        ~Floyd();
 };
-
 
 #endif //FLOYD_H

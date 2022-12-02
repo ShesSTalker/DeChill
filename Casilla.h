@@ -14,6 +14,7 @@ class Casilla
     public:
         //Constructor por defecto
         Casilla(){};
+        
         // PRE: -
         // POS: crea un objeto Casilla e inicializa los atributos.
         Casilla(string nombre, string terreno,int costo, char contenido);

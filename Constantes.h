@@ -126,10 +126,10 @@ COMIDA_LAGARTIJA = "Insectos";
 
 
 // Constantes combustible Auto
-
 const int
 MIN_COMBUSTIBLE = 0,
 MAX_COMBUSTIBLE = 100;
+
 // Constantes cargar combustible Auto
 const int
 CARGAR_COMBUSTIBLE_POR_ACCION = 5,
