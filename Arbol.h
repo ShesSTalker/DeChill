@@ -5,6 +5,7 @@
 
 using namespace std;
 
+// Declaracion auxiliar
 class Sistema;
 
 template < typename Tipo >
