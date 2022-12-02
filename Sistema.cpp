@@ -334,7 +334,6 @@ void Sistema::procesar_opcion(int opcion_tomada)
 
         case ADOPTAR_ANIMAL:
             cout << endl << "ADOPTAR ANIMAL:" << endl << endl;
-
             break;
 
         case CARGAR_COMBUSTIBLE:
@@ -356,7 +355,6 @@ void recorrido_pasar_tiempo(Animal* animal)
     {
         animal -> cambiar_estado_animal(FUGADO);
         cout << "Oh no! " << animal -> obtener_nombre() << " se ha fugado de la reserva :(" << endl << endl;
-
     }
 }
 
@@ -367,11 +365,11 @@ void Sistema::pasar_tiempo()
 
 void Sistema::limpiar_pantalla()
 {
-    #ifdef _WIN32
-            system("cls");
-    #else
-            system ("clear");
-    #endif
+    cout
+    <<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl
+    <<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl
+    <<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl
+    <<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl;
 }
 
 void mostrar_animal(Animal* animal, int &iteracion)
