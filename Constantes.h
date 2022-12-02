@@ -13,20 +13,21 @@ const string
 PATH_ANIMALES = "animales.csv",
 PATH_MAPA = "mapa.csv";
 
+
 // Constantes Grafos
 const int INFINITO = 100000;
 
-//Constantes Mapa
+
+// Constantes Mapa
 const string 
-MONTANIA = "Montania",
-PRECIPICIO = "Precipicio",
-TIERRA = "Tierra",
-CAMINO = "Camino",
-ANIMAL = "Animal";
+MONTANIA= "Montania",
+PRECIPICIO= "Precipicio",
+TIERRA= "Tierra",
+CAMINO= "Camino";
 
 const char 
 VACIO = ' ',
-VEHICULO = 'A';
+AUTO = 'A';
 
 const int 
 FILA_INICIAL_AUTO = 0,
@@ -100,6 +101,8 @@ ROEDOR = 'R',
 CONEJO = 'O',
 ERIZO = 'E',
 LAGARTIJA = 'L';
+const int
+CANTIDAD_ESPECIES= 7;
 
 // Constantes especie (string)
 const string

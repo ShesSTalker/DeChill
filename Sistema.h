@@ -3,22 +3,32 @@
 
 #include<stdlib.h>
 #include "Menu.h"
-#include "Grafo.h"
 #include "Auto.h"
-#include "Animal.h"
+#include "Vector.h"
+#include "Grafo.h"
+#include <fstream>
+#include "Constantes.h"
+#include "Perro.h"
+#include "Caballo.h"
+#include "Gato.h"
+#include "Lagartija.h"
+#include "Erizo.h"
+#include "Roedor.h"
+#include "Conejo.h"
+#include "Mapa.h"
 #include "Arbol.h"
+#include "Mapa.h"
+
 
 class Sistema
 {
     //Atributos
     private:
         ArbolB<Animal>* arbol_b;
-        //Vector<Animal*>* punteros_animales;
         Auto* vehiculo;
-        //Casilla** mapa;
-        //Grafo* grafo;
-        //int filas;
-        //int columnas;
+        Grafo* grafo;
+        Menu * menu;
+        Mapa * mapa;
         int animales_fugados;
     //Metodos
     public:
@@ -55,21 +65,26 @@ class Sistema
         ~Sistema();
 
     private:
+
         //PRE: -
         //POS: carga los parámetros como un animal nuevo en la reserva.
         void cargar_animal(char especie, string nombre, int edad, char tamanio, char personalidad);
-
-        //PRE: -
-        //POS: carga la casilla al mapa.
-        void cargar_casilla(int fila,int columna,string vertice,string terreno);
 
         //PRE: -    
         //POS: carga el grafo con los caminos.
         void cargar_caminos();
 
         //PRE: -    
-        //POS: inicializa las dimensiones del mapa.
-        void inicializar_mapa();
+        //POS: carga el mapa con su contenido ( Auto y Animales)
+        void cargar_contenido_mapa();
+
+        //PRE: -    
+        //POS: le pide al usuario ingresar la fila y columna donde desea moverse
+        void pedir_movimiento(int &fila , int &columna);
+
+        //PRE: -    
+        //POS: mueve el vehiculo a la posicion indicada
+        void procesar_movimiento();
 
         //PRE: -
         //POS: devuelve verdadero si esta dentro del rango del mapa y falso en caso contrario.
@@ -103,13 +118,17 @@ class Sistema
         //POS: llama a los metodos correspondientes a cuidar animal.
         void cuidar_animal();
 
-        //PRE: el nombre ingresado para un animal nuevo ya estaba en la reserva.
-        //POS: si el usuario ingresa que quiere intentar con un nombre diferente para un animal nuevo en la reserva, devuelve true. Caso contrario devuelve false.  
-        bool verificar_intentar_de_nuevo(int posicion, string nombre);
+        //PRE: -
+        //POS: devuelve un tamanio de animal aleatorio
+        string tamanio_animal_aleatorio(int numero);
+
+        //PRE: -
+        //POS: devuelve una personalidad de animal aleatorio
+        string personalidad_animal_aleatoria (int numero);
 
         //PRE: el nombre del animal no debe estar en la lista.
         //POS: pide el resto de datos del animal para rescatarlo y agregarlo a a la lista de animales.
-        void rescatar_animal(string nombre);
+        void rescatar_animal(string nombre, char especie);
 
         //PRE: -
         //POS: imprime por pantalla las opciones del submenú.

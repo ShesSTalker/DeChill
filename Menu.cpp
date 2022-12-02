@@ -22,10 +22,39 @@ void Menu::mostrar_menu()
     "[1] Listar animales." << endl <<
     "[2] Rescatar animal." << endl <<
     "[3] Buscar animal." << endl <<
-    "[4] Cuidar animales." << endl <<
+    "[4] Ciudar animales." << endl <<
     "[5] Adoptar animal." << endl <<
-    "[6] Cargar Combustible." << endl <<
+    "[6] Cargar combustible." << endl <<
     "[7] Guardar y salir." << endl << endl;
+}
+
+void Menu::mostrar_mapa(Casilla** mapa, int filas, int columnas){
+    for (int k= 0; k < filas; k++){
+        cout <<"|"<<k + 1;
+    }
+    cout<<"|X"<< endl;
+    for (int i = 0; i < filas; i++){
+        for (int j = 0; j < columnas; j++){
+            if (mapa[i][j].obtener_terreno()== CAMINO){
+
+                cout<<"|" << BGND_GRAY_240 <<mapa[i][j].obtener_contenido() << END_COLOR; 
+
+            }else if (mapa[i][j].obtener_terreno()== TIERRA){
+
+                cout<<"|" << BGND_BROWN_136 <<mapa[i][j].obtener_contenido()<< END_COLOR; 
+
+            }else if (mapa[i][j].obtener_terreno()== MONTANIA){
+
+                cout<<"|" << BGND_DARK_RED_88 <<mapa[i][j].obtener_contenido()<< END_COLOR; 
+
+            }else if (mapa[i][j].obtener_terreno()== PRECIPICIO){
+
+                cout<<"|" << BGND_BLACK_16 <<mapa[i][j].obtener_contenido()<< END_COLOR; 
+
+            }
+        }    
+        cout <<"|" <<i + 1 <<endl;
+    }
 }
 
 void Menu::pedir_opcion()
@@ -47,12 +76,6 @@ void Menu::pedir_opcion()
 int Menu::obtener_opcion_tomada()
 {
     return opcion_tomada;
-}
-
-
-void Menu::mostrar_mapa(Casilla** mapa)
-{
-    //MOSTRAR EL MAPA 
 }
 
 bool Menu::cadena_numeros_valida(string numeros)

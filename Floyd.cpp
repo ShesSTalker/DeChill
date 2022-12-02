@@ -31,21 +31,6 @@ int ** Floyd::crear_matriz_costos(int ** matriz_adyacencia){
     return costos;
 }
 
-void Floyd::mostrar_matrices(){
-    int i,j;
-    for (i = 0; i < cantidad_vertices; i++)
-    {
-        cout<<"\nMinimo Costo Respecto de :"<<vertices->obtener_elemento(i)<<endl;
-        for (j = 0; j < cantidad_vertices; j++)
-        {
-            cout << "(" << vertices->obtener_elemento(j) <<": ";
-            cout<<matriz_costos[i][j]<<") ";
-        }
-
-    }   
-    cout <<endl;
-}
-
 void Floyd::calcular_matrices() {
 
     int i,j,k;
@@ -62,14 +47,13 @@ void Floyd::calcular_matrices() {
             for (j = 0; j < cantidad_vertices; j++) {
 
                 if (matriz_costos[i][k] + matriz_costos[k][j] < matriz_costos[i][j]){
-
+                    
                     matriz_costos[i][j] = matriz_costos[i][k] + matriz_costos[k][j];
-
+                    matriz_caminos[i][j] = matriz_caminos[i][k];
                 }
             }
         }
     }
-    mostrar_matrices();
 }
 
 void Floyd::camino_minimo(int origen, int destino) {
@@ -81,8 +65,10 @@ void Floyd::camino_minimo(int origen, int destino) {
         cout << " tiene un costo de: " << matriz_costos[origen][destino] << " y es el siguiente: ";
         cout << vertices->obtener_elemento(origen);
         do {
+
             origen = matriz_caminos[origen][destino];
             cout << " -> " << vertices->obtener_elemento(origen);
+
         } while(origen != destino);
     }
     cout << endl;

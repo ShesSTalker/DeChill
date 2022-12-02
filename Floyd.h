@@ -2,7 +2,7 @@
 #define FLOYD_H
 
 using namespace std;
-#include "Vector2.h"
+#include "Vector.h"
 #include <string>
 #include <iostream>
 
@@ -12,11 +12,10 @@ class Floyd {
         int ** matriz_costos;
         int ** matriz_caminos;
         int ** matriz_adyacencia;
-        Vector <string> * vertices;// inicializar con 0 espacios
+        Vector <string> * vertices;
         int cantidad_vertices;
 
     //Metodos
-
         //PRE: matriz de adyacencia bien cargada
         //POS: crea la matriz costo inicializandola con los valores de la matriz de adyacencia
         int ** crear_matriz_costos(int ** matrizAdyacencia);
@@ -30,14 +29,11 @@ class Floyd {
         void liberar_matrices();
 
         //PRE: -
-        //POS: muestra la matriz de costo y de caminos.
-        void mostrar_matrices();
-
-        //PRE: -
         //POS:calcula las matrices de costos y caminos.
         void calcular_matrices();
 
     public:
+    
         //PRE: -
         //PRE: inicializa los vertices y matrices.
         Floyd(Vector<string>*vertices, int ** matrizAdyacencia);

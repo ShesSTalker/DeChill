@@ -1,17 +1,23 @@
 #include <iostream>
-#include "Sistema.h"
+#include <cstdlib>
 #include "Menu.h"
+#include "Sistema.h"
+#include <ctime>
 
 using namespace std;
 
 int main()
 {
+    //Semilla para generar numeros aleatorios
+    
+    srand((unsigned) time(NULL));
     Menu *menu = new Menu;
     Sistema *sistema = new Sistema;
 
     int opcion;
 
     sistema -> leer_animales();
+    sistema -> cargar_mapa_grafo();
     menu -> bienvenida();
     
     do
@@ -22,8 +28,8 @@ int main()
         sistema -> limpiar_pantalla();
         sistema -> procesar_opcion(opcion);
     }
-    while (opcion != GUARDAR_Y_SALIR);
-
+    while (opcion != GUARDAR_Y_SALIR && sistema->obtener_animales_fugados() < 3 );
+    
     sistema -> guardar();
     
     delete menu;
