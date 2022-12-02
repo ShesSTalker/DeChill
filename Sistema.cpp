@@ -370,7 +370,7 @@ void recorrido_pasar_tiempo(Animal* animal, int &contador)
     if(animal -> obtener_higiene() == HIGIENE_MIN || animal -> obtener_hambre() == HAMBRE_MAX)
     {
         animal -> cambiar_estado_animal(FUGADO);
-        cout << "Oh no! " << animal -> obtener_nombre() << " se ha fugado de la reserva :(" << endl << endl;
+        cout << "Oh no! " << animal -> obtener_nombre() << " se ha fugado de la reserva "<< EMOJI_TRISTE << endl << endl;
         contador++;
     }
 }
@@ -410,7 +410,7 @@ void Sistema::listar_animales()
 {
     if(arbol_b -> arbol_vacio())
     {
-        cout << endl << "La reserva actualmente no tiene animales ☹️ " << endl << endl;
+        cout << endl << "La reserva actualmente no tiene animales  " << EMOJI_TRISTE << endl << endl;
     }
     else
     {
@@ -694,7 +694,7 @@ void guardar_animal(Animal* animal, ofstream& archivo)
 
 void Sistema::clausurar()
 {
-    cout << "Lo sentimos, su reserva ha sido clausurada por fugas de animales ocasionadas por descontento... :(" << endl;
+    cout << "Lo sentimos, su reserva ha sido clausurada por fugas de animales ocasionadas por descontento... "<< EMOJI_TRISTE << endl;
 }
 
 void Sistema::guardar()
