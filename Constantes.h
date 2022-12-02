@@ -18,14 +18,15 @@ const int INFINITO = 100000;
 
 //Constantes Mapa
 const string 
-MONTANIA= "Montania",
-PRECIPICIO= "Precipicio",
-TIERRA= "Tierra",
-CAMINO= "Camino",
+MONTANIA = "Montania",
+PRECIPICIO = "Precipicio",
+TIERRA = "Tierra",
+CAMINO = "Camino",
 ANIMAL = "Animal";
 const char 
-VACIO =' ',
-VEHICULO= 'A';
+
+VACIO = ' ',
+VEHICULO = 'A';
 
 
 // Constantes pasar tiempo
@@ -146,8 +147,6 @@ const int MAX_OPCIONES_MENU_PRINCIPAL= 7;
 
 enum opciones_submenu {
     ELEGIR_INDIVIDUALMENTE = 1,
-    ALIMENTAR_A_TODOS,
-    DUCHAR_A_TODOS,
     REGRESAR_INICIO,
 };
 
@@ -155,13 +154,17 @@ enum opciones_individuales {
     DUCHAR = 1,
     ALIMENTAR,
     SALTEAR_ANIMAL,
+    VOLVER_INICIO,
 };
 
 // Constantes Arbol B
+const int TRES_VIAS = 3;
 
-const int PRIMERA_CLAVE = 0;
-
-const int PRIMER_HIJO = 0,
-SEGUNDO_HIJO = 1;
+// Constantes nodo de Arbol B
+const int 
+PRIMERA_CLAVE = 0,
+PRIMER_HIJO = 0,
+SEGUNDO_HIJO = 1,
+PRIMER_DATO = 0;
 
 #endif 

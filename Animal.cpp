@@ -159,6 +159,11 @@ string Animal::obtener_personalidad_texto()
     return personalidad_texto;
 }
 
+int Animal::obtener_estado_animal()
+{
+    return estado_animal;
+}
+
 void Animal::aumentar_hambre()
 {
     int tipo_personalidad = int(personalidad);
@@ -215,6 +220,24 @@ void Animal::alimentar()
 void Animal::duchar()
 {
     higiene = HIGIENE_INICIAL;
+}
+
+void Animal::cambiar_estado_animal(int estado)
+{
+    estado_animal = estado;
+}
+
+void Animal::mostrar_animal()
+{
+    cout <<
+    "Nombre: " << obtener_nombre() << endl <<
+    "Edad: " << obtener_edad() << endl <<
+    "Tamanio: " << obtener_tamanio_texto() << endl <<
+    "Especie: " << obtener_especie_texto() << endl <<
+    "Personalidad: " << obtener_personalidad_texto() << endl <<
+    "Hambre: " << obtener_hambre() << endl <<
+    "Higiene: " << obtener_higiene() << endl << endl <<
+    "---------------------------------------------------" << endl << endl;
 }
 
 Animal::~Animal(){}
