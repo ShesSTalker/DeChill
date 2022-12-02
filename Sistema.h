@@ -16,12 +16,12 @@ class Sistema
         //Vector<Animal*>* punteros_animales;
         //Auto* vehiculo;
         //Casilla** mapa;
+        //Grafo* grafo;
         //int filas;
         //int columnas;
         int animales_fugados;
     //Metodos
     public:
-        //Grafo* grafo;
         //PRE: -
         //POS: crea un objeto Sistema e incializa los atributos. 
         Sistema();
