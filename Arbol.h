@@ -30,7 +30,7 @@ class ArbolB
         Nodo<Tipo>* obtener_raiz();
 
         //PRE:
-        //POS:
+        //POS: establece la raiz del arbol como nueva_raiz.
         void establecer_raiz(Nodo<Tipo>* nueva_raiz);
 
         //PRE: -

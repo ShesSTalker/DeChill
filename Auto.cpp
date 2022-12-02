@@ -3,7 +3,7 @@
 Auto::Auto()
 {
     combustible = CARGAR_COMBUSTIBLE_COMPLETO;
-    fila= FILA_INICIAL_AUTO;
+    fila = FILA_INICIAL_AUTO;
     columna = COLUMNA_INICIAL_AUTO;
 }
 
@@ -37,8 +37,8 @@ void Auto::cargar_combustible(int combustible_cargar){
     
     combustible += combustible_cargar;
 
-    if(combustible > MAX_COMBUSTIBLE){
-        
+    if(combustible > MAX_COMBUSTIBLE)
+    {
         combustible = MAX_COMBUSTIBLE;
     }
 
@@ -48,9 +48,8 @@ void Auto::restar_combustible(int combustible_restar){
     
     combustible -= combustible_restar;
 
-    if(combustible < MIN_COMBUSTIBLE){
-        
+    if(combustible < MIN_COMBUSTIBLE)
+    {
         combustible = MIN_COMBUSTIBLE;
     }
-
 }

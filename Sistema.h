@@ -66,7 +66,7 @@ class Sistema
 
         //PRE: -
         //POS: le pide al usuario la opción individual que desea ejecutar y la valida.
-        void  pedir_opciones_individuales(string &opcion_individual);
+        void pedir_opciones_individuales(string &opcion_individual);
 
         //PRE: la opción individual tomada por el usuario no debe ser la tercera de las opciones individuales.
         //POS: realiza la opción individual tomada por el usuario.

@@ -1,15 +1,15 @@
 #include "Casilla.h"
 Casilla::Casilla(string nombre, string terreno, int costo, char contenido)
 {   
-    this->nombre = nombre;
+    this -> nombre = nombre;
     this -> terreno = terreno;
-    this->costo=costo;
-    this->contenido=contenido;
+    this -> costo = costo;
+    this -> contenido = contenido;
 }
 
 void Casilla::asignar_contenido(char contenido)
 {
-    this->contenido=contenido;
+    this -> contenido = contenido;
 }
 
 string Casilla::obtener_nombre()
