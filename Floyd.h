@@ -2,7 +2,7 @@
 #define FLOYD_H
 
 using namespace std;
-#include "Vector2.h"
+#include "Vector.h"
 #include <string>
 #include <iostream>
 
@@ -14,7 +14,6 @@ class Floyd {
         int ** matriz_adyacencia;
         Vector <string> * vertices;
         int cantidad_vertices;
-        Vector <string> * camino;
 
     //Metodos
         //PRE: matriz de adyacencia bien cargada

@@ -2,7 +2,6 @@
 #define _MENU_H_
 
 #include "Constantes.h"
-#include "Lista.h"
 #include "Animal.h"
 #include "Casilla.h"
 #include "Colores.h"

@@ -15,7 +15,6 @@
 #include "Erizo.h"
 #include "Roedor.h"
 #include "Conejo.h"
-#include "Lista.h"
 #include "Mapa.h"
 #include "Arbol.h"
 
@@ -24,13 +23,11 @@ class Sistema
 {
     //Atributos
     private:
-        //Lista<Animal*>* animales;
-        Vector<Animal*>* punteros_animales;
+        ArbolB<Animal>* arbol_b;
         Menu * menu;
         Mapa * mapa;
         Grafo * grafo;
         Auto * vehiculo;
-        ArbolB<Animal>* arbol_b;
     //Metodos
     public:
         //PRE: -

@@ -99,7 +99,6 @@ Floyd::~Floyd(){
 Floyd::Floyd(Vector<string> *vertices, int ** matriz_adyacencia) {
     this -> vertices = vertices;
     this -> matriz_adyacencia = matriz_adyacencia;
-    camino = new Vector<string>();
     cantidad_vertices = vertices -> obtener_longitud();  
     calcular_matrices();
 }
