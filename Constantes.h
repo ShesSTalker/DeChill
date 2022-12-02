@@ -10,6 +10,12 @@ const int CANTIDAD_MAXIMA_FUGADOS = 3;
 // Constantes emojis
 const string
 EMOJI_CONEJO = "\U0001f407",
+EMOJI_PERRO = 	"\U0001f415",
+EMOJI_GATO = "\U0001f408",
+EMOJI_CABALLO = "\U0001f40e",
+EMOJI_ROEDOR = "\U0001f400",
+EMOJI_ERIZO = "\U0001f994",
+EMOJI_LAGARTIJA = "\U0001f98e",
 EMOJI_LISTA = "\U0001f4c4",
 EMOJI_AUTO = "\U0001f697",
 EMOJI_LUPA = "\U0001f50d",
@@ -34,7 +40,7 @@ PRECIPICIO= "Precipicio",
 TIERRA= "Tierra",
 CAMINO= "Camino";
 
-const char 
+const char
 VACIO = ' ',
 AUTO = 'A';
 
