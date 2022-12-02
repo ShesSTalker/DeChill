@@ -19,6 +19,7 @@ int main()
     sistema -> leer_animales();
     sistema -> cargar_mapa_grafo();
     menu -> bienvenida();
+    sistema -> cargar_mapa_grafo();
     
     do
     {

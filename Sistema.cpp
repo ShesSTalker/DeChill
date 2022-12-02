@@ -26,11 +26,6 @@ void Sistema::leer_animales()
             getline(archivo,especie,',');
             getline(archivo,personalidad);
 
-            if(tamanio == GIGANTE_TEXTO)
-            {
-                tamanio[0] = GIGANTE;
-            }
-
             cargar_animal(especie[0], nombre, stoi(edad), tamanio[0], personalidad[0]);
         }
     }
@@ -70,7 +65,9 @@ void Sistema::cargar_animal(char especie, string nombre, int edad, char tamanio,
             break;
     }
 
-    arbol_b -> insertar(animal -> obtener_nombre(), animal);
+    animales -> alta(animal, animales -> obtener_cantidad() + 1);
+
+    punteros_animales -> cargar(animal, punteros_animales -> obtener_longitud());
 }
 
 void Sistema::cargar_mapa_grafo(){
@@ -183,6 +180,46 @@ void Sistema::cargar_contenido_mapa(){
             mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(LAGARTIJA);
             break;
 
+        }
+    }
+}
+
+void Sistema::cargar_contenido_mapa(){
+    mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(AUTO);
+    int fila_animal=0, columna_animal=0, animal_random;
+
+    for (int i = 0 ; i < ANIMALES_MAPA; i++){
+        animal_random =  rand() % CANTIDAD_ESPECIES;
+
+        do{
+        fila_animal= rand() % mapa->obtener_filas();
+        columna_animal= rand() % mapa->obtener_columnas();
+            
+        }while (mapa->obtener_tablero()[fila_animal][columna_animal].obtener_contenido() != VACIO);
+
+        switch (animal_random)
+        {
+        case 0:
+            mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(PERRO);
+            break;
+        case 1:
+            mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(GATO);
+            break;
+        case 2:
+            mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(CABALLO);
+            break;
+        case 3:
+            mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(ROEDOR);
+            break;
+        case 4:
+            mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(CONEJO);
+            break;
+        case 5:
+            mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(ERIZO);
+            break;
+        case 6:
+            mapa->obtener_tablero()[fila_animal][columna_animal].asignar_contenido(LAGARTIJA);
+            break;
         }
     }
 }
@@ -302,12 +339,19 @@ void Sistema::procesar_opcion(int opcion_tomada)
     int combustible_cargar;
     string nombre, espacio, opcion_submenu, posicion_adopcion;
 
-    //pasar_tiempo();
+    pasar_tiempo();
 
     switch (opcion_tomada)
     {
         case LISTAR_ANIMALES:
-            cout << "LISTAR ANIMALES:" << endl << endl;
+            if(animales -> vacia())
+            {
+                cout << endl << "La reserva actualmente no tiene animales :(" << endl;
+                break;
+            }
+
+            cout << endl << "LISTA DE ANIMALES EN LA RESERVA:" << endl << endl;
+            
             listar_animales();
             break;
 
@@ -320,15 +364,53 @@ void Sistema::procesar_opcion(int opcion_tomada)
             break;
 
         case BUSCAR_ANIMAL:
-            buscar_animal();
+            if(animales -> vacia())
+            {
+                cout << endl << "La reserva actualmente no tiene animales :(" << endl;
+                break;
+            }
+
+            cout << endl << "BUSCAR ANIMAL DE LA RESERVA:" << endl << endl;
+
+            pedir_nombre(nombre);
+            posicion = buscar_nombre(nombre);
+            if (posicion != NO_ENCONTRO)
+            {
+                mostrar_animal(animales -> consulta(posicion));
+            }
+            else
+            {
+                cout << endl << "No se pudo encontrar el nombre ingresado." << endl << endl;
+            }
             break;
 
         case CUIDAR_ANIMAL:
-            cout << endl << "CUIDAR ANIMAL:" << endl << endl;
-            cuidar_animal();
+            if(animales -> vacia())
+            {
+                cout << endl << "La reserva actualmente no tiene animales :(" << endl;
+                break;
+            }
+
+            cout << endl << "CUIDAR ANIMALES:" << endl << endl;
+
+            mostrar_submenu();
+            ingresar_opcion_submenu(opcion_submenu); 
+            procesar_opcion_submenu(opcion_submenu);
+            while (stoi(opcion_submenu) != REGRESAR_INICIO)
+            {
+                mostrar_submenu();
+                ingresar_opcion_submenu(opcion_submenu); 
+                procesar_opcion_submenu(opcion_submenu);
+            }
             break;
 
         case ADOPTAR_ANIMAL:
+            if(animales -> vacia())
+            {
+                cout << endl << "La reserva actualmente no tiene animales :(" << endl;
+                break;
+            }
+
             cout << endl << "ADOPTAR ANIMAL:" << endl << endl;
 
             break;
@@ -352,10 +434,9 @@ void Sistema::procesar_opcion(int opcion_tomada)
 
             break;    
     }
-    
 }
-/*
-(void Sistema::pasar_tiempo()
+
+void Sistema::pasar_tiempo()
 {
     Animal* animal;
 
@@ -370,7 +451,7 @@ void Sistema::procesar_opcion(int opcion_tomada)
         animal -> aumentar_hambre();
     }
     animales -> iniciar();
-}*/
+}
 
 void Sistema::limpiar_pantalla()
 {
@@ -391,16 +472,19 @@ void Sistema::listar_animales()
     {
         arbol_b -> listar_creciente();
     }
+    animales -> iniciar();
 }
 
-void Sistema::buscar_animal()
+void Sistema::mostrar_animal(Animal* animal)
 {
-    string nombre;
-    Animal* animal;
-
-    pedir_nombre(nombre);
-    animal = buscar_nombre(nombre);
-    mostrar_busqueda(animal);
+    cout << "---------------------------------------------------" << endl << endl;
+    cout << "Nombre: " << animal -> obtener_nombre() << endl <<
+    "Edad: " << animal -> obtener_edad() << endl <<
+    "Tamanio: " << animal -> obtener_tamanio_texto() << endl <<
+    "Especie: " << animal -> obtener_especie_texto() << endl <<
+    "Personalidad: " << animal -> obtener_personalidad_texto() << endl <<
+    "Hambre: " << animal -> obtener_hambre() << endl <<
+    "Higiene: " << animal -> obtener_higiene() << endl << endl;
 }
 
 void Sistema::pedir_nombre(string &nombre)
@@ -409,38 +493,22 @@ void Sistema::pedir_nombre(string &nombre)
     getline (cin >> ws, nombre);
 }
 
-Animal* Sistema::buscar_nombre(string nombre)
+int Sistema::buscar_nombre(string nombre)
 {
-    Animal* animal;
-
-    animal = arbol_b -> buscar_clave(nombre);
-
-    return animal;
-}
-
-void Sistema::mostrar_busqueda(Animal* animal)
-{
-    if(animal == NULL)
+    bool encontrado = false;
+    int posicion = NO_ENCONTRO, i = 1;
+    Animal* animal; 
+    
+    while (animales -> hay_siguiente() && !encontrado)
     {
-        cout << endl << "No se pudo encontrar el nombre en la reserva." << endl;
-    }
-    else
-    {
-        cout << "Datos del animal: " << endl;
-        animal -> mostrar_animal();
-    }
-}
-
-void Sistema::cuidar_animal()
-{
-    string opcion_submenu;
+        animal = animales -> siguiente();
 
     mostrar_submenu();
     ingresar_opcion_submenu(opcion_submenu);
 
 }
 
-/*bool Sistema::verificar_intentar_de_nuevo(int posicion, string nombre)
+bool Sistema::verificar_intentar_de_nuevo(int posicion, string nombre)
 {
     string decision;
 
@@ -521,54 +589,6 @@ void Sistema::rescatar_animal(string nombre,char especie)
 {
     string tamanio, personalidad;
     int edad;
-    /*
-    int posicion = buscar_nombre(nombre);
-    verificar_intentar_de_nuevo(posicion, nombre);
-    */
-    /*
-    //LOS ANIMALES RECATADOS YA TIENEN SU ESPECIE INICIALIZADA
-
-    cout << endl << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
-    endl << "- E (Erizo)" << endl << "- L (Lagartija)" << endl << "Ingrese el caracter la especie del animal: ";
-    getline(cin >> ws, especie);
-
-    while ((especie[0] != PERRO && especie[0] != GATO && especie[0] != CABALLO && especie[0] != ROEDOR && especie[0] != CONEJO && especie[0] != ERIZO && especie[0] != LAGARTIJA) || especie.size() != 1)
-    {
-        cout << endl << "- P (Perro)" << endl << "- G (Gato)" << endl << "- C (Caballo)" << endl << "- R (Roedor)" << endl << "- O (Conejo)" <<
-        endl << "- E (Erizo)" << endl << "- L (Lagartija)" << endl << "Especie invalida, Ingrese el caracter la especie del animal: ";
-        getline(cin >> ws, especie);
-    }
-    cout << endl << "Ingrese la edad del animal: ";
-    getline(cin >> ws, edad);
-
-    while (!cadena_numeros_valida(edad) || stoi(edad) > 100)
-    {
-        cout << endl << "Edad invalida, ingrese la edad del animal: ";
-        getline(cin >> ws, edad);
-    }
-
-    cout << endl << "- d (diminuto)" << endl << "- p (pequeño)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)" << 
-    endl << "Ingrese el caracter del tamanio del animal: ";
-    getline(cin >> ws, tamanio);
-
-    while ((tamanio[0] != DIMINUTO && tamanio[0] != PEQUENIO && tamanio[0] != MEDIANO && tamanio[0] != GRANDE && tamanio[0] != GIGANTE) || tamanio.size() != 1)
-    {
-        cout << endl << "- d (diminuto)" << endl << "- p (pequenio)" << endl << "- m (mediano)" << endl << "- g (grande)" << endl << "- t (gigante)"  <<endl<<
-        "Tamanio invalido, ingrese el caracter del tamanio del animal: ";
-        getline(cin >> ws, tamanio);
-    }
-
-    cout << endl << "- d (dormilon)" << endl << "- j (jugueton)" << endl << "- s (sociable)" << endl << "- t (travieso)" << endl << 
-    "Ingrese el caracter de la personalidad del animal: ";
-    getline(cin >> ws, personalidad);
-
-    while ((personalidad[0] != DORMILON && personalidad[0] != JUGUETON && personalidad[0] != SOCIABLE && personalidad[0] != TRAVIESO) || personalidad.size() != 1)
-    {
-        cout << endl << "- d (dormilon)" << endl << "- j (jugueton)" << endl << "- s (sociable)" << endl << "- t (travieso)" << endl << 
-        "Personalidad invalida, ingrese el caracter de la personalidad del animal: ";
-        getline(cin >> ws, personalidad);
-    }
-    */
 
     edad = rand() % DELIMITADOR_EDAD;
 
@@ -582,7 +602,9 @@ void Sistema::rescatar_animal(string nombre,char especie)
 void Sistema::mostrar_submenu()
 {
     cout << "[1] Elegir individualmente." << endl <<
-    "[2] Regresar al inicio." << endl << endl;
+    "[2] Alimentar a todos." <<endl << 
+    "[3] Duchar a todos." <<endl <<
+    "[4] Regresar al inicio." << endl << endl;
 }
 
 void Sistema::ingresar_opcion_submenu(string &opcion_submenu)
@@ -602,7 +624,7 @@ void Sistema::procesar_opcion_submenu(string opcion_submenu)
     switch(stoi(opcion_submenu))
     {
         case ELEGIR_INDIVIDUALMENTE:
-            //eleccion_individual();
+            eleccion_individual();
             break;
     }
 }
@@ -611,8 +633,7 @@ void Sistema::procesar_opcion_submenu(string opcion_submenu)
 {
     cout << "[1] Duchar." << endl <<
     "[2] Alimentar." << endl << 
-    "[3] Saltear animal." << endl <<
-    "[4]volver al inicio." << endl << endl;
+    "[3] Saltear animal." << endl << endl;
 }
 
 void Sistema::pedir_opciones_individuales(string &opcion_individual)
@@ -858,6 +879,7 @@ void Sistema::listar_animales_espacio(string espacio, int posicion , bool* anima
     animales -> iniciar();
 }
 */
+
 void guardar_animal(Animal* animal, ofstream& archivo)
 {
     archivo << 
@@ -871,10 +893,16 @@ void guardar_animal(Animal* animal, ofstream& archivo)
 
 void Sistema::guardar()
 {
+    Animal * animal;
     ofstream archivo (PATH_ANIMALES);
     if (archivo.is_open())
     {
-        arbol_b -> guardar_creciente(archivo, guardar_animal);      
+        for (int i = 1; i <= animales -> obtener_cantidad(); i++)
+        {
+            animal = animales -> consulta(i);
+            archivo << animal -> obtener_nombre() << "," << animal -> obtener_edad()<< "," << animal -> obtener_tamanio_texto() <<
+            "," << animal -> obtener_especie_caracter() << "," << animal -> obtener_personalidad_texto() << endl;
+        }        
     }
     else
     {
@@ -882,7 +910,6 @@ void Sistema::guardar()
     }
     archivo.close();
 }
-
 
 Sistema::~Sistema()
 {

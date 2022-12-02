@@ -103,6 +103,8 @@ ROEDOR = 'R',
 CONEJO = 'O',
 ERIZO = 'E',
 LAGARTIJA = 'L';
+const int
+CANTIDAD_ESPECIES= 7;
 
 // Constantes especie (string)
 const string

@@ -17,6 +17,7 @@
 #include "Conejo.h"
 #include "Mapa.h"
 #include "Arbol.h"
+#include "Mapa.h"
 
 
 class Sistema
@@ -24,10 +25,10 @@ class Sistema
     //Atributos
     private:
         ArbolB<Animal>* arbol_b;
-        Menu * menu;
+        Auto* vehiculo;
+        Grafo* grafo;
         Mapa * mapa;
-        Grafo * grafo;
-        Auto * vehiculo;
+        int animales_fugados;
     //Metodos
     public:
         //PRE: -
@@ -63,7 +64,6 @@ class Sistema
         //PRE: -
         //POS: carga los parámetros como un animal nuevo en la reserva.
         void cargar_animal(char especie, string nombre, int edad, char tamanio, char personalidad);
-
 
         //PRE: -    
         //POS: carga el grafo con los caminos.
@@ -108,6 +108,14 @@ class Sistema
         //PRE: -
         //POS: imprime por pantalla los datos del animal si el nombre fue encontrado en la reserva o un mensaje de error en caso contrario.
         void mostrar_busqueda(Animal* animal);
+
+        //PRE: -    
+        //POS: le pide al usuario ingresar la fila y columna donde desea moverse
+        void pedir_movimiento(int &fila , int &columna);
+
+        //PRE: -    
+        //POS: mueve el vehiculo a la posicion indicada
+        void procesar_movimiento();
 
         //PRE: -
         //POS: llama a los metodos correspondientes a cuidar animal.
