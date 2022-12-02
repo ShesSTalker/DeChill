@@ -19,12 +19,17 @@ class Sistema
         //Casilla** mapa;
         //int filas;
         //int columnas;
+        int animales_fugados;
     //Metodos
     public:
         //Grafo* grafo;
         //PRE: -
         //POS: crea un objeto Sistema e incializa los atributos. 
         Sistema();
+
+        //PRE: -
+        //POS: devuelve la cantidad de animales que se han fugado de la reserva.
+        int obtener_animales_fugados();
 
         //PRE: el archivo debe estar bien formado
         //POS: lee los datos del archivo PATH_ANIMALES de la reserva.
@@ -71,8 +76,8 @@ class Sistema
         //POS: devuelve verdadero si esta dentro del rango del mapa y falso en caso contrario.
         bool dentro_de_rango(int fila, int columna);
 
-        // PRE: -
-        // POS: aumenta el hambre del animal y reduce (o no) su higiene, basándose en las características del animal particular.
+        //PRE: -
+        //POS: manda a recorrer el arbol b para aumentar el hambre y reducir la higiene del animal.
         void pasar_tiempo();
 
         //PRE: -

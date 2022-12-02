@@ -18,12 +18,18 @@ using namespace std;
 Sistema::Sistema()
 {
     arbol_b = new ArbolB<Animal>(TRES_VIAS);
+    animales_fugados = 0;
     //punteros_animales = new Vector<Animal*>;
     //vehiculo = new Auto;
     //grafo= new Grafo();
     //mapa= nullptr;
     //filas=0;
     //columnas=0;
+}
+
+int Sistema::obtener_animales_fugados()
+{
+    return animales_fugados;
 }
 
 void Sistema::leer_animales()
@@ -192,9 +198,9 @@ void Sistema::procesar_opcion(int opcion_tomada)
    
     string nombre, espacio, opcion_submenu, posicion_adopcion;
     int posicion, animales_validados;
-    bool volver_a_intentar = false;
+    bool volver_a_intentar = false;*/
 
-    pasar_tiempo();*/
+    pasar_tiempo();
 
     switch (opcion_tomada)
     {
@@ -229,22 +235,25 @@ void Sistema::procesar_opcion(int opcion_tomada)
     }
 }
 
-/*(void Sistema::pasar_tiempo()
+void recorrido_pasar_tiempo(Animal* animal)
 {
-    Animal* animal;
-
-    while (animales -> hay_siguiente())
-    {
-        animal = animales -> siguiente();
-        
-        if (animal -> requiere_ducha())
+    if (animal -> requiere_ducha())
         {
             animal -> dearmar_higiene();
         }
         animal -> aumentar_hambre();
+
+    if(animal -> obtener_higiene() == HIGIENE_MIN || animal -> obtener_hambre() == HAMBRE_MAX)
+    {
+        animal -> cambiar_estado_animal(FUGADO);
+        cout << "Oh no! " << animal -> obtener_nombre() << " se ha fugado de la reserva :(" << endl << endl;
     }
-    animales -> iniciar();
-}*/
+}
+
+void Sistema::pasar_tiempo()
+{
+    arbol_b -> recorrer_creciente(recorrido_pasar_tiempo);
+}
 
 void Sistema::limpiar_pantalla()
 {
@@ -431,7 +440,7 @@ void Sistema::elegir_individualmente()
 {
     string opcion_individual;
 
-    
+
 }
 
 void Sistema::mostrar_opciones_individuales()
