@@ -10,7 +10,7 @@ Sistema::Sistema()
     mapa = new Mapa();
     menu = new Menu();
     arbol_b = new ArbolB<Animal>(TRES_VIAS);
-    animales_fugados = 0;
+    animales_fugados = 1;
 }
 
 int Sistema::obtener_animales_fugados()
@@ -222,11 +222,13 @@ void Sistema::pedir_movimiento(int &fila , int &columna)
      
     while (!cadena_numeros_valida(fila_aux) || !cadena_numeros_valida(columna_aux) || !dentro_de_rango(stoi(fila_aux)-1,stoi(columna_aux)-1))
     {
-        cout << "Uno o ambos datos ingresados no son válidos, ingreselos nuevamente.";
-        cout << "Fila: " << endl;
+        cout << "Uno o ambos datos ingresados no son válidos, ingreselos nuevamente." << endl;
+        cout << "Fila: " ;
         cin >> fila_aux;
-        cout << "Columna: " << endl;
+        cout << endl;
+        cout << "Columna: ";
         cin >> columna_aux;
+        cout << endl;
     }
     
     fila = stoi(fila_aux);
@@ -267,7 +269,7 @@ void Sistema::procesar_movimiento()
 
     if (vehiculo -> obtener_combustible() < costo_combustible)
     {
-        cout << "Combustible insuficiente " << endl;
+        cout << "Combustible insuficiente." << endl;
         cout << "Combustible actual: " << vehiculo -> obtener_combustible() << endl;
         cout << "Combustible necesario: " << costo_combustible << endl;
 
@@ -412,20 +414,12 @@ bool Sistema::pasar_tiempo()
     arbol_b -> recorrer_creciente_contando(contador, recorrido_pasar_tiempo);
 
     if(contador >= CANTIDAD_MAXIMA_FUGADOS)
+    {
         return false;
-
+    }
     establecer_animales_fugados(contador);
 
     return true;
-}
-
-void Sistema::limpiar_pantalla()
-{
-    cout
-    <<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl
-    <<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl
-    <<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl
-    <<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl;
 }
 
 void mostrar_animal(Animal* animal, int &iteracion)
@@ -508,6 +502,8 @@ void Sistema::rescatar_animal(string nombre,char especie)
     personalidad = personalidad_animal_aleatoria (1 + (rand() % CANTIDAD_PERSONALIDADES));
 
     cargar_animal(especie, nombre, edad, tamanio[0], personalidad[0]);
+
+    cout << endl << nombre << " ha sido rescatado con éxito!" << endl;
 }
 
 string Sistema::tamanio_animal_aleatorio(int numero)

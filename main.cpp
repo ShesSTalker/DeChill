@@ -27,7 +27,6 @@ int main()
         menu -> mostrar_menu();
         menu -> pedir_opcion();
         opcion = menu -> obtener_opcion_tomada();
-        sistema -> limpiar_pantalla();
         sistema -> procesar_opcion(opcion);
 
         no_clausurado = sistema -> pasar_tiempo();

@@ -59,10 +59,6 @@ class Sistema
         //PRE: -
         //POS: guarda todos los cambios realizados al archivo CSV de la reserva.
         void guardar();
-        
-        //PRE: - 
-        //POS: limpia la pantalla para mejorar la interfaz del usuario.
-        void limpiar_pantalla();
 
         //PRE: - 
         //POS: imprime por pantalla las opciones individuales para cada animal de la reserva.
