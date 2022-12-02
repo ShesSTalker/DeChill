@@ -45,12 +45,12 @@ void Menu::mostrar_mapa(Casilla** mapa, int filas, int columnas)
             }
             else if (mapa[i][j].obtener_terreno() == TIERRA)
             {
-                cout<<"|" << BGND_BROWN_136 <<mapa[i][j].obtener_contenido() << END_COLOR; 
+                cout<<"|" << BGND_BROWN_94 <<mapa[i][j].obtener_contenido() << END_COLOR; 
 
             }
             else if (mapa[i][j].obtener_terreno() == MONTANIA)
             {
-                cout<<"|" << BGND_DARK_RED_88 <<mapa[i][j].obtener_contenido() << END_COLOR; 
+                cout<<"|" << BGND_ORANGE_130 <<mapa[i][j].obtener_contenido() << END_COLOR; 
             }
             else if (mapa[i][j].obtener_terreno() == PRECIPICIO)
             {
