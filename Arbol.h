@@ -177,6 +177,7 @@ Nodo<Tipo>* ArbolB<Tipo>::buscar(Nodo<Tipo>* nodo_actual, string clave, int &pos
 template < typename Tipo >
 bool ArbolB<Tipo>::buscar_nodo_actual(Nodo<Tipo>* nodo_actual, string clave, int &posicion)
 {
+    Tipo* dato;
     int i = nodo_actual -> obtener_cantidad_claves_usadas();
     bool encontrado = false;
 
@@ -193,7 +194,8 @@ bool ArbolB<Tipo>::buscar_nodo_actual(Nodo<Tipo>* nodo_actual, string clave, int
         i -= 1;
         while(encontrado == false && clave <= nodo_actual -> obtener_clave(i) && i >= 0)
         {
-            if (clave == nodo_actual -> obtener_clave(i))
+            dato = nodo_actual -> obtener_dato(i);
+            if (clave == nodo_actual -> obtener_clave(i) && dato -> obtener_estado_animal() == NO_ADOPTADO) 
             {
                 encontrado = true;
             }
