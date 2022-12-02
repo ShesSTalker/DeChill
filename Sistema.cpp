@@ -212,18 +212,25 @@ bool Sistema::dentro_de_rango(int fila, int columna)
 
 void Sistema::pedir_movimiento(int &fila , int &columna)
 {
-    cout << "Ingrese la fila donde desea moverse: " << endl;
-    cin >> fila;
-    cout << "Ingrese la columna donde desea moverse: " << endl;
-    cin >> columna;
+    string fila_aux, columna_aux;
+
+    cout<<"Ingrese la fila a la cual desea moverse: "<<endl;
+    cin>>fila_aux;
+
+    cout<<"Ingrese la columna a la cual desea moverse: "<<endl;
+    cin>>columna_aux;
      
-    while (!dentro_de_rango(fila - 1, columna -1 ))
+    while (!cadena_numeros_valida(fila_aux) || !cadena_numeros_valida(columna_aux) || !dentro_de_rango(stoi(fila_aux)-1,stoi(columna_aux)-1))
     {
-        cout << "Ingrese una fila valida para moverse: " << endl;
-        cin >> fila;
-        cout << "Ingrese una columna valida para moverse: " << endl;
-        cin >> columna;
+        cout << "Uno o ambos datos ingresados no son válidos, ingreselos nuevamente." << endl;
+        cout << "Fila: " << endl;
+        cin >> fila_aux;
+        cout << "Columna: " << endl;
+        cin >> columna_aux;
     }
+    
+    fila = stoi(fila_aux);
+    columna = stoi(columna_aux);
 
     fila--;
     columna--;
