@@ -436,8 +436,12 @@ void ArbolB<Tipo>::guardar_creciente(Nodo<Tipo>* nodo_actual, ofstream& archivo,
         for(int i = 0; i < nodo_actual -> obtener_cantidad_claves_usadas(); i++)
         {   
             dato_actual = nodo_actual -> obtener_dato(i);
-            guardado(dato_actual, archivo);
-            guardar_creciente(nodo_actual -> obtener_hijo(i + 1), archivo, guardado);
+            if(dato_actual == NO_ADOPTADO)    
+            {
+                guardado(dato_actual, archivo);
+            }
+                guardar_creciente(nodo_actual -> obtener_hijo(i + 1), archivo, guardado);
+            
         }
     }
 }
