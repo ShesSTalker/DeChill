@@ -23,9 +23,9 @@ void Auto::cargar_combustible(int combustible_cargar){
     
     combustible = +combustible_cargar;
 
-    if(combustible > MAX_COMBUSTIBBLE){
+    if(combustible > MAX_COMBUSTIBLE){
         
-        combustible = MAX_COMBUSTIBBLE;
+        combustible = MAX_COMBUSTIBLE;
     }
 
 }
