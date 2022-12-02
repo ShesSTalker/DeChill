@@ -60,6 +60,18 @@ class Sistema
         //POS: limpia la pantalla para mejorar la interfaz del usuario.
         void limpiar_pantalla();
 
+        //PRE: - 
+        //POS: imprime por pantalla las opciones individuales para cada animal de la reserva.
+        void mostrar_opciones_individuales();
+
+        //PRE: -
+        //POS: le pide al usuario la opción individual que desea ejecutar y la valida.
+        void  pedir_opciones_individuales(string &opcion_individual);
+
+        //PRE: la opción individual tomada por el usuario no debe ser la tercera de las opciones individuales.
+        //POS: realiza la opción individual tomada por el usuario.
+        void procesar_opcion_individual (int opcion_individual, Animal* animal);
+
         //PRE: -
         //POS: libera la memoria asociada con este objeto.
         ~Sistema();
@@ -145,18 +157,6 @@ class Sistema
         //PRE: -
         //POS: llama a los metodos correspondientes a elegir individualmente.
         void elegir_individualmente();
-
-        //PRE: - 
-        //POS: imprime por pantalla las opciones individuales para cada animal de la reserva.
-        void mostrar_opciones_individuales();
-
-        //PRE: -
-        //POS: le pide al usuario la opción individual que desea ejecutar y la valida.
-        void  pedir_opciones_individuales(string &opcion_individual);
-
-        //PRE: la opción individual tomada por el usuario no debe ser la tercera de las opciones individuales.
-        //POS: realiza la opción individual tomada por el usuario.
-        void procesar_opcion_individual (int opcion_individual, Animal* animal);
 
         //PRE: -
         //POS: recorre toda la lista para que el usuario pueda elegir qué hacer (opciones individuales) con cada animal de la reserva.

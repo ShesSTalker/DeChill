@@ -456,7 +456,7 @@ void Sistema::rescatar_animal(string nombre,char especie)
     cargar_animal(especie, nombre, edad, tamanio[0], personalidad[0]);
 }
 
-string Sistema::tamanio_animal_aleatorio (int numero)
+string Sistema::tamanio_animal_aleatorio(int numero)
 {
     string tamanio;
     
@@ -534,15 +534,33 @@ void Sistema::procesar_opcion_submenu(string opcion_submenu)
     switch(stoi(opcion_submenu))
     {
         case ELEGIR_INDIVIDUALMENTE:
+            elegir_individualmente();
             break;
     }
 }
 
-void Sistema::elegir_individualmente()
+bool interactuar_individualmente(Sistema* sistema, Animal* animal)
 {
     string opcion_individual;
 
+    animal -> mostrar_animal();
+    sistema -> mostrar_opciones_individuales();
+    sistema -> pedir_opciones_individuales(opcion_individual);
+    
+    int int_opcion_individual = stoi(opcion_individual);
 
+    if(int_opcion_individual == VOLVER_INICIO)
+        return false;
+
+    if(int_opcion_individual != SALTEAR_ANIMAL)
+        sistema -> procesar_opcion_individual(int_opcion_individual, animal);
+
+    return true;
+}
+
+void Sistema::elegir_individualmente()
+{
+    arbol_b -> interactuar_sistema_creciente(this, interactuar_individualmente);
 }
 
 void Sistema::mostrar_opciones_individuales()
@@ -550,7 +568,7 @@ void Sistema::mostrar_opciones_individuales()
     cout << "[1] Duchar." << endl <<
     "[2] Alimentar." << endl << 
     "[3] Saltear animal." << endl <<
-    "[4]volver al inicio." << endl << endl;
+    "[4] Volver al inicio." << endl << endl;
 }
 
 void Sistema::pedir_opciones_individuales(string &opcion_individual)
@@ -558,12 +576,13 @@ void Sistema::pedir_opciones_individuales(string &opcion_individual)
     cout << "Ingrese la opcion a ejecutar: ";
     getline(cin >> ws, opcion_individual);
 
-    while (!cadena_numeros_valida(opcion_individual) || stoi(opcion_individual) == 0 || stoi(opcion_individual) > SALTEAR_ANIMAL)
+    while (!cadena_numeros_valida(opcion_individual) || stoi(opcion_individual) == 0 || stoi(opcion_individual) > VOLVER_INICIO)
     {
         cout << "Opcion invalida, ingrese la opcion a ejecutar: ";
         getline(cin >> ws, opcion_individual);
     }
 
+    cout << endl;
 }
 
 void Sistema::procesar_opcion_individual(int opcion_individual, Animal* animal)
@@ -586,6 +605,7 @@ void Sistema::procesar_opcion_individual(int opcion_individual, Animal* animal)
             cout << animal -> obtener_nombre() << " ha sido alimentado con " << animal -> que_come() << endl;
             break;
     }
+    cout << endl;
 }
 
 

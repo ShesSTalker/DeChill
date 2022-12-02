@@ -5,6 +5,8 @@
 
 using namespace std;
 
+class Sistema;
+
 template < typename Tipo >
 class ArbolB
 {
@@ -54,6 +56,10 @@ class ArbolB
         //POS: envia la información de todos los animales de la reserva al archivo indicado utilizando la funcion de guardado dada.
         void guardar_creciente(ofstream& archivo, void (*guardado)(Tipo* dato, ofstream& archivo));
 
+        //PRE: el sistema está inicializado, la funcion interactuar devuelve false cuando se desea dejar de interactuar in orden con los datos.
+        //POS: interactúa con el sistema con la funcion indicada, una vez por cada dato guardado en el arbol (o hasta que se elija frenar).
+        void interactuar_sistema_creciente(Sistema* sistema, bool (*interactuar)(Sistema* sistema, Tipo* dato));
+
         //Destructor. 
         ~ArbolB();
     
@@ -75,6 +81,8 @@ class ArbolB
         void pasar_tiempo(Nodo<Tipo>* nodo_actual, void (*recorrido_pasar_tiempo)(Tipo* dato));
 
         void guardar_creciente(Nodo<Tipo>* nodo_actual, ofstream& archivo, void (*guardado)(Tipo* dato, ofstream& archivo));
+
+        bool interactuar_sistema_creciente(Nodo<Tipo>* nodo_actual, Sistema* sistema, bool (*interactuar)(Sistema* sistema, Tipo* dato));
 };
 
 template < typename Tipo >
@@ -149,6 +157,12 @@ template < typename Tipo >
 void ArbolB<Tipo>::guardar_creciente(ofstream& archivo, void (*guardado)(Tipo* dato, ofstream& archivo))
 {
     guardar_creciente(obtener_raiz(), archivo, guardado);
+}
+
+template < typename Tipo >
+void ArbolB<Tipo>::interactuar_sistema_creciente(Sistema* sistema, bool (*interactuar)(Sistema* sistema, Tipo* dato))
+{
+    interactuar_sistema_creciente(obtener_raiz(), sistema, interactuar);
 }
 
 template < typename Tipo > 
@@ -395,6 +409,29 @@ void ArbolB<Tipo>::guardar_creciente(Nodo<Tipo>* nodo_actual, ofstream& archivo,
             guardar_creciente(nodo_actual -> obtener_hijo(i + 1), archivo, guardado);
         }
     }
+}
+
+template < typename Tipo >
+bool ArbolB<Tipo>::interactuar_sistema_creciente(Nodo<Tipo>* nodo_actual, Sistema* sistema, bool (*interactuar)(Sistema* sistema, Tipo* dato))
+{
+    Tipo* dato_actual;
+
+    if(nodo_actual != NULL)
+    {
+        if(interactuar_sistema_creciente(nodo_actual -> obtener_hijo(PRIMER_HIJO), sistema, interactuar) == false)
+            return false;
+
+        for(int i = 0; i < nodo_actual -> obtener_cantidad_claves_usadas(); i++)
+        {   
+            dato_actual = nodo_actual -> obtener_dato(i);
+            if(interactuar(sistema, dato_actual) == false) 
+                return false;
+            if(interactuar_sistema_creciente(nodo_actual -> obtener_hijo(i + 1), sistema, interactuar) == false) 
+                return false;
+        }
+    }
+
+    return true;
 }
 
 template < typename Tipo >
