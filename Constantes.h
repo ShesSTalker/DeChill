@@ -23,11 +23,15 @@ PRECIPICIO = "Precipicio",
 TIERRA = "Tierra",
 CAMINO = "Camino",
 ANIMAL = "Animal";
-const char 
 
+const char 
 VACIO = ' ',
 VEHICULO = 'A';
 
+const int 
+FILA_INICIAL_AUTO = 0,
+COLUMNA_INICIAL_AUTO = 0,
+ANIMALES_MAPA = 5;
 
 // Constantes pasar tiempo
 const int
@@ -37,6 +41,15 @@ SUMA_HAMBRE = 10,
 RESTA_HIGIENE = 10,
 HAMBRE_MAX = 100,
 HIGIENE_MIN = 0;
+
+// Constante delimitador edad
+const int DELIMITADOR_EDAD = 101;
+
+// Constante cantidad de tamanios
+const int CANTIDAD_TAMANIOS = 5;
+
+// Constante cantidad de personalidades
+const int CANTIDAD_PERSONALIDADES = 4;
 
 //Constante de elemento no encontrado
 const int NO_ENCONTRO = -1;
