@@ -40,6 +40,10 @@ class Sistema
         //POS: devuelve la cantidad de animales que se han fugado de la reserva.
         int obtener_animales_fugados();
 
+        //PRE: cantidad debe ser menor a la cantidad maxima de fugados en la reserva.
+        //POS: establece la cantidad de fugados como el parametro pasado.
+        void establecer_animales_fugados(int cantidad);
+
         //PRE: el archivo debe estar bien formado
         //POS: lee los datos del archivo PATH_ANIMALES de la reserva.
         void leer_animales();
@@ -53,16 +57,28 @@ class Sistema
         void procesar_opcion(int opcion_tomada);
 
         //PRE: -
-        //POS: manda a recorrer el arbol b para aumentar el hambre y reducir la higiene del animal. En el caso de que se deba clausurar la reserva, devuelve false.
-        bool pasar_tiempo();
-
-        //PRE: -
         //POS: guarda todos los cambios realizados al archivo CSV de la reserva.
         void guardar();
         
         //PRE: - 
         //POS: limpia la pantalla para mejorar la interfaz del usuario.
         void limpiar_pantalla();
+
+        //PRE: - 
+        //POS: imprime por pantalla las opciones individuales para cada animal de la reserva.
+        void mostrar_opciones_individuales();
+
+        //PRE: -
+        //POS: le pide al usuario la opción individual que desea ejecutar y la valida.
+        void pedir_opciones_individuales(string &opcion_individual);
+
+        //PRE: la opción individual tomada por el usuario no debe ser la tercera de las opciones individuales.
+        //POS: realiza la opción individual tomada por el usuario.
+        void procesar_opcion_individual (int opcion_individual, Animal* animal);
+
+        //PRE: -
+        //POS: manda a recorrer el arbol b para aumentar el hambre y reducir la higiene del animal. En el caso de que se deba clausurar la reserva, devuelve false.
+        bool pasar_tiempo();
 
         //PRE: la cantidad de fugados se pasó del máximo admitido.
         //POS: imprime mensajes informando al usuario de la clausura :(
@@ -73,10 +89,6 @@ class Sistema
         ~Sistema();
 
     private:
-
-        //PRE: cantidad debe ser menor a la cantidad maxima de fugados en la reserva.
-        //POS: establece la cantidad de fugados como el parametro pasado.
-        void establecer_animales_fugados(int cantidad);
 
         //PRE: -
         //POS: carga los parámetros como un animal nuevo en la reserva.
@@ -129,18 +141,6 @@ class Sistema
         //PRE: -
         //POS: llama a los metodos correspondientes a cuidar animal.
         void cuidar_animal();
-
-        //PRE: - 
-        //POS: imprime por pantalla las opciones individuales para cada animal de la reserva.
-        void mostrar_opciones_individuales();
-
-        //PRE: -
-        //POS: le pide al usuario la opción individual que desea ejecutar y la valida.
-        void pedir_opciones_individuales(string &opcion_individual);
-
-        //PRE: la opción individual tomada por el usuario no debe ser la tercera de las opciones individuales.
-        //POS: realiza la opción individual tomada por el usuario.
-        void procesar_opcion_individual (int opcion_individual, Animal* animal);
 
         //PRE: -
         //POS: devuelve un tamanio de animal aleatorio
