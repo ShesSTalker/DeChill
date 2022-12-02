@@ -12,20 +12,20 @@ Menu::Menu()
 
 void Menu::bienvenida()
 {
-    cout << "¡Bienvenidos a la Reserva DeChill!" << endl << endl;
+    cout << "¡Bienvenidos a la Reserva DeChill!" << EMOJI_CONEJO << endl << endl;
 }
 
 void Menu::mostrar_menu()
 {
     cout << endl << endl <<
     "--------MENU--------"<< endl <<
-    "[1] Listar animales." << endl <<
-    "[2] Rescatar animal." << endl <<
-    "[3] Buscar animal." << endl <<
-    "[4] Cuidar animales." << endl <<
-    "[5] Adoptar animal." << endl <<
-    "[6] Cargar combustible." << endl <<
-    "[7] Guardar y salir." << endl << endl;
+    "[1] Listar animales." << EMOJI_LISTA << endl <<
+    "[2] Rescatar animal." << EMOJI_AUTO << endl <<
+    "[3] Buscar animal." << EMOJI_LUPA << endl <<
+    "[4] Cuidar animales." << EMOJI_CUIDAR << endl <<
+    "[5] Adoptar animal." << EMOJI_ADOPTAR <<endl <<
+    "[6] Cargar combustible." << EMOJI_GASOLINA << endl <<
+    "[7] Guardar y salir." << EMOJI_PUERTA <<endl << endl;
 }
 
 void Menu::mostrar_mapa(Casilla** mapa, int filas, int columnas)

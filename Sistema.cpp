@@ -350,7 +350,6 @@ void Sistema::procesar_opcion(int opcion_tomada)
 
         case ADOPTAR_ANIMAL:
             cout << endl << "ADOPTAR ANIMAL:" << endl << endl;
-
             break;
 
         case CARGAR_COMBUSTIBLE:
@@ -391,11 +390,11 @@ bool Sistema::pasar_tiempo()
 
 void Sistema::limpiar_pantalla()
 {
-    #ifdef _WIN32
-            system("cls");
-    #else
-            system ("clear");
-    #endif
+    cout
+    <<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl
+    <<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl
+    <<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl
+    <<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl;
 }
 
 void mostrar_animal(Animal* animal, int &iteracion)
@@ -411,7 +410,7 @@ void Sistema::listar_animales()
 {
     if(arbol_b -> arbol_vacio())
     {
-        cout << endl << "La reserva actualmente no tiene animales :( " << endl << endl;
+        cout << endl << "La reserva actualmente no tiene animales ☹️ " << endl << endl;
     }
     else
     {
@@ -537,7 +536,8 @@ string Sistema::personalidad_animal_aleatoria (int numero)
 
 void Sistema::mostrar_submenu()
 {
-    cout << "[1] Elegir individualmente." << endl <<
+    cout <<
+    "[1] Elegir individualmente." << endl <<
     "[2] Regresar al inicio." << endl << endl;
 }
 
@@ -589,8 +589,9 @@ void Sistema::elegir_individualmente()
 
 void Sistema::mostrar_opciones_individuales()
 {
-    cout << "[1] Duchar." << endl <<
-    "[2] Alimentar." << endl << 
+    cout << 
+    "[1] Duchar." << endl <<
+    "[2] Alimentar." << endl <<
     "[3] Saltear animal." << endl <<
     "[4] Volver al inicio." << endl << endl;
 }
@@ -620,13 +621,13 @@ void Sistema::procesar_opcion_individual(int opcion_individual, Animal* animal)
             }
             else 
             {
-                cout << animal -> obtener_nombre() << " no necesita ducharse porque es un/a " << animal -> obtener_especie_texto() << endl; 
+                cout << animal -> obtener_nombre() << " no necesita ducharse porque es un/a " << animal -> obtener_especie_texto() << "." << endl; 
             }
             break;
 
         case ALIMENTAR:
             animal -> alimentar();
-            cout << animal -> obtener_nombre() << " ha sido alimentado con " << animal -> que_come() << endl;
+            cout << animal -> obtener_nombre() << " ha sido alimentado con " << animal -> que_come() << "." << endl;
             break;
     }
     cout << endl;
@@ -670,7 +671,7 @@ void Sistema::carga_de_combustible (int numero)
         cout << endl << "Ingrese la cantidad de combustible que desea cargar: ";
         cin >> combustible_cargar;
 
-        while(!cadena_numeros_valida(combustible_cargar) || stoi(combustible_cargar) < 1)
+        while(!cadena_numeros_valida(combustible_cargar) || stoi(combustible_cargar) < 1 )
         {
             cout << endl << "La cantidad de combustible ingresada es inválida, ingrese nuevamente: " << endl;
             cin >> combustible_cargar;

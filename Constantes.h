@@ -5,7 +5,19 @@
 
 using namespace std;
 
-const int CANTIDAD_MAXIMA_FUGADOS = 3;
+// Constantes emojis
+const string
+EMOJI_CONEJO = "\U0001f407",
+EMOJI_LISTA = "\U0001f4c4",
+EMOJI_AUTO = "\U0001f697",
+EMOJI_LUPA = "\U0001f50d",
+EMOJI_CUIDAR = "\u2764\uFE0F\u200D\U0001fa79",
+EMOJI_ADOPTAR = "\U0001f423",
+EMOJI_GASOLINA = "\u26FD",
+EMOJI_PUERTA = "\U0001f6aa";
+
+// Constantes ArbolB
+const int GRADO = 3;
 
 // Constantes leer datos
 const string 
