@@ -174,6 +174,7 @@ void Sistema::cargar_caminos(){
 }
 
 bool Sistema::dentro_de_rango(int fila, int columna){
+<<<<<<< HEAD
     return (fila >= 0 && fila < this->filas && columna >= 0 && columna < this->columnas);
 }*/
 
@@ -182,6 +183,123 @@ void Sistema::procesar_opcion(int opcion_tomada)
     /*cargar_caminos();
     grafo->usar_floyd();
     grafo->mostrar_grafo();
+=======
+    return (fila >= 0 && fila < this->mapa->obtener_filas() && columna >= 0 && columna < this->mapa->obtener_columnas());
+}
+
+void Sistema::pedir_movimiento(int &fila , int &columna){
+    
+    cout<<"Ingrese la fila donde desea moverse: "<<endl;
+    cin>>fila;
+    cout<<"Ingrese la columna donde desea moverse: "<<endl;
+    cin>>columna;
+     
+    while (!dentro_de_rango(fila-1,columna -1)){
+        cout<<"Ingrese una fila valida para moverse: "<<endl;
+        cin>>fila;
+        cout<<"Ingrese una columna valida para moverse: "<<endl;
+        cin>>columna;
+    }
+    fila--;
+    columna--;
+}
+void Sistema::procesar_movimiento(){
+    int fila , columna, costo_combustible;
+    string nombre, origen , destino;
+
+    pedir_movimiento(fila , columna);
+
+    origen= mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].obtener_nombre();
+
+    destino= mapa->obtener_tablero()[fila][columna].obtener_nombre();
+
+    costo_combustible= grafo->costo_camino( origen, destino);
+
+    if (vehiculo->obtener_combustible() < costo_combustible){
+
+        cout<<"Combustible insuficiente "<<endl;
+        cout<< "Combustible actual: "<<vehiculo->obtener_combustible()<<endl;
+        cout<<"Combustible necesario: "<< costo_combustible <<endl;
+
+    }else{
+
+        vehiculo->restar_combustible(costo_combustible);
+        grafo->minimo_camino(origen, destino);
+        cout<< "Combustible restante: "<<vehiculo->obtener_combustible()<<endl;
+
+        mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(VACIO);
+        
+        switch (mapa->obtener_tablero()[fila][columna].obtener_contenido())
+        {
+        case PERRO:
+            
+            cout<<"Encontraste un Perro!"<<endl;
+
+            pedir_nombre(nombre);
+            rescatar_animal(nombre, PERRO);
+            break;
+
+        case GATO:
+            
+            cout<<"Encontraste un Gato!"<<endl;
+
+            pedir_nombre(nombre);
+            rescatar_animal(nombre, GATO);     
+            break;
+
+        case CABALLO:
+            
+            cout<<"Encontraste un Caballo!"<<endl;
+
+            pedir_nombre(nombre);
+            rescatar_animal(nombre, CABALLO);
+            
+            break;
+
+        case ROEDOR:
+            
+            cout<<"Encontraste un Roedor!"<<endl;
+
+            pedir_nombre(nombre);
+            rescatar_animal(nombre, ROEDOR);
+        
+            break;
+
+        case CONEJO:
+            
+            cout<<"Encontraste un Conejo!"<<endl;
+
+            pedir_nombre(nombre);
+            rescatar_animal(nombre, CONEJO);
+        
+            break;
+
+        case ERIZO:
+            
+            cout<<"Encontraste un Erizo!"<<endl;
+
+            pedir_nombre(nombre);
+            rescatar_animal(nombre, ERIZO);   
+            break;
+
+        case LAGARTIJA:
+            
+            cout<<"Encontraste una Lagartija!"<<endl;
+            
+            pedir_nombre(nombre);
+            rescatar_animal(nombre, LAGARTIJA);
+            break;
+
+        }
+        vehiculo->cambiar_posicion(fila,columna);
+        mapa->obtener_tablero()[vehiculo->obtener_fila()][vehiculo->obtener_columna()].asignar_contenido(AUTO);
+    }
+}
+void Sistema::procesar_opcion(int opcion_tomada)
+{   
+    int combustible_cargar;
+    string nombre, espacio, opcion_submenu, posicion_adopcion;
+>>>>>>> parent of 9c1fe17 (a)
 
     for (int i = 0; i < this->filas; i++){
         for (int j = 0; j < this->columnas; j++){
@@ -225,6 +343,17 @@ void Sistema::procesar_opcion(int opcion_tomada)
         case CARGAR_COMBUSTIBLE:
             cout << endl << "CARGAR_COMBUSTIBLE:" << endl << endl;
 
+<<<<<<< HEAD
+=======
+            do{
+                cout<<"Ingrese la cantidad de combustible que desea cargar: "<<endl;
+                cin>>combustible_cargar;
+                
+            }while(combustible_cargar >= 100 || combustible_cargar < 1);
+
+            vehiculo->cargar_combustible(combustible_cargar);
+
+>>>>>>> parent of 9c1fe17 (a)
             break;
     }
 }
@@ -381,8 +510,19 @@ void Sistema::rescatar_animal(string nombre)
         getline(cin >> ws, personalidad);
     }
 
+<<<<<<< HEAD
     cargar_animal(especie[0], nombre, stoi(edad), tamanio[0], personalidad[0]);
 }*/
+=======
+    edad = rand() % DELIMITADOR_EDAD;
+
+    tamanio = tamanio_animal_aleatorio (1 + (rand() % CANTIDAD_TAMANIOS));
+
+    personalidad = personalidad_animal_aleatoria (1 + (rand() % CANTIDAD_PERSONALIDADES));
+
+    cargar_animal(especie, nombre, edad, tamanio[0], personalidad[0]);
+}
+>>>>>>> parent of 9c1fe17 (a)
 
 void Sistema::mostrar_submenu()
 {

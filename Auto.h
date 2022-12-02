@@ -36,6 +36,10 @@ class Auto
         int obtener_columna();
 
         //PRE: -
+        //POS: carga al 100 el combustible del auto
+        void cargar_combustible_completo();
+
+        //PRE: -
         //POS: carga la cantidad de combustible recibida
         void cargar_combustible(int combustible_cargar);
 
