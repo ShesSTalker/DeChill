@@ -106,6 +106,10 @@ class Sistema
         //POS: le pide al usuario ingresar la fila y columna donde desea moverse
         void pedir_movimiento(int &fila , int &columna);
 
+        //PRE: - 
+        //POS: valida el nombre del animal fijandose que no haya otro animal con el mismo nombre en la reserva y lo devuelve
+        string validar_nombre(string nombre);
+
         //PRE: -    
         //POS: mueve el vehiculo a la posicion indicada
         void procesar_movimiento();

@@ -222,7 +222,7 @@ void Sistema::pedir_movimiento(int &fila , int &columna)
      
     while (!cadena_numeros_valida(fila_aux) || !cadena_numeros_valida(columna_aux) || !dentro_de_rango(stoi(fila_aux)-1,stoi(columna_aux)-1))
     {
-        cout << "Uno o ambos datos ingresados no son válidos, ingreselos nuevamente." << endl;
+        cout << "Uno o ambos datos ingresados no son válidos, ingreselos nuevamente.";
         cout << "Fila: " << endl;
         cin >> fila_aux;
         cout << "Columna: " << endl;
@@ -235,10 +235,27 @@ void Sistema::pedir_movimiento(int &fila , int &columna)
     fila--;
     columna--;
 }
+
+string Sistema::validar_nombre(string nombre)
+{
+    Animal* animal;
+
+    animal = buscar_nombre(nombre);
+
+    while(animal != NULL)
+    {
+        cout << endl <<"El nombre elegido ya se encuentra en la reserva, elija otro nombre: ";
+        cin >> nombre;
+
+        animal = buscar_nombre(nombre);
+    }
+    return nombre;
+}
+
 void Sistema::procesar_movimiento()
 {
     int fila, columna, costo_combustible;
-    string nombre, origen, destino;
+    string nombre, origen, destino; 
 
     pedir_movimiento(fila, columna);
 
@@ -270,6 +287,7 @@ void Sistema::procesar_movimiento()
             cout << "Encontraste un Perro!" << endl;
 
             pedir_nombre(nombre);
+            nombre = validar_nombre(nombre);
             rescatar_animal(nombre, PERRO);
             break;
 
@@ -278,6 +296,7 @@ void Sistema::procesar_movimiento()
             cout << "Encontraste un Gato!" << endl;
 
             pedir_nombre(nombre);
+            nombre = validar_nombre(nombre);
             rescatar_animal(nombre, GATO);     
             break;
 
@@ -286,6 +305,7 @@ void Sistema::procesar_movimiento()
             cout << "Encontraste un Caballo!" << endl;
 
             pedir_nombre(nombre);
+            nombre = validar_nombre(nombre);
             rescatar_animal(nombre, CABALLO);
             break;
 
@@ -294,6 +314,7 @@ void Sistema::procesar_movimiento()
             cout << "Encontraste un Roedor!" << endl;
 
             pedir_nombre(nombre);
+            nombre = validar_nombre(nombre);
             rescatar_animal(nombre, ROEDOR);
             break;
 
@@ -302,6 +323,7 @@ void Sistema::procesar_movimiento()
             cout << "Encontraste un Conejo!" << endl;
 
             pedir_nombre(nombre);
+            nombre = validar_nombre(nombre);
             rescatar_animal(nombre, CONEJO);
             break;
 
@@ -310,6 +332,7 @@ void Sistema::procesar_movimiento()
             cout << "Encontraste un Erizo!" << endl;
 
             pedir_nombre(nombre);
+            nombre = validar_nombre(nombre);
             rescatar_animal(nombre, ERIZO);   
             break;
 
@@ -318,6 +341,7 @@ void Sistema::procesar_movimiento()
             cout << "Encontraste una Lagartija!" << endl;
             
             pedir_nombre(nombre);
+            nombre = validar_nombre(nombre);
             rescatar_animal(nombre, LAGARTIJA);
             break;
 
