@@ -182,6 +182,6 @@ class Sistema
         //PRE: -
         //POS: carga la cantidad de combustible que ingresa el usuario.
         void carga_de_combustible (int numero);
-}
+};
 
 #endif
