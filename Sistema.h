@@ -14,7 +14,7 @@ class Sistema
     private:
         ArbolB<Animal>* arbol_b;
         //Vector<Animal*>* punteros_animales;
-        //Auto* vehiculo;
+        Auto* vehiculo;
         //Casilla** mapa;
         //Grafo* grafo;
         //int filas;
@@ -183,4 +183,5 @@ class Sistema
         //POS: carga la cantidad de combustible que ingresa el usuario.
         void carga_de_combustible (int numero);
 }
+
 #endif
