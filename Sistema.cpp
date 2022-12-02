@@ -5,7 +5,6 @@ using namespace std;
 
 Sistema::Sistema()
 {
-    punteros_animales = new Vector<Animal*>;
     grafo= new Grafo();
     menu = new Menu();
     vehiculo = new Auto();
@@ -888,7 +887,6 @@ void Sistema::guardar()
 Sistema::~Sistema()
 {
     delete arbol_b;
-    delete punteros_animales;
     delete vehiculo;
     delete grafo;
     delete menu;

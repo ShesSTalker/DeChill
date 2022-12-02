@@ -23,12 +23,11 @@ class Sistema
 {
     //Atributos
     private:
-        Vector<Animal*>* punteros_animales;
+        ArbolB<Animal>* arbol_b;
         Menu * menu;
         Mapa * mapa;
         Grafo * grafo;
         Auto * vehiculo;
-        ArbolB<Animal>* arbol_b;
     //Metodos
     public:
         //PRE: -
